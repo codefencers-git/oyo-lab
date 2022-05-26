@@ -50,6 +50,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: RoundButton(
                   buttonLabel: "GET STARTED",
                   onTap: () {},
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Lato',
                 ),
               )
             ],

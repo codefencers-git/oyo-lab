@@ -5,8 +5,17 @@ import '../../themedata.dart';
 class RoundButton extends StatelessWidget {
   final String buttonLabel;
   final VoidCallback onTap;
-  const RoundButton({Key? key, required this.buttonLabel, required this.onTap})
-      : super(key: key);
+  final double fontSize;
+  final FontWeight fontWeight;
+  final String fontFamily;
+  const RoundButton({
+    Key? key,
+    required this.buttonLabel,
+    required this.onTap,
+    required this.fontSize,
+    required this.fontWeight,
+    required this.fontFamily,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +31,9 @@ class RoundButton extends StatelessWidget {
           child: Text(
             buttonLabel,
             style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w900,
+                fontSize: fontSize,
+                fontWeight: fontWeight,
+                fontFamily: fontFamily,
                 color: ThemeClass.whiteColor),
           ),
         ),
