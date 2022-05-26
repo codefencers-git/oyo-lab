@@ -14,10 +14,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-    Validation? validation;
+  Validation? validation;
 
   final TextEditingController _emailOrPhoneController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

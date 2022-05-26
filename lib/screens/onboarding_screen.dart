@@ -33,8 +33,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Center(child: Image.asset("assets/images/onboarding-1.png")),
             ),
             ContainerWithInnerShadow(
-              width: width,
-              height: height * 0.5,
+              // width: width,
+              // height: height * 0.4,
+              height: double.infinity,
+              width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
