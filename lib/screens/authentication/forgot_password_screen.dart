@@ -23,9 +23,9 @@ class ForgotPassword extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              SizedBox(
                 width: width * 0.62,
-                height: height * 0.6,
+                height: height * 0.57,
                 child: Image.asset(
                   "assets/images/logo.png",
                   fit: BoxFit.fitWidth,
@@ -37,27 +37,31 @@ class ForgotPassword extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Forgot Password ?",
-                      style: TextStyle(
-                          color: ThemeClass.orangeColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Container(
-                      width: width * 0.7,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 20,
-                      ),
-                      child: Text(
-                        "Please enter your registered phone number for received OTP code.",
-                        softWrap: true,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: ThemeClass.greyColor1,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
+                    Column(
+                      children: [
+                        Text(
+                          "Forgot Password ?",
+                          style: TextStyle(
+                              color: ThemeClass.orangeColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Container(
+                          width: width * 0.7,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20,
+                          ),
+                          child: Text(
+                            "Please enter your registered phone number for received OTP code.",
+                            softWrap: true,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: ThemeClass.greyColor1,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -80,12 +84,13 @@ class ForgotPassword extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          top: 30, left: 30, right: 30, bottom: 20),
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 30, right: 30),
                       child: RoundButton(
                         buttonLabel: 'Get Code',
                         onTap: () {
-                          Get.toNamed(Routes.mobileVerificationScreen);
+                          Get.toNamed(Routes.mobileVerificationScreen,
+                              arguments: 'forgotPasswordScreen');
                         },
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -52,8 +54,39 @@ class _MobileVerificationState extends State<MobileVerification> {
     super.initState();
   }
 
+   startTimer() {
+    setState(() {
+      timerValue = 60;
+      isShowResend = false;
+    });
+
+    periodicTimer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        setState(() {
+          if (timerValue == 1) {
+            stopTimer();
+          } else {
+            timerValue--;
+          }
+        });
+        // Update user about remaining time
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    periodicTimer!.cancel();
+
+    super.dispose();
+  }
+
+  var screenName = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
+    print(screenName);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -113,7 +146,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         _buildOtpTextBox(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -143,9 +176,10 @@ class _MobileVerificationState extends State<MobileVerification> {
                       padding:
                           const EdgeInsets.only(top: 30, left: 30, right: 30),
                       child: RoundButton(
-                        buttonLabel: 'Login',
+                        buttonLabel: screenName == 'signupScreen'?'Login' :'Submit',
                         onTap: () {
-                          Get.toNamed(Routes.homeScreen);
+                          screenName == 'signupScreen'?
+                          Get.toNamed(Routes.homeScreen): Get.toNamed(Routes.changePasswordScreen);
                         },
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -165,58 +199,55 @@ class _MobileVerificationState extends State<MobileVerification> {
   _buildOtpTextBox() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 35.0),
-      child: Form(
-        key: _formKey,
-        child: PinCodeTextField(
-          appContext: context,
-          pastedTextStyle: TextStyle(
-            color: ThemeClass.orangeColor,
-            fontWeight: FontWeight.bold,
-          ),
-          length: 6,
-          blinkWhenObscuring: true,
-          animationType: AnimationType.fade,
-          validator: (v) {
-            if (v!.length < 3) {
-              return GlobalMessages.pleasEenterVaildOTP;
-            } else {
-              return null;
-            }
-          },
-          errorTextSpace: 30,
-          textStyle: TextStyle(
-              fontSize: 30,
-              color: ThemeClass.orangeColor,
-              fontWeight: FontWeight.w700),
-          pinTheme: PinTheme(
-            fieldOuterPadding: EdgeInsets.zero,
-            shape: PinCodeFieldShape.circle,
-            fieldHeight: 53,
-            fieldWidth: 53,
-            selectedFillColor: ThemeClass.whiteColor,
-            inactiveFillColor: ThemeClass.whiteColor,
-            activeFillColor: ThemeClass.whiteColor,
-            activeColor: Colors.transparent,
-            inactiveColor: Colors.transparent,
-            selectedColor: ThemeClass.orangeColor.withOpacity(0.2),
-          ),
-          cursorColor: ThemeClass.orangeColor,
-          animationDuration: const Duration(milliseconds: 300),
-          enableActiveFill: true,
-          errorAnimationController: errorController,
-          controller: textEditingController,
-          keyboardType: TextInputType.number,
-          onCompleted: (v) {
-            print("Completed");
-          },
-          onChanged: (value) {},
-          beforeTextPaste: (text) {
-            print("Allowing to paste $text");
-            //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-            //but you can show anything you want here, like your pop up saying wrong paste format or etc
-            return true;
-          },
+      child: PinCodeTextField(
+        appContext: context,
+        pastedTextStyle: TextStyle(
+          color: ThemeClass.orangeColor,
+          fontWeight: FontWeight.bold,
         ),
+        length: 6,
+        blinkWhenObscuring: true,
+        animationType: AnimationType.fade,
+        validator: (v) {
+          if (v!.length < 3) {
+            return GlobalMessages.pleasEenterVaildOTP;
+          } else {
+            return null;
+          }
+        },
+        errorTextSpace: 30,
+        textStyle: TextStyle(
+            fontSize: 30,
+            color: ThemeClass.orangeColor,
+            fontWeight: FontWeight.w700),
+        pinTheme: PinTheme(
+          fieldOuterPadding: EdgeInsets.zero,
+          shape: PinCodeFieldShape.circle,
+          fieldHeight: 53,
+          fieldWidth: 53,
+          selectedFillColor: ThemeClass.whiteColor,
+          inactiveFillColor: ThemeClass.whiteColor,
+          activeFillColor: ThemeClass.whiteColor,
+          activeColor: Colors.transparent,
+          inactiveColor: Colors.transparent,
+          selectedColor: ThemeClass.orangeColor.withOpacity(0.2),
+        ),
+        cursorColor: ThemeClass.orangeColor,
+        animationDuration: const Duration(milliseconds: 300),
+        enableActiveFill: true,
+        errorAnimationController: errorController,
+        controller: textEditingController,
+        keyboardType: TextInputType.number,
+        onCompleted: (v) {
+          print("Completed");
+        },
+        onChanged: (value) {},
+        beforeTextPaste: (text) {
+          print("Allowing to paste $text");
+          //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+          //but you can show anything you want here, like your pop up saying wrong paste format or etc
+          return true;
+        },
       ),
     );
   }

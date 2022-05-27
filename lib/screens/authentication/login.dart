@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Container(
               width: width * 0.62,
-              padding: const EdgeInsets.only(top: 100, bottom: 60),
+              padding: const EdgeInsets.only(top: 75, bottom: 60),
               child: Image.asset(
                 "assets/images/logo.png",
                 fit: BoxFit.fitWidth,

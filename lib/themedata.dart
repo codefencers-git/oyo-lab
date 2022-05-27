@@ -30,8 +30,8 @@ class ThemeClass {
   static final Color blueColor = Color(0xFF19627C);
   static final Color skyblueColor = Color(0xffF3FAFF);
 
-   static final themeData = ThemeData(
-      primaryColor: ThemeClass.blueColor,
+  static final themeData = ThemeData(
+      primaryColor: ThemeClass.orangeColor,
       fontFamily: 'Lato',
-      splashColor: ThemeClass.orangeLightColor);
+      splashColor: ThemeClass.orangeColor);
 }

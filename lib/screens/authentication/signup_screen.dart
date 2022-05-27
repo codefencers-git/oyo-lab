@@ -111,7 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: RoundButton(
                               buttonLabel: 'Register',
                               onTap: () {
-                             Get.toNamed(Routes.mobileVerificationScreen);
+                             Get.toNamed(Routes.mobileVerificationScreen, arguments: 'signupScreen');
                               },
                               fontSize: 16,
                               fontWeight: FontWeight.w500,

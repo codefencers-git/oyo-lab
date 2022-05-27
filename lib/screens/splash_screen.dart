@@ -49,7 +49,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 120),
                 child: RoundButton(
                   buttonLabel: "GET STARTED",
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.onboardingScreen);
+                  },
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Lato',
