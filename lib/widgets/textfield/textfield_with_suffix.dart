@@ -9,7 +9,8 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
     required this.keyboardType,
     this.validator,
     required this.hintText,
-    required this.iconData, required this.onIconTap,
+    required this.iconData,
+    required this.onIconTap,
   }) : super(key: key);
 
   final TextEditingController textController;
@@ -44,6 +45,7 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
           hintStyle: TextStyle(
               color: ThemeClass.blackColor1,
               fontSize: 14,
+              fontFamily: 'assets/fonts/Lato-Regular.ttf',
               fontWeight: FontWeight.w400),
           suffixIcon: InkWell(
             onTap: onIconTap,

@@ -18,6 +18,7 @@ class _changePassword extends State<ChangePassword> {
   Validation? validation;
 
   final TextEditingController _passController = TextEditingController();
+  final TextEditingController _confirmpassController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +52,7 @@ class _changePassword extends State<ChangePassword> {
                             style: TextStyle(
                                 color: ThemeClass.orangeColor,
                                 fontSize: 24,
+                                fontFamily: 'assets/fonts/Lato-Bold.ttf',
                                 fontWeight: FontWeight.w700),
                           ),
                           const SizedBox(
@@ -58,11 +60,14 @@ class _changePassword extends State<ChangePassword> {
                           ),
                           SizedBox(
                             width: width * 0.9,
-                            child: Text(
+                            child: const Text(
                               'Please enter new password for your login account.',
                               softWrap: true,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                fontFamily: 'assets/fonts/Lato-Regular.ttf',
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                           Padding(
@@ -75,7 +80,7 @@ class _changePassword extends State<ChangePassword> {
                                   isReadOnly: false,
                                   keyboardType: TextInputType.visiblePassword,
                                   validator: validation?.validateEmail,
-                                  hintText: "Password",
+                                  hintText: "New Password",
                                   iconData: "assets/icons/icon-password.png",
                                   onIconTap: () {},
                                 ),
@@ -83,10 +88,10 @@ class _changePassword extends State<ChangePassword> {
                                   height: 20,
                                 ),
                                 TextFieldWithSuffixIcon(
-                                  textController: _passController,
+                                  textController: _confirmpassController,
                                   isReadOnly: false,
                                   keyboardType: TextInputType.visiblePassword,
-                                  //validator: validation!.validateEmail,
+                                  validator: validation?.validateEmail,
                                   hintText: "Confirm Password",
                                   iconData: "assets/icons/icon-password.png",
                                   onIconTap: () {},

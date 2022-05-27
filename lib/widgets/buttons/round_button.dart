@@ -22,9 +22,11 @@ class RoundButton extends StatelessWidget {
           child: Text(
             buttonLabel,
             style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w900,
-                color: ThemeClass.whiteColor),
+              fontSize: 14,
+              fontWeight: FontWeight.w900,
+              color: ThemeClass.whiteColor,
+              fontFamily: 'assets/fonts/Poppins-Medium.ttf',
+            ),
           ),
         ),
       ),
