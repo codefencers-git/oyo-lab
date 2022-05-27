@@ -14,7 +14,7 @@ class RoundButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 5),
         decoration: BoxDecoration(
             color: ThemeClass.orangeColor,
             borderRadius: BorderRadius.circular(30)),

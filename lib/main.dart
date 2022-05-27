@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
       title: 'OYO LAB',
       debugShowCheckedModeBanner: false,
       theme: ThemeClass.themeData,
-      initialRoute: Routes.splashRoute,
+      initialRoute: Routes.forgotPassword,
       getPages: Routes.gobalRoutes,
       //routes: Routes.gobalRoutes,
-      // home: const HomePage(),
+      //home: const HomePage(),
     );
   }
 }
