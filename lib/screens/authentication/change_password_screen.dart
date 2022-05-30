@@ -56,7 +56,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height * 0.54,
+                height: height * 0.52,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

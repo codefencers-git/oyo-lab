@@ -25,7 +25,7 @@ class ForgotPassword extends StatelessWidget {
             children: [
               SizedBox(
                 width: width * 0.62,
-                height: height * 0.57,
+                height: height * 0.30,
                 child: Image.asset(
                   "assets/images/logo.png",
                   fit: BoxFit.fitWidth,
@@ -33,7 +33,7 @@ class ForgotPassword extends StatelessWidget {
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height * 0.4,
+                height: height / 1.5,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

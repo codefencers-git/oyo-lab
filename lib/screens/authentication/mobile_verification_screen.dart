@@ -54,7 +54,7 @@ class _MobileVerificationState extends State<MobileVerification> {
     super.initState();
   }
 
-   startTimer() {
+  startTimer() {
     setState(() {
       timerValue = 60;
       isShowResend = false;
@@ -106,7 +106,7 @@ class _MobileVerificationState extends State<MobileVerification> {
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height * 0.54,
+                height: height / 1.5,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -172,19 +172,17 @@ class _MobileVerificationState extends State<MobileVerification> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 30, left: 30, right: 30),
-                      child: RoundButton(
-                        buttonLabel: screenName == 'signupScreen'?'Login' :'Submit',
-                        onTap: () {
-                          screenName == 'signupScreen'?
-                          Get.toNamed(Routes.homeScreen): Get.toNamed(Routes.changePasswordScreen);
-                        },
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Poppins',
-                      ),
+                    RoundButton(
+                      buttonLabel:
+                          screenName == 'signupScreen' ? 'Login' : 'Submit',
+                      onTap: () {
+                        screenName == 'signupScreen'
+                            ? Get.toNamed(Routes.homeScreen)
+                            : Get.toNamed(Routes.changePasswordScreen);
+                      },
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
                     ),
                   ],
                 ),
@@ -198,7 +196,7 @@ class _MobileVerificationState extends State<MobileVerification> {
 
   _buildOtpTextBox() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 35.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: PinCodeTextField(
         appContext: context,
         pastedTextStyle: TextStyle(

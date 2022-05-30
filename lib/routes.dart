@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'screens/authentication/change_password.dart';
+
 import 'package:oyo_labs/screens/authentication/forgot_password_screen.dart';
 import 'package:oyo_labs/screens/authentication/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/authentication/signup_screen.dart';
