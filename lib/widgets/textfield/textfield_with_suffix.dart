@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import '../../themedata.dart';
 
 class TextFieldWithSuffixIcon extends StatelessWidget {
-  const TextFieldWithSuffixIcon({
+   TextFieldWithSuffixIcon({
     Key? key,
     required this.textController,
     required this.isReadOnly,
-    required this.keyboardType,
+    required this.isObscureText,
+    this.keyboardType =  TextInputType.text,
     this.validator,
     required this.hintText,
     required this.iconData,
@@ -15,7 +16,8 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
 
   final TextEditingController textController;
   final bool isReadOnly;
-  final TextInputType keyboardType;
+  final bool isObscureText;
+  TextInputType keyboardType;
   final String? Function(String?)? validator;
   final String hintText;
   final String iconData;
@@ -30,9 +32,10 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
       child: TextFormField(
         controller: textController,
         readOnly: isReadOnly,
-        obscureText: false,
+        obscureText: isObscureText,
         keyboardType: keyboardType,
         validator: validator,
+        cursorColor: ThemeClass.orangeColor,
         style: TextStyle(
             color: ThemeClass.blackColor1,
             fontSize: 14,
@@ -77,7 +80,7 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
             borderSide: BorderSide(
-              color: ThemeClass.greyColor,
+              color: ThemeClass.greyLightColor,
               width: 1.0,
             ),
           ),

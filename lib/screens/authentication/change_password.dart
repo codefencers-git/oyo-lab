@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:oyo_labs/global/validaton.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
@@ -15,8 +14,6 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _changePassword extends State<ChangePassword> {
-  Validation? validation;
-
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _confirmpassController = TextEditingController();
 
@@ -76,10 +73,11 @@ class _changePassword extends State<ChangePassword> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextFieldWithSuffixIcon(
+                                  isObscureText: true,
                                   textController: _passController,
                                   isReadOnly: false,
                                   keyboardType: TextInputType.visiblePassword,
-                                  validator: validation?.validateEmail,
+                                  validator: (value) {},
                                   hintText: "New Password",
                                   iconData: "assets/icons/icon-password.png",
                                   onIconTap: () {},
@@ -88,10 +86,11 @@ class _changePassword extends State<ChangePassword> {
                                   height: 20,
                                 ),
                                 TextFieldWithSuffixIcon(
+                                  isObscureText: true,
                                   textController: _confirmpassController,
                                   isReadOnly: false,
                                   keyboardType: TextInputType.visiblePassword,
-                                  validator: validation?.validateEmail,
+                                  validator: (value) {},
                                   hintText: "Confirm Password",
                                   iconData: "assets/icons/icon-password.png",
                                   onIconTap: () {},

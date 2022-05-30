@@ -5,6 +5,9 @@ class GlobalMessages {
   static String pleasEenterVaildOTP = "Please enter vaild OTP";
   static String phoneNumberinvalied = "Please enter valid phone number";
 
+  static String nameLengthMessage =
+      "Name should be at least 3 characters";
+
   static String passwordshoudbeatleat =
       "Password should be at least 6 characters";
   static String passwordshoudbeatsame = "Password should be same as above";

@@ -33,5 +33,5 @@ class ThemeClass {
   static final themeData = ThemeData(
       primaryColor: ThemeClass.blueColor,
       fontFamily: 'Lato',
-      splashColor: ThemeClass.orangeLightColor);
+      splashColor: ThemeClass.orangeColor);
 }
