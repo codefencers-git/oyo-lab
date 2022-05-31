@@ -7,6 +7,8 @@ import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 
 import '../../widgets/textfield/textfield_with_suffix.dart';
+import '../home/home_page.dart';
+import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -85,7 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           RoundButton(
                             buttonLabel: 'Login',
                             onTap: () {
-                              Get.toNamed(Routes.homeScreen);
+                              //Get.toNamed(Routes.homeScreen);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()),
+                              );
                             },
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
