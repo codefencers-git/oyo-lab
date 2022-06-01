@@ -4,6 +4,8 @@ import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:get/get.dart';
 
+import 'screens/home/home_page.dart';
+
 void main() {
 
   runApp(const MyApp());
@@ -25,6 +27,7 @@ void configLoading() {
     ..maskColor = Colors.black.withOpacity(0.5)
     ..userInteractions = false;
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
@@ -33,11 +36,11 @@ class MyApp extends StatelessWidget {
       title: 'OYO LAB',
       debugShowCheckedModeBanner: false,
       theme: ThemeClass.themeData,
-      initialRoute: Routes.splashRoute,
-      getPages: Routes.gobalRoutes,
+      // initialRoute: Routes.forgotPasswordScreen,
+      // getPages: Routes.gobalRoutes,
       builder: EasyLoading.init(),
       //routes: Routes.gobalRoutes,
-      // home: const HomePage(),
+      home: const HomePage(),
     );
   }
 }

@@ -7,6 +7,8 @@ import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 
 import '../../widgets/textfield/textfield_with_suffix.dart';
+import '../home/home_page.dart';
+import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -43,7 +45,8 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Container(
               width: width * 0.62,
-              padding: const EdgeInsets.only(top: 75, bottom: 60),
+              height: height,
+              // padding: const EdgeInsets.only(top: 100, bottom: 60),
               child: Image.asset(
                 "assets/images/logo.png",
                 fit: BoxFit.fitWidth,
@@ -51,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             ContainerWithInnerShadow(
                 width: width,
-                height: height * 0.65,
+                height: height * 0.70,
                 child: Column(
                   children: [
                     Text(
@@ -72,17 +75,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           _buildPasswordField(),
                           const SizedBox(height: 10),
                           _buildForgotPassword(),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 60),
-                            child: RoundButton(
-                              buttonLabel: 'Login',
-                              onTap: () {
-                                Get.toNamed(Routes.homeScreen);
-                              },
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Poppins',
-                            ),
+                          SizedBox(
+                            height: height / 7,
+                          ),
+                          RoundButton(
+                            buttonLabel: 'Login',
+                            onTap: () {
+                              //Get.toNamed(Routes.homeScreen);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()),
+                              );
+                            },
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Poppins',
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 15),

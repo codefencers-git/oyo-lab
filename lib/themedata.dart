@@ -31,7 +31,7 @@ class ThemeClass {
   static final Color skyblueColor = Color(0xffF3FAFF);
 
   static final themeData = ThemeData(
-      primaryColor: ThemeClass.orangeColor,
+      primaryColor: ThemeClass.blueColor,
       fontFamily: 'Lato',
       splashColor: ThemeClass.orangeColor);
 }

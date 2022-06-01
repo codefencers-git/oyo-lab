@@ -12,9 +12,9 @@ class RoundButton extends StatelessWidget {
     Key? key,
     required this.buttonLabel,
     required this.onTap,
-    this.fontSize = 16,
-    this.fontWeight=FontWeight.w600,
-    this.fontFamily='Lato',
+    this.fontSize = 18,
+    this.fontWeight = FontWeight.normal,
+    this.fontFamily = "Lato",
   }) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class RoundButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 5),
         decoration: BoxDecoration(
             color: ThemeClass.orangeColor,
             borderRadius: BorderRadius.circular(30)),

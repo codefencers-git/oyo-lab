@@ -48,6 +48,7 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
           hintStyle: TextStyle(
               color: ThemeClass.blackColor1,
               fontSize: 14,
+              fontFamily: 'assets/fonts/Lato-Regular.ttf',
               fontWeight: FontWeight.w400),
           suffixIcon: InkWell(
             onTap: onIconTap,
