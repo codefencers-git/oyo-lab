@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
@@ -34,7 +35,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       isConfirmPwdObs = !isConfirmPwdObs;
     });
   }
-
+  Validation? validation;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -120,17 +121,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       textController: _passwordController,
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'password field';
-        } else {
-          var passwordLength = value.length;
-          if (passwordLength < 6) {
-            return GlobalMessages.passwordshoudbeatleat;
-          }
-        }
-        return null;
-      },
+      validator: validation!.passwordValidation,
       hintText: "Password",
       iconData: isObs
           ? "assets/icons/icon-password.png"
@@ -145,16 +136,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       textController: _confirmPasswordController,
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'password field';
-        } else if (value.length < 6) {
-          return GlobalMessages.passwordshoudbeatleat;
-        } else if (value != _passwordController.text) {
-          return GlobalMessages.incorrectConfirmPassword;
-        }
-        return null;
-      },
+      validator:( value) {
+    if (value!.isEmpty) {
+      return GlobalMessages.emptyMessage + 'password field';
+    } else if (value.length < 6) {
+      return GlobalMessages.passwordshoudbeatleat;
+    } else if (value != _passwordController.text) {
+      return GlobalMessages.incorrectConfirmPassword;
+    }
+    return null;
+  },
       hintText: "Confirm Password",
       iconData: isConfirmPwdObs
           ? "assets/icons/icon-password.png"

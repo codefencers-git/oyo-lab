@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:oyo_labs/global/global_enum_class.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
@@ -34,6 +35,8 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
+  Validation? validation;
+
   DateTime currentDate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -56,6 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ThemeClass.whiteColor,
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,7 +115,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: RoundButton(
                               buttonLabel: 'Register',
                               onTap: () {
-                             Get.toNamed(Routes.mobileVerificationScreen, arguments: 'signupScreen');
+                                Get.toNamed(Routes.mobileVerificationScreen,
+                                    arguments: 'signupScreen');
                               },
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -203,15 +208,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isReadOnly: false,
       isObscureText: false,
       keyboardType: TextInputType.text,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'name';
-        }
-        if (value.length < 3) {
-          return GlobalMessages.nameLengthMessage;
-        }
-        return null;
-      },
+      validator: validation!.nameValidation,
       hintText: "Full Name",
       iconData: "assets/icons/icon-user.png",
       onIconTap: () {},
@@ -224,17 +221,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isReadOnly: false,
       isObscureText: false,
       keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        Pattern pattern =
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-        RegExp regex = RegExp(pattern.toString());
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'email address';
-        } else if (!regex.hasMatch(value)) {
-          return GlobalMessages.pleaseEnterValidEmail;
-        }
-        return null;
-      },
+      validator: validation!.emailValidation,
       hintText: "Email address",
       iconData: "assets/icons/icon-mail.png",
       onIconTap: () {},
@@ -247,14 +234,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isReadOnly: false,
       isObscureText: false,
       keyboardType: TextInputType.number,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'phone number';
-        } else if (value.length != 10) {
-          return GlobalMessages.phoneNumberinvalied;
-        }
-        return null;
-      },
+      validator: validation!.phoneNumverValidation,
       hintText: "Phone Number",
       iconData: "assets/icons/icon-phone.png",
       onIconTap: () {},
@@ -266,17 +246,7 @@ class _SignupScreenState extends State<SignupScreen> {
       textController: _passwordController,
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'password field';
-        } else {
-          var passwordLength = value.length;
-          if (passwordLength < 6) {
-            return GlobalMessages.passwordshoudbeatleat;
-          }
-        }
-        return null;
-      },
+      validator: validation!.passwordValidation,
       hintText: "Password",
       iconData: isObs
           ? "assets/icons/icon-password.png"

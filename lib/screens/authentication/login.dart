@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
@@ -15,15 +16,6 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-bool isNumeric(String str) {
-  try {
-    var value = int.parse(str);
-  } on FormatException {
-    return false;
-  }
-  return true;
-}
-
 class _LoginScreenState extends State<LoginScreen> {
   bool isObs = true;
 
@@ -35,6 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController _emailOrPhoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  Validation? validation;
 
   @override
   Widget build(BuildContext context) {
@@ -132,22 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
       isReadOnly: false,
       isObscureText: false,
       keyboardType: TextInputType.text,
-      validator: (value) {
-        Pattern pattern =
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-        RegExp regex = RegExp(pattern.toString());
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'phone number or email';
-        }
-        if (isNumeric(value)) {
-          if (value.length != 10) {
-            return GlobalMessages.emptyMessage + 'valid phone number';
-          }
-        } else if (!regex.hasMatch(value)) {
-          return GlobalMessages.pleaseEnterValidEmail;
-        }
-        return null;
-      },
+      validator: validation!.emailValidation,
       hintText: "Phone Number or Email",
       iconData: "assets/icons/icon-user.png",
       onIconTap: () {},
@@ -159,17 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
       textController: _passwordController,
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'password field';
-        } else {
-          var passwordLength = value.length;
-          if (passwordLength < 6) {
-            return GlobalMessages.passwordshoudbeatleat;
-          }
-        }
-        return null;
-      },
+      validator: validation!.passwordValidation,
       hintText: "Password",
       iconData: isObs
           ? "assets/icons/icon-password.png"

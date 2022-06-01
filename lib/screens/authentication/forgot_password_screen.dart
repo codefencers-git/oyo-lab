@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
@@ -12,6 +13,7 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Validation? validation;
     final TextEditingController _phoneNumberController =
         TextEditingController();
 
@@ -19,6 +21,7 @@ class ForgotPassword extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ThemeClass.whiteColor,
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,14 +73,7 @@ class ForgotPassword extends StatelessWidget {
                         isReadOnly: false,
                         isObscureText: false,
                         keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return GlobalMessages.emptyMessage + 'phone number';
-                          } else if (value.length != 10) {
-                            return GlobalMessages.phoneNumberinvalied;
-                          }
-                          return null;
-                        },
+                        validator: validation!.phoneNumverValidation,
                         hintText: "Phone Number",
                         iconData: "assets/icons/icon-phone.png",
                         onIconTap: () {},

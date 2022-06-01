@@ -5,6 +5,7 @@ import 'package:oyo_labs/themedata.dart';
 import 'package:get/get.dart';
 
 void main() {
+
   runApp(const MyApp());
   configLoading();
 }

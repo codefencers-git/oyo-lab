@@ -12,9 +12,9 @@ class RoundButton extends StatelessWidget {
     Key? key,
     required this.buttonLabel,
     required this.onTap,
-    required this.fontSize,
-    required this.fontWeight,
-    required this.fontFamily,
+    this.fontSize = 16,
+    this.fontWeight=FontWeight.w600,
+    this.fontFamily='Lato',
   }) : super(key: key);
 
   @override

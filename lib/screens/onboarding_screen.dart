@@ -58,7 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     return SafeArea(
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
-        body: Container(
+        body: SizedBox(
           height: height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -70,25 +70,6 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 ),
                 child: Center(child: Image.asset(data[_index].imagePath)),
               ),
-              // CarouselSlider(
-              //   items: data
-              //       .map((item) => Container(
-              //             margin:
-              //                 const EdgeInsets.only(left: 5, right: 5, top: 15),
-              //             child: Column(
-              //               children: [Text(item.title.toString())],
-              //             ),
-              //           ))
-              //       .toList(),
-              //   carouselController: _controller,
-              //   options: CarouselOptions(
-              //       autoPlay: false,
-              //       enlargeCenterPage: false,
-              //       aspectRatio: 2.0,
-              //       enableInfiniteScroll: false,
-              //       viewportFraction: 0.9,
-              //       onPageChanged: (index, reason) {}),
-              // ),
               ContainerWithInnerShadow(
                 width: width,
                 height: height * 0.5,
