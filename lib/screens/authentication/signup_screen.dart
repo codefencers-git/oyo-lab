@@ -39,6 +39,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   DateTime currentDate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
+    validation = Validation();
     final DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: currentDate,
