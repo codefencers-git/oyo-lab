@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
@@ -74,7 +73,7 @@ class ForgotPassword extends StatelessWidget {
                         isReadOnly: false,
                         isObscureText: false,
                         keyboardType: TextInputType.number,
-                        validator: validation!.phoneNumverValidation,
+                        validator: validation.phoneNumverValidation,
                         hintText: "Phone Number",
                         iconData: "assets/icons/icon-phone.png",
                         onIconTap: () {},
