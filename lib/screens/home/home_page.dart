@@ -253,7 +253,7 @@ class _HomePageState extends State<HomePage> {
                                         _image('assets/images/blank_star.png'),
                                   ),
                                   itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 0.8),
+                                      EdgeInsets.symmetric(horizontal: 0.7),
                                   onRatingUpdate: (rating) {
                                     print(rating);
                                   },
@@ -281,9 +281,12 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          RoundButtonBookSlot(
-                            onTap: () {},
-                            label: 'Book a Slot',
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: RoundButtonBookSlot(
+                              onTap: () {},
+                              label: 'Book a Slot',
+                            ),
                           ),
                         ],
                       ),
