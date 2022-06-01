@@ -2,9 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import '../../widgets/buttons/round_book_slot.dart';
-import '../../widgets/buttons/round_button_with_icon.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -44,7 +42,7 @@ class _HomePageState extends State<HomePage> {
           ),
           title: Row(
             children: [
-              ImageIcon(AssetImage("assets/icons/icon-location.png")),
+              const ImageIcon(AssetImage("assets/icons/icon-location.png")),
               Text(
                 " Ahmedabad",
                 style: TextStyle(
@@ -158,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(
                           fontSize: 14,
                           color: ThemeClass.blackColor,
-                          fontWeight: FontWeight.w900),
+                          fontWeight: FontWeight.w700),
                     ),
                     TextButton(
                       onPressed: () {},
@@ -171,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                             'View All',
                             style: TextStyle(
                                 fontSize: 14,
-                                color: ThemeClass.redColor,
+                                color: ThemeClass.orangeColor,
                                 fontWeight: FontWeight.w900),
                           ),
                           Image.asset('assets/icons/arrowhead-right.png'),
@@ -252,8 +250,8 @@ class _HomePageState extends State<HomePage> {
                                     empty:
                                         _image('assets/images/blank_star.png'),
                                   ),
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 0.7),
+                                  itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 0.7),
                                   onRatingUpdate: (rating) {
                                     print(rating);
                                   },
@@ -303,7 +301,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   _image(String s) {
-    return Image.asset(s);
+    return Image.asset(
+      s,
+      height: 20,
+    );
   }
 }
 

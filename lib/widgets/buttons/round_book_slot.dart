@@ -25,7 +25,7 @@ class RoundButtonBookSlot extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/Group 2600.png'),
+                Image.asset('assets/icons/icon-calender-white.png'),
                 const SizedBox(
                   width: 3,
                 ),
