@@ -24,11 +24,11 @@ class ForgotPassword extends StatelessWidget {
         backgroundColor: ThemeClass.whiteColor,
         body: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SizedBox(
                 width: width * 0.62,
-                height: height * 0.30,
+                height: height * 0.55,
                 child: Image.asset(
                   "assets/images/logo.png",
                   fit: BoxFit.fitWidth,
@@ -36,7 +36,7 @@ class ForgotPassword extends StatelessWidget {
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height / 1.5,
+                height: height * 0.45,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -93,6 +93,7 @@ class ForgotPassword extends StatelessWidget {
                         fontFamily: 'Poppins',
                       ),
                     ),
+                    SizedBox(height: 10),
                   ],
                 ),
               )

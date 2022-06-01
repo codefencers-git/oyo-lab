@@ -64,11 +64,11 @@ class _SignupScreenState extends State<SignupScreen> {
         backgroundColor: ThemeClass.whiteColor,
         body: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
                 width: width * 0.45,
-                padding: const EdgeInsets.symmetric(vertical: 23),
+                height: height * 0.2,
                 child: Image.asset(
                   "assets/images/logo.png",
                   fit: BoxFit.fitWidth,
@@ -76,7 +76,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height * 0.8,
+                height: height * 0.79,
                 child: Column(
                   children: [
                     Text(
@@ -88,7 +88,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     const SizedBox(height: 15),
                     Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: const EdgeInsets.only(
+                          top: 25.0, bottom: 15, left: 20, right: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -111,7 +112,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               onIconTap: () {
                                 _selectDate(context);
                               }),
-                          const SizedBox(height: 10),
+                          // const SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.only(top: 30, bottom: 20),
                             child: RoundButton(

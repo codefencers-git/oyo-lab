@@ -5,10 +5,8 @@ import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
-
 import '../../widgets/textfield/textfield_with_suffix.dart';
 import '../home/home_page.dart';
-import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -40,90 +38,95 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
         body: SingleChildScrollView(
+          child: SizedBox(
+            height: height,
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: width * 0.62,
-              height: height,
-              // padding: const EdgeInsets.only(top: 100, bottom: 60),
-              child: Image.asset(
-                "assets/images/logo.png",
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            ContainerWithInnerShadow(
-                width: width,
-                height: height * 0.70,
-                child: Column(
-                  children: [
-                    Text(
-                      "LOGIN",
-                      style: TextStyle(
-                          color: ThemeClass.orangeColor,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 25),
-                    Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          _buildEmailField(),
-                          const SizedBox(height: 20),
-                          _buildPasswordField(),
-                          const SizedBox(height: 10),
-                          _buildForgotPassword(),
-                          SizedBox(
-                            height: height / 7,
-                          ),
-                          RoundButton(
-                            buttonLabel: 'Login',
-                            onTap: () {
-                              //Get.toNamed(Routes.homeScreen);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomePage()),
-                              );
-                            },
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Poppins',
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "New Here?  ",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: ThemeClass.greyColor1,
-                                      fontWeight: FontWeight.w400),
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  height: height * 0.33,
+                  width: width * 0.62,
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                ContainerWithInnerShadow(
+                    width: width,
+                    height: height * 0.67,
+                    child: Column(
+                      children: [
+                        Text(
+                          "LOGIN",
+                          style: TextStyle(
+                              color: ThemeClass.orangeColor,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        const SizedBox(height: 25),
+                        Padding(
+                          padding: const EdgeInsets.all(25.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              _buildEmailField(),
+                              const SizedBox(height: 20),
+                              _buildPasswordField(),
+                              const SizedBox(height: 10),
+                              _buildForgotPassword(),
+                              SizedBox(
+                                height: height * 0.1,
+                              ),
+                              RoundButton(
+                                buttonLabel: 'Login',
+                                onTap: () {
+                                  //Get.toNamed(Routes.homeScreen);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const HomePage()),
+                                  );
+                                },
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "New Here?  ",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: ThemeClass.greyColor1,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () =>
+                                          Get.toNamed(Routes.signupScreen),
+                                      child: Text(
+                                        "Create an account",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: ThemeClass.orangeColor,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                GestureDetector(
-                                  onTap: () => Get.toNamed(Routes.signupScreen),
-                                  child: Text(
-                                    "Create an account",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: ThemeClass.orangeColor,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ))
-          ],
-        )),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ))
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

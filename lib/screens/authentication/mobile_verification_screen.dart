@@ -106,7 +106,7 @@ class _MobileVerificationState extends State<MobileVerification> {
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height / 1.5,
+                height: height * 0.55,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
