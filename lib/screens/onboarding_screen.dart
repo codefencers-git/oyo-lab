@@ -63,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: height * 0.45,
+                height: height / 2.4,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 40,
                 ),
@@ -71,7 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height * 0.5,
+                height: height / 2.3,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

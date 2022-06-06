@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../widgets/buttons/round_book_slot.dart';
+import 'lab_test.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -195,6 +196,13 @@ class _HomePageState extends State<HomePage> {
                     return Container(
                       decoration: BoxDecoration(
                         color: ThemeClass.orangeLightColor,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 8.0,
+                            offset: Offset(5, 10),
+                            color: Colors.grey.withOpacity(0.2),
+                          ),
+                        ],
                         // color: Colors.amber,
                         borderRadius: BorderRadius.circular(7),
                       ),
@@ -282,7 +290,13 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: RoundButtonBookSlot(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LabTestScreen()),
+                                );
+                              },
                               label: 'Book a Slot',
                             ),
                           ),
