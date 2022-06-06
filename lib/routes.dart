@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:oyo_labs/screens/MyAppointments/my_appointment.dart';
 
 import 'package:oyo_labs/screens/authentication/forgot_password_screen.dart';
 import 'package:oyo_labs/screens/authentication/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/authentication/signup_screen.dart';
+import 'package:oyo_labs/screens/home/all_laboratories.dart';
 import 'screens/authentication/change_password_screen.dart';
 import 'screens/authentication/login.dart';
 import 'screens/home/home_page.dart';
@@ -18,6 +20,8 @@ class Routes {
   static const String mobileVerificationScreen = '/mobileVerification';
   static const String homeScreen = '/homeScreen';
   static const String changePasswordScreen = '/changePassword';
+  static const String allLabScreen = '/allLabScreen';
+  static const String myAppointmentScreen = '/myAppointment';
 
   static List<GetPage> gobalRoutes = [
     GetPage(name: splashRoute, page: () => const SplashScreen()),
@@ -30,5 +34,7 @@ class Routes {
     GetPage(name: homeScreen, page: () => const HomePage()),
     GetPage(
         name: changePasswordScreen, page: () => const ChangePasswordScreen()),
+    GetPage(name: allLabScreen, page: () => const AllLaboratories()),
+    GetPage(name: myAppointmentScreen, page: () => const MyAppointments()),
   ];
 }
