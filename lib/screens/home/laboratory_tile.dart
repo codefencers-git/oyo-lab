@@ -4,12 +4,14 @@ import 'package:oyo_labs/themedata.dart';
 
 import '../../widgets/buttons/round_book_slot.dart';
 
+import 'laboratory_detail.dart';
+
 class LaboratoryTile extends StatelessWidget {
-  const LaboratoryTile({ Key? key }) : super(key: key);
+  const LaboratoryTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-        double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
 
     return Container(
       decoration: BoxDecoration(
@@ -21,7 +23,7 @@ class LaboratoryTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            "assets/images/752ba49a-33d.png",
+            "assets/images/laboratory_image.png",
             width: width / 2.1,
             // height: height / 3,
             fit: BoxFit.cover,
@@ -99,7 +101,14 @@ class LaboratoryTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: RoundButtonBookSlot(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LaboratoryDetail()),
+                );
+                print("object");
+              },
               label: 'Book a Slot',
             ),
           ),
@@ -108,7 +117,8 @@ class LaboratoryTile extends StatelessWidget {
       ),
     );
   }
-    _image(String s) {
+
+  _image(String s) {
     return Image.asset(
       s,
       height: 20,

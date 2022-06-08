@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 3), () {
       _navigateTo();
     });
     super.initState();
@@ -30,6 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
         body: SizedBox(
@@ -66,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Container buildImageWidget(double height, double width) {
     return Container(
-      height: height * 0.65,
+      height: height / 1.8,
       width: width,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(
