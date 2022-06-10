@@ -1,15 +1,18 @@
 import 'package:get/get.dart';
+import 'package:oyo_labs/screens/AboutUs/about_us.dart';
 import 'package:oyo_labs/screens/MyAppointments/my_appointment.dart';
 
 import 'package:oyo_labs/screens/authentication/forgot_password_screen.dart';
 import 'package:oyo_labs/screens/authentication/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/authentication/signup_screen.dart';
 import 'package:oyo_labs/screens/home/all_laboratories.dart';
+import 'screens/ContactUs/contact_us.dart';
 import 'screens/authentication/change_password_screen.dart';
 import 'screens/authentication/login.dart';
 import 'screens/home/home_page.dart';
-import 'screens/onboarding_screen.dart';
-import 'screens/splash_screen.dart';
+import 'screens/notification/notification_setting.dart';
+import 'screens/onBoarding/onboarding_screen.dart';
+import 'screens/onBoarding/splash_screen.dart';
 
 class Routes {
   static const String splashRoute = '/splashScreen';
@@ -22,6 +25,9 @@ class Routes {
   static const String changePasswordScreen = '/changePassword';
   static const String allLabScreen = '/allLabScreen';
   static const String myAppointmentScreen = '/myAppointment';
+  static const String notificationSettingScreen = '/notificationSetting';
+  static const String aboutUsScreen = '/aboutUs';
+  static const String contactUsScreen = '/contactUs';
 
   static List<GetPage> gobalRoutes = [
     GetPage(name: splashRoute, page: () => const SplashScreen()),
@@ -36,5 +42,10 @@ class Routes {
         name: changePasswordScreen, page: () => const ChangePasswordScreen()),
     GetPage(name: allLabScreen, page: () => const AllLaboratories()),
     GetPage(name: myAppointmentScreen, page: () => const MyAppointments()),
+    GetPage(
+        name: notificationSettingScreen,
+        page: () => const NotificationSetting()),
+    GetPage(name: aboutUsScreen, page: () => const AboutUs()),
+    GetPage(name: contactUsScreen, page: () => const ContactUs()),
   ];
 }

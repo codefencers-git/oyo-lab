@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/slider_widget.dart';
-import '../widgets/buttons/round_button_with_border.dart';
-import '../widgets/buttons/round_button_with_icon.dart';
-import '../widgets/container_with_inner_shadow.dart';
+import '../../widgets/buttons/round_button_with_border.dart';
+import '../../widgets/buttons/round_button_with_icon.dart';
+import '../../widgets/container_with_inner_shadow.dart';
 
 class OnboardingScreen extends StatefulWidget {
   OnboardingScreen({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   //   print(index);
   // }
 
-  CarouselController _controller = CarouselController();
+  final CarouselController _controller = CarouselController();
 
   List<OnBoardingScreenData> data = [
     OnBoardingScreenData(

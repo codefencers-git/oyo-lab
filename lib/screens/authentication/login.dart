@@ -80,12 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               RoundButton(
                                 buttonLabel: 'Login',
                                 onTap: () {
-                                  //Get.toNamed(Routes.homeScreen);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const HomePage()),
-                                  );
+                                  Get.toNamed(Routes.homeScreen);
                                 },
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
@@ -6,12 +8,15 @@ class AppbarWithBackButton extends StatelessWidget {
   AppbarWithBackButton({
     Key? key,
     required this.appbarTitle,
+    this.elevation = 0,
   }) : super(key: key);
   String appbarTitle;
+  double elevation;
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 0,
+      elevation: elevation,
+      shadowColor: const Color(0x0000001a).withOpacity(0.3),
       toolbarHeight: 70,
       backgroundColor: ThemeClass.orangeColor,
       leading: GestureDetector(

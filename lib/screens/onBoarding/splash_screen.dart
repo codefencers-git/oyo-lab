@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 
-import '../widgets/buttons/round_button.dart';
+import '../../widgets/buttons/round_button.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

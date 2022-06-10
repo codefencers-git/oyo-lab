@@ -7,6 +7,7 @@ class ThemeClass {
   static final Color whiteColor = Color(0xFFFFFFFF);
   static final Color orangeColor = Color(0xFFFE4300);
   static final Color orangeLightColor = Color(0xFFFFF9F6);
+  static final Color orangeLightColor1 = Color(0xFFfe9975);
 
   static final Color redColor = Color(0xFFD70222);
   static final Color redColor1 = Color(0xFFFE0000);
@@ -26,6 +27,8 @@ class ThemeClass {
   static final greyLightColor = Color(0xffFBFBFB);
   static final greyLightColor1 = Color(0xffE3E3E3);
   static final greyLightColor2 = Color(0xffF4F9F9);
+
+  static final notificationSettingGrey = Color(0xffB8B8B8);
 
   static final Color blueColor = Color(0xFF19627C);
   static final Color skyblueColor = Color(0xffF3FAFF);

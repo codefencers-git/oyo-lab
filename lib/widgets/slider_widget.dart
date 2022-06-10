@@ -3,7 +3,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:oyo_labs/screens/onboarding_screen.dart';
+import 'package:oyo_labs/screens/onBoarding/onboarding_screen.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class OnBoardingSliderWidget extends StatefulWidget {

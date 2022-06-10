@@ -41,7 +41,9 @@ class DrawerWidget extends StatelessWidget {
                 tileIconPath: "assets/icons/appointment-icon.png",
               ),
               _buildDrawerListTile(
-                onTileTap: () {},
+                onTileTap: () {
+                  Get.toNamed(Routes.notificationSettingScreen);
+                },
                 tileLabel: "Notification",
                 tileIconPath: "assets/icons/notification-icon.png",
               ),
@@ -56,7 +58,9 @@ class DrawerWidget extends StatelessWidget {
                 tileIconPath: "assets/icons/setting-icon.png",
               ),
               _buildDrawerListTile(
-                onTileTap: () {},
+                onTileTap: () {
+                  Get.toNamed(Routes.aboutUsScreen);
+                },
                 tileLabel: "About Us",
                 tileIconPath: "assets/icons/info-icon.png",
               ),
@@ -66,7 +70,9 @@ class DrawerWidget extends StatelessWidget {
                 tileIconPath: "assets/icons/info-icon.png",
               ),
               _buildDrawerListTile(
-                onTileTap: () {},
+                onTileTap: () {
+                  Get.toNamed(Routes.contactUsScreen);
+                },
                 tileLabel: "Contact Us",
                 tileIconPath: "assets/icons/info-icon.png",
               ),

@@ -8,6 +8,7 @@ class RoundButton extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final String fontFamily;
+  final double verticalPadding;
   const RoundButton({
     Key? key,
     required this.buttonLabel,
@@ -15,6 +16,7 @@ class RoundButton extends StatelessWidget {
     this.fontSize = 18,
     this.fontWeight = FontWeight.normal,
     this.fontFamily = "Lato",
+    this.verticalPadding = 18.0,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class RoundButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 5),
+        padding: EdgeInsets.symmetric(vertical: verticalPadding, horizontal: 5),
         decoration: BoxDecoration(
             color: ThemeClass.orangeColor,
             borderRadius: BorderRadius.circular(30)),
