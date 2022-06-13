@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oyo_labs/screens/home/laboratory_tile.dart';
+import 'package:oyo_labs/screens/laboratory/laboratory_tile.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 

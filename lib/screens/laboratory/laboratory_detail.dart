@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:oyo_labs/themedata.dart';
 
 import '../../widgets/appbar/appbar_with_back_button.dart';
+import 'book_appointment.dart';
 
 class LaboratoryDetail extends StatefulWidget {
   const LaboratoryDetail({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class LaboratoryDetail extends StatefulWidget {
 
 class _LabTestScreenState extends State<LaboratoryDetail> {
   bool isLoadMore = false;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -52,9 +54,9 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                             Text(
                               "Green Cross Laboratory",
                               style: TextStyle(
-                                fontSize: 14,
-                                color: ThemeClass.blackColor,
-                              ),
+                                  fontSize: 14,
+                                  color: ThemeClass.blackColor,
+                                  fontWeight: FontWeight.w500),
                             ),
                             Padding(
                               padding:
@@ -91,7 +93,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                                           style: TextStyle(
                                               fontSize: 8,
                                               color: ThemeClass.redColor,
-                                              fontWeight: FontWeight.w900),
+                                              fontWeight: FontWeight.w400),
                                         ),
                                       ),
                                       Padding(
@@ -101,7 +103,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                                           style: TextStyle(
                                               fontSize: 8,
                                               color: ThemeClass.blackColor,
-                                              fontWeight: FontWeight.w900),
+                                              fontWeight: FontWeight.w400),
                                         ),
                                       ),
                                     ],
@@ -125,7 +127,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 color: ThemeClass.greyColor,
-                                                fontWeight: FontWeight.w900),
+                                                fontWeight: FontWeight.w400),
                                           ),
                                         ),
                                       )
@@ -258,7 +260,17 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                                 ],
                               ),
                             ),
-                            Image.asset("assets/icons/icon_calander.png"),
+                            TextButton(
+                              child:
+                                  Image.asset("assets/icons/icon_calander.png"),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => BookAppointment()),
+                                );
+                              },
+                            ),
                           ],
                         ),
                         Divider(
@@ -283,18 +295,20 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      isLoadMore == false ? "Load More" : "less",
+                      isLoadMore == false ? "Load More" : "Less",
                       style: TextStyle(
                           fontSize: 12,
                           color: ThemeClass.orangeColor,
                           fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(width: 5),
-                    Image.asset("assets/icons/icon_down_arrow.png"),
+                    Image.asset(isLoadMore == false
+                        ? "assets/icons/icon_down_arrow.png"
+                        : "assets/icons/icon_up_arrow.png"),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -329,9 +343,64 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                         Row(
                           children: [
                             Image.asset("assets/images/john_image.png"),
-                            Text("John Doe"),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "John Doe",
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: ThemeClass.darkgreyColor,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  "October, 2021",
+                                  style: TextStyle(
+                                      fontSize: 6,
+                                      color: ThemeClass.orangeColor,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
                           ],
-                        )
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            RatingBar(
+                              initialRating: 3,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemSize: 16,
+                              itemCount: 5,
+                              ignoreGestures: true,
+                              ratingWidget: RatingWidget(
+                                full: _image('assets/images/full_star.png'),
+                                half: _image('assets/images/half_star.png'),
+                                empty: _image('assets/images/blank_star.png'),
+                              ),
+                              itemPadding:
+                                  const EdgeInsets.symmetric(horizontal: 0.7),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+                          style: TextStyle(
+                              fontSize: 9,
+                              color: ThemeClass.greyColor1,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ],
                     ),
                   );
@@ -344,6 +413,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
     );
   }
 
+// widget
   _image(String s) {
     return Image.asset(
       s,
