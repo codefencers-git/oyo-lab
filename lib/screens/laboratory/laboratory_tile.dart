@@ -15,10 +15,17 @@ class LaboratoryTile extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: ThemeClass.orangeLightColor,
-        // color: Colors.amber,
-        borderRadius: BorderRadius.circular(7),
-      ),
+          color: ThemeClass.orangeLightColor,
+          // color: Colors.amber,
+          borderRadius: BorderRadius.circular(7),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 8.0,
+              spreadRadius: 0.0,
+              offset: Offset(5, 3),
+              color: Colors.grey.withOpacity(0.5),
+            ),
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -99,7 +106,7 @@ class LaboratoryTile extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 5),
             child: RoundButtonBookSlot(
               onTap: () {
                 Navigator.push(

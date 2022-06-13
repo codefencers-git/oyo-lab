@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_detail.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
@@ -246,7 +247,7 @@ class _MyAppointmentState extends State<MyAppointment>
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LabtestDetail()),
+                    MaterialPageRoute(builder: (context) => LabTestComplete()),
                   );
                 },
               );
