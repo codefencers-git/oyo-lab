@@ -54,81 +54,85 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        body: SizedBox(
-          height: height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                height: height * 0.45,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
+    return Container(
+      color: ThemeClass.whiteColor,
+      child: SafeArea(
+        bottom: false,
+        child: Scaffold(
+          backgroundColor: ThemeClass.whiteColor,
+          body: SizedBox(
+            height: height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  height: height / 2.4,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                  ),
+                  child: Center(child: Image.asset(data[_index].imagePath)),
                 ),
-                child: Center(child: Image.asset(data[_index].imagePath)),
-              ),
-              ContainerWithInnerShadow(
-                width: width,
-                height: height * 0.5,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    OnBoardingSliderWidget(
-                        controller: _controller,
-                        key: widget.globalKey,
-                        sliderData: data,
-                        callBack: (value) {
-                          setState(() {
-                            _index = value;
-                          });
-                        }),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: width * 0.3,
-                            child: BorderRoundButton(
-                              onTap: () {
-                                Get.toNamed(Routes.loginScreen);
-                              },
-                              buttonLabel: Text(
-                                'skip_us_key'.tr,
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w900,
-                                    color: ThemeClass.orangeColor),
+                ContainerWithInnerShadow(
+                  width: width,
+                  height: height / 2.3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      OnBoardingSliderWidget(
+                          controller: _controller,
+                          key: widget.globalKey,
+                          sliderData: data,
+                          callBack: (value) {
+                            setState(() {
+                              _index = value;
+                            });
+                          }),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: width * 0.3,
+                              child: BorderRoundButton(
+                                onTap: () {
+                                  Get.toNamed(Routes.loginScreen);
+                                },
+                                buttonLabel: Text(
+                                  "SKIP",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w900,
+                                      color: ThemeClass.orangeColor),
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: width * 0.33,
-                            child: RoundButtonWithIcon(
-                              label: 'NEXT  ',
-                              onTap: () {
-                                if (_index < 2) {
-                                  _controller.nextPage();
+                            SizedBox(
+                              width: width * 0.33,
+                              child: RoundButtonWithIcon(
+                                label: 'NEXT  ',
+                                onTap: () {
+                                  if (_index < 2) {
+                                    _controller.nextPage();
 
-                                  // widget.globalKey.currentState!.onNextPress();
-                                  setState(() {
-                                    _index++;
-                                  });
-                                } else {
-                                  Get.toNamed(Routes.loginScreen);
-                                }
-                              },
+                                    // widget.globalKey.currentState!.onNextPress();
+                                    setState(() {
+                                      _index++;
+                                    });
+                                  } else {
+                                    Get.toNamed(Routes.loginScreen);
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

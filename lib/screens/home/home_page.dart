@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/drawer_sceen.dart';
-import 'package:oyo_labs/screens/home/laboratory_tile.dart';
+import 'package:oyo_labs/screens/laboratory/laboratory_tile.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/homepage_appbar.dart';
 
@@ -29,6 +29,8 @@ class _HomePageState extends State<HomePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
         drawer: DrawerWidget(

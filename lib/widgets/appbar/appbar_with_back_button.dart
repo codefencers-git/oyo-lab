@@ -28,6 +28,7 @@ class AppbarWithBackButton extends StatelessWidget {
           child: ImageIcon(AssetImage("assets/icons/icon-back.png")),
         ),
       ),
+      centerTitle: false,
       title: Text(
         appbarTitle,
         style: TextStyle(

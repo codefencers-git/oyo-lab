@@ -35,6 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
         body: SingleChildScrollView(
@@ -75,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               const SizedBox(height: 10),
                               _buildForgotPassword(),
                               SizedBox(
-                                height: height * 0.1,
+                                height: height / 8,
                               ),
                               RoundButton(
                                 buttonLabel: 'Login',
