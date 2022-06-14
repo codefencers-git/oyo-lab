@@ -35,6 +35,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       isConfirmPwdObs = !isConfirmPwdObs;
     });
   }
+
   Validation? validation;
   @override
   Widget build(BuildContext context) {
@@ -105,6 +106,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Poppins',
+                        
                       ),
                     ),
                   ],
@@ -137,16 +139,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       textController: _confirmPasswordController,
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
-      validator:( value) {
-    if (value!.isEmpty) {
-      return GlobalMessages.emptyMessage + 'password field';
-    } else if (value.length < 6) {
-      return GlobalMessages.passwordshoudbeatleat;
-    } else if (value != _passwordController.text) {
-      return GlobalMessages.incorrectConfirmPassword;
-    }
-    return null;
-  },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return GlobalMessages.emptyMessage + 'password field';
+        } else if (value.length < 6) {
+          return GlobalMessages.passwordshoudbeatleat;
+        } else if (value != _passwordController.text) {
+          return GlobalMessages.incorrectConfirmPassword;
+        }
+        return null;
+      },
       hintText: "Confirm Password",
       iconData: isConfirmPwdObs
           ? "assets/icons/icon-password.png"

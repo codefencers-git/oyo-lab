@@ -50,6 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 120),
                 child: RoundButton(
+            
                   buttonLabel: "GET STARTED",
                   onTap: () {
                     Get.toNamed(Routes.onboardingScreen);

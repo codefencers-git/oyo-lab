@@ -3,7 +3,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
-import 'package:oyo_labs/widgets/buttons/round_button_with_border.dart';
 
 class LabtestDetail extends StatefulWidget {
   const LabtestDetail({Key? key}) : super(key: key);
@@ -420,8 +419,9 @@ class _LabtestDetailState extends State<LabtestDetail> {
             children: [
               Expanded(
                   child: RoundButton(
+        
                       buttonLabel: 'Cancel',
-                      color: Colors.white,
+                     
                       fontcolor: ThemeClass.orangeColor,
                       fontSize: 16,
                       fontFamily: "poppins",
@@ -431,6 +431,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
               ),
               Expanded(
                   child: RoundButton(
+           
                       buttonLabel: 'Reschedule',
                       fontSize: 16,
                       fontFamily: "poppins",

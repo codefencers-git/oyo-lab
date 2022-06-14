@@ -166,10 +166,11 @@ class _BookAppointmentState extends State<BookAppointment> {
           margin: const EdgeInsets.all(16),
           height: 45,
           child: RoundButton(
+         
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => BookingSuccess()),
+                MaterialPageRoute(builder: (context) => const BookingSuccess()),
               );
             },
             buttonLabel: 'Book an Appointment',

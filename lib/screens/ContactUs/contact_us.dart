@@ -90,7 +90,7 @@ class ContactUs extends StatelessWidget {
           height: height * 0.1,
           padding: const EdgeInsets.all(15),
           child: RoundButton(
-            verticalPadding: 10,
+     
             buttonLabel: 'Call Us',
             onTap: () {
               _makePhoneCall('9876543210');
