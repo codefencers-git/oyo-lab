@@ -34,7 +34,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
   List<OnBoardingScreenData> data = [
     OnBoardingScreenData(
-        title: 'Find A Lab',
+        title: 'find_a_lab_key'.tr,
         discription:
             'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
         imagePath: 'assets/images/onboarding-1.png'),
@@ -96,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                 Get.toNamed(Routes.loginScreen);
                               },
                               buttonLabel: Text(
-                                "SKIP",
+                                'skip_us_key'.tr,
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w900,

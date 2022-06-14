@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -17,7 +18,7 @@ class ContactUs extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
           child: AppbarWithBackButton(
-            appbarTitle: "Contact Us",
+            appbarTitle: 'contact_us_key'.tr,
             elevation: 20,
           ),
         ),

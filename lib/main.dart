@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:oyo_labs/language/localization_language.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:get/get.dart';
 
 void main() {
-
   runApp(const MyApp());
   configLoading();
 }
@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      locale: const Locale('en', 'US'),
+      translations: LanguageLocaleString(),
       title: 'OYO LAB',
       debugShowCheckedModeBanner: false,
       theme: ThemeClass.themeData,
