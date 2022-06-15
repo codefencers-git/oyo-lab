@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -31,12 +33,8 @@ class _BookingSuccessState extends State<BookingSuccess> {
           margin: const EdgeInsets.all(16),
           height: 45,
           child: RoundButton(
-         
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyAppointment()),
-              );
+              Get.toNamed(Routes.checkAppointment);
             },
             buttonLabel: 'Check Appointment',
           ),

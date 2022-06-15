@@ -259,15 +259,18 @@ class _LabtestDetailState extends State<LabtestDetail> {
                               color: ThemeClass.darkgreyColor,
                               fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(
-                          height: 10,
+                        const SizedBox(
+                          height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
-                                Image.asset("assets/icons/icon_lab.png"),
+                                Image.asset(
+                                  "assets/icons/icon_lab.png",
+                                  height: 30,
+                                ),
                                 const SizedBox(
                                   width: 9,
                                 ),
@@ -311,7 +314,10 @@ class _LabtestDetailState extends State<LabtestDetail> {
                           children: [
                             Row(
                               children: [
-                                Image.asset("assets/icons/icon_lab.png"),
+                                Image.asset(
+                                  "assets/icons/icon_lab.png",
+                                  height: 30,
+                                ),
                                 const SizedBox(
                                   width: 9,
                                 ),
@@ -419,9 +425,8 @@ class _LabtestDetailState extends State<LabtestDetail> {
             children: [
               Expanded(
                   child: RoundButton(
-        
                       buttonLabel: 'Cancel',
-                     
+                      color: ThemeClass.whiteColor,
                       fontcolor: ThemeClass.orangeColor,
                       fontSize: 16,
                       fontFamily: "poppins",
@@ -431,7 +436,6 @@ class _LabtestDetailState extends State<LabtestDetail> {
               ),
               Expanded(
                   child: RoundButton(
-           
                       buttonLabel: 'Reschedule',
                       fontSize: 16,
                       fontFamily: "poppins",

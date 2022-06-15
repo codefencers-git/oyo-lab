@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 
 import '../../widgets/buttons/round_book_slot.dart';
-
-import 'laboratory_detail.dart';
 
 class LaboratoryTile extends StatelessWidget {
   const LaboratoryTile({Key? key}) : super(key: key);
@@ -109,11 +109,7 @@ class LaboratoryTile extends StatelessWidget {
             padding: const EdgeInsets.only(top: 5),
             child: RoundButtonBookSlot(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const LaboratoryDetail()),
-                );
+                Get.toNamed(Routes.labTileScreen);
                 print("object");
               },
               label: 'Book a Slot',

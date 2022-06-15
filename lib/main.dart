@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       locale: const Locale('en', 'US'),
+
       translations: LanguageLocaleString(),
       title: 'OYO LAB',
       debugShowCheckedModeBanner: false,

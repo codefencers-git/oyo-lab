@@ -28,7 +28,7 @@ class DrawerWidget extends StatelessWidget {
               _buildProfileWidget(),
               _buildDrawerListTile(
                 onTileTap: () {
-                  Get.toNamed(Routes.allLabScreen);
+                  Get.toNamed(Routes.allLabTests);
                 },
                 tileLabel: "Book Lab Test",
                 tileIconPath: "assets/icons/lab-test-icon.png",
@@ -136,7 +136,7 @@ class DrawerWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+          padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
           child: Row(
             children: [
               CircleAvatar(

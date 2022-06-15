@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_detail.dart';
 import 'package:oyo_labs/themedata.dart';
@@ -161,10 +163,7 @@ class _MyAppointmentState extends State<MyAppointment>
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LabtestDetail()),
-                  );
+                  Get.toNamed(Routes.myUpCommingAppoinmentScreen);
                 },
               );
             },
@@ -245,10 +244,7 @@ class _MyAppointmentState extends State<MyAppointment>
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LabTestComplete()),
-                  );
+                  Get.toNamed(Routes.myAppointmentComplete);
                 },
               );
             },

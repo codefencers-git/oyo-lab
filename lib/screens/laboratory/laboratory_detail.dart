@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 
 import '../../widgets/appbar/appbar_with_back_button.dart';
@@ -164,55 +166,75 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                   },
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                height: 60,
-                color: ThemeClass.skyblueColor,
+
+              Padding(
+                padding: const EdgeInsets.only(left: 14.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: width / 2.8,
-                      child: Row(
-                        children: [
-                          Image.asset("assets/icons/icon_short.png"),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text(
-                            "Short by : Relevance",
-                            style: TextStyle(
-                                fontSize: 10, fontWeight: FontWeight.w900),
-                          ),
-                        ],
-                      ),
-                    ),
-                    VerticalDivider(
-                      thickness: 1,
-                      indent: 15,
-                      endIndent: 15,
-                      color: ThemeClass.orangeColor,
-                    ),
-                    SizedBox(
-                      width: width / 2.8,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset("assets/icons/icon_filter.png"),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text(
-                            "Filter",
-                            style: TextStyle(
-                                fontSize: 10, fontWeight: FontWeight.w900),
-                          ),
-                        ],
-                      ),
+                    Text(
+                      "Tests",
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: ThemeClass.blackColor,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
               ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(horizontal: 30),
+              //   height: 60,
+              //   color: ThemeClass.skyblueColor,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       SizedBox(
+              //         width: width / 2.8,
+              //         child: Row(
+              //           children: [
+              //             Image.asset("assets/icons/icon_short.png",
+              //                 height: 20),
+              //             const SizedBox(
+              //               width: 10,
+              //             ),
+              //             const Text(
+              //               "Short by : Relevance",
+              //               style: TextStyle(
+              //                   fontSize: 10, fontWeight: FontWeight.w900),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //       VerticalDivider(
+              //         thickness: 1,
+              //         indent: 15,
+              //         endIndent: 15,
+              //         color: ThemeClass.orangeColor,
+              //       ),
+              //       SizedBox(
+              //         width: width / 2.8,
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: [
+              //             Image.asset(
+              //               "assets/icons/icon_filter.png",
+              //               height: 20,
+              //             ),
+              //             const SizedBox(
+              //               width: 10,
+              //             ),
+              //             const Text(
+              //               "Filter",
+              //               style: TextStyle(
+              //                   fontSize: 10, fontWeight: FontWeight.w900),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(9.0),
                 child: ListView.builder(
@@ -261,14 +283,12 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                               ),
                             ),
                             TextButton(
-                              child:
-                                  Image.asset("assets/icons/icon_calander.png"),
+                              child: Image.asset(
+                                "assets/icons/icon_calander.png",
+                                height: 30,
+                              ),
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => BookAppointment()),
-                                );
+                                Get.toNamed(Routes.labDetailScreen);
                               },
                             ),
                           ],
@@ -302,9 +322,12 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                           fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(width: 5),
-                    Image.asset(isLoadMore == false
-                        ? "assets/icons/icon_down_arrow.png"
-                        : "assets/icons/icon_up_arrow.png"),
+                    Image.asset(
+                      isLoadMore == false
+                          ? "assets/icons/icon_down_arrow.png"
+                          : "assets/icons/icon_up_arrow.png",
+                      height: 12,
+                    ),
                   ],
                 ),
               ),

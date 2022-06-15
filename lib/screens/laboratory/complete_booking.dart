@@ -67,7 +67,10 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                                     MaterialStateProperty.all(CircleBorder()),
                               ),
                               onPressed: () {},
-                              child: Image.asset("assets/icons/download.png"),
+                              child: Image.asset(
+                                "assets/icons/icon_download.png",
+                                height: 20,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -81,7 +84,10 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                                     MaterialStateProperty.all(CircleBorder()),
                               ),
                               onPressed: () {},
-                              child: Image.asset("assets/icons/share.png"),
+                              child: Image.asset(
+                                "assets/icons/icon_share.png",
+                                height: 20,
+                              ),
                             ),
                           )
                         ],
@@ -268,15 +274,18 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                               color: ThemeClass.darkgreyColor,
                               fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(
-                          height: 10,
+                        const SizedBox(
+                          height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
-                                Image.asset("assets/icons/icon_lab.png"),
+                                Image.asset(
+                                  "assets/icons/icon_lab.png",
+                                  height: 30,
+                                ),
                                 const SizedBox(
                                   width: 9,
                                 ),
@@ -320,7 +329,10 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                           children: [
                             Row(
                               children: [
-                                Image.asset("assets/icons/icon_lab.png"),
+                                Image.asset(
+                                  "assets/icons/icon_lab.png",
+                                  height: 30,
+                                ),
                                 const SizedBox(
                                   width: 9,
                                 ),

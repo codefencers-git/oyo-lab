@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:intl/intl.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
@@ -166,12 +169,8 @@ class _BookAppointmentState extends State<BookAppointment> {
           margin: const EdgeInsets.all(16),
           height: 45,
           child: RoundButton(
-         
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const BookingSuccess()),
-              );
+              Get.toNamed(Routes.bookingSuccessScreen);
             },
             buttonLabel: 'Book an Appointment',
           ),
@@ -199,7 +198,10 @@ class _BookAppointmentState extends State<BookAppointment> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/icons/icon_camera.png"),
+                  Image.asset(
+                    "assets/icons/icon_camera.png",
+                    height: 30,
+                  ),
                   const SizedBox(
                     width: 10,
                   ),
@@ -224,7 +226,10 @@ class _BookAppointmentState extends State<BookAppointment> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/icons/icon_gallery.png"),
+                  Image.asset(
+                    "assets/icons/icon_gallery.png",
+                    height: 30,
+                  ),
                   const SizedBox(
                     width: 10,
                   ),
@@ -368,7 +373,10 @@ class _date_pickerState extends State<DatePicker> {
       child: TextFormField(
         controller: widget.dateController,
         decoration: InputDecoration(
-          suffixIcon: Image.asset("assets/icons/icon_calander_white.png"),
+          suffixIcon: Image.asset(
+            "assets/icons/icon-calender.png",
+            scale: 3,
+          ),
           contentPadding:
               const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 15),
           fillColor: ThemeClass.greyLightColor,
