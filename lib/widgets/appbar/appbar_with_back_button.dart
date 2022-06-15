@@ -8,10 +8,14 @@ class AppbarWithBackButton extends StatelessWidget {
   AppbarWithBackButton({
     Key? key,
     required this.appbarTitle,
+    this.onIconPress,
+    this.isShowSearch = false,
     this.elevation = 0,
   }) : super(key: key);
   String appbarTitle;
+  bool isShowSearch;
   double elevation;
+  Function? onIconPress;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -28,6 +32,15 @@ class AppbarWithBackButton extends StatelessWidget {
           child: ImageIcon(AssetImage("assets/icons/icon-back.png")),
         ),
       ),
+      actions: [
+        isShowSearch
+            ? IconButton(
+                onPressed: () {
+                  onIconPress!();
+                },
+                icon: Icon(Icons.search))
+            : SizedBox()
+      ],
       centerTitle: false,
       title: Text(
         appbarTitle,

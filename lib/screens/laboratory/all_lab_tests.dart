@@ -8,10 +8,23 @@ import 'package:oyo_labs/widgets/buttons/round_book_slot.dart';
 
 import '../../routes.dart';
 
-class AllLabTests extends StatelessWidget {
+class AllLabTests extends StatefulWidget {
   const AllLabTests({Key? key}) : super(key: key);
 
   @override
+  State<AllLabTests> createState() => _AllLabTestsState();
+}
+
+class _AllLabTestsState extends State<AllLabTests> {
+  late TextEditingController _controller;
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  bool isShowSearch = true;
+
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -21,11 +34,41 @@ class AllLabTests extends StatelessWidget {
         backgroundColor: ThemeClass.whiteColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Lab Tests"),
+          child: AppbarWithBackButton(
+            appbarTitle: "Lab Tests",
+            isShowSearch: isShowSearch,
+            onIconPress: () {
+              setState(() {
+                isShowSearch = !isShowSearch;
+              });
+            },
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
+              isShowSearch == false
+                  ? TextButton(
+                      onPressed: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: TextField(
+                          cursorColor: ThemeClass.blackColor,
+                          controller: _controller,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Search',
+                            hintStyle: const TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.w400),
+                            suffixIcon: SizedBox(
+                              child: Image.asset("assets/icons/icon_search.png",
+                                  scale: 3),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 height: 60,
