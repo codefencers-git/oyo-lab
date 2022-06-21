@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import '../../themedata.dart';
 
 class TextFieldWithSuffixIcon extends StatelessWidget {
-   TextFieldWithSuffixIcon({
+  TextFieldWithSuffixIcon({
     Key? key,
     required this.textController,
     required this.isReadOnly,
     required this.isObscureText,
-    this.keyboardType =  TextInputType.text,
+    this.keyboardType = TextInputType.text,
     this.validator,
     required this.hintText,
     required this.iconData,
     required this.onIconTap,
+    this.color = ThemeClass.whiteColor,
   }) : super(key: key);
 
   final TextEditingController textController;
@@ -21,14 +22,14 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
   final String? Function(String?)? validator;
   final String hintText;
   final String iconData;
+  final Color? color;
   final VoidCallback onIconTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: ThemeClass.whiteColor,
-          borderRadius: BorderRadius.circular(25)),
+      decoration:
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(25)),
       child: TextFormField(
         controller: textController,
         readOnly: isReadOnly,

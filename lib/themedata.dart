@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class ThemeClass {
   ThemeClass();
-  static final Color whiteColor = Color(0xFFFFFFFF);
+  static const Color whiteColor = Color(0xFFFFFFFF);
+  static final Color whiteColor2 = Color(0xFFFCFCFC);
+
   static final Color orangeColor = Color(0xFFFE4300);
   static final Color orangeLightColor = Color(0xFFFFF9F6);
   static final Color orangeLightColor1 = Color(0xFFfe9975);
