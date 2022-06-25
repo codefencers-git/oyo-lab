@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/screens/laboratory/laboratory_tile.dart';
+import 'package:oyo_labs/screens/laboratory/shortbybottomsheet.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_book_slot.dart';
@@ -36,7 +37,7 @@ class _AllLabTestsState extends State<AllLabTests> {
           preferredSize: const Size.fromHeight(65.0),
           child: AppbarWithBackButton(
             appbarTitle: "Lab Tests",
-            isShowSearch: isShowSearch,
+            // isShowSearch: isShowSearch,
             onIconPress: () {
               setState(() {
                 isShowSearch = !isShowSearch;
@@ -47,28 +48,28 @@ class _AllLabTestsState extends State<AllLabTests> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              isShowSearch == false
-                  ? TextButton(
-                      onPressed: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: TextField(
-                          cursorColor: ThemeClass.blackColor,
-                          controller: _controller,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Search',
-                            hintStyle: const TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w400),
-                            suffixIcon: SizedBox(
-                              child: Image.asset("assets/icons/icon_search.png",
-                                  scale: 3),
-                            ),
-                          ),
-                        ),
+              // isShowSearch == false
+              TextButton(
+                onPressed: () {},
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: TextField(
+                    cursorColor: ThemeClass.blackColor,
+                    controller: _controller,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Search',
+                      hintStyle: const TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.w400),
+                      suffixIcon: SizedBox(
+                        child: Image.asset("assets/icons/icon_search.png",
+                            scale: 3),
                       ),
-                    )
-                  : SizedBox(),
+                    ),
+                  ),
+                ),
+              ),
+
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 height: 60,
@@ -78,19 +79,30 @@ class _AllLabTestsState extends State<AllLabTests> {
                   children: [
                     SizedBox(
                       width: width / 2.9,
-                      child: Row(
-                        children: [
-                          Image.asset("assets/icons/icon_short.png",
-                              height: 20),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text(
-                            "Short by : Relevance",
-                            style: TextStyle(
-                                fontSize: 10, fontWeight: FontWeight.w900),
-                          ),
-                        ],
+                      child: InkWell(
+                        onTap: () {
+                          showModalBottomSheet<void>(
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            builder: (BuildContext context) {
+                              return ShortByBottomSheet();
+                            },
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset("assets/icons/icon_short.png",
+                                height: 20),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Text(
+                              "Short by : Relevance",
+                              style: TextStyle(
+                                  fontSize: 10, fontWeight: FontWeight.w900),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     VerticalDivider(
@@ -208,74 +220,33 @@ class AllLabs extends StatelessWidget {
             // height: height / 3,
             fit: BoxFit.cover,
           ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 8.0,
-              top: 10,
-            ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 5),
             child: Text(
-              "Green Cross Laboratory",
+              "A002",
+              style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 5),
+            child: Text(
+              "ABO Group & RH Type",
               style: TextStyle(fontSize: 10),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 8.0,
-              top: 5,
-            ),
+
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 5),
             child: Text(
-              "1 Km Away",
-              style: TextStyle(fontSize: 8),
+              "(Blood Group)",
+              style: TextStyle(fontSize: 8, color: ThemeClass.greyColor),
             ),
-          ),
-          const SizedBox(
-            height: 5,
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 5.0,
-              top: 0.2,
-            ),
-            child: Row(
-              children: [
-                RatingBar(
-                  initialRating: 3,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemSize: 16,
-                  itemCount: 5,
-                  ignoreGestures: true,
-                  ratingWidget: RatingWidget(
-                    full: _image('assets/images/full_star.png'),
-                    half: _image('assets/images/half_star.png'),
-                    empty: _image('assets/images/blank_star.png'),
-                  ),
-                  itemPadding: const EdgeInsets.symmetric(horizontal: 0.7),
-                  onRatingUpdate: (rating) {
-                    print(rating);
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    '4.0',
-                    style: TextStyle(
-                        fontSize: 8,
-                        color: ThemeClass.redColor,
-                        fontWeight: FontWeight.w900),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    '(120)',
-                    style: TextStyle(
-                        fontSize: 8,
-                        color: ThemeClass.blackColor,
-                        fontWeight: FontWeight.w900),
-                  ),
-                ),
-              ],
+            padding: const EdgeInsets.only(left: 8.0, top: 5),
+            child: Text(
+              "(W B-ED TA (3ml))",
+              style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
             ),
           ),
           Padding(

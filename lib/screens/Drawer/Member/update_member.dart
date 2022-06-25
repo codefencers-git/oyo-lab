@@ -8,14 +8,14 @@ import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
 
-class AddnewMemberScreen extends StatefulWidget {
-  AddnewMemberScreen({Key? key}) : super(key: key);
+class UpdateNewMemberScreen extends StatefulWidget {
+  UpdateNewMemberScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddnewMemberScreen> createState() => _AddnewMemberScreenState();
+  State<UpdateNewMemberScreen> createState() => _UpdateNewMemberScreenState();
 }
 
-class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
+class _UpdateNewMemberScreenState extends State<UpdateNewMemberScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -49,7 +49,7 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
         backgroundColor: ThemeClass.whiteColor2,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Add Member"),
+          child: AppbarWithBackButton(appbarTitle: "Member"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -111,15 +111,40 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
           ),
         ),
         bottomNavigationBar: Container(
-          margin: const EdgeInsets.all(16),
-          height: 45,
-          child: RoundButton(
-            onTap: () {
-              //Get.toNamed(Routes.addMemberScreen);
-            },
-            buttonLabel: 'Add Member',
+          margin: EdgeInsets.all(16),
+          height: 50,
+          child: Row(
+            children: [
+              Expanded(
+                  child: RoundButton(
+                      buttonLabel: 'Delete',
+                      color: ThemeClass.whiteColor,
+                      fontcolor: ThemeClass.orangeColor,
+                      fontSize: 16,
+                      fontFamily: "poppins",
+                      onTap: () {})),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                  child: RoundButton(
+                      buttonLabel: 'Update',
+                      fontSize: 16,
+                      fontFamily: "poppins",
+                      onTap: () {})),
+            ],
           ),
         ),
+        // bottomNavigationBar: Container(
+        //   margin: const EdgeInsets.all(16),
+        //   height: 45,
+        //   child: RoundButton(
+        //     onTap: () {
+        //       //Get.toNamed(Routes.addMemberScreen);
+        //     },
+        //     buttonLabel: 'Add Member',
+        //   ),
+        // ),
       ),
     );
   }

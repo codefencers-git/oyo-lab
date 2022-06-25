@@ -80,7 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: height / 8,
                               ),
                               RoundButton(
-                     
                                 buttonLabel: 'Login',
                                 onTap: () {
                                   Get.toNamed(Routes.homeScreen);
@@ -88,6 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Poppins',
+                              ),
+                              SizedBox(
+                                height: 20,
                               ),
                               Padding(
                                 padding:

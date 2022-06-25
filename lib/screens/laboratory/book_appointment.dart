@@ -38,130 +38,149 @@ class _BookAppointmentState extends State<BookAppointment> {
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Green Cross Laboratory"),
+          child: AppbarWithBackButton(appbarTitle: "ABO Group & RH Type"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(9.0),
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 12.0, top: 10),
-                  child: Text(
-                    "Select a Date",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: ThemeClass.blackColor1,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                DatePicker(
-                  dateController: _date,
-                ),
-                _buildSelectSlot(),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(9.0),
-                  child: SizedBox(
-                    child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 10,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                crossAxisSpacing: 5,
-                                mainAxisSpacing: 5,
-                                childAspectRatio: 4 / 1.8),
-                        itemBuilder: (context, index) {
-                          return _buildTrainerBox(index);
-                        }),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Have a prescription? upload here",
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: ThemeClass.blackColor2,
-                      fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                _priscripion(width),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  "Payment Summary",
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: ThemeClass.blackColor2,
-                      fontWeight: FontWeight.w400),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Item Total (MRP)",
+          child: SingleChildScrollView(
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0, top: 10),
+                    child: Text(
+                      "Select a Date",
                       style: TextStyle(
-                          fontSize: 10,
-                          color: ThemeClass.greyColor1,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "₹120.00",
-                          style: TextStyle(
-                              fontSize: 10,
-                              color: ThemeClass.greyColor1,
-                              fontWeight: FontWeight.w400),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Divider(
-                  color: ThemeClass.greyColor1,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Payable amount",
-                      style: TextStyle(
-                          fontSize: 10,
+                          fontSize: 12,
                           color: ThemeClass.blackColor1,
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w700),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          "₹120.00",
-                          style: TextStyle(
-                              fontSize: 10,
-                              color: ThemeClass.blackColor1,
-                              fontWeight: FontWeight.w400),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ],
+                  ),
+                  DatePicker(
+                    dateController: _date,
+                  ),
+                  _buildSelectSlot(),
+                  Padding(
+                    padding: const EdgeInsets.all(9.0),
+                    child: SizedBox(
+                      child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: 10,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 4,
+                                  crossAxisSpacing: 5,
+                                  mainAxisSpacing: 5,
+                                  childAspectRatio: 4 / 1.8),
+                          itemBuilder: (context, index) {
+                            return _buildTrainerBox(index);
+                          }),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    //keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    minLines: 3,
+                    decoration: InputDecoration(
+                      hintText: 'Write Your Remark...',
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                        color: ThemeClass.greyColor,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                    ),
+                    //controller: _textaddController2,
+                    validator: (value) {},
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Have a prescription? upload here",
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: ThemeClass.blackColor2,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  _priscripion(width),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    "Payment Summary",
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: ThemeClass.blackColor2,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Item Total (MRP)",
+                        style: TextStyle(
+                            fontSize: 10,
+                            color: ThemeClass.greyColor1,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "₹120.00",
+                            style: TextStyle(
+                                fontSize: 10,
+                                color: ThemeClass.greyColor1,
+                                fontWeight: FontWeight.w400),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  Divider(
+                    color: ThemeClass.greyColor1,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Payable amount",
+                        style: TextStyle(
+                            fontSize: 10,
+                            color: ThemeClass.blackColor1,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "₹120.00",
+                            style: TextStyle(
+                                fontSize: 10,
+                                color: ThemeClass.blackColor1,
+                                fontWeight: FontWeight.w400),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -22,7 +22,7 @@ final _formKey = GlobalKey<FormState>();
 
 StreamController<ErrorAnimationType>? errorController;
 
-TextEditingController textEditingController = TextEditingController();
+final TextEditingController textEditingController = TextEditingController();
 
 class _MobileVerificationState extends State<MobileVerification> {
   bool isShowResend = false;
@@ -172,18 +172,20 @@ class _MobileVerificationState extends State<MobileVerification> {
                         ),
                       ],
                     ),
-                    RoundButton(
-     
-                      buttonLabel:
-                          screenName == 'signupScreen' ? 'Login' : 'Submit',
-                      onTap: () {
-                        screenName == 'signupScreen'
-                            ? Get.toNamed(Routes.homeScreen)
-                            : Get.toNamed(Routes.changePasswordScreen);
-                      },
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Poppins',
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: RoundButton(
+                        buttonLabel:
+                            screenName == 'signupScreen' ? 'Login' : 'Submit',
+                        onTap: () {
+                          screenName == 'signupScreen'
+                              ? Get.toNamed(Routes.homeScreen)
+                              : Get.toNamed(Routes.changePasswordScreen);
+                        },
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Poppins',
+                      ),
                     ),
                   ],
                 ),

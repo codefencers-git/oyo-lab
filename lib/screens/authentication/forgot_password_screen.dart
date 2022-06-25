@@ -22,86 +22,85 @@ class ForgotPassword extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     validation = Validation();
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(
-                width: width * 0.62,
-                height: height * 0.55,
-                child: Image.asset(
-                  "assets/images/logo.png",
-                  fit: BoxFit.fitWidth,
-                ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SizedBox(
+              width: width * 0.62,
+              height: height * 0.45,
+              child: Image.asset(
+                "assets/images/logo.png",
+                fit: BoxFit.fitWidth,
               ),
-              ContainerWithInnerShadow(
-                width: width,
-                height: height * 0.45,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          "Forgot Password ?",
+            ),
+            ContainerWithInnerShadow(
+              width: width,
+              height: height * 0.45,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        "Forgot Password ?",
+                        style: TextStyle(
+                            color: ThemeClass.orangeColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Container(
+                        width: width * 0.7,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        child: Text(
+                          "Please enter your registered phone number for received OTP code.",
+                          softWrap: true,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: ThemeClass.orangeColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
+                              color: ThemeClass.greyColor1,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400),
                         ),
-                        Container(
-                          width: width * 0.7,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 20,
-                          ),
-                          child: Text(
-                            "Please enter your registered phone number for received OTP code.",
-                            softWrap: true,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: ThemeClass.greyColor1,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: TextFieldWithSuffixIcon(
-                        textController: _phoneNumberController,
-                        isReadOnly: false,
-                        isObscureText: false,
-                        keyboardType: TextInputType.number,
-                        validator: validation.phoneNumverValidation,
-                        hintText: "Phone Number",
-                        iconData: "assets/icons/icon-phone.png",
-                        onIconTap: () {},
                       ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: TextFieldWithSuffixIcon(
+                      textController: _phoneNumberController,
+                      isReadOnly: false,
+                      isObscureText: false,
+                      keyboardType: TextInputType.number,
+                      validator: validation.phoneNumverValidation,
+                      hintText: "Phone Number",
+                      iconData: "assets/icons/icon-phone.png",
+                      onIconTap: () {},
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 30, left: 30, right: 30),
-                      child: RoundButton(
-                   
-                        buttonLabel: 'Get Code',
-                        onTap: () {
-                          Get.toNamed(Routes.mobileVerificationScreen,
-                              arguments: 'forgotPasswordScreen');
-                        },
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Poppins',
-                      ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, left: 30, right: 30),
+                    child: RoundButton(
+                      buttonLabel: 'Get Code',
+                      onTap: () {
+                        Get.toNamed(Routes.mobileVerificationScreen,
+                            arguments: 'forgotPasswordScreen');
+                      },
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
                     ),
-                    SizedBox(height: 10),
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                  SizedBox(height: 10),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

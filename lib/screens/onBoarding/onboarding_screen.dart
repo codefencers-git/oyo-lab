@@ -96,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                               width: width * 0.3,
                               child: BorderRoundButton(
                                 onTap: () {
-                                  Get.toNamed(Routes.loginScreen);
+                                  Get.toNamed(Routes.homeScreen);
                                 },
                                 buttonLabel: Text(
                                   "SKIP",
@@ -120,7 +120,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                       _index++;
                                     });
                                   } else {
-                                    Get.toNamed(Routes.loginScreen);
+                                    Get.toNamed(Routes.homeScreen);
                                   }
                                 },
                               ),

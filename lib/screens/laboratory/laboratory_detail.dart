@@ -27,7 +27,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
         // backgroundColor: ThemeClass.whiteColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Green Cross Laboratory"),
+          child: AppbarWithBackButton(appbarTitle: "ABO Group & RH Type"),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -54,7 +54,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Green Cross Laboratory",
+                              "ABO Group & RH Type",
                               style: TextStyle(
                                   fontSize: 14,
                                   color: ThemeClass.blackColor,
@@ -64,76 +64,96 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                               padding:
                                   const EdgeInsets.only(right: 8.0, top: 5),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      RatingBar(
-                                        initialRating: 3,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemSize: 16,
-                                        itemCount: 5,
-                                        ignoreGestures: true,
-                                        ratingWidget: RatingWidget(
-                                          full: _image(
-                                              'assets/images/full_star.png'),
-                                          half: _image(
-                                              'assets/images/half_star.png'),
-                                          empty: _image(
-                                              'assets/images/blank_star.png'),
-                                        ),
-                                        itemPadding: const EdgeInsets.symmetric(
-                                            horizontal: 0.7),
-                                        onRatingUpdate: (rating) {
-                                          print(rating);
-                                        },
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8),
-                                        child: Text(
-                                          '4.0',
-                                          style: TextStyle(
-                                              fontSize: 8,
-                                              color: ThemeClass.redColor,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8),
-                                        child: Text(
-                                          '(120)',
-                                          style: TextStyle(
-                                              fontSize: 8,
-                                              color: ThemeClass.blackColor,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                    ],
+                                  // Row(
+                                  //   children: [
+                                  //     RatingBar(
+                                  //       initialRating: 3,
+                                  //       direction: Axis.horizontal,
+                                  //       allowHalfRating: true,
+                                  //       itemSize: 16,
+                                  //       itemCount: 5,
+                                  //       ignoreGestures: true,
+                                  //       ratingWidget: RatingWidget(
+                                  //         full: _image(
+                                  //             'assets/images/full_star.png'),
+                                  //         half: _image(
+                                  //             'assets/images/half_star.png'),
+                                  //         empty: _image(
+                                  //             'assets/images/blank_star.png'),
+                                  //       ),
+                                  //       itemPadding: const EdgeInsets.symmetric(
+                                  //           horizontal: 0.7),
+                                  //       onRatingUpdate: (rating) {
+                                  //         print(rating);
+                                  //       },
+                                  //     ),
+                                  //     Padding(
+                                  //       padding: const EdgeInsets.only(left: 8),
+                                  //       child: Text(
+                                  //         '4.0',
+                                  //         style: TextStyle(
+                                  //             fontSize: 8,
+                                  //             color: ThemeClass.redColor,
+                                  //             fontWeight: FontWeight.w400),
+                                  //       ),
+                                  //     ),
+                                  //     Padding(
+                                  //       padding: const EdgeInsets.only(left: 8),
+                                  //       child: Text(
+                                  //         '(120)',
+                                  //         style: TextStyle(
+                                  //             fontSize: 8,
+                                  //             color: ThemeClass.blackColor,
+                                  //             fontWeight: FontWeight.w400),
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
+
+                                  // Row(
+                                  //   crossAxisAlignment:
+                                  //       CrossAxisAlignment.start,
+                                  //   children: [
+                                  //     Padding(
+                                  //       padding:
+                                  //           EdgeInsets.only(right: 8.0, top: 5),
+                                  //       child: Image.asset(
+                                  //           "assets/images/icon_black_location.png"),
+                                  //     ),
+                                  //     Expanded(
+                                  //       child: Padding(
+                                  //         padding: EdgeInsets.only(
+                                  //             right: 8.0, top: 4),
+                                  //         child: Text(
+                                  //           '45, Park Avenue, Near Sal Hospital, Thaltej, Ahmedabad.',
+                                  //           style: TextStyle(
+                                  //               fontSize: 12,
+                                  //               color: ThemeClass.greyColor,
+                                  //               fontWeight: FontWeight.w400),
+                                  //         ),
+                                  //       ),
+                                  //     )
+                                  //   ],
+                                  // ),
+                                  Text(
+                                    "(Blood Group)",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: ThemeClass.greyColor),
                                   ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(right: 8.0, top: 5),
-                                        child: Image.asset(
-                                            "assets/images/icon_black_location.png"),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              right: 8.0, top: 4),
-                                          child: Text(
-                                            '45, Park Avenue, Near Sal Hospital, Thaltej, Ahmedabad.',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: ThemeClass.greyColor,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      )
-                                    ],
+                                  Text(
+                                    "(W B-ED TA (3ml))",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: ThemeClass.orangeColor),
+                                  ),
+                                  Text(
+                                    "₹ 120.00",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: ThemeClass.orangeColor),
                                   ),
                                 ],
                               ),
@@ -173,7 +193,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Tests",
+                      "Laboratories Near By You",
                       style: TextStyle(
                           fontSize: 14,
                           color: ThemeClass.blackColor,
@@ -262,7 +282,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const Text(
-                                        "ABO Group & RH Type",
+                                        "Green Cross Laboratory",
                                         style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500),

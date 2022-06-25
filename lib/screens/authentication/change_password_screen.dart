@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/authentication/login.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -43,6 +44,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
         body: SingleChildScrollView(
@@ -50,8 +53,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: width * 0.62,
-                padding: const EdgeInsets.symmetric(vertical: 113),
+                width: width * 0.55,
+                padding: const EdgeInsets.symmetric(vertical: 148),
                 child: Image.asset(
                   "assets/images/logo.png",
                   fit: BoxFit.fitWidth,
@@ -59,7 +62,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height * 0.52,
+                height: height * 0.55,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -97,7 +100,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 30, left: 30, right: 30),
+                          const EdgeInsets.only(top: 0, left: 30, right: 30),
                       child: RoundButton(
                         buttonLabel: 'Change Password',
                         onTap: () {
@@ -106,7 +109,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Poppins',
-                        
                       ),
                     ),
                   ],

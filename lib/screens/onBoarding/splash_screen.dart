@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
       _navigateTo();
     });
     super.initState();
@@ -47,19 +47,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               const SizedBox(height: 35),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 120),
-                child: RoundButton(
-            
-                  buttonLabel: "GET STARTED",
-                  onTap: () {
-                    Get.toNamed(Routes.onboardingScreen);
-                  },
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Lato',
-                ),
-              )
             ],
           ),
         ),

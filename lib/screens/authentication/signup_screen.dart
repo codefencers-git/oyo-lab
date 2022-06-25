@@ -59,6 +59,8 @@ class _SignupScreenState extends State<SignupScreen> {
     double height = MediaQuery.of(context).size.height;
     validation = Validation();
     return SafeArea(
+      top: false,
+      bottom: false,
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
         body: SingleChildScrollView(
@@ -75,7 +77,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               ContainerWithInnerShadow(
                 width: width,
-                height: height * 0.79,
+                height: height / 0.1,
                 child: Column(
                   children: [
                     Text(
@@ -115,7 +117,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 30, bottom: 20),
                             child: RoundButton(
-                       
                               buttonLabel: 'Register',
                               onTap: () {
                                 Get.toNamed(Routes.mobileVerificationScreen,

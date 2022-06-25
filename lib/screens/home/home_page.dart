@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/home/imagebottomsheet.dart';
 import 'package:oyo_labs/screens/home/drawer_sceen.dart';
 import 'package:oyo_labs/screens/laboratory/laboratory_tile.dart';
 import 'package:oyo_labs/themedata.dart';
@@ -132,6 +133,88 @@ class _HomePageState extends State<HomePage> {
                 }).toList(),
               ),
               Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  cursorColor: ThemeClass.orangeColor,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: ThemeClass.skyblueColor,
+                    border: InputBorder.none,
+                    hintText: 'Search',
+                    hintStyle: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w400),
+                    suffixIcon: SizedBox(
+                      child:
+                          Image.asset("assets/icons/icon_search.png", scale: 3),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                decoration: BoxDecoration(
+                  color: ThemeClass.whiteColor2,
+                  border: Border.all(width: 0, color: Colors.white),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(-5, 3),
+                      blurRadius: 3,
+                      color: Colors.black.withOpacity(0.1),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "Order with priscription",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            SizedBox(
+                              width: 200,
+                              child: Text(
+                                'Upload a prescription and tell us what you need. we do the rest!',
+                                softWrap: true,
+                                maxLines: 3,
+                                // overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 35,
+                          width: 100,
+                          child: _elevationButton(context, width),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 25.0,
                 ),
@@ -139,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Laboratory Near by You",
+                      "Test Near by You",
                       style: TextStyle(
                           fontSize: 14,
                           color: ThemeClass.blackColor,
@@ -147,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Get.toNamed(Routes.allLabScreen);
+                        Get.toNamed(Routes.allLabTests);
                       },
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(EdgeInsets.zero),
@@ -188,6 +271,33 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  ElevatedButton _elevationButton(BuildContext context, double width) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: ThemeClass.orangeColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
+      onPressed: () {
+        showModalBottomSheet<void>(
+          context: context,
+          backgroundColor: Colors.transparent,
+          builder: (BuildContext context) {
+            return SelectImageBottomSheet();
+          },
+        );
+      },
+      child: Text(
+        'Upload',
+        style: TextStyle(
+            fontSize: 14,
+            color: ThemeClass.whiteColor,
+            fontWeight: FontWeight.w700),
       ),
     );
   }

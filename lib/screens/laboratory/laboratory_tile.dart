@@ -35,78 +35,88 @@ class LaboratoryTile extends StatelessWidget {
             // height: height / 3,
             fit: BoxFit.cover,
           ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 8.0,
-              top: 10,
-            ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 5),
             child: Text(
-              "Green Cross Laboratory",
+              "A002",
+              style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 5),
+            child: Text(
+              "ABO Group & RH Type",
               style: TextStyle(fontSize: 10),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 8.0,
-              top: 5,
-            ),
-            child: Text(
-              "1 Km Away",
-              style: TextStyle(fontSize: 8),
-            ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
           Padding(
             padding: const EdgeInsets.only(
-              left: 5.0,
-              top: 0.2,
+              left: 8.0,
             ),
-            child: Row(
-              children: [
-                RatingBar(
-                  initialRating: 3,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemSize: 16,
-                  itemCount: 5,
-                  ignoreGestures: true,
-                  ratingWidget: RatingWidget(
-                    full: _image('assets/images/full_star.png'),
-                    half: _image('assets/images/half_star.png'),
-                    empty: _image('assets/images/blank_star.png'),
-                  ),
-                  itemPadding: const EdgeInsets.symmetric(horizontal: 0.7),
-                  onRatingUpdate: (rating) {
-                    print(rating);
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    '4.0',
-                    style: TextStyle(
-                        fontSize: 8,
-                        color: ThemeClass.redColor,
-                        fontWeight: FontWeight.w900),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    '(120)',
-                    style: TextStyle(
-                        fontSize: 8,
-                        color: ThemeClass.blackColor,
-                        fontWeight: FontWeight.w900),
-                  ),
-                ),
-              ],
+            child: Text(
+              "(Blood Group)",
+              style: TextStyle(fontSize: 8, color: ThemeClass.greyColor),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(left: 8.0, top: 5),
+            child: Text(
+              "(W B-ED TA (3ml))",
+              style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
+            ),
+          ),
+
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     left: 5.0,
+          //     top: 0.2,
+          //   ),
+          //   child: Row(
+          //     children: [
+          //       RatingBar(
+          //         initialRating: 3,
+          //         direction: Axis.horizontal,
+          //         allowHalfRating: true,
+          //         itemSize: 16,
+          //         itemCount: 5,
+          //         ignoreGestures: true,
+          //         ratingWidget: RatingWidget(
+          //           full: _image('assets/images/full_star.png'),
+          //           half: _image('assets/images/half_star.png'),
+          //           empty: _image('assets/images/blank_star.png'),
+          //         ),
+          //         itemPadding: const EdgeInsets.symmetric(horizontal: 0.7),
+          //         onRatingUpdate: (rating) {
+          //           print(rating);
+          //         },
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.only(left: 8),
+          //         child: Text(
+          //           '4.0',
+          //           style: TextStyle(
+          //               fontSize: 8,
+          //               color: ThemeClass.redColor,
+          //               fontWeight: FontWeight.w900),
+          //         ),
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.only(left: 8),
+          //         child: Text(
+          //           '(120)',
+          //           style: TextStyle(
+          //               fontSize: 8,
+          //               color: ThemeClass.blackColor,
+          //               fontWeight: FontWeight.w900),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8,
+            ),
             child: RoundButtonBookSlot(
               onTap: () {
                 Get.toNamed(Routes.labTileScreen);

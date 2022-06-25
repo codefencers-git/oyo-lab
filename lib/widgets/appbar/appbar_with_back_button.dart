@@ -42,12 +42,21 @@ class AppbarWithBackButton extends StatelessWidget {
             : SizedBox()
       ],
       centerTitle: false,
-      title: Text(
-        appbarTitle,
-        style: TextStyle(
-            fontSize: 14,
-            color: ThemeClass.whiteColor,
-            fontWeight: FontWeight.w400),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            appbarTitle,
+            style: TextStyle(
+                fontSize: 14,
+                color: ThemeClass.whiteColor,
+                fontWeight: FontWeight.w400),
+          ),
+          Image.asset(
+            'assets/images/logo_oyo_lab.png',
+            height: 30,
+          ),
+        ],
       ),
     );
   }

@@ -1,7 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
+
+import '../../routes.dart';
 
 class HomePageAppBar extends StatelessWidget {
   HomePageAppBar({Key? key, required this.onTap}) : super(key: key);
@@ -24,15 +27,23 @@ class HomePageAppBar extends StatelessWidget {
       //   ),
       // ),
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const ImageIcon(AssetImage("assets/icons/icon-location.png")),
-          const SizedBox(width: 10),
-          Text(
-            " Ahmedabad, Gujarat",
-            style: TextStyle(
-                fontSize: 14,
-                color: ThemeClass.whiteColor,
-                fontWeight: FontWeight.w400),
+          Image.asset(
+            'assets/images/logo_oyo_lab.png',
+            height: 40,
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.loginScreen);
+            },
+            child: const Text(
+              "Login",
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: ThemeClass.whiteColor),
+            ),
           ),
         ],
       ),

@@ -28,21 +28,33 @@ class _AddNewMemberState extends State<AddNewMember> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'John Doe',
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: ThemeClass.blackColor),
+              TextButton(
+                onPressed: () {
+                  Get.toNamed(Routes.updateNewMemberScreen);
+                },
+                style: ElevatedButton.styleFrom(
+                  splashFactory: NoSplash.splashFactory,
+                  primary: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                ),
+                child: SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'John Doe',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: ThemeClass.blackColor),
+                      ),
+                      Image.asset(
+                        'assets/icons/icon_3_dots.png',
+                        height: 20,
+                      ),
+                    ],
                   ),
-                  Image.asset(
-                    'assets/icons/icon_3_dots.png',
-                    height: 20,
-                  ),
-                ],
+                ),
               ),
               const SizedBox(
                 height: 10,
