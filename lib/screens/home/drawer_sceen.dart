@@ -82,7 +82,23 @@ class DrawerWidget extends StatelessWidget {
                   tileIconPath: "assets/icons/icon_location.png",
                 ),
                 _buildDrawerListTile(
-                  onTileTap: () {},
+                  onTileTap: () {
+                    Get.toNamed(Routes.referandEarnScreen);
+                  },
+                  tileLabel: "Refer And Earn",
+                  tileIconPath: "assets/icons/icon-dollor.png",
+                ),
+                _buildDrawerListTile(
+                  onTileTap: () {
+                    Get.toNamed(Routes.walletScreen);
+                  },
+                  tileLabel: "Wallet",
+                  tileIconPath: "assets/icons/icon-wallet.png",
+                ),
+                _buildDrawerListTile(
+                  onTileTap: () {
+                    Get.toNamed(Routes.settingScreen);
+                  },
                   tileLabel: "Settings",
                   tileIconPath: "assets/icons/setting-icon.png",
                 ),
@@ -96,31 +112,24 @@ class DrawerWidget extends StatelessWidget {
                 _buildDrawerListTile(
                   onTileTap: () {},
                   tileLabel: "Terms & Privacy Policy",
-                  tileIconPath: "assets/icons/info-icon.png",
+                  tileIconPath: "assets/icons/icon-terms&policy.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.contactUsScreen);
                   },
                   tileLabel: "Contact Us",
-                  tileIconPath: "assets/icons/info-icon.png",
+                  tileIconPath: "assets/icons/icon-contectus.png",
+                ),
+                _buildDrawerListTile(
+                  onTileTap: () {
+                    Get.toNamed(Routes.loginScreen);
+                  },
+                  tileLabel: "Logout",
+                  tileIconPath: "assets/icons/logout-icon.png",
                 ),
               ],
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Column(
-            children: [
-              _buildDrawerListTile(
-                onTileTap: () {
-                  Get.toNamed(Routes.loginScreen);
-                },
-                tileLabel: "Logout",
-                tileIconPath: "assets/icons/logout-icon.png",
-              ),
-            ],
           ),
         ],
       ),

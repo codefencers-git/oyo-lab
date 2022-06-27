@@ -31,168 +31,164 @@ class _BookAppointmentState extends State<BookAppointment> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "ABO Group & RH Type"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(9.0),
-          child: SingleChildScrollView(
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0, top: 10),
-                    child: Text(
-                      "Select a Date",
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: ThemeClass.blackColor1,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                  DatePicker(
-                    dateController: _date,
-                  ),
-                  _buildSelectSlot(),
-                  Padding(
-                    padding: const EdgeInsets.all(9.0),
-                    child: SizedBox(
-                      child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 10,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  crossAxisSpacing: 5,
-                                  mainAxisSpacing: 5,
-                                  childAspectRatio: 4 / 1.8),
-                          itemBuilder: (context, index) {
-                            return _buildTrainerBox(index);
-                          }),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    //keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    minLines: 3,
-                    decoration: InputDecoration(
-                      hintText: 'Write Your Remark...',
-                      hintStyle: TextStyle(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65.0),
+        child: AppbarWithBackButton(appbarTitle: "ABO Group & RH Type"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(9.0),
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0, top: 10),
+                  child: Text(
+                    "Select a Date",
+                    style: TextStyle(
                         fontSize: 12,
-                        color: ThemeClass.greyColor,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      filled: true,
+                        color: ThemeClass.blackColor1,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+                DatePicker(
+                  dateController: _date,
+                ),
+                _buildSelectSlot(),
+                Padding(
+                  padding: const EdgeInsets.all(9.0),
+                  child: SizedBox(
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 10,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                crossAxisSpacing: 5,
+                                mainAxisSpacing: 5,
+                                childAspectRatio: 4 / 1.8),
+                        itemBuilder: (context, index) {
+                          return _buildTrainerBox(index);
+                        }),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  //keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  minLines: 3,
+                  decoration: InputDecoration(
+                    hintText: 'Write Your Remark...',
+                    hintStyle: TextStyle(
+                      fontSize: 12,
+                      color: ThemeClass.greyColor,
+                      fontWeight: FontWeight.w400,
                     ),
-                    //controller: _textaddController2,
-                    validator: (value) {},
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    filled: true,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Have a prescription? upload here",
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: ThemeClass.blackColor2,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  _priscripion(width),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Payment Summary",
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: ThemeClass.blackColor2,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Item Total (MRP)",
-                        style: TextStyle(
-                            fontSize: 10,
-                            color: ThemeClass.greyColor1,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "₹120.00",
-                            style: TextStyle(
-                                fontSize: 10,
-                                color: ThemeClass.greyColor1,
-                                fontWeight: FontWeight.w400),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  Divider(
-                    color: ThemeClass.greyColor1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Payable amount",
-                        style: TextStyle(
-                            fontSize: 10,
-                            color: ThemeClass.blackColor1,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "₹120.00",
-                            style: TextStyle(
-                                fontSize: 10,
-                                color: ThemeClass.blackColor1,
-                                fontWeight: FontWeight.w400),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                  //controller: _textaddController2,
+                  validator: (value) {},
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Have a prescription? upload here",
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: ThemeClass.blackColor2,
+                      fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                _priscripion(width),
+                const SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "Payment Summary",
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: ThemeClass.blackColor2,
+                      fontWeight: FontWeight.w400),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Item Total (MRP)",
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: ThemeClass.greyColor1,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "₹120.00",
+                          style: TextStyle(
+                              fontSize: 10,
+                              color: ThemeClass.greyColor1,
+                              fontWeight: FontWeight.w400),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Divider(
+                  color: ThemeClass.greyColor1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Payable amount",
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: ThemeClass.blackColor1,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "₹120.00",
+                          style: TextStyle(
+                              fontSize: 10,
+                              color: ThemeClass.blackColor1,
+                              fontWeight: FontWeight.w400),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ],
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.all(16),
-          height: 45,
-          child: RoundButton(
-            onTap: () {
-              Get.toNamed(Routes.bookingSuccessScreen);
-            },
-            buttonLabel: 'Book an Appointment',
-          ),
+      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.all(16),
+        height: 45,
+        child: RoundButton(
+          onTap: () {
+            Get.toNamed(Routes.bookingSuccessScreen);
+          },
+          buttonLabel: 'Book an Appointment',
         ),
       ),
     );

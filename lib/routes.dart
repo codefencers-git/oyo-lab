@@ -20,11 +20,15 @@ import 'screens/ContactUs/contact_us.dart';
 import 'screens/Drawer/ManageAddress/add_address.dart';
 import 'screens/Drawer/ManageAddress/manage_address.dart';
 import 'screens/Drawer/Member/add_new_member.dart';
+import 'screens/Drawer/Refer and Earn/refer_and_earn.dart';
+
+import 'screens/Drawer/Settings/setting.dart';
+import 'screens/Drawer/Wallet/wallet_screen.dart';
 import 'screens/authentication/change_password_screen.dart';
 import 'screens/authentication/login.dart';
 import 'screens/home/home_page.dart';
 import 'screens/laboratory/book_appointment.dart';
-import 'screens/notification/notification_setting.dart';
+import 'screens/Drawer/Settings/notification_setting.dart';
 import 'screens/onBoarding/onboarding_screen.dart';
 import 'screens/onBoarding/splash_screen.dart';
 
@@ -57,6 +61,9 @@ class Routes {
   static const String addNewAddressScreen = '/addNewAddressScreen';
   static const String addNewMembers = '/addNewMembers';
   static const String updateNewMemberScreen = '/updateNewMemberScreen';
+  static const String referandEarnScreen = '/referandEarnScreen';
+  static const String walletScreen = '/walletScreen';
+  static const String settingScreen = '/settingScreen';
 
   static List<GetPage> gobalRoutes = [
     GetPage(name: splashRoute, page: () => const SplashScreen()),
@@ -91,5 +98,8 @@ class Routes {
     GetPage(name: addNewAddressScreen, page: () => const AddAddress()),
     GetPage(name: addNewMembers, page: () => AddnewMemberScreen()),
     GetPage(name: updateNewMemberScreen, page: () => UpdateNewMemberScreen()),
+    GetPage(name: referandEarnScreen, page: () => ReferEarnScreen()),
+    GetPage(name: walletScreen, page: () => WalletScreen()),
+    GetPage(name: settingScreen, page: () => SettingScreen()),
   ];
 }

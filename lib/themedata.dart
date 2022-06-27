@@ -10,6 +10,7 @@ class ThemeClass {
   static final Color orangeColor = Color(0xFFFE4300);
   static final Color orangeLightColor = Color(0xFFFFF9F6);
   static final Color orangeLightColor1 = Color(0xFFfe9975);
+  static final Color orangeLightColor2 = Color(0xffFFECE5);
 
   static final Color redColor = Color(0xFFD70222);
   static final Color redColor1 = Color(0xFFFE0000);
