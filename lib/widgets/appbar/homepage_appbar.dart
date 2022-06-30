@@ -29,9 +29,46 @@ class HomePageAppBar extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            'assets/images/logo_oyo_lab.png',
-            height: 40,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(
+                'assets/images/logo_oyo_lab.png',
+                height: 40,
+              ),
+              Row(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Delivered To',
+                    style: TextStyle(
+                      color: ThemeClass.whiteColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Text(
+                    '350001 Ahmedabad',
+                    style: TextStyle(
+                      color: ThemeClass.whiteColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 2,
+                    height: 25,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        print('object');
+                      },
+                      icon: Icon(Icons.expand_more),
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
           TextButton(
             onPressed: () {

@@ -119,7 +119,7 @@ class DrawerWidget extends StatelessWidget {
                     Get.toNamed(Routes.contactUsScreen);
                   },
                   tileLabel: "Contact Us",
-                  tileIconPath: "assets/icons/icon-contectus.png",
+                  tileIconPath: "assets/icons/icon-contactus.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
