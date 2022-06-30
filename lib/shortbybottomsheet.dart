@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:oyo_labs/screens/home/imagebottomsheet.dart';
+import 'package:get/get.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
+import 'package:oyo_labs/widgets/buttons/round_button.dart';
 
 class ShortByBottomSheet extends StatefulWidget {
   const ShortByBottomSheet({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 300,
       color: ThemeClass.whiteColor,
       child: Column(
         children: [
@@ -48,7 +50,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
                 leading: Radio(
                     value: "rating",
                     fillColor: MaterialStateColor.resolveWith(
-                        (states) => Color(0xFFFE4300)),
+                        (states) => ThemeClass.orangeColor),
                     groupValue: short,
                     onChanged: (value) {
                       setState(() {
@@ -61,7 +63,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
                 leading: Radio(
                     value: "low",
                     fillColor: MaterialStateColor.resolveWith(
-                        (states) => Color(0xFFFE4300)),
+                        (states) => ThemeClass.orangeColor),
                     groupValue: short,
                     onChanged: (value) {
                       setState(() {
@@ -74,13 +76,25 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
                 leading: Radio(
                     value: "high",
                     fillColor: MaterialStateColor.resolveWith(
-                        (states) => Color(0xFFFE4300)),
+                        (states) => ThemeClass.orangeColor),
                     groupValue: short,
                     onChanged: (value) {
                       setState(() {
                         short = value.toString();
                       });
                     }),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: RoundButton(
+                  buttonLabel: 'Apply',
+                  onTap: () {
+                    Get.back();
+                  },
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Poppins',
+                ),
               ),
             ],
           ),
