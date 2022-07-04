@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
-import 'package:oyo_labs/screens/authentication/login.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
-
 import '../../widgets/textfield/textfield_with_suffix.dart';
 
 class ChangePasswordScreen extends StatefulWidget {

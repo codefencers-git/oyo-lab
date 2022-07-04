@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 
-import '../../widgets/buttons/round_button.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -56,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Container buildImageWidget(double height, double width) {
     return Container(
-      height: height / 1.8,
+      height: height / 1.5,
       width: width,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(

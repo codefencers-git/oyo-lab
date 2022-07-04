@@ -34,19 +34,16 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
   List<OnBoardingScreenData> data = [
     OnBoardingScreenData(
-        title: 'find_a_lab_key'.tr,
-        discription:
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        title: 'key_find_a_lab'.tr,
+        discription: 'key_onboarding1_discription'.tr,
         imagePath: 'assets/images/onboarding-1.png'),
     OnBoardingScreenData(
-        title: 'Book An Appointment',
-        discription:
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        title: 'key_book_an_appointment'.tr,
+        discription: 'key_onboarding2_discription'.tr,
         imagePath: 'assets/images/onboarding-2.png'),
     OnBoardingScreenData(
-        title: 'Make A Payment',
-        discription:
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        title: 'key_make_payment'.tr,
+        discription: 'key_onboarding3_discription'.tr,
         imagePath: 'assets/images/onboarding-3.png'),
   ];
 
@@ -99,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                   Get.toNamed(Routes.homeScreen);
                                 },
                                 buttonLabel: Text(
-                                  "SKIP",
+                                  'key_skip'.tr,
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w900,
@@ -110,7 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                             SizedBox(
                               width: width * 0.33,
                               child: RoundButtonWithIcon(
-                                label: 'NEXT  ',
+                                label: 'key_onboarding_next_btn'.tr,
                                 onTap: () {
                                   if (_index < 2) {
                                     _controller.nextPage();

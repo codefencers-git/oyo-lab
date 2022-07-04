@@ -61,14 +61,14 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "50% Off",
+                                      'key_homepage_slider_title'.tr,
                                       style: TextStyle(
                                           fontSize: 24,
                                           color: ThemeClass.redColor,
                                           fontWeight: FontWeight.w900),
                                     ),
                                     Text(
-                                      "On your first\nbooking",
+                                      'key_homepage_slider_subtitle'.tr,
                                       softWrap: true,
                                       style: TextStyle(
                                           height: 1.5,
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     const SizedBox(height: 5),
                                     Text(
-                                      "Also save more with online\npayment offers",
+                                      'key_homepage_slider_description'.tr,
                                       softWrap: true,
                                       style: TextStyle(
                                           height: 1.5,
@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                     filled: true,
                     fillColor: ThemeClass.skyblueColor,
                     border: InputBorder.none,
-                    hintText: 'Search',
+                    hintText: 'key_searchbar_label'.tr,
                     hintStyle: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w400),
                     suffixIcon: SizedBox(
@@ -175,21 +175,21 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
-                              "Order with priscription",
-                              style: TextStyle(
+                              'key_order_with_prescription'.tr,
+                              style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             SizedBox(
                               width: 200,
                               child: Text(
-                                'Upload a prescription and tell us what you need. we do the rest!',
+                                'key_upload_prescription_description'.tr,
                                 softWrap: true,
                                 maxLines: 3,
                                 // overflow: TextOverflow.ellipsis,
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           height: 35,
                           width: 100,
-                          child: _elevationButton(context, width),
+                          child: _uploadButton(context, width),
                         ),
                       ],
                     ),
@@ -222,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Test Near by You",
+                      'key_test_near_by_you'.tr,
                       style: TextStyle(
                           fontSize: 14,
                           color: ThemeClass.blackColor,
@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         children: [
                           Text(
-                            'View All',
+                            'key_view_all'.tr,
                             style: TextStyle(
                                 fontSize: 14,
                                 color: ThemeClass.orangeColor,
@@ -275,7 +275,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  ElevatedButton _elevationButton(BuildContext context, double width) {
+  ElevatedButton _uploadButton(BuildContext context, double width) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         primary: ThemeClass.orangeColor,
@@ -288,13 +288,13 @@ class _HomePageState extends State<HomePage> {
           context: context,
           backgroundColor: Colors.transparent,
           builder: (BuildContext context) {
-            return SelectImageBottomSheet();
+            return const SelectImageBottomSheet();
           },
         );
       },
       child: Text(
-        'Upload',
-        style: TextStyle(
+        'key_upload_btn_label'.tr,
+        style: const TextStyle(
             fontSize: 14,
             color: ThemeClass.whiteColor,
             fontWeight: FontWeight.w700),

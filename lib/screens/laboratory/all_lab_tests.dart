@@ -30,7 +30,7 @@ class _AllLabTestsState extends State<AllLabTests> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
         child: AppbarWithBackButton(
-          appbarTitle: "Lab Tests",
+          appbarTitle: 'key_lab_test_title'.tr,
           // isShowSearch: isShowSearch,
           onIconPress: () {
             setState(() {

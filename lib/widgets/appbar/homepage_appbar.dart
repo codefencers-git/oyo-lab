@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +40,7 @@ class HomePageAppBar extends StatelessWidget {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Delivered To',
+                    'key_delivered_to_appbar'.tr,
                     style: TextStyle(
                       color: ThemeClass.whiteColor,
                       fontSize: 10,
@@ -74,9 +74,9 @@ class HomePageAppBar extends StatelessWidget {
             onPressed: () {
               Get.toNamed(Routes.loginScreen);
             },
-            child: const Text(
-              "Login",
-              style: TextStyle(
+            child: Text(
+              'key_login_appbar'.tr,
+              style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: ThemeClass.whiteColor),

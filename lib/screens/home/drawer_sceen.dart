@@ -31,35 +31,35 @@ class DrawerWidget extends StatelessWidget {
                   onTileTap: () {
                     Get.toNamed(Routes.allLabTests);
                   },
-                  tileLabel: "Book Lab Test",
+                  tileLabel: 'key_book_lab_lest'.tr,
                   tileIconPath: "assets/icons/lab-test-icon.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.checkAppointment);
                   },
-                  tileLabel: "My Appointments",
+                  tileLabel: 'key_my_appointments'.tr,
                   tileIconPath: "assets/icons/appointment-icon.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.myPrescritionSreen);
                   },
-                  tileLabel: "My Prescription",
+                  tileLabel: 'key_my_prescription'.tr,
                   tileIconPath: "assets/icons/icon_prescription.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.myTestReportScreen);
                   },
-                  tileLabel: "My Test Report",
+                  tileLabel: 'key_my_test_report'.tr,
                   tileIconPath: "assets/icons/icon_lab_test_reort.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.addMemberScreen);
                   },
-                  tileLabel: "Members",
+                  tileLabel: 'key_members'.tr,
                   tileIconPath: "assets/icons/icon_members.png",
                 ),
                 // _buildDrawerListTile(
@@ -71,54 +71,54 @@ class DrawerWidget extends StatelessWidget {
                 // ),
                 _buildDrawerListTile(
                   onTileTap: () {},
-                  tileLabel: "Help & FAQ's",
+                  tileLabel: 'key_help_n_faq'.tr,
                   tileIconPath: "assets/icons/help-faq-icon.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.manageAddressScreen);
                   },
-                  tileLabel: "Manage Address",
+                  tileLabel: 'key_manage_address'.tr,
                   tileIconPath: "assets/icons/icon_location.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.referandEarnScreen);
                   },
-                  tileLabel: "Refer And Earn",
+                  tileLabel: 'key_refer_n_earn'.tr,
                   tileIconPath: "assets/icons/icon-dollor.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.walletScreen);
                   },
-                  tileLabel: "Wallet",
+                  tileLabel: 'key_wallet'.tr,
                   tileIconPath: "assets/icons/icon-wallet.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.settingScreen);
                   },
-                  tileLabel: "Settings",
+                  tileLabel: 'key_settings'.tr,
                   tileIconPath: "assets/icons/setting-icon.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.aboutUsScreen);
                   },
-                  tileLabel: "About Us",
+                  tileLabel: 'key_about_us'.tr,
                   tileIconPath: "assets/icons/info-icon.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {},
-                  tileLabel: "Terms & Privacy Policy",
+                  tileLabel: 'key_terms_policy'.tr,
                   tileIconPath: "assets/icons/icon-terms&policy.png",
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.contactUsScreen);
                   },
-                  tileLabel: "Contact Us",
+                  tileLabel: 'key_contact_us'.tr,
                   tileIconPath: "assets/icons/icon-contactus.png",
                 ),
                 _buildDrawerListTile(
