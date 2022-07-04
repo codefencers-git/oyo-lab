@@ -53,6 +53,7 @@ class LanguageLocaleString extends Translations {
           'key_sortby': 'Sort by:',
           'key_relevance': 'Relevance',
           'key_filter': 'Filter',
+          'key_filters': 'Filter',
           'key_all_test': 'All Test',
           'key_test_available': 'Test available',
           //-------------------My appointment screen

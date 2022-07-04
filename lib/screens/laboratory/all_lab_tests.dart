@@ -23,6 +23,7 @@ class _AllLabTestsState extends State<AllLabTests> {
 
   bool isShowSearch = true;
 
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -124,7 +125,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,
                               builder: (context) =>
-                                  CategoryFilterBottomSheet());
+                                  const CategoryFilterBottomSheet());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

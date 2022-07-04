@@ -42,11 +42,11 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           Column(
             children: <Widget>[
               ListTile(
-                title: Text("Average customer rating"),
+                title: const Text("Average customer rating"),
                 leading: Radio(
                     value: "rating",
                     fillColor: MaterialStateColor.resolveWith(
@@ -59,7 +59,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
                     }),
               ),
               ListTile(
-                title: Text("Price : low to high"),
+                title: const Text("Price : low to high"),
                 leading: Radio(
                     value: "low",
                     fillColor: MaterialStateColor.resolveWith(
@@ -72,7 +72,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
                     }),
               ),
               ListTile(
-                title: Text("Price : high to low"),
+                title: const Text("Price : high to low"),
                 leading: Radio(
                     value: "high",
                     fillColor: MaterialStateColor.resolveWith(
@@ -117,16 +117,16 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.88,
-      decoration: new BoxDecoration(
+      decoration:  const BoxDecoration(
         color: Colors.white,
-        borderRadius: new BorderRadius.only(),
+        borderRadius:  const BorderRadius.only(),
       ),
       child: Scaffold(
         body: Container(
           height: MediaQuery.of(context).size.height * 0.88,
-          decoration: new BoxDecoration(
+          decoration:  const BoxDecoration(
             color: Colors.white,
-            borderRadius: new BorderRadius.only(),
+            borderRadius:  BorderRadius.only(),
           ),
           child: Column(
             children: [
@@ -137,12 +137,12 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Filters',
+                      'key_filters'.tr,
                       style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                          const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                     ),
                     ImageIcon(
-                      AssetImage(
+                      const AssetImage(
                         'assets/icons/icon-cancel.png',
                       ),
                       color: ThemeClass.orangeColor,
@@ -150,14 +150,14 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
                   ],
                 ),
               ),
-              Divider(
+              const Divider(
                 thickness: 0.8,
               ),
             ],
           ),
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           // decoration: BoxDecoration(
           //   boxShadow: [
           //     BoxShadow(
@@ -198,9 +198,9 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
                       },
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     'Apply',
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         color: ThemeClass.whiteColor,
                         fontWeight: FontWeight.w700),
