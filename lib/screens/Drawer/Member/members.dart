@@ -22,7 +22,7 @@ class _AddNewMemberState extends State<AddNewMember> {
         backgroundColor: ThemeClass.whiteColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Members"),
+          child: AppbarWithBackButton(appbarTitle: 'key_members'.tr),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -70,7 +70,7 @@ class _AddNewMemberState extends State<AddNewMember> {
             onTap: () {
               Get.toNamed(Routes.addNewMembers);
             },
-            buttonLabel: 'Add New Member',
+            buttonLabel: 'key_add_new_member'.tr,
           ),
         ),
       ),

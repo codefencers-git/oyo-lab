@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class SelectImageBottomSheet extends StatefulWidget {
@@ -28,15 +29,15 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
                   color: Colors.white,
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
-                      const Text(
-                        'Choose Option',
-                        style: TextStyle(
+                      Text(
+                        'key_choose_option'.tr,
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Padding(
@@ -67,9 +68,9 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
                                       const SizedBox(
                                         width: 10,
                                       ),
-                                      const Text(
-                                        "Camera",
-                                        style: TextStyle(
+                                      Text(
+                                        'key_camera'.tr,
+                                        style: const TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w900),
                                       ),
@@ -97,9 +98,9 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
                                       const SizedBox(
                                         width: 10,
                                       ),
-                                      const Text(
-                                        "Gallery",
-                                        style: TextStyle(
+                                      Text(
+                                        'key_gallery'.tr,
+                                        style: const TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w900),
                                       ),

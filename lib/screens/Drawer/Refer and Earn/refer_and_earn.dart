@@ -1,7 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
-
 import '../../../widgets/appbar/appbar_with_back_button.dart';
 
 class ReferEarnScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
         child: AppbarWithBackButton(
-          appbarTitle: "Refer And Earn",
+          appbarTitle: 'key_refer_n_earn'.tr,
           elevation: 20,
         ),
       ),
@@ -33,7 +33,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
             height: 15,
           ),
           Text(
-            'Refer your friend and earn',
+            'key_refer_your_friend_n_earn'.tr,
             style: TextStyle(
                 color: ThemeClass.orangeColor,
                 fontSize: 18,
@@ -45,7 +45,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35),
             child: Text(
-              'Your Friend gets 50 Mediheist points on signup and, you get 100 Mediheist points too everytime!',
+              'key_refer_n_earn_description'.tr,
               style: TextStyle(
                   color: ThemeClass.greyColor,
                   fontSize: 12,
@@ -80,7 +80,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Your referral code",
+                              'key_your_referral_code'.tr,
                               style: TextStyle(
                                   color: ThemeClass.greyColor,
                                   fontSize: 8,
@@ -122,7 +122,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                             SizedBox(
                               width: 20,
                               child: Text(
-                                "Copy Code",
+                                "key_copy_code".tr,
                                 style: TextStyle(
                                     color: ThemeClass.greyColor,
                                     fontSize: 8,
@@ -146,7 +146,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
             height: 15,
           ),
           Text(
-            "Share your Referral Code via",
+            'key_share_referral_code_via'.tr,
             style: TextStyle(
                 color: ThemeClass.orangeColor,
                 fontSize: 14,

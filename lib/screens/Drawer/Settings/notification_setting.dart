@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -12,8 +13,6 @@ class NotificationSetting extends StatefulWidget {
 
 class _NotificationSettingState extends State<NotificationSetting> {
   bool _isPushNotification = true;
-  bool _isMessage = false;
-  bool _isEmail = true;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -22,7 +21,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
         child: AppbarWithBackButton(
-          appbarTitle: "Notification",
+          appbarTitle: 'key_notification'.tr,
           elevation: 20,
         ),
       ),

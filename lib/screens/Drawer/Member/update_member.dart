@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
@@ -62,7 +61,7 @@ class _UpdateNewMemberScreenState extends State<UpdateNewMemberScreen> {
                 isObscureText: false,
                 keyboardType: TextInputType.text,
                 validator: validation!.nameValidation,
-                hintText: "Name",
+                hintText: 'key_name'.tr,
                 iconData: "assets/icons/icon-user.png",
                 onIconTap: () {},
               ),
@@ -74,7 +73,7 @@ class _UpdateNewMemberScreenState extends State<UpdateNewMemberScreen> {
                   isReadOnly: true,
                   color: ThemeClass.greyLightColor,
                   isObscureText: false,
-                  hintText: 'DOB',
+                  hintText: 'key_dob'.tr,
                   iconData: 'assets/icons/icon-calender.png',
                   onIconTap: () {
                     _selectDate(context);
@@ -89,7 +88,7 @@ class _UpdateNewMemberScreenState extends State<UpdateNewMemberScreen> {
                 isObscureText: false,
                 keyboardType: TextInputType.emailAddress,
                 validator: validation!.emailValidation,
-                hintText: "Email address",
+                hintText: 'key_email_address'.tr,
                 iconData: "assets/icons/icon-mail.png",
                 onIconTap: () {},
               ),
@@ -103,7 +102,7 @@ class _UpdateNewMemberScreenState extends State<UpdateNewMemberScreen> {
                 isObscureText: false,
                 keyboardType: TextInputType.number,
                 validator: validation!.phoneNumverValidation,
-                hintText: "Phone Number",
+                hintText: 'key_phone_number.tr',
                 iconData: "assets/icons/icon-phone.png",
                 onIconTap: () {},
               ),
@@ -117,7 +116,7 @@ class _UpdateNewMemberScreenState extends State<UpdateNewMemberScreen> {
             children: [
               Expanded(
                   child: RoundButton(
-                      buttonLabel: 'Delete',
+                      buttonLabel: 'key_delete_btn'.tr,
                       color: ThemeClass.whiteColor,
                       fontcolor: ThemeClass.orangeColor,
                       fontSize: 16,
@@ -128,7 +127,7 @@ class _UpdateNewMemberScreenState extends State<UpdateNewMemberScreen> {
               ),
               Expanded(
                   child: RoundButton(
-                      buttonLabel: 'Update',
+                      buttonLabel: 'key_update_btn'.tr,
                       fontSize: 16,
                       fontFamily: "poppins",
                       onTap: () {})),

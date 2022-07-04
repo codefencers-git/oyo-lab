@@ -52,7 +52,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                   controller: _controller,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Search',
+                    hintText: 'key_search'.tr,
                     hintStyle: const TextStyle(
                         fontSize: 12, fontWeight: FontWeight.w400),
                     suffixIcon: SizedBox(
@@ -90,9 +90,9 @@ class _AllLabTestsState extends State<AllLabTests> {
                           const SizedBox(
                             width: 10,
                           ),
-                          const Text(
-                            "Short by : Relevance",
-                            style: TextStyle(
+                          Text(
+                            'key_sortby'.tr + 'key_relevance'.tr,
+                            style: const TextStyle(
                                 fontSize: 10, fontWeight: FontWeight.w900),
                           ),
                         ],
@@ -136,9 +136,9 @@ class _AllLabTestsState extends State<AllLabTests> {
                             const SizedBox(
                               width: 10,
                             ),
-                            const Text(
-                              "Filter",
-                              style: TextStyle(
+                            Text(
+                              'key_filter'.tr,
+                              style: const TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.w900),
                             ),
                           ],
@@ -155,7 +155,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'All Test',
+                    'key_all_test'.tr,
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -164,7 +164,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                   Row(
                     children: [
                       Text(
-                        '34,001 Test available',
+                        '34,001' + 'key_test_available'.tr,
                         style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
@@ -9,7 +8,7 @@ import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
 
 class AddnewMemberScreen extends StatefulWidget {
-  AddnewMemberScreen({Key? key}) : super(key: key);
+  const AddnewMemberScreen({Key? key}) : super(key: key);
 
   @override
   State<AddnewMemberScreen> createState() => _AddnewMemberScreenState();
@@ -49,7 +48,7 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
         backgroundColor: ThemeClass.whiteColor2,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Add Member"),
+          child: AppbarWithBackButton(appbarTitle: 'key_add_member'.tr),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -62,7 +61,7 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
                 isObscureText: false,
                 keyboardType: TextInputType.text,
                 validator: validation!.nameValidation,
-                hintText: "Name",
+                hintText: 'key_name'.tr,
                 iconData: "assets/icons/icon-user.png",
                 onIconTap: () {},
               ),
@@ -74,7 +73,7 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
                   isReadOnly: true,
                   color: ThemeClass.greyLightColor,
                   isObscureText: false,
-                  hintText: 'DOB',
+                  hintText: 'key_dob'.tr,
                   iconData: 'assets/icons/icon-calender.png',
                   onIconTap: () {
                     _selectDate(context);
@@ -89,7 +88,7 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
                 isObscureText: false,
                 keyboardType: TextInputType.emailAddress,
                 validator: validation!.emailValidation,
-                hintText: "Email address",
+                hintText: 'key_email_address'.tr,
                 iconData: "assets/icons/icon-mail.png",
                 onIconTap: () {},
               ),
@@ -103,7 +102,7 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
                 isObscureText: false,
                 keyboardType: TextInputType.number,
                 validator: validation!.phoneNumverValidation,
-                hintText: "Phone Number",
+                hintText: 'key_phone_number'.tr,
                 iconData: "assets/icons/icon-phone.png",
                 onIconTap: () {},
               ),
@@ -117,7 +116,7 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
             onTap: () {
               //Get.toNamed(Routes.addMemberScreen);
             },
-            buttonLabel: 'Add Member',
+            buttonLabel: 'key_add_member'.tr,
           ),
         ),
       ),

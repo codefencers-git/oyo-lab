@@ -3,9 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
-
 import '../../widgets/appbar/appbar_with_back_button.dart';
-import 'book_appointment.dart';
 
 class LaboratoryDetail extends StatefulWidget {
   const LaboratoryDetail({Key? key}) : super(key: key);
@@ -189,7 +187,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Laboratories Near By You",
+                    'key_laboratories_near_you'.tr,
                     style: TextStyle(
                         fontSize: 14,
                         color: ThemeClass.blackColor,
@@ -330,7 +328,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    isLoadMore == false ? "Load More" : "Less",
+                    isLoadMore == false ? 'key_load_more'.tr : 'key_less'.tr,
                     style: TextStyle(
                         fontSize: 12,
                         color: ThemeClass.orangeColor,
@@ -355,7 +353,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Customer Reviews",
+                    'key_customer_reviews'.tr,
                     style: TextStyle(
                         fontSize: 12,
                         color: ThemeClass.darkgreyColor,

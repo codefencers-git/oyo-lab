@@ -31,7 +31,7 @@ class RoundButtonBookSlot extends StatelessWidget {
                 ),
                 Text(
                   label,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 8,
                       fontWeight: FontWeight.w900,
                       color: ThemeClass.whiteColor),

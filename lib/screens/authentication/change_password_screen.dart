@@ -67,7 +67,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Column(
                       children: [
                         Text(
-                          "Change Password",
+                          'key_change_password'.tr,
                           style: TextStyle(
                               color: ThemeClass.orangeColor,
                               fontSize: 20,
@@ -77,7 +77,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         SizedBox(
                           width: width * 0.7,
                           child: Text(
-                            "Please enter new password for your login account.",
+                            'key_change_password_description'.tr,
                             softWrap: true,
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -100,7 +100,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       padding:
                           const EdgeInsets.only(top: 0, left: 30, right: 30),
                       child: RoundButton(
-                        buttonLabel: 'Change Password',
+                        buttonLabel: 'key_change_password'.tr,
                         onTap: () {
                           Get.toNamed(Routes.loginScreen);
                         },
@@ -125,7 +125,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
       validator: validation!.passwordValidation,
-      hintText: "Password",
+      hintText: 'key_password'.tr,
       iconData: isObs
           ? "assets/icons/icon-password.png"
           : "assets/icons/icon-view-password.png",
@@ -149,7 +149,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         }
         return null;
       },
-      hintText: "Confirm Password",
+      hintText: 'key_confirm_password'.tr,
       iconData: isConfirmPwdObs
           ? "assets/icons/icon-password.png"
           : "assets/icons/icon-view-password.png",

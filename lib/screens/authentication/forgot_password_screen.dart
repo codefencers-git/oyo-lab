@@ -46,7 +46,7 @@ class ForgotPassword extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        "Forgot Password ?",
+                        'key_forgot_password'.tr,
                         style: TextStyle(
                             color: ThemeClass.orangeColor,
                             fontSize: 20,
@@ -58,7 +58,7 @@ class ForgotPassword extends StatelessWidget {
                           vertical: 20,
                         ),
                         child: Text(
-                          "Please enter your registered phone number for received OTP code.",
+                          'key_forgot_password_description'.tr,
                           softWrap: true,
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -77,7 +77,7 @@ class ForgotPassword extends StatelessWidget {
                       isObscureText: false,
                       keyboardType: TextInputType.number,
                       validator: validation.phoneNumverValidation,
-                      hintText: "Phone Number",
+                      hintText: 'key_phone_number'.tr,
                       iconData: "assets/icons/icon-phone.png",
                       onIconTap: () {},
                     ),
@@ -86,7 +86,7 @@ class ForgotPassword extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(top: 30, left: 30, right: 30),
                     child: RoundButton(
-                      buttonLabel: 'Get Code',
+                      buttonLabel: 'key_get_code'.tr,
                       onTap: () {
                         Get.toNamed(Routes.mobileVerificationScreen,
                             arguments: 'forgotPasswordScreen');

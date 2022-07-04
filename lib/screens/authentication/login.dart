@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         Text(
-                          "LOGIN",
+                          'key_login_title'.tr,
                           style: TextStyle(
                               color: ThemeClass.orangeColor,
                               fontSize: 24,
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: height / 8,
                               ),
                               RoundButton(
-                                buttonLabel: 'Login',
+                                buttonLabel: 'key_login_btn'.tr,
                                 onTap: () {
                                   Get.toNamed(Routes.homeScreen);
                                 },
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "New Here?  ",
+                                      'key_new_here'.tr,
                                       style: TextStyle(
                                           fontSize: 16,
                                           color: ThemeClass.greyColor1,
@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       onTap: () =>
                                           Get.toNamed(Routes.signupScreen),
                                       child: Text(
-                                        "Create an account",
+                                        'key_create_account'.tr,
                                         style: TextStyle(
                                             fontSize: 16,
                                             color: ThemeClass.orangeColor,
@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
       isObscureText: false,
       keyboardType: TextInputType.text,
       validator: validation!.emailValidation,
-      hintText: "Phone Number or Email",
+      hintText: 'key_phone_email'.tr,
       iconData: "assets/icons/icon-user.png",
       onIconTap: () {},
     );
@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
       validator: validation!.passwordValidation,
-      hintText: "Password",
+      hintText: 'key_password'.tr,
       iconData: isObs
           ? "assets/icons/icon-password.png"
           : "assets/icons/icon-view-password.png",
@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Get.toNamed(Routes.forgotPasswordScreen);
       },
       child: Text(
-        "Forgot Password ?",
+        'key_forgot_password'.tr,
         style: TextStyle(
             color: ThemeClass.orangeColor,
             fontSize: 14,

@@ -21,9 +21,10 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
         backgroundColor: ThemeClass.whiteColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "My Prescription Details"),
+          child:
+              AppbarWithBackButton(appbarTitle: 'key_prescription_details'.tr),
         ),
-        body: const _buildTestCase(),
+        body: _buildTestCase(),
         bottomNavigationBar: Container(
           margin: const EdgeInsets.all(16),
           height: 45,
@@ -31,7 +32,7 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
             onTap: () {
               //Get.toNamed(Routes.bookingSuccessScreen);
             },
-            buttonLabel: 'Dawnload Prescription',
+            buttonLabel: 'key_download_prescription'.tr,
           ),
         ),
       ),
@@ -39,13 +40,8 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
   }
 }
 
-class _buildTestCase extends StatelessWidget {
-  const _buildTestCase({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+Column _buildTestCase() {
+  {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -96,7 +92,7 @@ class _buildTestCase extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'Document',
+            'key_document'.tr,
             style: TextStyle(
               fontSize: 16,
               color: ThemeClass.blackColor,
@@ -106,7 +102,7 @@ class _buildTestCase extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+            padding:const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
             decoration: BoxDecoration(
               color: ThemeClass.whiteColor2,
               border: Border.all(width: 0, color: Colors.white),

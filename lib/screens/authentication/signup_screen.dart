@@ -81,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 child: Column(
                   children: [
                     Text(
-                      "REGISTER",
+                      'key_register_title'.tr,
                       style: TextStyle(
                           color: ThemeClass.orangeColor,
                           fontSize: 24,
@@ -108,7 +108,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               textController: _dobController,
                               isReadOnly: true,
                               isObscureText: false,
-                              hintText: 'Date of Birth',
+                              hintText: 'key_date_of_birth'.tr,
                               iconData: 'assets/icons/icon-calender.png',
                               onIconTap: () {
                                 _selectDate(context);
@@ -117,7 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 30, bottom: 20),
                             child: RoundButton(
-                              buttonLabel: 'Register',
+                              buttonLabel: 'key_register'.tr,
                               onTap: () {
                                 Get.toNamed(Routes.mobileVerificationScreen,
                                     arguments: 'signupScreen');
@@ -131,7 +131,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Already exists?  ",
+                                'key_already_exists'.tr,
                                 style: TextStyle(
                                     fontSize: 16,
                                     color: ThemeClass.greyColor1,
@@ -140,7 +140,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               GestureDetector(
                                 onTap: () => Get.toNamed(Routes.loginScreen),
                                 child: Text(
-                                  "Login",
+                                  'key_login_appbar'.tr,
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: ThemeClass.orangeColor,
@@ -167,7 +167,7 @@ class _SignupScreenState extends State<SignupScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "  Select Gender",
+          'key_select_gender'.tr,
           style: TextStyle(
               color: ThemeClass.greyColor1,
               fontWeight: FontWeight.w400,
@@ -186,7 +186,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 });
               },
             ),
-            const Text('Male'),
+            Text('key_male'.tr),
             const SizedBox(width: 30),
             Radio(
               value: enumForMF.Female,
@@ -199,7 +199,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 });
               },
             ),
-            const Text('Female')
+            Text('key_female'.tr),
           ],
         )
       ],
@@ -213,7 +213,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isObscureText: false,
       keyboardType: TextInputType.text,
       validator: validation!.nameValidation,
-      hintText: "Full Name",
+      hintText: 'key_full_name'.tr,
       iconData: "assets/icons/icon-user.png",
       onIconTap: () {},
     );
@@ -226,7 +226,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isObscureText: false,
       keyboardType: TextInputType.emailAddress,
       validator: validation!.emailValidation,
-      hintText: "Email address",
+      hintText: 'key_email_address'.tr,
       iconData: "assets/icons/icon-mail.png",
       onIconTap: () {},
     );
@@ -239,7 +239,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isObscureText: false,
       keyboardType: TextInputType.number,
       validator: validation!.phoneNumverValidation,
-      hintText: "Phone Number",
+      hintText: 'key_phone_number'.tr,
       iconData: "assets/icons/icon-phone.png",
       onIconTap: () {},
     );
@@ -251,7 +251,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
       validator: validation!.passwordValidation,
-      hintText: "Password",
+      hintText: 'key_password',
       iconData: isObs
           ? "assets/icons/icon-password.png"
           : "assets/icons/icon-view-password.png",

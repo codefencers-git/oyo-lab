@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:oyo_labs/themedata.dart';
-
 import '../../widgets/buttons/round_book_slot.dart';
-
 import 'laboratory_detail.dart';
 
 class LaboratoryTile extends StatelessWidget {
