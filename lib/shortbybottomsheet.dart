@@ -12,9 +12,13 @@ class ShortByBottomSheet extends StatefulWidget {
 }
 
 class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
+  late double screebnHeight, screenWidth;
   String? short;
   @override
   Widget build(BuildContext context) {
+    screebnHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
       height: 300,
       color: ThemeClass.whiteColor,
@@ -113,6 +117,7 @@ class CategoryFilterBottomSheet extends StatefulWidget {
 }
 
 class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
+  int isSelected = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -131,8 +136,8 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
           child: Column(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: const EdgeInsets.only(
+                    bottom: 5, right: 10, top: 10, left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -141,17 +146,141 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
                       style:
                           const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                     ),
-                    ImageIcon(
-                      const AssetImage(
-                        'assets/icons/icon-cancel.png',
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: ImageIcon(
+                        AssetImage(
+                          'assets/icons/icon-cancel.png',
+                        ),
+                        color: ThemeClass.orangeColor,
                       ),
-                      color: ThemeClass.orangeColor,
                     ),
                   ],
                 ),
               ),
               const Divider(
                 thickness: 0.8,
+              ),
+              Expanded(
+                child: Container(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 110,
+                        // child: ListView.builder(
+                        //     shrinkWrap: true,
+                        //     itemCount: 3,
+                        //     itemBuilder: (BuildContext context, int index) {
+                        //       return InkWell(
+                        //         onTap: () {
+                        //           setState(() {
+                        //             isSelected = index;
+                        //           });
+                        //         },
+                        //         child: Container(
+                        //           decoration: BoxDecoration(
+                        //               border: Border(
+                        //             right: BorderSide(
+                        //               color: isSelected == index
+                        //                   ? ThemeClass.orangeColor
+                        //                   : ThemeClass.whiteColor,
+                        //               width: 2.0,
+                        //             ),
+                        //           )),
+                        //           child: const ListTile(
+                        //             visualDensity: VisualDensity(
+                        //                 horizontal: -4, vertical: -4),
+                        //             dense: true,
+                        //             //contentPadding: EdgeInsets.zero,
+                        //             title: Text(
+                        //               "Category 01",
+                        //               style: TextStyle(
+                        //                   fontSize: 12,
+                        //                   fontWeight: FontWeight.w500),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       );
+                        //     }),
+                      ),
+
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 8),
+                      //   child: Text(
+                      //     'Category 01',
+                      //     style: TextStyle(
+                      //         fontSize: 14, fontWeight: FontWeight.w500),
+                      //   ),
+                      // ),
+                      // Container(
+                      //   height: double.infinity,
+                      //   width: 1,
+                      //   color: ThemeClass.greyColor2,
+                      // ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 35,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    border: Border.all(
+                                        color: ThemeClass.greyColor2)),
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      suffixIcon: SizedBox(
+                                        child: Image.asset(
+                                          'assets/icons/icon_search.png',
+                                          scale: 2.8,
+                                        ),
+                                      ),
+                                      // contentPadding: EdgeInsets.only(top: 14),
+                                      border: InputBorder.none,
+                                      // isCollapsed: true,
+                                      hintText: 'Select Catagory',
+                                      focusedBorder: InputBorder.none,
+                                      focusedErrorBorder: InputBorder.none,
+                                      disabledBorder: InputBorder.none),
+                                ),
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: 5,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return const ListTile(
+                                        visualDensity: VisualDensity(
+                                            horizontal: -4, vertical: -4),
+                                        dense: true,
+                                        contentPadding: EdgeInsets.zero,
+                                        leading: const Icon(
+                                            Icons.check_box_outline_blank),
+                                        title: Text(
+                                          "ABO Group & RH Type",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      );
+                                    }),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                ),
               ),
             ],
           ),
