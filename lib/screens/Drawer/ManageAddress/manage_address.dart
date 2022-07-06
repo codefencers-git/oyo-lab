@@ -22,7 +22,7 @@ class _ManageAddressState extends State<ManageAddress> {
         backgroundColor: ThemeClass.whiteColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "My Test Report"),
+          child: AppbarWithBackButton(appbarTitle: 'key_manage_address'.tr),
         ),
         body: Container(
           padding: const EdgeInsets.all(16),
@@ -35,7 +35,7 @@ class _ManageAddressState extends State<ManageAddress> {
             onTap: () {
               Get.toNamed(Routes.addNewAddressScreen);
             },
-            buttonLabel: 'Add New Address',
+            buttonLabel: 'key_add_new_address'.tr,
           ),
         ),
       ),
@@ -114,7 +114,7 @@ class _ManageAddressState extends State<ManageAddress> {
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       // margin: const EdgeInsets.only(right: 10),
                       child: Text(
-                        "Edit",
+                        'key_edit_btn'.tr,
                         style: TextStyle(
                           fontSize: 12,
                           color: ThemeClass.blackColor,
@@ -201,7 +201,7 @@ class _ManageAddressState extends State<ManageAddress> {
                               vertical: 10, horizontal: 20),
                           // margin: const EdgeInsets.only(right: 10),
                           child: Text(
-                            "Edit",
+                            'key_edit_btn'.tr,
                             style: TextStyle(
                               fontSize: 12,
                               color: ThemeClass.blackColor,
@@ -289,7 +289,7 @@ class _ManageAddressState extends State<ManageAddress> {
                                   vertical: 10, horizontal: 20),
                               // margin: const EdgeInsets.only(right: 10),
                               child: Text(
-                                "Edit",
+                                'key_edit_btn'.tr,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: ThemeClass.blackColor,

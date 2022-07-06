@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -23,7 +24,7 @@ class _AddAddressState extends State<AddAddress> {
         backgroundColor: ThemeClass.whiteColor2,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Manage Address"),
+          child: AppbarWithBackButton(appbarTitle: 'key_manage_address'.tr),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
@@ -31,7 +32,7 @@ class _AddAddressState extends State<AddAddress> {
             children: [
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'Name',
+                  hintText: 'key_name'.tr,
                   hintStyle: TextStyle(
                     fontSize: 12,
                     color: ThemeClass.greyColor,
@@ -46,9 +47,9 @@ class _AddAddressState extends State<AddAddress> {
                 controller: _textController,
                 validator: (value) {
                   if (value == null) {
-                    return "Full Name";
+                    return 'key_full_name'.tr;
                   } else if (value.length < 2) {
-                    return "Please enter valid Name";
+                    return 'key_name_validation'.tr;
                   }
                 },
               ),
@@ -62,7 +63,7 @@ class _AddAddressState extends State<AddAddress> {
                   maxLines: null,
                   minLines: 6,
                   decoration: InputDecoration(
-                    hintText: 'Address Line-1',
+                    hintText: 'key_address_line-1'.tr,
                     hintStyle: TextStyle(
                       fontSize: 12,
                       color: ThemeClass.greyColor,
@@ -77,9 +78,9 @@ class _AddAddressState extends State<AddAddress> {
                   controller: _textaddController,
                   validator: (value) {
                     if (value == null) {
-                      return "Full Name";
+                      return 'key_address_line-1'.tr;
                     } else if (value.length < 2) {
-                      return "Please enter valid Name";
+                      return 'key_address_validation'.tr;
                     }
                   },
                 ),
@@ -94,7 +95,7 @@ class _AddAddressState extends State<AddAddress> {
                   maxLines: null,
                   minLines: 6,
                   decoration: InputDecoration(
-                    hintText: 'Address Line-2',
+                    hintText: 'key_address_line-2'.tr,
                     hintStyle: TextStyle(
                       fontSize: 12,
                       color: ThemeClass.greyColor,
@@ -109,9 +110,9 @@ class _AddAddressState extends State<AddAddress> {
                   controller: _textaddController2,
                   validator: (value) {
                     if (value == null) {
-                      return "Full Name";
+                      return 'key_address_line-2'.tr;
                     } else if (value.length < 2) {
-                      return "Please enter valid Name";
+                      return 'key_address_validation'.tr;
                     }
                   },
                 ),
@@ -126,7 +127,7 @@ class _AddAddressState extends State<AddAddress> {
             onTap: () {
               //Get.toNamed(Routes.bookingSuccessScreen);
             },
-            buttonLabel: 'Add Address',
+            buttonLabel: 'key_add_address'.tr,
           ),
         ),
       ),

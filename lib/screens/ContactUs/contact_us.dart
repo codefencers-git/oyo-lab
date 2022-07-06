@@ -17,7 +17,7 @@ class ContactUs extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
         child: AppbarWithBackButton(
-          appbarTitle: 'Success',
+          appbarTitle: 'key_contact_us'.tr,
           // elevation: 20,
         ),
       ),
@@ -45,7 +45,7 @@ class ContactUs extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Emergency Help Needed?",
+                            'key_emergency_help_needed'.tr,
                             style: TextStyle(
                               color: ThemeClass.redColor1,
                               fontSize: 20,
@@ -87,7 +87,7 @@ class ContactUs extends StatelessWidget {
         height: height * 0.1,
         padding: const EdgeInsets.all(15),
         child: RoundButton(
-          buttonLabel: 'Call Us',
+          buttonLabel: 'key_call_us'.tr,
           onTap: () {
             _makePhoneCall('9876543210');
           },

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:intl/intl.dart';
 import 'package:oyo_labs/routes.dart';
-import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 
 import '../../widgets/buttons/round_button.dart';
 
 class BookAppointment extends StatefulWidget {
-  BookAppointment({
+  const BookAppointment({
     Key? key,
   }) : super(key: key);
 
@@ -23,6 +23,7 @@ class _BookAppointmentState extends State<BookAppointment> {
   late List<bool> isSelected;
   String? time;
   int? select;
+  @override
   void initState() {
     isSelected = [true, false];
     super.initState();
@@ -48,7 +49,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0, top: 10),
                   child: Text(
-                    "Select a Date",
+                    'key_select_date'.tr,
                     style: TextStyle(
                         fontSize: 12,
                         color: ThemeClass.blackColor1,
@@ -85,7 +86,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   maxLines: null,
                   minLines: 3,
                   decoration: InputDecoration(
-                    hintText: 'Write Your Remark...',
+                    hintText: 'key_write_your_remark'.tr,
                     hintStyle: TextStyle(
                       fontSize: 12,
                       color: ThemeClass.greyColor,
@@ -104,7 +105,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   height: 10,
                 ),
                 Text(
-                  "Have a prescription? upload here",
+                  'key_have_prescription'.tr,
                   style: TextStyle(
                       fontSize: 14,
                       color: ThemeClass.blackColor2,
@@ -118,7 +119,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   height: 15,
                 ),
                 Text(
-                  "Payment Summary",
+                  'key_payment_summary'.tr,
                   style: TextStyle(
                       fontSize: 14,
                       color: ThemeClass.blackColor2,
@@ -131,7 +132,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Item Total (MRP)",
+                      'key_item_total_mrp'.tr,
                       style: TextStyle(
                           fontSize: 10,
                           color: ThemeClass.greyColor1,
@@ -157,7 +158,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Payable amount",
+                      'key_payable_amount'.tr,
                       style: TextStyle(
                           fontSize: 10,
                           color: ThemeClass.blackColor1,
@@ -188,7 +189,7 @@ class _BookAppointmentState extends State<BookAppointment> {
           onTap: () {
             Get.toNamed(Routes.bookingSuccessScreen);
           },
-          buttonLabel: 'Book an Appointment',
+          buttonLabel: 'key_book_appointment_btn'.tr,
         ),
       ),
     );
@@ -220,9 +221,10 @@ class _BookAppointmentState extends State<BookAppointment> {
                   const SizedBox(
                     width: 10,
                   ),
-                  const Text(
-                    "Camera",
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
+                  Text(
+                    'key_camera'.tr,
+                    style: const TextStyle(
+                        fontSize: 10, fontWeight: FontWeight.w900),
                   ),
                 ],
               ),
@@ -248,9 +250,10 @@ class _BookAppointmentState extends State<BookAppointment> {
                   const SizedBox(
                     width: 10,
                   ),
-                  const Text(
-                    "Gallery",
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
+                  Text(
+                    'key_gallery'.tr,
+                    style: const TextStyle(
+                        fontSize: 10, fontWeight: FontWeight.w900),
                   ),
                 ],
               ),
@@ -306,7 +309,7 @@ class _BookAppointmentState extends State<BookAppointment> {
           Row(
             children: [
               Text(
-                "Select a Slot",
+                'key_select_slot'.tr,
                 style: TextStyle(
                     fontSize: 12,
                     color: ThemeClass.blackColor1,
@@ -431,7 +434,7 @@ class _date_pickerState extends State<DatePicker> {
         readOnly: true,
         validator: (value) {
           if (value!.isEmpty) {
-            return "Please enter Date";
+            return 'key_date_validation'.tr;
           } else {
             return null;
           }

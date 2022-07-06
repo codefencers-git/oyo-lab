@@ -125,7 +125,7 @@ class DrawerWidget extends StatelessWidget {
                   onTileTap: () {
                     Get.toNamed(Routes.loginScreen);
                   },
-                  tileLabel: "Logout",
+                  tileLabel: 'key_logout'.tr,
                   tileIconPath: "assets/icons/logout-icon.png",
                 ),
               ],

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
-import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
-import 'package:oyo_labs/screens/laboratory/lab_test_detail.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 
@@ -17,6 +15,7 @@ class _MyAppointmentState extends State<MyAppointment>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   get editingController => null;
+  @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
@@ -31,10 +30,11 @@ class _MyAppointmentState extends State<MyAppointment>
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "My Appointment"),
+          child:
+              AppbarWithBackButton(appbarTitle: 'key_my_appointment_title'.tr),
         ),
         body: Column(children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Padding(
@@ -58,18 +58,18 @@ class _MyAppointmentState extends State<MyAppointment>
                 ),
                 labelColor: Colors.white,
                 unselectedLabelColor: ThemeClass.orangeColor,
-                tabs: const [
+                tabs: [
                   Tab(
                     child: Text(
-                      'Upcoming',
-                      style: TextStyle(
+                      'key_upcoming'.tr,
+                      style: const TextStyle(
                           fontSize: 14.0, fontFamily: "Poppins-Regular"),
                     ),
                   ),
                   Tab(
                     child: Text(
-                      'Completed',
-                      style: TextStyle(
+                      'key_completed'.tr,
+                      style: const TextStyle(
                           fontSize: 14.0, fontFamily: "Poppins-Regular"),
                     ),
                   ),
@@ -89,172 +89,93 @@ class _MyAppointmentState extends State<MyAppointment>
     return TabBarView(
       controller: _tabController,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: 20,
-            itemBuilder: (context, index) {
-              return InkWell(
-                child: Container(
-                  margin: const EdgeInsets.all(4.0),
-                  decoration: BoxDecoration(
-                      color: Color(0xfffeebe4),
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Colors.transparent)),
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset("assets/images/lab_test_image.png"),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    Text(
-                                      "ID : #123456",
-                                      style: TextStyle(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Text(
-                                        "25 Oct, 2021 12:30PM",
-                                        style: TextStyle(
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 9,
-                                ),
-                                Text(
-                                  "ABO Group & RH Type",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  "₹ 120.00",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: ThemeClass.orangeColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                onTap: () {
-                  Get.toNamed(Routes.myUpCommingAppoinmentScreen);
-                },
-              );
-            },
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: 20,
-            itemBuilder: (context, index) {
-              return InkWell(
-                child: Container(
-                  margin: const EdgeInsets.all(4.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xfffeebe4),
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.transparent),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset("assets/images/lab_test_image.png"),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    Text(
-                                      "ID : #123456",
-                                      style: TextStyle(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Text(
-                                        "25 Oct, 2021 12:30PM",
-                                        style: TextStyle(
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 9,
-                                ),
-                                Text(
-                                  "ABO Group & RH Type",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  "₹ 120.00",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: ThemeClass.orangeColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                onTap: () {
-                  Get.toNamed(Routes.myAppointmentComplete);
-                },
-              );
-            },
-          ),
-        ),
+        _buildAppointmentListTIle(),
+        _buildAppointmentListTIle(),
         // TextButton(
         //   onPressed: () {},
         //   //child: _tabBarView(),
         // )
       ],
+    );
+  }
+
+  Padding _buildAppointmentListTIle() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: 20,
+        itemBuilder: (context, index) {
+          return InkWell(
+            child: Container(
+              margin: const EdgeInsets.all(4.0),
+              decoration: BoxDecoration(
+                  color: const Color(0xfffeebe4),
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.transparent)),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset("assets/images/lab_test_image.png"),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'key_id'.tr + " #123456",
+                                  style: const TextStyle(
+                                      fontSize: 9, fontWeight: FontWeight.w500),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(right: 8),
+                                  child: Text(
+                                    "25 Oct, 2021 12:30PM",
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 9,
+                            ),
+                            const Text(
+                              "ABO Group & RH Type",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              "₹ 120.00",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: ThemeClass.orangeColor,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            onTap: () {
+              Get.toNamed(Routes.myUpCommingAppoinmentScreen);
+            },
+          );
+        },
+      ),
     );
   }
 }

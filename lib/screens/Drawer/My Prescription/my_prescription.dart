@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
@@ -22,19 +21,20 @@ class _MyPrescriptionState extends State<MyPrescription> {
         backgroundColor: ThemeClass.whiteColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "My Prescription"),
+          child: AppbarWithBackButton(appbarTitle: 'key_my_prescription'.tr),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: const Text(
-                'Prescriptions',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              child: Text(
+                'key_prescriptions'.tr,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
             const SizedBox(
@@ -51,11 +51,11 @@ class _MyPrescriptionState extends State<MyPrescription> {
               ),
             ),
             const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                'Past 7 days',
-                style: TextStyle(
+                'key_past_7_days'.tr,
+                style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                 ),
@@ -65,14 +65,14 @@ class _MyPrescriptionState extends State<MyPrescription> {
               height: 20,
             ),
             _buildTestCase(),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             _buildTestCase(),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Past 22 days',
+                'key_past_22_days'.tr,
                 style: TextStyle(
                   fontSize: 12,
                   color: ThemeClass.blackColor,

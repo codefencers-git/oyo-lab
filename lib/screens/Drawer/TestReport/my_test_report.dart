@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 
@@ -21,7 +20,7 @@ class _MyTestRepoerState extends State<MyTestRepoer> {
         backgroundColor: ThemeClass.whiteColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "My Test Report"),
+          child: AppbarWithBackButton(appbarTitle: 'key_my_test_report'.tr),
         ),
         body: Column(
           children: [
@@ -81,7 +80,7 @@ class _MyTestRepoerState extends State<MyTestRepoer> {
                   SizedBox(
                     height: 8,
                   ),
-                  const Text(
+                  Text(
                     'Laboratory Upload',
                     style: TextStyle(
                       fontSize: 10,
@@ -100,7 +99,7 @@ class _MyTestRepoerState extends State<MyTestRepoer> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -117,8 +116,8 @@ class _MyTestRepoerState extends State<MyTestRepoer> {
                   ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
                   onPressed: () {},
                   child: Text(
-                    'Download',
-                    style: TextStyle(
+                    'key_download_btn'.tr,
+                    style: const TextStyle(
                         fontSize: 10,
                         color: ThemeClass.whiteColor,
                         fontWeight: FontWeight.w700),

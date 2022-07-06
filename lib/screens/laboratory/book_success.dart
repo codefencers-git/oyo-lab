@@ -22,7 +22,7 @@ class _BookingSuccessState extends State<BookingSuccess> {
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Success"),
+          child: AppbarWithBackButton(appbarTitle: 'key_success'.tr),
         ),
         body: Column(
           children: [
@@ -36,7 +36,7 @@ class _BookingSuccessState extends State<BookingSuccess> {
             onTap: () {
               Get.toNamed(Routes.checkAppointment);
             },
-            buttonLabel: 'Check Appointment',
+            buttonLabel: 'key_check_appointment'.tr,
           ),
         ),
       ),

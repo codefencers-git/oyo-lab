@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
@@ -111,7 +110,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "Verify Mobile Number",
+                      'key_verify_mobile_number'.tr,
                       style: TextStyle(
                           color: ThemeClass.orangeColor,
                           fontSize: 18,
@@ -121,8 +120,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                       padding: const EdgeInsets.all(25),
                       child: Text.rich(
                         TextSpan(
-                            text:
-                                "A 6 digit code has been sent on your mobile number ",
+                            text: 'key_code_sent_on_mobile'.tr,
                             style: TextStyle(
                                 fontSize: 14, color: ThemeClass.greyColor1),
                             children: [
@@ -140,7 +138,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                     Column(
                       children: [
                         Text(
-                          "Enter the verification code here",
+                          'key_enter_code_here'.tr,
                           style: TextStyle(
                               color: ThemeClass.greyColor1,
                               fontSize: 14,
@@ -152,7 +150,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Didn't get the code?",
+                              'key_didnt_get_code'.tr,
                               style: TextStyle(
                                   fontSize: 16,
                                   color: ThemeClass.greyColor1,
@@ -161,7 +159,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                             GestureDetector(
                               onTap: () {},
                               child: Text(
-                                " Resend in 00:${timerValue}.",
+                                'key_resend_in'.tr + '${timerValue}.',
                                 style: TextStyle(
                                     fontSize: 16,
                                     color: ThemeClass.orangeColor,
@@ -175,8 +173,9 @@ class _MobileVerificationState extends State<MobileVerification> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: RoundButton(
-                        buttonLabel:
-                            screenName == 'signupScreen' ? 'Login' : 'Submit',
+                        buttonLabel: screenName == 'signupScreen'
+                            ? 'key_login_btn'.tr
+                            : 'key_submit_btn'.tr,
                         onTap: () {
                           screenName == 'signupScreen'
                               ? Get.toNamed(Routes.homeScreen)

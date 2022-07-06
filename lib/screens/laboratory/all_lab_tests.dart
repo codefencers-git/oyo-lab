@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/screens/laboratory/labtest_tile.dart';
 import 'package:oyo_labs/shortbybottomsheet.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
@@ -23,6 +24,7 @@ class _AllLabTestsState extends State<AllLabTests> {
 
   bool isShowSearch = true;
 
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -52,7 +54,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                   controller: _controller,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Search',
+                    hintText: 'key_search'.tr,
                     hintStyle: const TextStyle(
                         fontSize: 12, fontWeight: FontWeight.w400),
                     suffixIcon: SizedBox(
@@ -90,9 +92,9 @@ class _AllLabTestsState extends State<AllLabTests> {
                           const SizedBox(
                             width: 10,
                           ),
-                          const Text(
-                            "Short by : Relevance",
-                            style: TextStyle(
+                          Text(
+                            'key_sortby'.tr + 'key_relevance'.tr,
+                            style: const TextStyle(
                                 fontSize: 10, fontWeight: FontWeight.w900),
                           ),
                         ],
@@ -124,7 +126,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,
                               builder: (context) =>
-                                  CategoryFilterBottomSheet());
+                                  const CategoryFilterBottomSheet());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -136,9 +138,9 @@ class _AllLabTestsState extends State<AllLabTests> {
                             const SizedBox(
                               width: 10,
                             ),
-                            const Text(
-                              "Filter",
-                              style: TextStyle(
+                            Text(
+                              'key_filter'.tr,
+                              style: const TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.w900),
                             ),
                           ],
@@ -155,7 +157,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'All Test',
+                    'key_all_test'.tr,
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -164,7 +166,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                   Row(
                     children: [
                       Text(
-                        '34,001 Test available',
+                        '34,001' + 'key_test_available'.tr,
                         style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -191,7 +193,7 @@ class _AllLabTestsState extends State<AllLabTests> {
                     ),
                     itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
-                      return const AllLabs();
+                      return AllLabs();
                     },
                   ),
                 ),
@@ -204,85 +206,4 @@ class _AllLabTestsState extends State<AllLabTests> {
   }
 }
 
-class AllLabs extends StatelessWidget {
-  const AllLabs({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: ThemeClass.orangeLightColor,
-        // color: Colors.amber,
-        borderRadius: BorderRadius.circular(7),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 8.0,
-            spreadRadius: 0.0,
-            offset: Offset(5, 3),
-            color: Colors.grey.withOpacity(0.5),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            "assets/images/laboratory_image.png",
-            width: width / 2.1,
-            // height: height / 3,
-            fit: BoxFit.cover,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 5),
-            child: Text(
-              "A002",
-              style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 5),
-            child: Text(
-              "ABO Group & RH Type",
-              style: TextStyle(fontSize: 10),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 5),
-            child: Text(
-              "(Blood Group)",
-              style: TextStyle(fontSize: 8, color: ThemeClass.greyColor),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 5),
-            child: Text(
-              "(W B-ED TA (3ml))",
-              style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: RoundButtonBookSlot(
-              onTap: () {
-                Get.toNamed(Routes.labTileScreen);
-                print("object");
-              },
-              label: 'Book a Slot',
-            ),
-          ),
-          // comment
-        ],
-      ),
-    );
-  }
-
-  _image(String s) {
-    return Image.asset(
-      s,
-      height: 20,
-    );
-  }
-}

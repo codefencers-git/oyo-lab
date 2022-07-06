@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
-import 'package:oyo_labs/widgets/buttons/round_button.dart';
-import 'package:oyo_labs/widgets/buttons/round_button_with_border.dart';
 
 class LabTestComplete extends StatefulWidget {
   const LabTestComplete({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class _LabTestCompleteState extends State<LabTestComplete> {
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: "Lab Test Details"),
+          child: AppbarWithBackButton(appbarTitle: 'key_lab_test_details'.tr),
         ),
         body: Column(
           children: [
@@ -46,8 +45,8 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                           ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
                           onPressed: () {},
                           child: Text(
-                            'Completed',
-                            style: TextStyle(
+                           'key_completed'.tr,
+                            style: const TextStyle(
                                 fontSize: 8,
                                 color: ThemeClass.whiteColor,
                                 fontWeight: FontWeight.w500),
@@ -64,7 +63,7 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                                     MaterialStateProperty.all<Color>(
                                         ThemeClass.orangeColor),
                                 shape:
-                                    MaterialStateProperty.all(CircleBorder()),
+                                    MaterialStateProperty.all(const CircleBorder()),
                               ),
                               onPressed: () {},
                               child: Image.asset(
@@ -212,7 +211,7 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                   child: Row(
                     children: [
                       Text(
-                        "Patient Details",
+                        'key_patient_details'.tr,
                         style: TextStyle(
                             fontSize: 14,
                             color: ThemeClass.blackColor,
@@ -268,7 +267,7 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Test Detail",
+                          'key_test_details'.tr,
                           style: TextStyle(
                               fontSize: 14,
                               color: ThemeClass.darkgreyColor,
@@ -378,7 +377,7 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Item Total (MRP)",
+                        'key_item_total_mrp'.tr,
                         style: TextStyle(
                             fontSize: 10,
                             color: ThemeClass.greyColor1,

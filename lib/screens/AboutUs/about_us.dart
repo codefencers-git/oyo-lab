@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 
@@ -15,7 +16,7 @@ class AboutUs extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65.0),
           child: AppbarWithBackButton(
-            appbarTitle: "About Us",
+            appbarTitle: 'key_about_us'.tr,
             elevation: 20,
           ),
         ),

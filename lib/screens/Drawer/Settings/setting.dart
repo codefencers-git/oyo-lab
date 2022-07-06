@@ -19,7 +19,7 @@ class _SettingScreenState extends State<SettingScreen> {
       backgroundColor: ThemeClass.whiteColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
-        child: AppbarWithBackButton(appbarTitle: "Setting"),
+        child: AppbarWithBackButton(appbarTitle: 'key_settings'.tr),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -40,7 +40,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Notification',
+                      'key_notification'.tr,
                       style: TextStyle(
                         color: ThemeClass.greyColor,
                         fontSize: 12,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
-import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
-
 import '../../../widgets/appbar/appbar_with_back_button.dart';
 
 class WalletScreen extends StatefulWidget {
@@ -17,7 +16,7 @@ class _WalletScreenState extends State<WalletScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
-        child: AppbarWithBackButton(appbarTitle: "Wallet"),
+        child: AppbarWithBackButton(appbarTitle: 'key_wallet'.tr),
       ),
       body: Column(
         children: [
@@ -42,18 +41,18 @@ class _WalletScreenState extends State<WalletScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    "Available Balance",
-                    style: TextStyle(
+                    'key_available_balance'.tr,
+                    style: const TextStyle(
                         fontSize: 12,
                         color: ThemeClass.whiteColor,
                         fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "₹12000.00",
                     style: TextStyle(
                         fontSize: 14,
@@ -64,7 +63,7 @@ class _WalletScreenState extends State<WalletScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(
@@ -73,7 +72,7 @@ class _WalletScreenState extends State<WalletScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Wallet History',
+                  'key_wallet_history'.tr,
                   style: TextStyle(
                       fontSize: 16,
                       color: ThemeClass.blackColor,
@@ -94,14 +93,14 @@ class _WalletScreenState extends State<WalletScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Date',
+                    'key_date'.tr,
                     style: TextStyle(
                         fontSize: 12,
                         color: ThemeClass.blackColor,
                         fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    'Amount',
+                    'key_amount'.tr,
                     style: TextStyle(
                         fontSize: 12,
                         color: ThemeClass.blackColor,
