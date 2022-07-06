@@ -1,12 +1,15 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/imagebottomsheet.dart';
 import 'package:oyo_labs/screens/home/drawer_sceen.dart';
-import 'package:oyo_labs/screens/laboratory/laboratory_tile.dart';
+import 'package:oyo_labs/screens/laboratory/labtest_tile.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/homepage_appbar.dart';
+import 'Homepage Services/dashboard_services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,15 +18,21 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-final List<String> imgList = [
-  'assets/images/home-page-slider.png',
-  'assets/images/home-page-slider.png',
-  'assets/images/home-page-slider.png',
-];
-
 class _HomePageState extends State<HomePage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
+  var dashboardController = Get.put(DashboardController());
+  final List<String> imgList = [
+    'assets/images/home-page-slider.png',
+    'assets/images/home-page-slider.png',
+    'assets/images/home-page-slider.png',
+  ];
+
+  @override
+  void initState() {
+    dashboardController.getDashboardData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,237 +50,275 @@ class _HomePageState extends State<HomePage> {
           preferredSize: const Size.fromHeight(65.0),
           child: HomePageAppBar(onTap: () {}),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              CarouselSlider(
-                items: imgList
-                    .map((item) => Container(
-                          margin: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: ThemeClass.skyblueColor,
-                              borderRadius: BorderRadius.circular(7)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(25),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'key_homepage_slider_title'.tr,
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          color: ThemeClass.redColor,
-                                          fontWeight: FontWeight.w900),
-                                    ),
-                                    Text(
-                                      'key_homepage_slider_subtitle'.tr,
-                                      softWrap: true,
-                                      style: TextStyle(
-                                          height: 1.5,
-                                          fontSize: 14,
-                                          color: ThemeClass.blackColor1,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text(
-                                      'key_homepage_slider_description'.tr,
-                                      softWrap: true,
-                                      style: TextStyle(
-                                          height: 1.5,
-                                          fontSize: 10,
-                                          color: ThemeClass.greyColor1,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Image.asset(
-                                'assets/images/home-page-slider.png',
-                                width: width / 2.5,
-                                height: height / 3,
-                                fit: BoxFit.fill,
-                              )
-                            ],
-                          ),
-                        ))
-                    .toList(),
-                carouselController: _controller,
-                options: CarouselOptions(
-                    autoPlay: true,
-                    enlargeCenterPage: false,
-                    aspectRatio: 2,
-                    enableInfiniteScroll: false,
-                    viewportFraction: 0.95,
-                    initialPage: 1,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                      });
-                    }),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: imgList.asMap().entries.map((entry) {
-                  return GestureDetector(
-                    onTap: () => _controller.animateToPage(entry.key),
-                    child: Container(
-                      width: 10.0,
-                      height: 10.0,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 4.0),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _current == entry.key
-                              ? ThemeClass.orangeColor
-                              : ThemeClass.orangeColor.withOpacity(0.2)),
-                    ),
-                  );
-                }).toList(),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  cursorColor: ThemeClass.orangeColor,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: ThemeClass.skyblueColor,
-                    border: InputBorder.none,
-                    hintText: 'key_searchbar_label'.tr,
-                    hintStyle: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w400),
-                    suffixIcon: SizedBox(
-                      child:
-                          Image.asset("assets/icons/icon_search.png", scale: 3),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                decoration: BoxDecoration(
-                  color: ThemeClass.whiteColor2,
-                  border: Border.all(width: 0, color: Colors.white),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: const Offset(-5, 3),
-                      blurRadius: 3,
-                      color: Colors.black.withOpacity(0.1),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: Obx(
+          () => (dashboardController.isloading.value == false)
+              ? dashboardController.isError.value == true
+                  ? Center(
+                      child: Text(
+                          dashboardController.errorMessage.value.toString()),
+                    )
+                  : SingleChildScrollView(
+                      child: Column(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'key_order_with_prescription'.tr,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            SizedBox(
-                              width: 200,
-                              child: Text(
-                                'key_upload_prescription_description'.tr,
-                                softWrap: true,
-                                maxLines: 3,
-                                // overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
+                        _buildSlider(width, height),
+                        _buildSearchBar(),
+                        const SizedBox(
+                          height: 15,
                         ),
-                        SizedBox(
-                          height: 35,
-                          width: 100,
-                          child: _uploadButton(context, width),
+                        _buildUploadPrescription(context, width),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        _buildTestNearYouTitleRow(),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 0.7,
+                            ),
+                            itemCount: dashboardController
+                                .dashboardData.value.tests!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var dashboardData = dashboardController
+                                  .dashboardData.value.tests![index];
+                              return AllLabs(labTestData: dashboardData);
+                            },
+                          ),
                         ),
                       ],
+                    ))
+              : Container(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: ThemeClass.orangeColor,
                     ),
-                  ],
+                  ),
                 ),
+        ),
+      ),
+    );
+  }
+
+  Padding _buildTestNearYouTitleRow() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 25.0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'key_test_near_by_you'.tr,
+            style: TextStyle(
+                fontSize: 14,
+                color: ThemeClass.blackColor,
+                fontWeight: FontWeight.w700),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.allLabTests);
+            },
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(EdgeInsets.zero),
+            ),
+            child: Row(
+              children: [
+                Text(
+                  'key_view_all'.tr,
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: ThemeClass.orangeColor,
+                      fontWeight: FontWeight.w900),
+                ),
+                Image.asset('assets/icons/arrowhead-right.png'),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container _buildUploadPrescription(BuildContext context, double width) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      decoration: BoxDecoration(
+        color: ThemeClass.whiteColor2,
+        border: Border.all(width: 0, color: Colors.white),
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(-5, 3),
+            blurRadius: 3,
+            color: Colors.black.withOpacity(0.1),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'key_order_with_prescription'.tr,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  SizedBox(
+                    width: 200,
+                    child: Text(
+                      'key_upload_prescription_description'.tr,
+                      softWrap: true,
+                      maxLines: 3,
+                      // overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 25.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'key_test_near_by_you'.tr,
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: ThemeClass.blackColor,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Get.toNamed(Routes.allLabTests);
-                      },
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.zero),
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            'key_view_all'.tr,
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: ThemeClass.orangeColor,
-                                fontWeight: FontWeight.w900),
-                          ),
-                          Image.asset('assets/icons/arrowhead-right.png'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.7,
-                  ),
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const LaboratoryTile();
-                  },
-                ),
+                height: 35,
+                width: 100,
+                child: _uploadButton(context, width),
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Padding _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: TextField(
+        cursorColor: ThemeClass.orangeColor,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: ThemeClass.skyblueColor,
+          border: InputBorder.none,
+          hintText: 'key_searchbar_label'.tr,
+          hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+          suffixIcon: SizedBox(
+            child: Image.asset("assets/icons/icon_search.png", scale: 3),
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSlider(double width, double height) {
+    return Column(
+      children: [
+        CarouselSlider(
+          items: imgList
+              .map((item) => Container(
+                    margin: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: ThemeClass.skyblueColor,
+                        borderRadius: BorderRadius.circular(7)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(25),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'key_homepage_slider_title'.tr,
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    color: ThemeClass.redColor,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                              Text(
+                                'key_homepage_slider_subtitle'.tr,
+                                softWrap: true,
+                                style: TextStyle(
+                                    height: 1.5,
+                                    fontSize: 14,
+                                    color: ThemeClass.blackColor1,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                'key_homepage_slider_description'.tr,
+                                softWrap: true,
+                                style: TextStyle(
+                                    height: 1.5,
+                                    fontSize: 10,
+                                    color: ThemeClass.greyColor1,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Image.asset(
+                          'assets/images/home-page-slider.png',
+                          width: width / 2.5,
+                          height: height / 3,
+                          fit: BoxFit.fill,
+                        )
+                      ],
+                    ),
+                  ))
+              .toList(),
+          carouselController: _controller,
+          options: CarouselOptions(
+              autoPlay: true,
+              enlargeCenterPage: false,
+              aspectRatio: 2,
+              enableInfiniteScroll: false,
+              viewportFraction: 0.95,
+              initialPage: 1,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _current = index;
+                });
+              }),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: imgList.asMap().entries.map((entry) {
+            return GestureDetector(
+              onTap: () => _controller.animateToPage(entry.key),
+              child: Container(
+                width: 10.0,
+                height: 10.0,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _current == entry.key
+                        ? ThemeClass.orangeColor
+                        : ThemeClass.orangeColor.withOpacity(0.2)),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 
@@ -302,55 +349,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-// Star Rating Class
-
-
-// typedef void RatingChangeCallback(double rating);
-
-// class StarRating extends StatelessWidget {
-//   final int starCount;
-//   final double rating;
-//   final RatingChangeCallback onRatingChanged;
-//   final Color color;
-
-//   StarRating(
-//       {this.starCount = 5,
-//       this.rating = .0,
-//       required this.onRatingChanged,
-//       required this.color});
-
-//   Widget buildStar(BuildContext context, int index) {
-//     Icon icon;
-//     if (index >= rating) {
-//       icon = Icon(
-//         Icons.star_border,
-//         color: ThemeClass.redColor1,
-//       );
-//     } else if (index > rating - 1 && index < rating) {
-//       icon = Icon(
-//         Icons.star_half,
-//         color: ThemeClass.redColor1,
-//       );
-//     } else {
-//       icon = Icon(
-//         Icons.star,
-//         color: ThemeClass.redColor1,
-//       );
-//     }
-//     return InkResponse(
-//       onTap:
-//           onRatingChanged == null ? null : () => onRatingChanged(index + 1.0),
-//       child: icon,
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       child: Row(
-//           children:
-//               List.generate(starCount, (index) => buildStar(context, index))),
-//     );
-//   }
-// }

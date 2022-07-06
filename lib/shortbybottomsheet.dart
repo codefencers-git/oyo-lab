@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 
@@ -122,16 +121,16 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.88,
-      decoration:  const BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius:  const BorderRadius.only(),
+        borderRadius: const BorderRadius.only(),
       ),
       child: Scaffold(
         body: Container(
           height: MediaQuery.of(context).size.height * 0.88,
-          decoration:  const BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius:  BorderRadius.only(),
+            borderRadius: BorderRadius.only(),
           ),
           child: Column(
             children: [
@@ -143,12 +142,12 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
                   children: [
                     Text(
                       'key_filters'.tr,
-                      style:
-                          const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w500),
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pop(context);
+                        Get.back();
                       },
                       child: ImageIcon(
                         AssetImage(
