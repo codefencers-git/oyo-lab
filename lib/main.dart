@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
       title: 'OYO LAB',
       debugShowCheckedModeBanner: false,
       theme: ThemeClass.themeData,
+
       initialRoute: Routes.splashRoute,
       getPages: Routes.gobalRoutes,
       builder: EasyLoading.init(),
