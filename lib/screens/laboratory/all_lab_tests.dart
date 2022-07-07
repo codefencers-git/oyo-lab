@@ -4,8 +4,6 @@ import 'package:oyo_labs/screens/laboratory/labtest_tile.dart';
 import 'package:oyo_labs/shortbybottomsheet.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
-import 'package:oyo_labs/widgets/buttons/round_book_slot.dart';
-import '../../routes.dart';
 
 class AllLabTests extends StatefulWidget {
   const AllLabTests({Key? key}) : super(key: key);

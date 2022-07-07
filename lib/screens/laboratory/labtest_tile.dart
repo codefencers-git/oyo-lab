@@ -19,12 +19,12 @@ class AllLabs extends StatelessWidget {
         color: ThemeClass.orangeLightColor,
         // color: Colors.amber,
         borderRadius: BorderRadius.circular(7),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            blurRadius: 8.0,
+            blurRadius: 6.0,
             spreadRadius: 0.0,
-            offset: Offset(5, 3),
-            color: Colors.grey.withOpacity(0.5),
+            offset: Offset(2, 2),
+            color: Color(0xffe5e5e5),
           ),
         ],
       ),
@@ -69,11 +69,10 @@ class AllLabs extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(top: 5, bottom: 15),
             child: RoundButtonBookSlot(
               onTap: () {
                 Get.toNamed(Routes.labTileScreen);
-                print("object");
               },
               label: 'Book a Slot',
             ),

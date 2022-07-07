@@ -10,6 +10,8 @@ import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
 
+import 'signup_service_controller.dart';
+
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
 
@@ -19,7 +21,6 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   enumForMF _radioMF = enumForMF.Male;
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -52,6 +53,10 @@ class _SignupScreenState extends State<SignupScreen> {
       });
     }
   }
+
+  final _formKey = GlobalKey<FormState>();
+
+  var signUpController = Get.put(SignupController());
 
   @override
   Widget build(BuildContext context) {
@@ -91,65 +96,35 @@ class _SignupScreenState extends State<SignupScreen> {
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 25.0, bottom: 15, left: 20, right: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildFullNameWidget(),
-                          const SizedBox(height: 15),
-                          _buildEmailWidget(),
-                          const SizedBox(height: 15),
-                          _buildPhoneNumberWidget(),
-                          const SizedBox(height: 15),
-                          _buildPasswordField(),
-                          const SizedBox(height: 15),
-                          _buildGenderWidget(),
-                          const SizedBox(height: 10),
-                          TextFieldWithSuffixIcon(
-                              textController: _dobController,
-                              isReadOnly: true,
-                              isObscureText: false,
-                              hintText: 'key_date_of_birth'.tr,
-                              iconData: 'assets/icons/icon-calender.png',
-                              onIconTap: () {
-                                _selectDate(context);
-                              }),
-                          // const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30, bottom: 20),
-                            child: RoundButton(
-                              buttonLabel: 'key_register'.tr,
-                              onTap: () {
-                                Get.toNamed(Routes.mobileVerificationScreen,
-                                    arguments: 'signupScreen');
-                              },
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'key_already_exists'.tr,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: ThemeClass.greyColor1,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              GestureDetector(
-                                onTap: () => Get.toNamed(Routes.loginScreen),
-                                child: Text(
-                                  'key_login_appbar'.tr,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: ThemeClass.orangeColor,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildFullNameWidget(),
+                            const SizedBox(height: 15),
+                            _buildEmailWidget(),
+                            const SizedBox(height: 15),
+                            _buildPhoneNumberWidget(),
+                            const SizedBox(height: 15),
+                            _buildPasswordField(),
+                            const SizedBox(height: 15),
+                            _buildGenderWidget(),
+                            const SizedBox(height: 10),
+                            TextFieldWithSuffixIcon(
+                                textController: _dobController,
+                                isReadOnly: true,
+                                isObscureText: false,
+                                hintText: 'key_date_of_birth'.tr,
+                                iconData: 'assets/icons/icon-calender.png',
+                                onIconTap: () {
+                                  _selectDate(context);
+                                }),
+                            // const SizedBox(height: 10),
+                            _buildRegisterWidget(),
+                            _buildAlreadyExistWidget()
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -159,6 +134,58 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Padding _buildRegisterWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30, bottom: 20),
+      child: RoundButton(
+        buttonLabel: 'key_register'.tr,
+        onTap: () {
+          if (_formKey.currentState!.validate()) {
+            var mapData = <String, dynamic>{};
+
+            mapData['name'] = _nameController.text.trim();
+            mapData['email'] = _emailController.text.trim();
+            mapData['country_code'] = "+91";
+            mapData['phone_number'] = _phoneNumberController.text.trim();
+            mapData['password'] = _passwordController.text.trim();
+            mapData['gender'] = _radioMF.name.trim();
+            mapData['dob'] = _dobController.text.trim();
+
+            signUpController.signupServices(mapData);
+          }
+        },
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Poppins',
+      ),
+    );
+  }
+
+  Row _buildAlreadyExistWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'key_already_exists'.tr,
+          style: TextStyle(
+              fontSize: 16,
+              color: ThemeClass.greyColor1,
+              fontWeight: FontWeight.w400),
+        ),
+        GestureDetector(
+          onTap: () => Get.toNamed(Routes.loginScreen),
+          child: Text(
+            'key_login_appbar'.tr,
+            style: TextStyle(
+                fontSize: 16,
+                color: ThemeClass.orangeColor,
+                fontWeight: FontWeight.w400),
+          ),
+        )
+      ],
     );
   }
 
@@ -251,7 +278,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
       validator: validation!.passwordValidation,
-      hintText: 'key_password',
+      hintText: 'key_password'.tr,
       iconData: isObs
           ? "assets/icons/icon-password.png"
           : "assets/icons/icon-view-password.png",

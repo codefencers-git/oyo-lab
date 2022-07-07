@@ -74,8 +74,8 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: const BorderSide(
-              color: Colors.red,
+            borderSide: BorderSide(
+              color: ThemeClass.greyLightColor,
             ),
           ),
           focusedBorder: OutlineInputBorder(
@@ -87,8 +87,8 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
-            borderSide: const BorderSide(
-              color: Colors.red,
+            borderSide: BorderSide(
+              color: ThemeClass.orangeColor,
             ),
           ),
         ),

@@ -7,8 +7,8 @@ import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import '../../widgets/buttons/round_button.dart';
-import '../../widgets/container_with_inner_shadow.dart';
+import '../../../widgets/buttons/round_button.dart';
+import '../../../widgets/container_with_inner_shadow.dart';
 
 class MobileVerification extends StatefulWidget {
   const MobileVerification({Key? key}) : super(key: key);
