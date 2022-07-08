@@ -14,72 +14,75 @@ class AllLabs extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: ThemeClass.orangeLightColor,
-        // color: Colors.amber,
-        borderRadius: BorderRadius.circular(7),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 8.0,
-            spreadRadius: 0.0,
-            offset: Offset(5, 3),
-            color: Colors.grey.withOpacity(0.5),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Image.network(
-              labTestData!.image.toString(),
-              width: width / 2.1,
-              // height: height / 3,
-              fit: BoxFit.contain,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: ThemeClass.orangeLightColor,
+          // color: Colors.amber,
+          borderRadius: BorderRadius.circular(7),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 7.0,
+              spreadRadius: 0.0,
+              offset: Offset(2, 0),
+              color: Colors.grey.withOpacity(0.5),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 5),
-            child: Text(
-              "A002",
-              style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Image.network(
+                labTestData!.image.toString(),
+                width: width / 2.1,
+                // height: height / 3,
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 5),
-            child: Text(
-              labTestData!.title.toString(),
-              style: const TextStyle(fontSize: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 5),
+              child: Text(
+                "A002",
+                style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 5),
+              child: Text(
+                labTestData!.title.toString(),
+                style: const TextStyle(fontSize: 10),
+              ),
+            ),
 
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 5),
-            child: Text(
-              "(Blood Group)",
-              style: TextStyle(fontSize: 8, color: ThemeClass.greyColor),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 5),
+              child: Text(
+                "(Blood Group)",
+                style: TextStyle(fontSize: 8, color: ThemeClass.greyColor),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 5),
-            child: Text(
-              "(W B-ED TA (3ml))",
-              style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 5),
+              child: Text(
+                "(W B-ED TA (3ml))",
+                style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: RoundButtonBookSlot(
-              onTap: () {
-                Get.toNamed(Routes.labTileScreen);
-                print("object");
-              },
-              label: 'Book a Slot',
+            Padding(
+              padding: const EdgeInsets.only(top: 5, bottom: 10),
+              child: RoundButtonBookSlot(
+                onTap: () {
+                  Get.toNamed(Routes.labTileScreen);
+                  print("object");
+                },
+                label: 'Book a Slot',
+              ),
             ),
-          ),
-          // comment
-        ],
+            // comment
+          ],
+        ),
       ),
     );
   }

@@ -58,105 +58,101 @@ class _SignupScreenState extends State<SignupScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     validation = Validation();
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                width: width * 0.45,
-                height: height * 0.2,
-                child: Image.asset(
-                  "assets/images/logo.png",
-                  fit: BoxFit.fitWidth,
-                ),
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              width: width * 0.45,
+              height: height * 0.2,
+              child: Image.asset(
+                "assets/images/logo.png",
+                fit: BoxFit.fitWidth,
               ),
-              ContainerWithInnerShadow(
-                width: width,
-                height: height / 0.1,
-                child: Column(
-                  children: [
-                    Text(
-                      'key_register_title'.tr,
-                      style: TextStyle(
-                          color: ThemeClass.orangeColor,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 15),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 25.0, bottom: 15, left: 20, right: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildFullNameWidget(),
-                          const SizedBox(height: 15),
-                          _buildEmailWidget(),
-                          const SizedBox(height: 15),
-                          _buildPhoneNumberWidget(),
-                          const SizedBox(height: 15),
-                          _buildPasswordField(),
-                          const SizedBox(height: 15),
-                          _buildGenderWidget(),
-                          const SizedBox(height: 10),
-                          TextFieldWithSuffixIcon(
-                              textController: _dobController,
-                              isReadOnly: true,
-                              isObscureText: false,
-                              hintText: 'key_date_of_birth'.tr,
-                              iconData: 'assets/icons/icon-calender.png',
-                              onIconTap: () {
-                                _selectDate(context);
-                              }),
-                          // const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30, bottom: 20),
-                            child: RoundButton(
-                              buttonLabel: 'key_register'.tr,
-                              onTap: () {
-                                Get.toNamed(Routes.mobileVerificationScreen,
-                                    arguments: 'signupScreen');
-                              },
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Poppins',
-                            ),
+            ),
+            ContainerWithInnerShadow(
+              width: width,
+              height: height / 0.1,
+              child: Column(
+                children: [
+                  Text(
+                    'key_register_title'.tr,
+                    style: TextStyle(
+                        color: ThemeClass.orangeColor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 15),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 25.0, bottom: 15, left: 20, right: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildFullNameWidget(),
+                        const SizedBox(height: 15),
+                        _buildEmailWidget(),
+                        const SizedBox(height: 15),
+                        _buildPhoneNumberWidget(),
+                        const SizedBox(height: 15),
+                        _buildPasswordField(),
+                        const SizedBox(height: 15),
+                        _buildGenderWidget(),
+                        const SizedBox(height: 10),
+                        TextFieldWithSuffixIcon(
+                            textController: _dobController,
+                            isReadOnly: true,
+                            isObscureText: false,
+                            hintText: 'key_date_of_birth'.tr,
+                            iconData: 'assets/icons/icon-calender.png',
+                            onIconTap: () {
+                              _selectDate(context);
+                            }),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30, bottom: 20),
+                          child: RoundButton(
+                            buttonLabel: 'key_register'.tr,
+                            onTap: () {
+                              Get.toNamed(Routes.mobileVerificationScreen,
+                                  arguments: 'signupScreen');
+                            },
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Poppins',
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'key_already_exists'.tr,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'key_already_exists'.tr,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: ThemeClass.greyColor1,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            GestureDetector(
+                              onTap: () => Get.toNamed(Routes.loginScreen),
+                              child: Text(
+                                'key_login_appbar'.tr,
                                 style: TextStyle(
                                     fontSize: 16,
-                                    color: ThemeClass.greyColor1,
+                                    color: ThemeClass.orangeColor,
                                     fontWeight: FontWeight.w400),
                               ),
-                              GestureDetector(
-                                onTap: () => Get.toNamed(Routes.loginScreen),
-                                child: Text(
-                                  'key_login_appbar'.tr,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: ThemeClass.orangeColor,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
