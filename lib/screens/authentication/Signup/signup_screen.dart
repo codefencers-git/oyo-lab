@@ -10,6 +10,8 @@ import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
 
+import 'signup_service_controller.dart';
+
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
 
@@ -19,7 +21,6 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   enumForMF _radioMF = enumForMF.Male;
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -52,6 +53,10 @@ class _SignupScreenState extends State<SignupScreen> {
       });
     }
   }
+
+  final _formKey = GlobalKey<FormState>();
+
+  var signUpController = Get.put(SignupController());
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +163,58 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  Padding _buildRegisterWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30, bottom: 20),
+      child: RoundButton(
+        buttonLabel: 'key_register'.tr,
+        onTap: () {
+          if (_formKey.currentState!.validate()) {
+            var mapData = <String, dynamic>{};
+
+            mapData['name'] = _nameController.text.trim();
+            mapData['email'] = _emailController.text.trim();
+            mapData['country_code'] = "+91";
+            mapData['phone_number'] = _phoneNumberController.text.trim();
+            mapData['password'] = _passwordController.text.trim();
+            mapData['gender'] = _radioMF.name.trim();
+            mapData['dob'] = _dobController.text.trim();
+
+            signUpController.signupServices(mapData);
+          }
+        },
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Poppins',
+      ),
+    );
+  }
+
+  Row _buildAlreadyExistWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'key_already_exists'.tr,
+          style: TextStyle(
+              fontSize: 16,
+              color: ThemeClass.greyColor1,
+              fontWeight: FontWeight.w400),
+        ),
+        GestureDetector(
+          onTap: () => Get.toNamed(Routes.loginScreen),
+          child: Text(
+            'key_login_appbar'.tr,
+            style: TextStyle(
+                fontSize: 16,
+                color: ThemeClass.orangeColor,
+                fontWeight: FontWeight.w400),
+          ),
+        )
+      ],
+    );
+  }
+
   Column _buildGenderWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,7 +304,7 @@ class _SignupScreenState extends State<SignupScreen> {
       isReadOnly: false,
       keyboardType: TextInputType.visiblePassword,
       validator: validation!.passwordValidation,
-      hintText: 'key_password',
+      hintText: 'key_password'.tr,
       iconData: isObs
           ? "assets/icons/icon-password.png"
           : "assets/icons/icon-view-password.png",

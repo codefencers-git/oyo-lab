@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/onBoarding/onboarding_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/slider_widget.dart';
 import '../../widgets/buttons/round_button_with_border.dart';
@@ -23,13 +24,6 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     with TickerProviderStateMixin {
   int _index = 0;
 
-  // isImageIndexChanged(currentIndex) {
-  //   setState(() {
-  //     index = currentIndex;
-  //   });
-  //   print(index);
-  // }
-
   final CarouselController _controller = CarouselController();
 
   List<OnBoardingScreenData> data = [
@@ -46,6 +40,16 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         discription: 'key_onboarding3_discription'.tr,
         imagePath: 'assets/images/onboarding-3.png'),
   ];
+
+  @override
+  void initState() {
+    _disableOnBoading();
+    super.initState();
+  }
+
+  _disableOnBoading() async {
+    await OnBoadingPrefService.setOnBoaringScreenDisable(false);
+  }
 
   @override
   Widget build(BuildContext context) {

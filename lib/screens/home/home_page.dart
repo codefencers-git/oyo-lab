@@ -18,21 +18,19 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+
+
+
 class _HomePageState extends State<HomePage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
-  var dashboardController = Get.put(DashboardController());
+  var dashboardController =
+      Get.find<DashboardController>(); 
   final List<String> imgList = [
     'assets/images/home-page-slider.png',
     'assets/images/home-page-slider.png',
     'assets/images/home-page-slider.png',
   ];
-
-  @override
-  void initState() {
-    dashboardController.getDashboardData();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

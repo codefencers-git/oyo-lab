@@ -1,29 +1,33 @@
 import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
-import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
-class DashboardController extends GetxController {
-  var dashboardData = DashboardData().obs;
+class SignupController extends GetxController {
   RxBool isError = false.obs;
   var errorMessage = "".obs;
   var isloading = false.obs;
 
-  getDashboardData() async {
-    isloading(true);
+  signupServices(dynamic mapData) async {
     try {
-      var url = 'get_dashboard_data';
-      var response  = await HttpServices.httpGetWithoutToken(url);
+      var url = 'registration';
+      var response = await HttpServices.httpPostWithoutToken(url, mapData);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final jasonData = json.decode(response.body);
+        final jasonData = jsonDecode(response.body);
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
+          showToast(jasonData['message']);
+          Get.toNamed(Routes.mobileVerificationScreen,
+              arguments: 'signupScreen');
           isError(false);
           errorMessage("");
-          var dashboardData1 = DashboardModel.fromJson(jasonData);
-          dashboardData(dashboardData1.data);
+        } else if (jasonData['success'].toString() == "0" &&
+            jasonData['status'].toString() == "201") {
+          showToast(jasonData['message']);
         } else {
           isError(true);
           errorMessage(jasonData['message'].toString());

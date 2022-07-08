@@ -2,6 +2,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
+import 'package:oyo_labs/screens/onBoarding/onboarding_screen.dart';
+import 'package:oyo_labs/screens/onBoarding/onboarding_services.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,18 +15,49 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  var dashboardController = Get.put(DashboardController());
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Future.delayed(const Duration(seconds: 1), () async {
       _navigateTo();
-      // String? token = await FirebaseMessaging.instance.getToken();
-      // print("------------------" + token.toString());
     });
+    dashboardController.getDashboardData();
     super.initState();
   }
 
-  _navigateTo() {
-    Get.toNamed(Routes.onboardingScreen);
+  _navigateTo() async {
+    try {
+      bool? isOnboard = await OnBoadingPrefService.getOnBoaring();
+      if (isOnboard == null) {
+        Navigator.pushAndRemoveUntil<void>(
+          context,
+          MaterialPageRoute<void>(
+              builder: (BuildContext context) => OnboardingScreen()),
+          ModalRoute.withName(Routes.onboardingScreen),
+        );
+        String? token = await FirebaseMessaging.instance.getToken();
+        debugPrint("--" + token.toString());
+      } else if (!isOnboard) {
+        
+        Get.toNamed(Routes.homeScreen);
+      } else {
+        Navigator.pushAndRemoveUntil<void>(
+          context,
+          MaterialPageRoute<void>(
+              builder: (BuildContext context) => OnboardingScreen()),
+          ModalRoute.withName(Routes.onboardingScreen),
+        );
+      }
+    } catch (e) {
+      Navigator.pushAndRemoveUntil<void>(
+        context,
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) => OnboardingScreen()),
+        ModalRoute.withName(Routes.onboardingScreen),
+      );
+    }
+    // Get.toNamed(Routes.onboardingScreen);
   }
 
   @override

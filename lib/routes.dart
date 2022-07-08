@@ -6,8 +6,8 @@ import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_detail.dart';
 import 'package:oyo_labs/screens/Drawer/Member/members.dart';
 import 'package:oyo_labs/screens/authentication/forgot_password_screen.dart';
-import 'package:oyo_labs/screens/authentication/mobile_verification_screen.dart';
-import 'package:oyo_labs/screens/authentication/signup_screen.dart';
+import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
+import 'package:oyo_labs/screens/authentication/Signup/signup_screen.dart';
 import 'package:oyo_labs/screens/laboratory/all_lab_tests.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
@@ -69,7 +69,7 @@ class Routes {
     GetPage(name: forgotPasswordScreen, page: () => const ForgotPassword()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
     GetPage(
-        name: mobileVerificationScreen, page: () => const MobileVerification()),
+        name: mobileVerificationScreen, page: () =>MobileVerification()),
     GetPage(name: homeScreen, page: () => const HomePage()),
     GetPage(
         name: changePasswordScreen, page: () => const ChangePasswordScreen()),
