@@ -84,7 +84,7 @@ class _MobileVerificationState extends State<MobileVerification> {
   }
 
   var screenName = Get.arguments[0]['route'];
-  var phoneNumber = Get.arguments[0]['phoneNumber'];
+  var phoneNumber = Get.arguments[1]['phoneNumber'];
   @override
   Widget build(BuildContext context) {
     print(screenName);
@@ -180,7 +180,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                             : 'key_submit_btn'.tr,
                         onTap: () {
                           screenName == 'signupScreen'
-                              ? Get.toNamed(Routes.homeScreen)
+                              ? Get.offAllNamed(Routes.homeScreen)
                               : Get.toNamed(Routes.changePasswordScreen);
                         },
                         fontSize: 16,
@@ -198,14 +198,7 @@ class _MobileVerificationState extends State<MobileVerification> {
     );
   }
 
-  bool isLoading = false;
-  bool isError = false;
-  String errorMessage = "";
-  _checkOtp(String otp) async {
-    isLoading = true;
 
- 
-  }
 
   _buildOtpTextBox() {
     return Padding(

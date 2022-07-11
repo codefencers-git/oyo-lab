@@ -2,17 +2,16 @@
 
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
+import 'forgot_password_controller.dart';
 
 class ForgotPassword extends StatelessWidget {
   ForgotPassword({Key? key}) : super(key: key);
@@ -21,6 +20,8 @@ class ForgotPassword extends StatelessWidget {
   final TextEditingController _phoneNumberController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  var forgotPasswordController = Get.put(ForgotPasswordController());
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -31,32 +32,37 @@ class ForgotPassword extends StatelessWidget {
       bottom: false,
       child: Scaffold(
         backgroundColor: ThemeClass.whiteColor,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            SizedBox(
-              width: width * 0.62,
-              height: height * 0.45,
-              child: Image.asset(
-                "assets/images/logo.png",
-                fit: BoxFit.fitWidth,
-              ),
+        body: SingleChildScrollView(
+          child: Container(
+            height: height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: width * 0.62,
+                  height: height * 0.45,
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                ContainerWithInnerShadow(
+                  width: width,
+                  height: height * 0.45,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildTitleNdescription(width),
+                      _buildTextField(
+                          _formKey, _phoneNumberController, validation!),
+                      _buildButton(_formKey),
+                      SizedBox(height: 10),
+                    ],
+                  ),
+                )
+              ],
             ),
-            ContainerWithInnerShadow(
-              width: width,
-              height: height * 0.45,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildTitleNdescription(width),
-                  _buildTextField(
-                      _formKey, _phoneNumberController, validation!),
-                  _buildButton(_formKey),
-                  SizedBox(height: 10),
-                ],
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );
@@ -68,10 +74,11 @@ class ForgotPassword extends StatelessWidget {
       child: RoundButton(
         buttonLabel: 'key_get_code'.tr,
         onTap: () {
-          // if (_formKey.currentState!.validate()) {}
-
-          // Get.toNamed(Routes.mobileVerificationScreen,
-          //     arguments: 'forgotPasswordScreen');
+          if (_formKey.currentState!.validate()) {
+            var mapData = <String, dynamic>{};
+            mapData['username'] = _phoneNumberController.text;
+            forgotPasswordController.forgotPasswordService(mapData);
+          }
         },
         fontSize: 16,
         fontWeight: FontWeight.w500,
@@ -136,7 +143,7 @@ class ForgotPassword extends StatelessWidget {
       var mapData = Map<String, dynamic>();
 
       mapData['phone_number'] = _phoneNumberController.text.trim();
-       var url = 'recover-password';
+      var url = 'recover-password';
     } catch (e) {
       if (e is SocketException) {
         showToast(GlobalMessages.socketExceptionMessage);

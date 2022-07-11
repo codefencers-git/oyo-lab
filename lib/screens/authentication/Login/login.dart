@@ -34,6 +34,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   var loginController = Get.put(LoginController());
 
+  _clearTextFields() {
+    _emailOrPhoneController.clear();
+    _passwordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     validation = Validation();
@@ -86,28 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SizedBox(
                                   height: height / 8,
                                 ),
-                                RoundButton(
-                                  buttonLabel: 'key_login_btn'.tr,
-                                  onTap: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      var mapData = <String, dynamic>{};
-                                      mapData['username'] =
-                                          _emailOrPhoneController.text;
-                                      mapData['password'] =
-                                          _passwordController.text;
-                                      mapData['device_token'] = "0";
-                                      mapData['device_type'] =
-                                          Platform.isAndroid
-                                              ? "android"
-                                              : "ios";
-                                      loginController.loginServices(mapData);
-                                    }
-                                    Get.toNamed(Routes.homeScreen);
-                                  },
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Poppins',
-                                ),
+                                _buildLoginButton(),
                                 const SizedBox(height: 20),
                                 _buildKeyNewHere()
                               ],
@@ -121,6 +105,26 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  RoundButton _buildLoginButton() {
+    return RoundButton(
+      buttonLabel: 'key_login_btn'.tr,
+      onTap: () {
+        if (_formKey.currentState!.validate()) {
+          var mapData = <String, dynamic>{};
+          mapData['username'] = _emailOrPhoneController.text;
+          mapData['password'] = _passwordController.text;
+          mapData['device_token'] = "0";
+          mapData['device_type'] = Platform.isAndroid ? "android" : "ios";
+          loginController.loginServices(mapData);
+          _clearTextFields();
+        }
+      },
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Poppins',
     );
   }
 
