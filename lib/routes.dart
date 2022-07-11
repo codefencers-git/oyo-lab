@@ -5,7 +5,7 @@ import 'package:oyo_labs/screens/Drawer/My%20Prescription/my_prescription.dart';
 import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_detail.dart';
 import 'package:oyo_labs/screens/Drawer/Member/members.dart';
-import 'package:oyo_labs/screens/authentication/forgot_password_screen.dart';
+import 'package:oyo_labs/screens/authentication/Foegot%20Password/forgot_password_screen.dart';
 import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/authentication/Signup/signup_screen.dart';
 import 'package:oyo_labs/screens/laboratory/all_lab_tests.dart';
@@ -22,7 +22,7 @@ import 'screens/Drawer/Refer and Earn/refer_and_earn.dart';
 import 'screens/Drawer/Settings/setting.dart';
 import 'screens/Drawer/Wallet/wallet_screen.dart';
 import 'screens/authentication/change_password_screen.dart';
-import 'screens/authentication/login.dart';
+import 'screens/authentication/Login/login.dart';
 import 'screens/home/home_page.dart';
 import 'screens/laboratory/book_appointment.dart';
 import 'screens/Drawer/Settings/notification_setting.dart';
@@ -66,7 +66,7 @@ class Routes {
     GetPage(name: splashRoute, page: () => const SplashScreen()),
     GetPage(name: onboardingScreen, page: () => OnboardingScreen()),
     GetPage(name: loginScreen, page: () => const LoginScreen()),
-    GetPage(name: forgotPasswordScreen, page: () => const ForgotPassword()),
+    GetPage(name: forgotPasswordScreen, page: () => ForgotPassword()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
     GetPage(
         name: mobileVerificationScreen, page: () =>MobileVerification()),

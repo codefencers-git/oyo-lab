@@ -6,14 +6,14 @@ import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
-class SignupController extends GetxController {
-  RxBool isError = false.obs;
+class LoginController extends GetxController {
+    RxBool isError = false.obs;
   var errorMessage = "".obs;
   var isloading = false.obs;
 
-  signupServices(dynamic mapData) async {
+  loginServices(dynamic mapData) async {
     try {
-      var url = 'registration';
+      var url = 'login';
       var response = await HttpServices.httpPostWithoutToken(url, mapData);
 
       if (response.statusCode == 200 || response.statusCode == 201) {

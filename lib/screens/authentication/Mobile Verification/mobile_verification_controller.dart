@@ -1,21 +1,28 @@
-import 'dart:convert';
+import 'dart:async';
 
 import 'package:get/get.dart';
+import 'dart:convert';
+import 'dart:io';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
-class SignupController extends GetxController {
-  RxBool isError = false.obs;
+class MobileVerificationController extends GetxController {
+  var isError = false.obs;
   var errorMessage = "".obs;
-  var isloading = false.obs;
+  var isLoading = false.obs;
 
-  signupServices(dynamic mapData) async {
+  checkOtp(String phoneNumber, String otp) async {
     try {
-      var url = 'registration';
-      var response = await HttpServices.httpPostWithoutToken(url, mapData);
+      var mapData = <String, dynamic>{};
+      mapData['otp'] = otp;
+      mapData['country_code'] = "+91";
+      mapData['phone_number'] = phoneNumber;
 
+      var url = 'activeAccount';
+
+      var response = await HttpServices.httpPostWithoutToken(url, mapData);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jasonData = jsonDecode(response.body);
 
@@ -32,7 +39,6 @@ class SignupController extends GetxController {
             jasonData['status'].toString() == "201") {
           showToast(jasonData['message']);
         } else {
-          isError(true);
           errorMessage(jasonData['message'].toString());
         }
       } else {
@@ -40,10 +46,15 @@ class SignupController extends GetxController {
         errorMessage(GlobalMessages.internalservererror);
       }
     } catch (e) {
-      isError(true);
-      errorMessage(e.toString());
+      if (e is SocketException) {
+        showToast(GlobalMessages.socketExceptionMessage);
+      } else if (e is TimeoutException) {
+        showToast(GlobalMessages.timeoutExceptionMessage);
+      } else {
+        showToast(e.toString());
+      }
     } finally {
-      isloading(false);
+      isLoading(false);
     }
   }
 }
