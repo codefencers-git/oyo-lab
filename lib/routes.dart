@@ -2,13 +2,14 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/screens/AboutUs/about_us.dart';
 import 'package:oyo_labs/screens/Drawer/Member/update_member.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/my_prescription.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/my_profile.dart';
 import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_detail.dart';
 import 'package:oyo_labs/screens/Drawer/Member/members.dart';
 
 import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/authentication/Signup/signup_screen.dart';
-import 'package:oyo_labs/screens/laboratory/all_lab_tests.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_tests.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_detail.dart';
@@ -62,6 +63,7 @@ class Routes {
   static const String referandEarnScreen = '/referandEarnScreen';
   static const String walletScreen = '/walletScreen';
   static const String settingScreen = '/settingScreen';
+  static const String myProfileScreen = '/myProfileScreen';
 
   static List<GetPage> gobalRoutes = [
     GetPage(name: splashRoute, page: () => const SplashScreen()),
@@ -97,5 +99,6 @@ class Routes {
     GetPage(name: referandEarnScreen, page: () => const ReferEarnScreen()),
     GetPage(name: walletScreen, page: () => const WalletScreen()),
     GetPage(name: settingScreen, page: () => const SettingScreen()),
+    GetPage(name: myProfileScreen, page: () => const MyProfileScreen()),
   ];
 }

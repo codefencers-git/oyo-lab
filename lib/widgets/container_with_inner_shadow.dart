@@ -33,7 +33,7 @@ class ContainerWithInnerShadow extends StatelessWidget {
       ),
       child: Container(
         width: width,
-        height: height,
+        // height: height,
         padding: const EdgeInsets.only(top: 40, bottom: 20),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.vertical(
