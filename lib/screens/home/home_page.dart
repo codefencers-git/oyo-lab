@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/imagebottomsheet.dart';
 import 'package:oyo_labs/screens/home/drawer_sceen.dart';
-import 'package:oyo_labs/screens/laboratory/labtest_tile.dart';
+import 'package:oyo_labs/screens/laboratory/labtest_tile_widget.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/homepage_appbar.dart';
 import 'Homepage Services/dashboard_services.dart';
@@ -18,14 +18,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-
-
-
 class _HomePageState extends State<HomePage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
-  var dashboardController =
-      Get.find<DashboardController>(); 
+  var dashboardController = Get.find<DashboardController>();
   final List<String> imgList = [
     'assets/images/home-page-slider.png',
     'assets/images/home-page-slider.png',
@@ -36,71 +32,68 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        drawer: DrawerWidget(
-          width: width,
-        ),
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65.0),
-          child: HomePageAppBar(onTap: () {}),
-        ),
-        body: Obx(
-          () => (dashboardController.isloading.value == false)
-              ? dashboardController.isError.value == true
-                  ? Center(
-                      child: Text(
-                          dashboardController.errorMessage.value.toString()),
-                    )
-                  : SingleChildScrollView(
-                      child: Column(
-                      children: [
-                        _buildSlider(width, height),
-                        _buildSearchBar(),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        _buildUploadPrescription(context, width),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        _buildTestNearYouTitleRow(),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
-                              childAspectRatio: 0.7,
-                            ),
-                            itemCount: dashboardController
-                                .dashboardData.value.tests!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              var dashboardData = dashboardController
-                                  .dashboardData.value.tests![index];
-                              return AllLabs(labTestData: dashboardData);
-                            },
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
+      drawer: DrawerWidget(
+        width: width,
+      ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65.0),
+        child: HomePageAppBar(onTap: () {}),
+      ),
+      body: Obx(
+        () => (dashboardController.isloading.value == false)
+            ? dashboardController.isError.value == true
+                ? Center(
+                    child:
+                        Text(dashboardController.errorMessage.value.toString()),
+                  )
+                : SingleChildScrollView(
+                    child: Column(
+                    children: [
+                      _buildSlider(width, height),
+                      _buildSearchBar(),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      _buildUploadPrescription(context, width),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      _buildTestNearYouTitleRow(),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 0.7,
                           ),
+                          itemCount: dashboardController
+                              .dashboardData.value.tests!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            var dashboardData = dashboardController
+                                .dashboardData.value.tests![index];
+                            return AllLabsGridTileWidget(
+                                labTestData: dashboardData);
+                          },
                         ),
-                      ],
-                    ))
-              : Container(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: ThemeClass.orangeColor,
-                    ),
+                      ),
+                    ],
+                  ))
+            : Container(
+                height: height,
+                width: width,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: ThemeClass.orangeColor,
                   ),
                 ),
-        ),
+              ),
       ),
     );
   }

@@ -20,7 +20,7 @@ class DrawerWidget extends StatelessWidget {
       child: Column(
         children: [
           _buildProfileWidget(onTap: () {
-            Get.toNamed(Routes.loginScreen);
+            Get.toNamed(Routes.myProfileScreen);
           }),
           Expanded(
             child: ListView(
