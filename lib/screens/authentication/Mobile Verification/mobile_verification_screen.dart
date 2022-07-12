@@ -26,6 +26,7 @@ final TextEditingController textEditingController = TextEditingController();
 class _MobileVerificationState extends State<MobileVerification> {
   bool isShowResend = false;
   Timer? periodicTimer;
+  dynamic argumentData = Get.arguments;
 
   stopTimer() {
     periodicTimer!.cancel();
@@ -50,6 +51,7 @@ class _MobileVerificationState extends State<MobileVerification> {
         // Update user about remaining time
       },
     );
+
     super.initState();
   }
 
@@ -81,8 +83,8 @@ class _MobileVerificationState extends State<MobileVerification> {
     super.dispose();
   }
 
-  var screenName = Get.arguments;
-
+  var screenName = Get.arguments[0]['route'];
+  var phoneNumber = Get.arguments[1]['phoneNumber'];
   @override
   Widget build(BuildContext context) {
     print(screenName);
@@ -125,7 +127,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                                 fontSize: 14, color: ThemeClass.greyColor1),
                             children: [
                               TextSpan(
-                                text: '8200092056',
+                                text: phoneNumber,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: ThemeClass.orangeColor),
@@ -178,7 +180,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                             : 'key_submit_btn'.tr,
                         onTap: () {
                           screenName == 'signupScreen'
-                              ? Get.toNamed(Routes.homeScreen)
+                              ? Get.offAllNamed(Routes.homeScreen)
                               : Get.toNamed(Routes.changePasswordScreen);
                         },
                         fontSize: 16,
@@ -195,6 +197,8 @@ class _MobileVerificationState extends State<MobileVerification> {
       ),
     );
   }
+
+
 
   _buildOtpTextBox() {
     return Padding(

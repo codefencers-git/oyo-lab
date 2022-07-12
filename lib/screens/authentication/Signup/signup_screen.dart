@@ -9,7 +9,6 @@ import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
-
 import 'signup_service_controller.dart';
 
 class SignupScreen extends StatefulWidget {

@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/authentication/Login/login_controller.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
-import '../../widgets/textfield/textfield_with_suffix.dart';
+import '../../../widgets/textfield/textfield_with_suffix.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -27,6 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   Validation? validation;
+  final _formKey = GlobalKey<FormState>();
+
+  var loginController = Get.put(LoginController());
+
+  _clearTextFields() {
+    _emailOrPhoneController.clear();
+    _passwordController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,57 +78,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(height: 25),
                         Padding(
                           padding: const EdgeInsets.all(25.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              _buildEmailField(),
-                              const SizedBox(height: 20),
-                              _buildPasswordField(),
-                              const SizedBox(height: 10),
-                              _buildForgotPassword(),
-                              SizedBox(
-                                height: height / 8,
-                              ),
-                              RoundButton(
-                                buttonLabel: 'key_login_btn'.tr,
-                                onTap: () {
-                                  Get.toNamed(Routes.homeScreen);
-                                },
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Poppins',
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 15),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'key_new_here'.tr,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: ThemeClass.greyColor1,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () =>
-                                          Get.toNamed(Routes.signupScreen),
-                                      child: Text(
-                                        'key_create_account'.tr,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: ThemeClass.orangeColor,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    )
-                                  ],
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                _buildEmailField(),
+                                const SizedBox(height: 20),
+                                _buildPasswordField(),
+                                const SizedBox(height: 10),
+                                _buildForgotPassword(),
+                                SizedBox(
+                                  height: height / 8,
                                 ),
-                              )
-                            ],
+                                _buildLoginButton(),
+                                const SizedBox(height: 20),
+                                _buildKeyNewHere()
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -126,6 +104,54 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  RoundButton _buildLoginButton() {
+    return RoundButton(
+      buttonLabel: 'key_login_btn'.tr,
+      onTap: () {
+        if (_formKey.currentState!.validate()) {
+          var mapData = <String, dynamic>{};
+          mapData['username'] = _emailOrPhoneController.text;
+          mapData['password'] = _passwordController.text;
+          mapData['device_token'] = "0";
+          mapData['device_type'] = Platform.isAndroid ? "android" : "ios";
+          loginController.loginServices(mapData);
+          _clearTextFields();
+        }
+      },
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Poppins',
+    );
+  }
+
+  Padding _buildKeyNewHere() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'key_new_here'.tr,
+            style: TextStyle(
+                fontSize: 16,
+                color: ThemeClass.greyColor1,
+                fontWeight: FontWeight.w400),
+          ),
+          GestureDetector(
+            onTap: () => Get.toNamed(Routes.signupScreen),
+            child: Text(
+              'key_create_account'.tr,
+              style: TextStyle(
+                  fontSize: 16,
+                  color: ThemeClass.orangeColor,
+                  fontWeight: FontWeight.w400),
+            ),
+          )
+        ],
       ),
     );
   }

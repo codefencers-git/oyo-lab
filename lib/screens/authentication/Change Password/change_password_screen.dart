@@ -6,7 +6,8 @@ import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
-import '../../widgets/textfield/textfield_with_suffix.dart';
+import '../../../widgets/textfield/textfield_with_suffix.dart';
+import 'change_password_controller.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
@@ -19,6 +20,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
+        var changePasswordController = Get.put(ChangePasswordController());
 
   bool isObs = true;
   bool isConfirmPwdObs = true;
@@ -34,6 +37,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       isConfirmPwdObs = !isConfirmPwdObs;
     });
   }
+
+    final _formKey = GlobalKey<FormState>();
 
   Validation? validation;
   @override
@@ -64,27 +69,29 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      children: [
-                        Text(
-                          'key_change_password'.tr,
-                          style: TextStyle(
-                              color: ThemeClass.orangeColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(height: 30),
-                        SizedBox(
-                          width: width * 0.7,
-                          child: Text(
-                            'key_change_password_description'.tr,
-                            softWrap: true,
-                            textAlign: TextAlign.center,
+                    Form(key: _formKey,
+                      child: Column(
+                        children: [
+                          Text(
+                            'key_change_password'.tr,
                             style: TextStyle(
-                                fontSize: 14, color: ThemeClass.greyColor1),
+                                color: ThemeClass.orangeColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 30),
+                          SizedBox(
+                            width: width * 0.7,
+                            child: Text(
+                              'key_change_password_description'.tr,
+                              softWrap: true,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 14, color: ThemeClass.greyColor1),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -102,7 +109,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       child: RoundButton(
                         buttonLabel: 'key_change_password'.tr,
                         onTap: () {
-                          Get.toNamed(Routes.loginScreen);
+                          if (_formKey.currentState!.validate()) {
+                            var mapData = <String, dynamic>{};
+                                mapData['otp'] = Get.arguments[0]['userName'];
+                            mapData['username'] =Get.arguments[1]['otp'];
+                            mapData['new_password'] = _passwordController.text;
+                            mapData['confirm_password'] =
+                                _confirmPasswordController.text;
+                                changePasswordController.changePasswordService(mapData);
+                          }
+                          
                         },
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

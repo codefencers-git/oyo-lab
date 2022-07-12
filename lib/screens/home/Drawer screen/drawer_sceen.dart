@@ -1,16 +1,20 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/home/Drawer%20screen/logout_controller.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({
+   DrawerWidget({
     Key? key,
     required this.width,
   }) : super(key: key);
 
   final double width;
+
+  
+    var logoutController = Get.put(LogoutController());
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +127,7 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 _buildDrawerListTile(
                   onTileTap: () {
-                    Get.toNamed(Routes.loginScreen);
+                    logoutController.logout(context);
                   },
                   tileLabel: 'key_logout'.tr,
                   tileIconPath: "assets/icons/logout-icon.png",
@@ -135,6 +139,7 @@ class DrawerWidget extends StatelessWidget {
       ),
     );
   }
+
 
   Column _buildDrawerListTile({
     String tileLabel = "",
@@ -172,6 +177,7 @@ class DrawerWidget extends StatelessWidget {
       ],
     );
   }
+
 
   InkWell _buildProfileWidget({
     VoidCallback? onTap,

@@ -11,6 +11,7 @@ import 'package:oyo_labs/widgets/slider_widget.dart';
 import '../../widgets/buttons/round_button_with_border.dart';
 import '../../widgets/buttons/round_button_with_icon.dart';
 import '../../widgets/container_with_inner_shadow.dart';
+import '../home/Homepage Services/dashboard_services.dart';
 
 class OnboardingScreen extends StatefulWidget {
   OnboardingScreen({Key? key}) : super(key: key);
@@ -40,9 +41,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         discription: 'key_onboarding3_discription'.tr,
         imagePath: 'assets/images/onboarding-3.png'),
   ];
+  var dashboardController = Get.put(DashboardController());
 
   @override
   void initState() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    dashboardController.getDashboardData();
     _disableOnBoading();
     super.initState();
   }

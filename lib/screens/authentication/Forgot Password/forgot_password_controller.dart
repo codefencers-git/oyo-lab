@@ -1,18 +1,20 @@
-import 'dart:convert';
 import 'package:get/get.dart';
+import 'dart:convert';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
-class SignupController extends GetxController {
+class ForgotPasswordController extends GetxController {
   RxBool isError = false.obs;
   var errorMessage = "".obs;
   var isloading = false.obs;
 
-  signupServices(dynamic mapData) async {
+  forgotPasswordService(dynamic mapData) async {
     try {
-      var url = 'registration';
+      var url = 'recover-password';
+
       var response = await HttpServices.httpPostWithoutToken(url, mapData);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -20,11 +22,12 @@ class SignupController extends GetxController {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message']);
+          print("-----------------" + jasonData['message']);
           Get.toNamed(Routes.mobileVerificationScreen, arguments: [
-            {'route': 'signupScreen'},
-            {'phoneNumber': mapData['phone_number'].toString()}
+            {'route': 'forgotPasswordScreen'},
+            {'phoneNumber': mapData['username'].toString()}
           ]);
-          print(mapData['phone_number'].toString());
+
           isError(false);
           errorMessage("");
         } else if (jasonData['success'].toString() == "0" &&
@@ -34,6 +37,10 @@ class SignupController extends GetxController {
           isError(true);
           errorMessage(jasonData['message'].toString());
         }
+      } else if (response.statusCode == 401) {
+        showToast(GlobalMessages.unauthorizedUser);
+        await UserPrefService().removeUserData();
+
       } else {
         isError(true);
         errorMessage(GlobalMessages.internalservererror);
