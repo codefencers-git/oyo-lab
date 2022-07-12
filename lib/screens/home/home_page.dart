@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/home/google_place_picker/google_place_picker_screen.dart';
 import 'package:oyo_labs/screens/home/imagebottomsheet.dart';
 import 'package:oyo_labs/screens/home/Drawer%20screen/drawer_sceen.dart';
 import 'package:oyo_labs/screens/laboratory/labtest_tile.dart';
@@ -18,14 +19,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-
-
-
 class _HomePageState extends State<HomePage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
-  var dashboardController =
-      Get.find<DashboardController>(); 
+  var dashboardController = Get.find<DashboardController>();
   final List<String> imgList = [
     'assets/images/home-page-slider.png',
     'assets/images/home-page-slider.png',
