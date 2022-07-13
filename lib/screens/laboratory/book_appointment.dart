@@ -115,6 +115,16 @@ class _BookAppointmentState extends State<BookAppointment> {
                   height: 15,
                 ),
                 _priscripion(width),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Uploaded Prescription',
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: ThemeClass.blackColor2,
+                      fontWeight: FontWeight.w400),
+                ),
                 const SizedBox(
                   height: 15,
                 ),

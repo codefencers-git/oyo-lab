@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
   var dashboardController = Get.find<DashboardController>();
+
   final List<String> imgList = [
     'assets/images/home-page-slider.png',
     'assets/images/home-page-slider.png',

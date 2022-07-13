@@ -13,7 +13,7 @@ import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_tests.dart'
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_detail.dart';
-import 'package:oyo_labs/screens/laboratory/laboratory_detail.dart';
+import 'package:oyo_labs/screens/laboratory/product_detail.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment.dart';
 import 'screens/ContactUs/contact_us.dart';
 import 'screens/Drawer/ManageAddress/add_address.dart';
