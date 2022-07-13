@@ -110,8 +110,8 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: () {
         if (_formKey.currentState!.validate()) {
           var mapData = <String, dynamic>{};
-          mapData['username'] = _emailOrPhoneController.text;
-          mapData['password'] = _passwordController.text;
+          mapData['username'] = _emailOrPhoneController.text.trim();
+          mapData['password'] = _passwordController.text.trim();
           mapData['device_token'] = "0";
           mapData['device_type'] = Platform.isAndroid ? "android" : "ios";
           loginController.loginServices(mapData);

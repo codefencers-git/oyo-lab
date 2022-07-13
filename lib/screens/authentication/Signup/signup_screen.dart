@@ -25,6 +25,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _referralCodeController = TextEditingController();
 
   bool isObs = true;
 
@@ -92,65 +93,37 @@ class _SignupScreenState extends State<SignupScreen> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 25.0, bottom: 15, left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildFullNameWidget(),
-                        const SizedBox(height: 15),
-                        _buildEmailWidget(),
-                        const SizedBox(height: 15),
-                        _buildPhoneNumberWidget(),
-                        const SizedBox(height: 15),
-                        _buildPasswordField(),
-                        const SizedBox(height: 15),
-                        _buildGenderWidget(),
-                        const SizedBox(height: 10),
-                        TextFieldWithSuffixIcon(
-                            textController: _dobController,
-                            isReadOnly: true,
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildFullNameWidget(),
+                          const SizedBox(height: 15),
+                          _buildEmailWidget(),
+                          const SizedBox(height: 15),
+                          _buildPhoneNumberWidget(),
+                          const SizedBox(height: 15),
+                          _buildPasswordField(),
+                          const SizedBox(height: 15),
+                          _buildGenderWidget(),
+                          const SizedBox(height: 10),
+                          _buildDoBWidget(context),
+                          const SizedBox(height: 15),
+                          TextFieldWithSuffixIcon(
+                            textController: _referralCodeController,
+                            isReadOnly: false,
                             isObscureText: false,
-                            hintText: 'key_date_of_birth'.tr,
-                            iconData: 'assets/icons/icon-calender.png',
-                            onIconTap: () {
-                              _selectDate(context);
-                            }),
-                        const SizedBox(height: 10),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30, bottom: 20),
-                          child: RoundButton(
-                            buttonLabel: 'key_register'.tr,
-                            onTap: () {
-                              Get.toNamed(Routes.mobileVerificationScreen,
-                                  arguments: 'signupScreen');
-                            },
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Poppins',
+                            keyboardType: TextInputType.text,
+                            hintText: 'key_referral_code'.tr,
+                            iconData: "assets/icons/referral-code-icon.png",
+                            onIconTap: () {},
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'key_already_exists'.tr,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: ThemeClass.greyColor1,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            GestureDetector(
-                              onTap: () => Get.toNamed(Routes.loginScreen),
-                              child: Text(
-                                'key_login_appbar'.tr,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: ThemeClass.orangeColor,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            )
-                          ],
-                        )
-                      ],
+                          _buildRegisterWidget(),
+                          const SizedBox(height: 15),
+                          _buildAlreadyExistWidget(),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -160,6 +133,18 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  TextFieldWithSuffixIcon _buildDoBWidget(BuildContext context) {
+    return TextFieldWithSuffixIcon(
+        textController: _dobController,
+        isReadOnly: true,
+        isObscureText: false,
+        hintText: 'key_date_of_birth'.tr,
+        iconData: 'assets/icons/icon-calender.png',
+        onIconTap: () {
+          _selectDate(context);
+        });
   }
 
   Padding _buildRegisterWidget() {
