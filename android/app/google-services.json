@@ -1,43 +1,41 @@
 {
   "project_info": {
-    "project_number": "235551438149",
-    "firebase_url": "https://oyo-lab-default-rtdb.firebaseio.com",
-    "project_id": "oyo-lab",
-    "storage_bucket": "oyo-lab.appspot.com"
+    "project_number": "126394854128",
+    "project_id": "oyolab-7b9ea",
+    "storage_bucket": "oyolab-7b9ea.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:235551438149:android:348f392cfc171fa6197a2c",
+        "mobilesdk_app_id": "1:126394854128:android:76f80ffdace8b4ba993035",
         "android_client_info": {
           "package_name": "com.example.oyo_labs"
         }
       },
       "oauth_client": [
         {
-          "client_id": "235551438149-e545vtb0f646b6sd8lj74nn7v9837ibl.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.oyo_labs",
-            "certificate_hash": "3a755029f9b3ceb9a6eb19c8fdd936ba0fef6f7c"
-          }
-        },
-        {
-          "client_id": "235551438149-bai0irdgaqq83o0icu25ov4fjpkclbdj.apps.googleusercontent.com",
+          "client_id": "126394854128-7rouj8grl6j2c4790monrrsqedm540l7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAfDGl4FhBWuVstF2_mWDWD0e2IDS58WXk"
+          "current_key": "AIzaSyCjQLRV2Ha7-wfTUveS1m0KNmRHvGxvtlY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "235551438149-bai0irdgaqq83o0icu25ov4fjpkclbdj.apps.googleusercontent.com",
+              "client_id": "126394854128-7rouj8grl6j2c4790monrrsqedm540l7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "126394854128-jn114aqmdd3db1scbes6d662ejtvtf4p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.oyoLabs"
+              }
             }
           ]
         }
