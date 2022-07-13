@@ -41,6 +41,11 @@ class LoginController extends GetxController {
           showToast(jasonData['message']);
         } else if (jasonData['success'].toString() == "0" &&
             jasonData['status'].toString() == "202") {
+              // Get.to
+          // Get.toNamed(Routes.mobileVerificationScreen, arguments: [
+          //   {'route': 'login'},
+          //   {'phoneNumber': mapData['username'].toString()}
+          // ]);
           showToast(jasonData['message']);
         } else {
           isError(true);
