@@ -41,7 +41,8 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                     var result = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const GooglePlacePickerScreen()),
+                          builder: (context) =>
+                              const GooglePlacePickerScreen()),
                     );
 
                     if (result != null) {
@@ -72,8 +73,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                          width: 2, height: 25, child: Icon(Icons.expand_more)),
+                      const SizedBox(width: 30, child: Icon(Icons.expand_more)),
                     ],
                   ),
                 )
