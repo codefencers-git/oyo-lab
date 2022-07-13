@@ -50,7 +50,7 @@ class Routes {
   static const String myAppointmentComplete = '/myAppointmentCompete';
   static const String checkAppointment = '/checkAppointment';
   static const String labDetailScreen = '/labDetailScreen';
-  static const String labTileScreen = '/labTileScreen';
+  // static const String labTileScreen = '/labTileScreen';
   static const String allLabTests = '/allLabTests';
   static const String addMemberScreen = '/memberScreen';
   static const String myPrescritionSreen = '/myPrescription';
@@ -86,7 +86,7 @@ class Routes {
     GetPage(name: myAppointmentComplete, page: () => const LabTestComplete()),
     GetPage(name: checkAppointment, page: () => const MyAppointment()),
     GetPage(name: labDetailScreen, page: () => const BookAppointment()),
-    GetPage(name: labTileScreen, page: () => const LaboratoryDetail()),
+    // GetPage(name: labTileScreen, page: () => const LaboratoryDetail()),
     GetPage(name: allLabTests, page: () => const AllLabTests()),
     GetPage(name: addMemberScreen, page: () => const AddNewMember()),
     GetPage(name: myPrescritionSreen, page: () => const MyPrescription()),

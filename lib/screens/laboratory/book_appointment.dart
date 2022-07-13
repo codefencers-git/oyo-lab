@@ -181,7 +181,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                           style: TextStyle(
                               fontSize: 10,
                               color: ThemeClass.blackColor1,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w500),
                         )
                       ],
                     )

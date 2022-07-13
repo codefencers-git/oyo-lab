@@ -21,14 +21,16 @@ class LAbTestDetailModel {
   String? success;
   String? status;
   String? message;
-  Data? data;
+  LAbTestDetailData? data;
 
   factory LAbTestDetailModel.fromJson(Map<String, dynamic> json) =>
       LAbTestDetailModel(
         success: json["success"] == null ? null : json["success"],
         status: json["status"] == null ? null : json["status"],
         message: json["message"] == null ? null : json["message"],
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        data: json["data"] == null
+            ? null
+            : LAbTestDetailData.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,8 +41,8 @@ class LAbTestDetailModel {
       };
 }
 
-class Data {
-  Data({
+class LAbTestDetailData {
+  LAbTestDetailData({
     this.id,
     this.title,
     this.image,
@@ -74,7 +76,8 @@ class Data {
   dynamic reviews;
   List<RecommendedProduct>? recommendedProduct;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory LAbTestDetailData.fromJson(Map<String, dynamic> json) =>
+      LAbTestDetailData(
         id: json["id"] == null ? null : json["id"],
         title: json["title"] == null ? null : json["title"],
         image: json["image"] == null ? null : json["image"],

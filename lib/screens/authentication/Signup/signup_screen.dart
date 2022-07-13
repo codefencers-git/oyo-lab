@@ -20,6 +20,7 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   enumForMF _radioMF = enumForMF.Male;
+  bool check = false;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -118,6 +119,78 @@ class _SignupScreenState extends State<SignupScreen> {
                             hintText: 'key_referral_code'.tr,
                             iconData: "assets/icons/referral-code-icon.png",
                             onIconTap: () {},
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  height: 15,
+                                  width: 15,
+                                  child: Transform.scale(
+                                    scale: 0.9,
+                                    child: Checkbox(
+                                      side: MaterialStateBorderSide.resolveWith(
+                                        (states) => BorderSide(
+                                            width: 1.0,
+                                            color: ThemeClass.orangeColor),
+                                      ),
+                                      materialTapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                      activeColor: ThemeClass.orangeColor,
+                                      value: check,
+                                      onChanged: (b) {
+                                        setState(
+                                          () {
+                                            check = !check;
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: DefaultTextStyle.of(context).style,
+                                      children: <TextSpan>[
+                                        const TextSpan(
+                                            text: 'Accept',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                        TextSpan(
+                                            text: 'Terms',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                color: ThemeClass.orangeColor)),
+                                        const TextSpan(
+                                            text: '& ',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                        TextSpan(
+                                            text: 'Condition',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                color: ThemeClass.orangeColor)),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                           _buildRegisterWidget(),
                           const SizedBox(height: 15),
