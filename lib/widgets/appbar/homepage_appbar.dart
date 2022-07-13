@@ -41,7 +41,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                     var result = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => GooglePlacePickerScreen()),
+                          builder: (context) => const GooglePlacePickerScreen()),
                     );
 
                     if (result != null) {
@@ -55,26 +55,24 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                     children: [
                       Text(
                         'key_delivered_to_appbar'.tr + " ",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: ThemeClass.whiteColor,
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          child: Text(
-                            _currentAddress + "asd asd asd asd asd asd",
-                            style: TextStyle(
-                              // overflow: TextOverflow.ellipsis,
-                              color: ThemeClass.whiteColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
+                        child: Text(
+                          _currentAddress,
+                          style: const TextStyle(
+                            // overflow: TextOverflow.ellipsis,
+                            color: ThemeClass.whiteColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                           width: 2, height: 25, child: Icon(Icons.expand_more)),
                     ],
                   ),

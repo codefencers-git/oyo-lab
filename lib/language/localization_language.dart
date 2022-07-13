@@ -166,6 +166,7 @@ class LanguageLocaleString extends Translations {
           'key_select_gender': '  Select Gender',
           'key_male': 'Male',
           'key_female': 'Female',
+          'key_referral_code':'Referral Code',
           //-------------------Upload image bottom sheet
           'key_choose_option': 'Choose Option',
           //global messages

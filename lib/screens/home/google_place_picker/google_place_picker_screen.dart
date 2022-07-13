@@ -2,9 +2,13 @@
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_place/google_place.dart';
+import 'package:oyo_labs/themedata.dart';
 
 class GooglePlacePickerScreen extends StatefulWidget {
+  const GooglePlacePickerScreen({Key? key}) : super(key: key);
+
   @override
   _GooglePlacePickerScreenState createState() =>
       _GooglePlacePickerScreenState();
@@ -24,6 +28,7 @@ class _GooglePlacePickerScreenState extends State<GooglePlacePickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.only(right: 20, left: 20, top: 20),
@@ -32,21 +37,42 @@ class _GooglePlacePickerScreenState extends State<GooglePlacePickerScreen> {
             children: <Widget>[
               TextField(
                 decoration: InputDecoration(
-                  labelText: "Search",
-                  hintText: "Type here...",
+                  filled: true,
+                  fillColor: ThemeClass.skyblueColor,
+                  border: InputBorder.none,
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.blue,
-                      width: 2.0,
+                      color: ThemeClass.orangeColor,
+                      width: 1.0,
                     ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                      width: 2.0,
-                    ),
+                  hintText: 'key_searchbar_label'.tr,
+                  hintStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w400),
+                  suffixIcon: SizedBox(
+                    child:
+                        Image.asset("assets/icons/icon_search.png", scale: 3),
                   ),
                 ),
+                // decoration: InputDecoration(
+                //   labelText: "Search",
+                //   hintText: "Type here...",
+                //   filled: true,
+                //   fillColor: ThemeClass.skyblueColor,
+                //   border: InputBorder.none,
+                //   focusedBorder: OutlineInputBorder(
+                //     borderSide: BorderSide(
+                //       color: Colors.blue,
+                //       width: 2.0,
+                //     ),
+                //   ),
+                //   enabledBorder: OutlineInputBorder(
+                //     borderSide: BorderSide(
+                //       color: Colors.black54,
+                //       width: 2.0,
+                //     ),
+                //   ),
+                // ),
                 onChanged: (value) {
                   if (value.isNotEmpty) {
                     autoCompleteSearch(value);

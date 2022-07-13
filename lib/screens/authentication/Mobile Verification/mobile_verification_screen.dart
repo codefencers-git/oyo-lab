@@ -83,11 +83,11 @@ class _MobileVerificationState extends State<MobileVerification> {
     super.dispose();
   }
 
-  var screenName = Get.arguments[0]['route'];
-  var phoneNumber = Get.arguments[1]['phoneNumber'];
+  // var screenName = Get.arguments[0]['route'];
+  // var phoneNumber = Get.arguments[1]['phoneNumber'];
   @override
   Widget build(BuildContext context) {
-    print(screenName);
+    
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -127,7 +127,7 @@ class _MobileVerificationState extends State<MobileVerification> {
                                 fontSize: 14, color: ThemeClass.greyColor1),
                             children: [
                               TextSpan(
-                                text: phoneNumber,
+                                text: Get.arguments[1]['phoneNumber'].toString(),
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: ThemeClass.orangeColor),
@@ -175,11 +175,11 @@ class _MobileVerificationState extends State<MobileVerification> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: RoundButton(
-                        buttonLabel: screenName == 'signupScreen'
+                        buttonLabel: Get.arguments[0]['route'].toString() == 'signupScreen'
                             ? 'key_login_btn'.tr
                             : 'key_submit_btn'.tr,
                         onTap: () {
-                          screenName == 'signupScreen'
+                          Get.arguments[0]['route'].toString() == 'signupScreen'
                               ? Get.offAllNamed(Routes.homeScreen)
                               : Get.toNamed(Routes.changePasswordScreen);
                         },
