@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_enum_class.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/validation_services.dart';
@@ -70,26 +71,13 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              width: width * 0.45,
-              height: height * 0.2,
-              child: Image.asset(
-                "assets/images/logo.png",
-                fit: BoxFit.fitWidth,
-              ),
-            ),
+            _buildLogoWidget(width, height),
             ContainerWithInnerShadow(
               width: width,
               height: height / 0.1,
               child: Column(
                 children: [
-                  Text(
-                    'key_register_title'.tr,
-                    style: TextStyle(
-                        color: ThemeClass.orangeColor,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700),
-                  ),
+                  _buildRegisterTitle(),
                   const SizedBox(height: 15),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -111,87 +99,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           const SizedBox(height: 10),
                           _buildDoBWidget(context),
                           const SizedBox(height: 15),
-                          TextFieldWithSuffixIcon(
-                            textController: _referralCodeController,
-                            isReadOnly: false,
-                            isObscureText: false,
-                            keyboardType: TextInputType.text,
-                            hintText: 'key_referral_code'.tr,
-                            iconData: "assets/icons/referral-code-icon.png",
-                            onIconTap: () {},
-                          ),
+                          _buildReferralCodeWidget(),
                           const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: Transform.scale(
-                                    scale: 0.9,
-                                    child: Checkbox(
-                                      side: MaterialStateBorderSide.resolveWith(
-                                        (states) => BorderSide(
-                                            width: 1.0,
-                                            color: ThemeClass.orangeColor),
-                                      ),
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                      activeColor: ThemeClass.orangeColor,
-                                      value: check,
-                                      onChanged: (b) {
-                                        setState(
-                                          () {
-                                            check = !check;
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: DefaultTextStyle.of(context).style,
-                                      children: <TextSpan>[
-                                        const TextSpan(
-                                            text: 'Accept',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                        TextSpan(
-                                            text: 'Terms',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: ThemeClass.orangeColor)),
-                                        const TextSpan(
-                                            text: '& ',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                        TextSpan(
-                                            text: 'Condition',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: ThemeClass.orangeColor)),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                          _buildTemsNconditionWidget(context),
                           _buildRegisterWidget(),
                           const SizedBox(height: 15),
                           _buildAlreadyExistWidget(),
@@ -205,6 +115,109 @@ class _SignupScreenState extends State<SignupScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Text _buildRegisterTitle() {
+    return Text(
+      'key_register_title'.tr,
+      style: TextStyle(
+          color: ThemeClass.orangeColor,
+          fontSize: 24,
+          fontWeight: FontWeight.w700),
+    );
+  }
+
+  Container _buildLogoWidget(double width, double height) {
+    return Container(
+      width: width * 0.45,
+      height: height * 0.2,
+      child: Image.asset(
+        "assets/images/logo.png",
+        fit: BoxFit.fitWidth,
+      ),
+    );
+  }
+
+  Padding _buildTemsNconditionWidget(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8.0,
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            height: 15,
+            width: 15,
+            child: Transform.scale(
+              scale: 0.9,
+              child: Checkbox(
+                side: MaterialStateBorderSide.resolveWith(
+                  (states) =>
+                      BorderSide(width: 1.0, color: ThemeClass.orangeColor),
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                activeColor: ThemeClass.orangeColor,
+                value: check,
+                onChanged: (b) {
+                  setState(() {
+                    check = !check;
+                  });
+                },
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: RichText(
+              text: TextSpan(
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  const TextSpan(
+                      text: 'Accept ',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      )),
+                  TextSpan(
+                      text: 'Terms ',
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: ThemeClass.orangeColor)),
+                  const TextSpan(
+                      text: '& ',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      )),
+                  TextSpan(
+                      text: 'Condition',
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: ThemeClass.orangeColor)),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  TextFieldWithSuffixIcon _buildReferralCodeWidget() {
+    return TextFieldWithSuffixIcon(
+      textController: _referralCodeController,
+      isReadOnly: false,
+      isObscureText: false,
+      keyboardType: TextInputType.text,
+      hintText: 'key_referral_code'.tr,
+      iconData: "assets/icons/referral-code-icon.png",
+      onIconTap: () {},
     );
   }
 
@@ -227,17 +240,20 @@ class _SignupScreenState extends State<SignupScreen> {
         buttonLabel: 'key_register'.tr,
         onTap: () {
           if (_formKey.currentState!.validate()) {
-            var mapData = <String, dynamic>{};
+            if (check == false) {
+              showToast('key_accept_terms_msg'.tr);
+              var mapData = <String, dynamic>{};
 
-            mapData['name'] = _nameController.text.trim();
-            mapData['email'] = _emailController.text.trim();
-            mapData['country_code'] = "+91";
-            mapData['phone_number'] = _phoneNumberController.text.trim();
-            mapData['password'] = _passwordController.text.trim();
-            mapData['gender'] = _radioMF.name.trim();
-            mapData['dob'] = _dobController.text.trim();
+              mapData['name'] = _nameController.text.trim();
+              mapData['email'] = _emailController.text.trim();
+              mapData['country_code'] = "+91";
+              mapData['phone_number'] = _phoneNumberController.text.trim();
+              mapData['password'] = _passwordController.text.trim();
+              mapData['gender'] = _radioMF.name.trim();
+              mapData['dob'] = _dobController.text.trim();
 
-            signUpController.signupServices(mapData);
+              signUpController.signupServices(mapData);
+            }
           }
         },
         fontSize: 16,

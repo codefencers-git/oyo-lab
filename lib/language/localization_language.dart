@@ -150,7 +150,7 @@ class LanguageLocaleString extends Translations {
           'key_code_sent_on_mobile':
               'A 6 digit code has been sent on your mobile number ',
           'key_enter_code_here': 'Enter the verification code here',
-          'key_didnt_get_code': 'Didn\'t get the code?',
+          'key_didnt_get_code': 'Didn\'t get the code? ',
           'key_resend_in': 'Resend in 00: ',
           'key_submit_btn': 'Submit',
           //-------------------Change Password
@@ -166,7 +166,8 @@ class LanguageLocaleString extends Translations {
           'key_select_gender': '  Select Gender',
           'key_male': 'Male',
           'key_female': 'Female',
-          'key_referral_code':'Referral Code',
+          'key_referral_code': 'Referral Code',
+          'key_accept_terms_msg': 'Please accept terms and conditions.',
           //-------------------Upload image bottom sheet
           'key_choose_option': 'Choose Option',
           //global messages
@@ -185,8 +186,8 @@ class LanguageLocaleString extends Translations {
           'key_OTP_send_successfully': 'OTP send successfully',
           'key_paymet_success_msg': 'Payment successfully',
           'key_paymet_fail_msg': 'Payment faild try again',
-          'key_internal_server_error':'Internal Server Error',
-          'key_valid_phone_number_msg':'Please enter valid phone number',
+          'key_internal_server_error': 'Internal Server Error',
+          'key_valid_phone_number_msg': 'Please enter valid phone number',
           'key_valid_otp_msg': 'Please enter vaild OTP',
           'key_valid_email_msg': 'Please enter vaild Email',
         },
