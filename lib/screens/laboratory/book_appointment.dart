@@ -4,14 +4,17 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:intl/intl.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/member_selection_bottomsheet.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 
 import '../../widgets/buttons/round_button.dart';
 
 class BookAppointment extends StatefulWidget {
+  final String type;
   const BookAppointment({
     Key? key,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -114,7 +117,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                 const SizedBox(
                   height: 15,
                 ),
-                _priscripion(width),
+                widget.type != "Reschedule" ? _priscripion(width) : SizedBox(),
                 SizedBox(
                   height: 10,
                 ),
@@ -197,7 +200,15 @@ class _BookAppointmentState extends State<BookAppointment> {
         height: 45,
         child: RoundButton(
           onTap: () {
-            Get.toNamed(Routes.bookingSuccessScreen);
+            showModalBottomSheet<void>(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (BuildContext context) {
+                return const MemberSelectionBottomSheet();
+              },
+            );
+            // Get.toNamed(Routes.bookingSuccessScreen);
           },
           buttonLabel: 'key_book_appointment_btn'.tr,
         ),

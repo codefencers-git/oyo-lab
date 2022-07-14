@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/reschedule_bottomsheet.dart';
 
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
+
+import '../../../routes.dart';
 
 class LabtestDetail extends StatefulWidget {
   const LabtestDetail({Key? key}) : super(key: key);
@@ -51,26 +54,13 @@ class _LabtestDetailState extends State<LabtestDetail> {
         ],
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.all(16),
-        height: 50,
-        child: Row(
-          children: [
-            Expanded(
-                child: RoundButton(
-                    buttonLabel: 'key_cancel_btn'.tr,
-                    color: ThemeClass.whiteColor,
-                    fontcolor: ThemeClass.orangeColor,
-                    fontSize: 16,
-                    fontFamily: "poppins",
-                    onTap: () {})),
-            const SizedBox(width: 10),
-            Expanded(
-                child: RoundButton(
-                    buttonLabel: 'key_reschedule'.tr,
-                    fontSize: 16,
-                    fontFamily: "poppins",
-                    onTap: () {})),
-          ],
+        margin: const EdgeInsets.all(16),
+        height: 45,
+        child: RoundButton(
+          onTap: () {
+            Get.toNamed(Routes.bookingSuccessScreen);
+          },
+          buttonLabel: 'Confirm'.tr,
         ),
       ),
     );
@@ -304,43 +294,45 @@ class _LabtestDetailState extends State<LabtestDetail> {
             children: [
               SizedBox(
                 height: 20,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: ThemeClass.orangeColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
-                  onPressed: () {},
-                  child: Text(
-                    'key_pending'.tr,
-                    style: const TextStyle(
-                        fontSize: 8,
-                        color: ThemeClass.whiteColor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
+                // child: ElevatedButton(
+                //   style: ElevatedButton.styleFrom(
+                //     primary: ThemeClass.orangeColor,
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(25),
+                //     ),
+                //   ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
+                //   onPressed: () {},
+                //   child: Text(
+                //     'key_pending'.tr,
+                //     style: const TextStyle(
+                //         fontSize: 8,
+                //         color: ThemeClass.whiteColor,
+                //         fontWeight: FontWeight.w500),
+                //   ),
+                // ),
               ),
               Column(
                 children: [
                   SizedBox(
                     height: 20,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: ThemeClass.orangeColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
-                      onPressed: () {},
-                      child: Text(
-                        'key_submit_review'.tr,
-                        style: const TextStyle(
-                            fontSize: 8,
-                            color: ThemeClass.whiteColor,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
+                    // child: ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //     primary: ThemeClass.orangeColor,
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(25),
+                    //     ),
+                    //   ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
+                    //   onPressed: () {
+                    //     Get.toNamed(Routes.ratingScreen);
+                    //   },
+                    //   child: Text(
+                    //     'key_submit_review'.tr,
+                    //     style: const TextStyle(
+                    //         fontSize: 8,
+                    //         color: ThemeClass.whiteColor,
+                    //         fontWeight: FontWeight.w500),
+                    //   ),
+                    // ),
                   ),
                 ],
               )

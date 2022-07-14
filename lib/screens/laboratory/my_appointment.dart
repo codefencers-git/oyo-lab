@@ -171,7 +171,7 @@ class _MyAppointmentState extends State<MyAppointment>
               ),
             ),
             onTap: () {
-              Get.toNamed(Routes.myUpCommingAppoinmentScreen);
+              Get.toNamed(Routes.drawerLabTestScreen);
             },
           );
         },

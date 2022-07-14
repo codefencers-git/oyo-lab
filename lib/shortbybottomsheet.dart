@@ -19,7 +19,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
     screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      height: 300,
+      height: 290,
       color: ThemeClass.whiteColor,
       child: Column(
         children: [
@@ -49,46 +49,98 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
           Column(
             children: <Widget>[
               ListTile(
-                title: const Text("Average customer rating"),
-                leading: Radio(
-                    value: "rating",
-                    fillColor: MaterialStateColor.resolveWith(
-                        (states) => ThemeClass.orangeColor),
-                    groupValue: short,
-                    onChanged: (value) {
-                      setState(() {
-                        short = value.toString();
-                      });
-                    }),
+                dense: true,
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                contentPadding: EdgeInsets.zero,
+                minVerticalPadding: 0,
+                title: Row(
+                  children: [
+                    Radio(
+                        value: "rating",
+                        fillColor: MaterialStateColor.resolveWith(
+                            (states) => ThemeClass.orangeColor),
+                        groupValue: short,
+                        onChanged: (value) {
+                          setState(() {
+                            short = value.toString();
+                          });
+                        }),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Average customer rating",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: ThemeClass.blackColor),
+                    ),
+                  ],
+                ),
               ),
               ListTile(
-                title: const Text("Price : low to high"),
-                leading: Radio(
-                    value: "low",
-                    fillColor: MaterialStateColor.resolveWith(
-                        (states) => ThemeClass.orangeColor),
-                    groupValue: short,
-                    onChanged: (value) {
-                      setState(() {
-                        short = value.toString();
-                      });
-                    }),
+                dense: true,
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                contentPadding: EdgeInsets.zero,
+                minVerticalPadding: 0,
+                title: Row(
+                  children: [
+                    Radio(
+                        value: "low",
+                        fillColor: MaterialStateColor.resolveWith(
+                            (states) => ThemeClass.orangeColor),
+                        groupValue: short,
+                        onChanged: (value) {
+                          setState(() {
+                            short = value.toString();
+                          });
+                        }),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Price : low to high",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: ThemeClass.blackColor),
+                    ),
+                  ],
+                ),
               ),
               ListTile(
-                title: const Text("Price : high to low"),
-                leading: Radio(
-                    value: "high",
-                    fillColor: MaterialStateColor.resolveWith(
-                        (states) => ThemeClass.orangeColor),
-                    groupValue: short,
-                    onChanged: (value) {
-                      setState(() {
-                        short = value.toString();
-                      });
-                    }),
+                dense: true,
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                contentPadding: EdgeInsets.zero,
+                minVerticalPadding: 0,
+                title: Row(
+                  children: [
+                    Radio(
+                        value: "high",
+                        fillColor: MaterialStateColor.resolveWith(
+                            (states) => ThemeClass.orangeColor),
+                        groupValue: short,
+                        onChanged: (value) {
+                          setState(() {
+                            short = value.toString();
+                          });
+                        }),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Price : high to low",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: ThemeClass.blackColor),
+                    ),
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: RoundButton(
                   buttonLabel: 'Apply',
                   onTap: () {

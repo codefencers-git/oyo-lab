@@ -10,9 +10,11 @@ import 'package:oyo_labs/screens/Drawer/Member/members.dart';
 import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/authentication/Signup/signup_screen.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_tests.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/rating_screen.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
-import 'package:oyo_labs/screens/laboratory/lab_test_detail.dart';
+import 'package:oyo_labs/screens/laboratory/lab_test_drawer_detail.dart';
 import 'package:oyo_labs/screens/laboratory/product_detail.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment.dart';
 import 'screens/ContactUs/contact_us.dart';
@@ -64,6 +66,8 @@ class Routes {
   static const String walletScreen = '/walletScreen';
   static const String settingScreen = '/settingScreen';
   static const String myProfileScreen = '/myProfileScreen';
+  static const String ratingScreen = '/ratingScreen';
+  static const String drawerLabTestScreen = '/drawerLabTestScreen';
 
   static List<GetPage> gobalRoutes = [
     GetPage(name: splashRoute, page: () => const SplashScreen()),
@@ -85,7 +89,11 @@ class Routes {
         name: myUpCommingAppoinmentScreen, page: () => const LabtestDetail()),
     GetPage(name: myAppointmentComplete, page: () => const LabTestComplete()),
     GetPage(name: checkAppointment, page: () => const MyAppointment()),
-    GetPage(name: labDetailScreen, page: () => const BookAppointment()),
+    GetPage(
+        name: labDetailScreen,
+        page: () => const BookAppointment(
+              type: "",
+            )),
     // GetPage(name: labTileScreen, page: () => const LaboratoryDetail()),
     GetPage(name: allLabTests, page: () => const AllLabTests()),
     GetPage(name: addMemberScreen, page: () => const AddNewMember()),
@@ -100,5 +108,11 @@ class Routes {
     GetPage(name: walletScreen, page: () => const WalletScreen()),
     GetPage(name: settingScreen, page: () => const SettingScreen()),
     GetPage(name: myProfileScreen, page: () => const MyProfileScreen()),
+    GetPage(
+        name: ratingScreen,
+        page: () => RatingScreen(
+              id: '',
+            )),
+    GetPage(name: drawerLabTestScreen, page: () => const DrawerLabTestScreen()),
   ];
 }
