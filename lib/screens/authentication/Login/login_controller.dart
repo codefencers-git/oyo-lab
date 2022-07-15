@@ -4,6 +4,7 @@ import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/authentication/Login/user_model.dart';
+import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
 import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
@@ -11,13 +12,13 @@ class LoginController extends GetxController {
   var userPrefController = Get.put(UserPrefService());
 
   RxBool isError = false.obs;
-  var errorMessage = "".obs;
-  var isloading = false.obs;
-  var islogin = false.obs;
+  RxString  errorMessage = "".obs;
+  RxBool isloading = false.obs;
+  RxBool islogin = false.obs;
 
   loginServices(dynamic mapData) async {
     try {
-      var url = 'login';
+      String url = 'login';
       var response = await HttpServices.httpPostWithoutToken(url, mapData);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -41,6 +42,11 @@ class LoginController extends GetxController {
           showToast(jasonData['message']);
         } else if (jasonData['success'].toString() == "0" &&
             jasonData['status'].toString() == "202") {
+          Get.to(
+            MobileVerification(
+                fromScreen: "login",
+                userNameorPhoneNumber: mapData['username'].toString()),
+          );
           showToast(jasonData['message']);
         } else {
           isError(true);

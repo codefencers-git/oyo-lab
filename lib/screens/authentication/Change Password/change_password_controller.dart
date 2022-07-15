@@ -8,12 +8,12 @@ import 'package:oyo_labs/services/http_services.dart';
 
 class ChangePasswordController extends GetxController {
   RxBool isError = false.obs;
-  var errorMessage = "".obs;
-  var isloading = false.obs;
+  RxString  errorMessage = "".obs;
+  RxBool isloading = false.obs;
 
   changePasswordService(dynamic mapData) async {
     try {
-      var url = 'reset-password';
+      String url = 'reset-password';
 
       var response = await HttpServices.httpPostWithoutToken(url, mapData);
       if (response.statusCode == 200 || response.statusCode == 201) {
