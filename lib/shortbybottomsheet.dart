@@ -193,7 +193,7 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'key_filters'.tr,
+                      'Filters'.tr,
                       style: const TextStyle(
                           fontSize: 14, fontWeight: FontWeight.w500),
                     ),
@@ -216,48 +216,50 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
               ),
               Expanded(
                 child: Container(
+                  //margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: 110,
-                        // child: ListView.builder(
-                        //     shrinkWrap: true,
-                        //     itemCount: 3,
-                        //     itemBuilder: (BuildContext context, int index) {
-                        //       return InkWell(
-                        //         onTap: () {
-                        //           setState(() {
-                        //             isSelected = index;
-                        //           });
-                        //         },
-                        //         child: Container(
-                        //           decoration: BoxDecoration(
-                        //               border: Border(
-                        //             right: BorderSide(
-                        //               color: isSelected == index
-                        //                   ? ThemeClass.orangeColor
-                        //                   : ThemeClass.whiteColor,
-                        //               width: 2.0,
-                        //             ),
-                        //           )),
-                        //           child: const ListTile(
-                        //             visualDensity: VisualDensity(
-                        //                 horizontal: -4, vertical: -4),
-                        //             dense: true,
-                        //             //contentPadding: EdgeInsets.zero,
-                        //             title: Text(
-                        //               "Category 01",
-                        //               style: TextStyle(
-                        //                   fontSize: 12,
-                        //                   fontWeight: FontWeight.w500),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       );
-                        //     }),
-                      ),
+                          // width: 110,
+                          // child: ListView.builder(
+                          //     shrinkWrap: true,
+                          //     itemCount: 3,
+                          //     itemBuilder: (BuildContext context, int index) {
+                          //       return InkWell(
+                          //         onTap: () {
+                          //           setState(() {
+                          //             isSelected = index;
+                          //           });
+                          //         },
+                          //         child: Container(
+                          //           decoration: BoxDecoration(
+                          //               border: Border(
+                          //             right: BorderSide(
+                          //               color: isSelected == index
+                          //                   ? ThemeClass.orangeColor
+                          //                   : ThemeClass.whiteColor,
+                          //               width: 2.0,
+                          //             ),
+                          //           )),
+                          //           child: const ListTile(
+                          //             visualDensity: VisualDensity(
+                          //                 horizontal: -4, vertical: -4),
+                          //             dense: true,
+                          //             //contentPadding: EdgeInsets.zero,
+                          //             title: Text(
+                          //               "Category 01",
+                          //               style: TextStyle(
+                          //                   fontSize: 12,
+                          //                   fontWeight: FontWeight.w500),
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       );
+                          //     }),
+                          ),
 
                       // Padding(
                       //   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -273,64 +275,60 @@ class _CategoryFilterBottomSheetState extends State<CategoryFilterBottomSheet> {
                       //   color: ThemeClass.greyColor2,
                       // ),
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 35,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    border: Border.all(
-                                        color: ThemeClass.greyColor2)),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                      suffixIcon: SizedBox(
-                                        child: Image.asset(
-                                          'assets/icons/icon_search.png',
-                                          scale: 2.8,
-                                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 35,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  border:
+                                      Border.all(color: ThemeClass.greyColor2)),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    suffixIcon: SizedBox(
+                                      child: Image.asset(
+                                        'assets/icons/icon_search.png',
+                                        scale: 2.8,
                                       ),
-                                      // contentPadding: EdgeInsets.only(top: 14),
-                                      border: InputBorder.none,
-                                      // isCollapsed: true,
-                                      hintText: 'Select Catagory',
-                                      focusedBorder: InputBorder.none,
-                                      focusedErrorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none),
-                                ),
+                                    ),
+                                    // contentPadding: EdgeInsets.only(top: 14),
+                                    border: InputBorder.none,
+                                    // isCollapsed: true,
+                                    hintText: 'Select Catagory',
+                                    focusedBorder: InputBorder.none,
+                                    focusedErrorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none),
                               ),
-                              Expanded(
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: 5,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return const ListTile(
-                                        visualDensity: VisualDensity(
-                                            horizontal: -4, vertical: -4),
-                                        dense: true,
-                                        contentPadding: EdgeInsets.zero,
-                                        leading: const Icon(
-                                            Icons.check_box_outline_blank),
-                                        title: Text(
-                                          "ABO Group & RH Type",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      );
-                                    }),
-                              )
-                            ],
-                          ),
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: 5,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return const ListTile(
+                                      visualDensity: VisualDensity(
+                                          horizontal: -1, vertical: -3),
+                                      dense: true,
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: const Icon(
+                                          Icons.check_box_outline_blank),
+                                      title: Text(
+                                        "ABO Group & RH Type",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    );
+                                  }),
+                            )
+                          ],
                         ),
                       )
                     ],
                   ),
-                  margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 ),
               ),
             ],

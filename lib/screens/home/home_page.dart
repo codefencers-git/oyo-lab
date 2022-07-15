@@ -323,13 +323,15 @@ class _HomePageState extends State<HomePage> {
         ),
       ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
       onPressed: () {
-        showModalBottomSheet<void>(
-          context: context,
-          backgroundColor: Colors.transparent,
-          builder: (BuildContext context) {
-            return const SelectImageBottomSheet();
-          },
-        );
+        // showModalBottomSheet<void>(
+        //   context: context,
+        //   backgroundColor: Colors.transparent,
+        //   builder: (BuildContext context) {
+        //     return const SelectImageBottomSheet();
+        //   },
+        // );
+
+        dashboardController.showdialog();
       },
       child: Text(
         'key_upload_btn_label'.tr,

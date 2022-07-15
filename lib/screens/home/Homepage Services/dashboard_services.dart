@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
@@ -9,6 +10,19 @@ class DashboardController extends GetxController {
   RxBool isError = false.obs;
   RxString errorMessage = "".obs;
   RxBool isloading = false.obs;
+
+  showdialog() {
+    Get.dialog(
+      Center(
+        child: Container(
+          height: 100,
+          width: 100,
+          color: Colors.white,
+          child: Text("code here"),
+        ),
+      ),
+    );
+  }
 
   Future<void> getDashboardData() async {
     isloading(true);
