@@ -1,19 +1,21 @@
-import 'package:get/get.dart';
 import 'dart:convert';
+
+import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
+import 'package:oyo_labs/services/product_category/product_category_model.dart';
 
-class ChangePasswordController extends GetxController {
+class ProductCategoryController extends GetxController {
+  RxList<ProductCategoryData> categoryData = <ProductCategoryData>[].obs;
   RxBool isError = false.obs;
   RxString errorMessage = "".obs;
   RxBool isloading = false.obs;
 
-  changePasswordService(dynamic mapData) async {
+  getProductCategory(dynamic mapData) async {
     try {
-      String url = 'reset-password';
+      String url = 'categories';
 
       var response = await HttpServices.httpPostWithoutToken(url, mapData);
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -21,9 +23,8 @@ class ChangePasswordController extends GetxController {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message']);
-
-          Get.offAllNamed(Routes.loginScreen);
-
+          var dashboardData1 = ProductCategoryModel.fromJson(jasonData);
+          categoryData(dashboardData1.data);
           isError(false);
           errorMessage("");
         } else if (jasonData['success'].toString() == "0" &&
