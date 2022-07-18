@@ -1,11 +1,6 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable
-
-import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/global/flutter_toast.dart';
-import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -21,7 +16,8 @@ class ForgotPassword extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  var forgotPasswordController = Get.put(ForgotPasswordController());
+  ForgotPasswordController forgotPasswordController =
+      Get.put(ForgotPasswordController());
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -77,6 +73,7 @@ class ForgotPassword extends StatelessWidget {
           if (_formKey.currentState!.validate()) {
             var mapData = <String, dynamic>{};
             mapData['username'] = _phoneNumberController.text;
+
             forgotPasswordController.forgotPasswordService(mapData);
           }
         },
@@ -134,26 +131,5 @@ class ForgotPassword extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  bool isLoading = false;
-  _sendOTP() {
-    isLoading = true;
-    try {
-      var mapData = Map<String, dynamic>();
-
-      mapData['phone_number'] = _phoneNumberController.text.trim();
-      var url = 'recover-password';
-    } catch (e) {
-      if (e is SocketException) {
-        showToast(GlobalMessages.socketExceptionMessage);
-      } else if (e is TimeoutException) {
-        showToast(GlobalMessages.timeoutExceptionMessage);
-      } else {
-        showToast(e.toString());
-      }
-    } finally {
-      isLoading = false;
-    }
   }
 }

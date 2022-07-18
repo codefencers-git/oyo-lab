@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/screens/home/google_place_picker/google_place_picker_screen.dart';
 import 'package:oyo_labs/themedata.dart';
-
+import 'package:oyo_labs/screens/authentication/Login/login_controller.dart';
 import '../../routes.dart';
 
 class HomePageAppBar extends StatefulWidget {
@@ -18,6 +18,7 @@ class HomePageAppBar extends StatefulWidget {
 
 class _HomePageAppBarState extends State<HomePageAppBar> {
   var _currentAddress = "350001 Ahmedabad";
+  final LoginController _loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -41,7 +42,8 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                     var result = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const GooglePlacePickerScreen()),
+                          builder: (context) =>
+                              const GooglePlacePickerScreen()),
                     );
 
                     if (result != null) {
@@ -72,8 +74,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                          width: 2, height: 25, child: Icon(Icons.expand_more)),
+                      const SizedBox(width: 30, child: Icon(Icons.expand_more)),
                     ],
                   ),
                 )
@@ -89,7 +90,9 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                   Get.toNamed(Routes.loginScreen);
                 },
                 child: Text(
-                  'key_login_appbar'.tr,
+                  _loginController.islogin.value == true
+                      ? ""
+                      : 'key_login_appbar'.tr,
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,

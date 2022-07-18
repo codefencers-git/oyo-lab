@@ -8,6 +8,7 @@ import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/authentication/Login/user_model.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import '../../../services/SharedPrefServices/shared_pref_services.dart';
+import '../Change Password/change_password_screen.dart';
 
 class MobileVerificationController extends GetxController {
   var isError = false.obs;
@@ -21,7 +22,7 @@ class MobileVerificationController extends GetxController {
       var mapData = <String, dynamic>{};
       mapData['otp'] = otp;
       mapData['country_code'] = "+91";
-      mapData['phone_number'] = phoneNumber;
+      mapData['username'] = phoneNumber;
 
       var url = 'activeAccount';
 
@@ -31,11 +32,10 @@ class MobileVerificationController extends GetxController {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message']);
-          Get.toNamed(Routes.mobileVerificationScreen, arguments: [
-            {'route': 'signupScreen'},
-            {'phoneNumber': mapData['phone_number'].toString()}
-          ]);
+
           UserModel userData = UserModel.fromJson(jasonData);
+
+          Get.offAllNamed(Routes.homeScreen);
 
           userPrefController.setUserData(userModel: userData);
           userPrefController.setToken(userData.data!.token);
@@ -70,9 +70,9 @@ class MobileVerificationController extends GetxController {
       var mapData = <String, dynamic>{};
       mapData['otp'] = otp;
       mapData['country_code'] = "+91";
-      mapData['phone_number'] = phoneNumber;
+      mapData['username'] = phoneNumber;
 
-      var url = 'reset-password';
+      var url = 'verifyOTP';
 
       var response = await HttpServices.httpPostWithoutToken(url, mapData);
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -80,12 +80,14 @@ class MobileVerificationController extends GetxController {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message']);
-          Get.offAllNamed(Routes.changePasswordScreen, arguments: [
-            {
-              'userName': mapData['phone_number'],
-              'otp': otp,
-            }
-          ]);
+          Get.to(ChangePasswordScreen(
+              otp: otp, usernameOrPhoneNumber: mapData['username']));
+          // Get.offAllNamed(Routes.changePasswordScreen, arguments: [
+          //   {
+          //     'userName': mapData['phone_number'],
+          //     'otp': otp,
+          //   }
+          // ]);
 
           isError(false);
           errorMessage("");

@@ -3,11 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
+import 'package:oyo_labs/screens/laboratory/product_detail.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_book_slot.dart';
 
 class AllLabsGridTileWidget extends StatelessWidget {
-  AllLabsGridTileWidget({Key? key, this.labTestData}) : super(key: key);
+  AllLabsGridTileWidget({Key? key, required this.labTestData})
+      : super(key: key);
   var labTestData;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class AllLabsGridTileWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Image.network(
-                  labTestData!.image.toString(),
+                  labTestData.image.toString(),
                   width: width / 2.1,
                   // height: height / 3,
                   fit: BoxFit.contain,
@@ -53,7 +56,7 @@ class AllLabsGridTileWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8.0, top: 5),
               child: Text(
-                labTestData!.title.toString(),
+                labTestData.title.toString(),
                 style: const TextStyle(fontSize: 10),
               ),
             ),
@@ -76,7 +79,9 @@ class AllLabsGridTileWidget extends StatelessWidget {
               padding: const EdgeInsets.only(top: 5, bottom: 10),
               child: RoundButtonBookSlot(
                 onTap: () {
-                  Get.toNamed(Routes.labTileScreen);
+                  Get.to(LaboratoryDetail(
+                    id: labTestData.id.toString(),
+                  ));
                   print("object");
                 },
                 label: 'Book a Slot',

@@ -27,6 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _navigateTo() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    debugPrint("---firebase token ---->" + token.toString());
     try {
       bool? isOnboard = await OnBoadingPrefService.getOnBoaring();
       if (isOnboard == null) {
@@ -36,10 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
               builder: (BuildContext context) => OnboardingScreen()),
           ModalRoute.withName(Routes.onboardingScreen),
         );
-        String? token = await FirebaseMessaging.instance.getToken();
-        debugPrint("--" + token.toString());
       } else if (!isOnboard) {
-        
         Get.toNamed(Routes.homeScreen);
       } else {
         Navigator.pushAndRemoveUntil<void>(

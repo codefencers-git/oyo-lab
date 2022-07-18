@@ -6,14 +6,11 @@ import 'package:oyo_labs/screens/Drawer/Profile/my_profile.dart';
 import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_detail.dart';
 import 'package:oyo_labs/screens/Drawer/Member/members.dart';
-
-import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/authentication/Signup/signup_screen.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_tests.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_detail.dart';
-import 'package:oyo_labs/screens/laboratory/laboratory_detail.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment.dart';
 import 'screens/ContactUs/contact_us.dart';
 import 'screens/Drawer/ManageAddress/add_address.dart';
@@ -23,7 +20,6 @@ import 'screens/Drawer/Refer and Earn/refer_and_earn.dart';
 import 'screens/Drawer/Settings/setting.dart';
 import 'screens/Drawer/Wallet/wallet_screen.dart';
 import 'screens/authentication/Forgot Password/forgot_password_screen.dart';
-import 'screens/authentication/Change Password/change_password_screen.dart';
 import 'screens/authentication/Login/login.dart';
 import 'screens/home/home_page.dart';
 import 'screens/laboratory/book_appointment.dart';
@@ -50,7 +46,7 @@ class Routes {
   static const String myAppointmentComplete = '/myAppointmentCompete';
   static const String checkAppointment = '/checkAppointment';
   static const String labDetailScreen = '/labDetailScreen';
-  static const String labTileScreen = '/labTileScreen';
+  // static const String labTileScreen = '/labTileScreen';
   static const String allLabTests = '/allLabTests';
   static const String addMemberScreen = '/memberScreen';
   static const String myPrescritionSreen = '/myPrescription';
@@ -71,10 +67,10 @@ class Routes {
     GetPage(name: loginScreen, page: () => const LoginScreen()),
     GetPage(name: forgotPasswordScreen, page: () => ForgotPassword()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
-    GetPage(name: mobileVerificationScreen, page: () => MobileVerification()),
+    // GetPage(name: mobileVerificationScreen, page: () => MobileVerification()),
     GetPage(name: homeScreen, page: () => const HomePage()),
-    GetPage(
-        name: changePasswordScreen, page: () => const ChangePasswordScreen()),
+    // GetPage(
+    //     name: changePasswordScreen, page: () =>  ChangePasswordScreen()),
     GetPage(
         name: notificationSettingScreen,
         page: () => const NotificationSetting()),
@@ -86,7 +82,7 @@ class Routes {
     GetPage(name: myAppointmentComplete, page: () => const LabTestComplete()),
     GetPage(name: checkAppointment, page: () => const MyAppointment()),
     GetPage(name: labDetailScreen, page: () => const BookAppointment()),
-    GetPage(name: labTileScreen, page: () => const LaboratoryDetail()),
+    // GetPage(name: labTileScreen, page: () => const LaboratoryDetail()),
     GetPage(name: allLabTests, page: () => const AllLabTests()),
     GetPage(name: addMemberScreen, page: () => const AddNewMember()),
     GetPage(name: myPrescritionSreen, page: () => const MyPrescription()),

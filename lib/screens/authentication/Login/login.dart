@@ -44,64 +44,60 @@ class _LoginScreenState extends State<LoginScreen> {
     validation = Validation();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        body: SingleChildScrollView(
-          child: SizedBox(
-            height: height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  height: height * 0.33,
-                  width: width * 0.62,
-                  child: Image.asset(
-                    "assets/images/logo.png",
-                    fit: BoxFit.fitWidth,
-                  ),
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: height * 0.20,
+                width: width * 0.62,
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  fit: BoxFit.fitWidth,
                 ),
-                ContainerWithInnerShadow(
-                    width: width,
-                    height: height * 0.67,
-                    child: Column(
-                      children: [
-                        Text(
-                          'key_login_title'.tr,
-                          style: TextStyle(
-                              color: ThemeClass.orangeColor,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(height: 25),
-                        Padding(
-                          padding: const EdgeInsets.all(25.0),
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                _buildEmailField(),
-                                const SizedBox(height: 20),
-                                _buildPasswordField(),
-                                const SizedBox(height: 10),
-                                _buildForgotPassword(),
-                                SizedBox(
-                                  height: height / 8,
-                                ),
-                                _buildLoginButton(),
-                                const SizedBox(height: 20),
-                                _buildKeyNewHere()
-                              ],
-                            ),
+              ),
+              ContainerWithInnerShadow(
+                  width: width,
+                  height: height * 0.67,
+                  child: Column(
+                    children: [
+                      Text(
+                        'key_login_title'.tr,
+                        style: TextStyle(
+                            color: ThemeClass.orangeColor,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      const SizedBox(height: 25),
+                      Padding(
+                        padding: const EdgeInsets.all(25.0),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              _buildEmailField(),
+                              const SizedBox(height: 20),
+                              _buildPasswordField(),
+                              const SizedBox(height: 10),
+                              _buildForgotPassword(),
+                              SizedBox(
+                                height: height / 8,
+                              ),
+                              _buildLoginButton(),
+                              const SizedBox(height: 20),
+                              _buildKeyNewHere()
+                            ],
                           ),
                         ),
-                      ],
-                    ))
-              ],
-            ),
+                      ),
+                    ],
+                  ))
+            ],
           ),
         ),
       ),

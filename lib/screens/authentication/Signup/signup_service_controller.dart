@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
 class SignupController extends GetxController {
@@ -20,10 +21,13 @@ class SignupController extends GetxController {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message']);
-          Get.toNamed(Routes.mobileVerificationScreen, arguments: [
-            {'route': 'signupScreen'},
-            {'phoneNumber': mapData['phone_number'].toString()}
-          ]);
+          Get.to(MobileVerification(
+              fromScreen: 'signUp',
+              userNameorPhoneNumber: mapData['phone_number'].toString()));
+          // Get.toNamed(Routes.mobileVerificationScreen, arguments: [
+          //   {'route': 'signupScreen'},
+          //   {'phoneNumber': mapData['phone_number'].toString()}
+          // ]);
           print(mapData['phone_number'].toString());
           isError(false);
           errorMessage("");

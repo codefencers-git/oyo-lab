@@ -2,18 +2,18 @@ import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
+import '../Mobile Verification/mobile_verification_screen.dart';
 
 class ForgotPasswordController extends GetxController {
   RxBool isError = false.obs;
-  var errorMessage = "".obs;
-  var isloading = false.obs;
+  RxString errorMessage = "".obs;
+  RxBool isloading = false.obs;
 
   forgotPasswordService(dynamic mapData) async {
     try {
-      var url = 'recover-password';
+      String url = 'recover-password';
 
       var response = await HttpServices.httpPostWithoutToken(url, mapData);
 
@@ -22,11 +22,15 @@ class ForgotPasswordController extends GetxController {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message']);
-          print("-----------------" + jasonData['message']);
-          Get.toNamed(Routes.mobileVerificationScreen, arguments: [
-            {'route': 'forgotPasswordScreen'},
-            {'phoneNumber': mapData['username'].toString()}
-          ]);
+
+          Get.to(MobileVerification(
+              fromScreen: 'forgotPasswordScreen',
+              userNameorPhoneNumber: mapData['username'].toString()));
+         
+          // Get.toNamed(Routes.mobileVerificationScreen, arguments: [
+          //   {'route': 'forgotPasswordScreen'},
+          //   {'phoneNumber': mapData['username'].toString()}
+          // ]);
 
           isError(false);
           errorMessage("");

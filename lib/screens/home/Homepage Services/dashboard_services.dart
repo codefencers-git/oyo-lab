@@ -5,16 +5,16 @@ import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
 class DashboardController extends GetxController {
-  var dashboardData = DashboardData().obs;
+  Rx<DashboardData> dashboardData = DashboardData().obs;
   RxBool isError = false.obs;
-  var errorMessage = "".obs;
-  var isloading = false.obs;
+  RxString errorMessage = "".obs;
+  RxBool isloading = false.obs;
 
-  getDashboardData() async {
+  Future<void> getDashboardData() async {
     isloading(true);
     try {
       var url = 'get_dashboard_data';
-      var response  = await HttpServices.httpGetWithoutToken(url);
+      var response = await HttpServices.httpGetWithoutToken(url);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jasonData = json.decode(response.body);

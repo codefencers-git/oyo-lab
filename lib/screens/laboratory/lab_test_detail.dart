@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -15,65 +16,61 @@ class LabtestDetail extends StatefulWidget {
 class _LabtestDetailState extends State<LabtestDetail> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: 'key_lab_test_details'.tr),
-        ),
-        body: Column(
-          children: [
-            _buildLabDetailWidget(),
-            const SizedBox(
-              height: 60,
-            ),
-            Column(
-              children: [
-                _buildPatientDetailTile(),
-                _buildPatientDetail(),
-                const SizedBox(
-                  height: 10,
-                ),
-                _buildTestDetail(),
-                const SizedBox(
-                  height: 10,
-                ),
-                _buildItemTotalWidget(),
-                Divider(
-                  indent: 10,
-                  endIndent: 10,
-                  color: ThemeClass.greyColor1,
-                ),
-                _buildPayableAmountWidget(),
-              ],
-            ),
-          ],
-        ),
-        bottomNavigationBar: Container(
-          margin: EdgeInsets.all(16),
-          height: 50,
-          child: Row(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65.0),
+        child: AppbarWithBackButton(appbarTitle: 'key_lab_test_details'.tr),
+      ),
+      body: Column(
+        children: [
+          _buildLabDetailWidget(),
+          const SizedBox(
+            height: 60,
+          ),
+          Column(
             children: [
-              Expanded(
-                  child: RoundButton(
-                      buttonLabel: 'key_cancel_btn'.tr,
-                      color: ThemeClass.whiteColor,
-                      fontcolor: ThemeClass.orangeColor,
-                      fontSize: 16,
-                      fontFamily: "poppins",
-                      onTap: () {})),
-              const SizedBox(width: 10),
-              Expanded(
-                  child: RoundButton(
-                      buttonLabel: 'key_reschedule'.tr,
-                      fontSize: 16,
-                      fontFamily: "poppins",
-                      onTap: () {})),
+              _buildPatientDetailTile(),
+              _buildPatientDetail(),
+              const SizedBox(
+                height: 10,
+              ),
+              _buildTestDetail(),
+              const SizedBox(
+                height: 10,
+              ),
+              _buildItemTotalWidget(),
+              Divider(
+                indent: 10,
+                endIndent: 10,
+                color: ThemeClass.greyColor1,
+              ),
+              _buildPayableAmountWidget(),
             ],
           ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.all(16),
+        height: 50,
+        child: Row(
+          children: [
+            Expanded(
+                child: RoundButton(
+                    buttonLabel: 'key_cancel_btn'.tr,
+                    color: ThemeClass.whiteColor,
+                    fontcolor: ThemeClass.orangeColor,
+                    fontSize: 16,
+                    fontFamily: "poppins",
+                    onTap: () {})),
+            const SizedBox(width: 10),
+            Expanded(
+                child: RoundButton(
+                    buttonLabel: 'key_reschedule'.tr,
+                    fontSize: 16,
+                    fontFamily: "poppins",
+                    onTap: () {})),
+          ],
         ),
       ),
     );
