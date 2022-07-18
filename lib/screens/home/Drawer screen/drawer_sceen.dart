@@ -6,15 +6,14 @@ import 'package:oyo_labs/screens/home/Drawer%20screen/logout_controller.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class DrawerWidget extends StatelessWidget {
-   DrawerWidget({
+  DrawerWidget({
     Key? key,
     required this.width,
   }) : super(key: key);
 
   final double width;
 
-  
-    var logoutController = Get.put(LogoutController());
+  var logoutController = Get.put(LogoutController());
 
   @override
   Widget build(BuildContext context) {
@@ -85,20 +84,20 @@ class DrawerWidget extends StatelessWidget {
                   tileLabel: 'key_manage_address'.tr,
                   tileIconPath: "assets/icons/icon_location.png",
                 ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.referandEarnScreen);
-                  },
-                  tileLabel: 'key_refer_n_earn'.tr,
-                  tileIconPath: "assets/icons/icon-dollor.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.walletScreen);
-                  },
-                  tileLabel: 'key_wallet'.tr,
-                  tileIconPath: "assets/icons/icon-wallet.png",
-                ),
+                // _buildDrawerListTile(
+                //   onTileTap: () {
+                //     Get.toNamed(Routes.referandEarnScreen);
+                //   },
+                //   tileLabel: 'key_refer_n_earn'.tr,
+                //   tileIconPath: "assets/icons/icon-dollor.png",
+                // ),
+                // _buildDrawerListTile(
+                //   onTileTap: () {
+                //     Get.toNamed(Routes.walletScreen);
+                //   },
+                //   tileLabel: 'key_wallet'.tr,
+                //   tileIconPath: "assets/icons/icon-wallet.png",
+                // ),
                 _buildDrawerListTile(
                   onTileTap: () {
                     Get.toNamed(Routes.settingScreen);
@@ -140,7 +139,6 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
-
   Column _buildDrawerListTile({
     String tileLabel = "",
     String tileIconPath = "",
@@ -177,7 +175,6 @@ class DrawerWidget extends StatelessWidget {
       ],
     );
   }
-
 
   InkWell _buildProfileWidget({
     VoidCallback? onTap,

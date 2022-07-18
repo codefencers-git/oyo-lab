@@ -102,7 +102,7 @@ class _UpdateNewMemberScreenState extends State<UpdateNewMemberScreen> {
                 isObscureText: false,
                 keyboardType: TextInputType.number,
                 validator: validation!.phoneNumverValidation,
-                hintText: 'key_phone_number.tr',
+                hintText: 'key_phone_number'.tr,
                 iconData: "assets/icons/icon-phone.png",
                 onIconTap: () {},
               ),
