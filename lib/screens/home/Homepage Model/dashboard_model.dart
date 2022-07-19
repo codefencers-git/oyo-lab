@@ -2,6 +2,8 @@
 //
 //     final dashboardModel = dashboardModelFromJson(jsonString);
 
+// ignore_for_file: prefer_if_null_operators
+
 import 'dart:convert';
 
 DashboardModel dashboardModelFromJson(String str) =>

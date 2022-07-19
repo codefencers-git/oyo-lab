@@ -5,11 +5,13 @@ import 'package:intl/intl.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_enum_class.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/services/product_category/product_category_service.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
+import '../../home/Homepage Services/dashboard_services.dart';
 import '../user_controller.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -59,6 +61,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
   UserController userController = Get.put(UserController());
+
   _onSubmit() {
     if (_formKey.currentState!.validate()) {
       if (check != false) {
@@ -81,6 +84,19 @@ class _SignupScreenState extends State<SignupScreen> {
         showToast('key_accept_terms_msg'.tr);
       }
     }
+  }
+
+  final DashboardController dashboardController =
+      Get.put(DashboardController());
+
+  final ProductCategoryController _categoryController =
+      Get.put(ProductCategoryController());
+
+  @override
+  void initState() {
+    dashboardController.getDashboardData();
+    _categoryController.getProductCategory();
+    super.initState();
   }
 
   @override

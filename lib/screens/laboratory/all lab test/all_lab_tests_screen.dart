@@ -20,6 +20,9 @@ class _AllLabTestsScreenState extends State<AllLabTestsScreen> {
   late TextEditingController _controller;
   var _scrollcontroller = ScrollController();
   var _categoryController = Get.find<ProductCategoryController>();
+
+  // final ProductCategoryController _categoryController =
+  //     Get.put(ProductCategoryController());
   var _labTestController = Get.put(LabTestController());
   @override
   void initState() {
@@ -157,8 +160,7 @@ class _AllLabTestsScreenState extends State<AllLabTestsScreen> {
           Row(
             children: [
               Text(
-                " ${_labTestController.labTestData.length.toString()} " +
-                    'key_test_available'.tr,
+                " ${_labTestController.totalCount} " + 'key_test_available'.tr,
                 style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,

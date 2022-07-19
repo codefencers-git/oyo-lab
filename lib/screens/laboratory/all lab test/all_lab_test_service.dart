@@ -7,13 +7,13 @@ import '../../../services/http_services.dart';
 import 'all_lab_test_model.dart';
 
 class LabTestController extends GetxController {
-  RxList<LabTestData?> labTestData = (List<LabTestData?>.of([])).obs;
+  RxList<LabTestProductData?> labTestData =
+      (List<LabTestProductData?>.of([])).obs;
 
   RxBool isError = false.obs;
   var errorMessage = "".obs;
   var isloading = false.obs;
 
-  List<LabTestData>? incomingData;
   RxString totalCount = "".obs;
 
 // filter and sorting
@@ -65,8 +65,10 @@ class LabTestController extends GetxController {
           var dashboardData1 = AllLabTestModel.fromJson(jasonData);
           isError(false);
 
-          if (dashboardData1.data!.isNotEmpty) {
-            dashboardData1.data!.forEach((element) {
+          if (dashboardData1.data!.data!.isNotEmpty) {
+            isnotMoreData(false);
+            totalCount(dashboardData1.data!.totalcount.toString());
+            dashboardData1.data!.data!.forEach((element) {
               labTestData.value.add(element);
             });
           } else {
@@ -85,6 +87,47 @@ class LabTestController extends GetxController {
       errorMessage(e.toString());
     } finally {
       isloading(false);
+    }
+  }
+
+  Future<List<LabTestProductData>?> getLabTestForSearch(String text) async {
+    try {
+      var url = 'products';
+      var perameter = {
+        "page": "",
+        "count": "",
+        "search": text,
+        "short_by": "",
+        "category_id": ""
+      };
+
+      var response = await HttpServices.httpPostWithoutToken(url, perameter);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final jasonData = json.decode(response.body);
+
+        if (jasonData['status'] == "200" && jasonData['success'] == "1") {
+          var dashboardData1 = AllLabTestModel.fromJson(jasonData);
+
+          return dashboardData1.data!.data;
+          // return data;
+        } else {
+          throw jasonData['message'].toString();
+          // isErrorInSearch(true);
+          // errorMessageInSearch(jasonData['message'].toString());
+        }
+      } else {
+        // isErrorInSearch(true);
+        // errorMessageInSearch(GlobalMessages.internalservererror);
+        throw GlobalMessages.internalservererror;
+      }
+    } catch (e) {
+      // isErrorInSearch(true);
+      // errorMessageInSearch(e.toString());
+
+      throw e.toString();
+    } finally {
+      // isloadingInSearch(false);
     }
   }
 }

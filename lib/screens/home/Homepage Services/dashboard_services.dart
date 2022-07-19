@@ -18,7 +18,7 @@ class DashboardController extends GetxController {
           height: 100,
           width: 100,
           color: Colors.white,
-          child: Text("code here"),
+          child: const Text("code here"),
         ),
       ),
     );
@@ -37,6 +37,7 @@ class DashboardController extends GetxController {
           isError(false);
           errorMessage("");
           var dashboardData1 = DashboardModel.fromJson(jasonData);
+
           dashboardData(dashboardData1.data);
         } else {
           isError(true);
