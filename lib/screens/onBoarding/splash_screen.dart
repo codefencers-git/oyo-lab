@@ -5,6 +5,7 @@ import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
 import 'package:oyo_labs/screens/onBoarding/onboarding_screen.dart';
 import 'package:oyo_labs/screens/onBoarding/onboarding_services.dart';
+import 'package:oyo_labs/services/product_category/product_category_service.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,13 +17,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   var dashboardController = Get.put(DashboardController());
+  var _categoryController = Get.put(ProductCategoryController());
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
     Future.delayed(const Duration(seconds: 1), () async {
       _navigateTo();
     });
-    dashboardController.getDashboardData();
+
+    _categoryController.getProductCategory();
     super.initState();
   }
 
@@ -39,6 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ModalRoute.withName(Routes.onboardingScreen),
         );
       } else if (!isOnboard) {
+        await dashboardController.getDashboardData();
         Get.toNamed(Routes.homeScreen);
       } else {
         Navigator.pushAndRemoveUntil<void>(

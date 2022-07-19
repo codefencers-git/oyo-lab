@@ -49,18 +49,20 @@ class ProductCategoryData {
     this.id,
     this.title,
     this.image,
+    this.isChecked = false,
   });
 
   String? id;
   String? title;
   String? image;
+  bool? isChecked;
 
   factory ProductCategoryData.fromJson(Map<String, dynamic> json) =>
       ProductCategoryData(
-        id: json["id"] == null ? null : json["id"],
-        title: json["title"] == null ? null : json["title"],
-        image: json["image"] == null ? null : json["image"],
-      );
+          id: json["id"] == null ? null : json["id"],
+          title: json["title"] == null ? null : json["title"],
+          image: json["image"] == null ? null : json["image"],
+          isChecked: false);
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
