@@ -13,7 +13,7 @@ class MobileVerificationController extends GetxController {
   var errorMessage = "".obs;
   var isLoading = false.obs;
 
-  var userPrefController = Get.put(UserPrefService());
+  var userPrefController = Get.find<UserPrefService>();
 
   checkOtpForChangePassword(String phoneNumber, String otp) async {
     try {

@@ -37,6 +37,7 @@ class DashboardController extends GetxController {
           isError(false);
           errorMessage("");
           var dashboardData1 = DashboardModel.fromJson(jasonData);
+
           dashboardData(dashboardData1.data);
         } else {
           isError(true);

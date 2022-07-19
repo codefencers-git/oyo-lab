@@ -2,9 +2,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
+import 'package:oyo_labs/screens/home/home_page.dart';
 import 'package:oyo_labs/screens/onBoarding/onboarding_screen.dart';
 import 'package:oyo_labs/screens/onBoarding/onboarding_services.dart';
+import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/product_category/product_category_service.dart';
 import 'package:oyo_labs/themedata.dart';
 
@@ -16,16 +19,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  DashboardController dashboardController = Get.put(DashboardController());
-  final _categoryController = Get.put(ProductCategoryController());
+  final DashboardController _dashboardController =
+      Get.put(DashboardController(), permanent: true);
+  final ProductCategoryController _categoryController =
+      Get.put(ProductCategoryController(), permanent: true);
+
+  final UserController _userController =
+      Get.put(UserController(), permanent: true);
+
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
-    Future.delayed(const Duration(seconds: 1), () async {
-      _navigateTo();
-    });
-
+    _navigateTo();
     _categoryController.getProductCategory();
+
     super.initState();
   }
 
@@ -42,8 +49,16 @@ class _SplashScreenState extends State<SplashScreen> {
           ModalRoute.withName(Routes.onboardingScreen),
         );
       } else if (!isOnboard) {
-        await dashboardController.getDashboardData();
-        Get.toNamed(Routes.homeScreen);
+        await _dashboardController.getDashboardData();
+        await _checkUserLogin();
+        Navigator.pushAndRemoveUntil<void>(
+          context,
+          MaterialPageRoute<void>(
+              builder: (BuildContext context) => const HomePage()),
+          ModalRoute.withName(Routes.homeScreen),
+        );
+        // Get.offAll(Routes.homeScreen);
+        // Get.off(Routes.homeScreen);
       } else {
         Navigator.pushAndRemoveUntil<void>(
           context,
@@ -59,6 +74,20 @@ class _SplashScreenState extends State<SplashScreen> {
             builder: (BuildContext context) => OnboardingScreen()),
         ModalRoute.withName(Routes.onboardingScreen),
       );
+    }
+  }
+
+  _checkUserLogin() async {
+    try {
+      var getToken = await UserPrefService().getToken();
+      if (getToken != "" && getToken != null) {
+        _userController.setIsLogin(true);
+      } else {
+        _userController.setIsLogin(false);
+      }
+    } catch (e) {
+      _userController.setIsLogin(false);
+      print("------------> ${e}");
     }
   }
 

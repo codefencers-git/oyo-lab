@@ -20,6 +20,9 @@ class _AllLabTestsScreenState extends State<AllLabTestsScreen> {
   late TextEditingController _controller;
   var _scrollcontroller = ScrollController();
   var _categoryController = Get.find<ProductCategoryController>();
+
+  // final ProductCategoryController _categoryController =
+  //     Get.put(ProductCategoryController());
   var _labTestController = Get.put(LabTestController());
   @override
   void initState() {

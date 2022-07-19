@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/screens/home/google_place_picker/google_place_picker_screen.dart';
 import 'package:oyo_labs/themedata.dart';
-import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import '../../routes.dart';
+import '../../services/SharedPrefServices/shared_pref_services.dart';
 
 class HomePageAppBar extends StatefulWidget {
   HomePageAppBar({Key? key, required this.onTap}) : super(key: key);
@@ -17,12 +18,12 @@ class HomePageAppBar extends StatefulWidget {
 }
 
 class _HomePageAppBarState extends State<HomePageAppBar> {
-  String _currentAddress = "350001 Ahmedabad";
-  final UserController _loginController = Get.put(UserController());
+  String _currentAddress = "";
+
+  final UserController _userPrefController = Get.find<UserController>();
+
   @override
   Widget build(BuildContext context) {
-    print("in appbar------------------" +
-        _loginController.islogin.value.toString());
     return AppBar(
       backgroundColor: ThemeClass.orangeColor,
       toolbarHeight: 70,
@@ -55,7 +56,6 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                     }
                   },
                   child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'key_delivered_to_appbar'.tr + " ",
@@ -83,26 +83,26 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
               ],
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: TextButton(
-                onPressed: () {
-                  Get.toNamed(Routes.loginScreen);
-                },
-                child: Text(
-                  _loginController.islogin.value == true
-                      ? ""
-                      : 'key_login_appbar'.tr,
-                  style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: ThemeClass.whiteColor),
+          Obx(() => Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: _userPrefController.setIsLogin.value == true
+                      ? SizedBox()
+                      : TextButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.loginScreen);
+                          },
+                          child: Text(
+                            'key_login_appbar'.tr,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: ThemeClass.whiteColor),
+                          ),
+                        ),
                 ),
-              ),
-            ),
-          ),
+              )),
         ],
       ),
     );

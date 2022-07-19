@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 
 class HttpServices {
   static String API_BASE_URL = "http://oyolab.codefencers.com/api/customer/";
@@ -26,13 +27,26 @@ class HttpServices {
     // var token = await UserPrefService().getToken();
 
     print(API_BASE_URL + url);
-    //  print(token);
 
     return http.get(
       Uri.parse(API_BASE_URL + url),
       headers: requestHeaders
         ..addAll({
           // 'Authorization': 'Bearer $token',
+        }),
+    );
+  }
+
+  static Future<Response> httpGetForLogout(String url) async {
+    var token = await UserPrefService().getToken();
+
+    print(API_BASE_URL + url);
+
+    return http.get(
+      Uri.parse(API_BASE_URL + url),
+      headers: requestHeaders
+        ..addAll({
+          'Authorization': 'Bearer $token',
         }),
     );
   }

@@ -5,9 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPrefService extends GetxController {
   static SharedPreferences? preferences;
-
   Rx<UserModel> globleUserModel = UserModel().obs;
-  RxString token = "".obs;
 
   Future<void> setUserData({required UserModel? userModel}) async {
     preferences = await SharedPreferences.getInstance();
@@ -18,7 +16,19 @@ class UserPrefService extends GetxController {
   Future<void> setToken(value) async {
     preferences = await SharedPreferences.getInstance();
     preferences!.setString('token', value);
-    token = value;
+    // token(value);
+  }
+
+  Future<void> setIsLogin(value) async {
+    preferences = await SharedPreferences.getInstance();
+    preferences!.setBool('islogin', value);
+    // islogin(value);
+  }
+
+  Future<bool?> getIsLogin() async {
+    preferences = await SharedPreferences.getInstance();
+    var data = preferences!.getBool('islogin');
+    return data;
   }
 
   Future<String?> getToken() async {
@@ -27,7 +37,7 @@ class UserPrefService extends GetxController {
     return data;
   }
 
-  Future<void> removeToken(value) async {
+  Future<void> removeToken() async {
     preferences = await SharedPreferences.getInstance();
     preferences!.remove('token');
   }

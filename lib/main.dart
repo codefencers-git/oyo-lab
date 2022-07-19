@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:oyo_labs/firebase_options.dart';
 import 'package:oyo_labs/language/localization_language.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/services/navigation_service.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:get/get.dart';
 
@@ -38,16 +39,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      locale: const Locale('en', 'US'),
-      translations: LanguageLocaleString(),
-      title: 'OYO LAB',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeClass.themeData,
-
-      initialRoute: Routes.splashRoute,
-      getPages: Routes.gobalRoutes,
-      builder: EasyLoading.init(),
-      //home: const HomePage(),
-    );
+        locale: const Locale('en', 'US'),
+        translations: LanguageLocaleString(),
+        title: 'OYO LAB',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeClass.themeData,
+        initialRoute: Routes.splashRoute,
+        getPages: Routes.gobalRoutes,
+        builder: EasyLoading.init(),
+        navigatorKey: navigationService.navigationKey
+        //home: const HomePage(),
+        );
   }
 }

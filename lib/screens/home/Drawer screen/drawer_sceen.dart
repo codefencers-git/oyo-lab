@@ -3,10 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
-import 'package:oyo_labs/screens/home/Drawer%20screen/logout_controller.dart';
+import 'package:oyo_labs/screens/authentication/user_controller.dart';
+import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/themedata.dart';
-
-import '../../authentication/user_controller.dart';
 
 class DrawerWidget extends StatelessWidget {
   DrawerWidget({
@@ -16,18 +15,21 @@ class DrawerWidget extends StatelessWidget {
 
   final double width;
 
-  LogoutController logoutController = Get.put(LogoutController());
-  final UserController _loginController = Get.put(UserController());
+  // LogoutController logoutController = Get.put(LogoutController());
+
+  final UserController _userController = Get.find<UserController>();
+  // final UserPrefService _userPrefController = Get.find<UserPrefService>();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: ThemeClass.whiteColor,
-      elevation: 0,
-      child: _loginController.islogin.value == true
-          ? _buildMenuOfUser(context)
-          : _buildMenuForLogin(context),
-    );
+        backgroundColor: ThemeClass.whiteColor,
+        elevation: 0,
+        child: Obx(
+          () => _userController.setIsLogin.value == true
+              ? _buildMenuOfUser(context)
+              : _buildMenuForLogin(context),
+        ));
   }
 
   Column _buildMenuOfUser(BuildContext context) {
@@ -116,7 +118,10 @@ class DrawerWidget extends StatelessWidget {
               ),
               _buildDrawerListTile(
                 onTileTap: () {
-                  logoutController.logout(context);
+                  // try{
+
+                  // }catch
+                  _userController.logout(context);
                 },
                 tileLabel: 'key_logout'.tr,
                 tileIconPath: "assets/icons/logout-icon.png",
@@ -184,13 +189,6 @@ class DrawerWidget extends StatelessWidget {
                 tileLabel: 'key_contact_us'.tr,
                 tileIconPath: "assets/icons/icon-contactus.png",
               ),
-              _buildDrawerListTile(
-                onTileTap: () {
-                  logoutController.logout(context);
-                },
-                tileLabel: 'key_logout'.tr,
-                tileIconPath: "assets/icons/logout-icon.png",
-              ),
             ],
           ),
         ),
@@ -209,7 +207,10 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
             child: Row(
               children: [
-                Image.network("assets/images/profile-picture.png"),
+                Image.asset(
+                  "assets/images/profile-picture.png",
+                  height: 50,
+                ),
                 const SizedBox(width: 8),
                 SizedBox(
                   width: width * 0.45,
@@ -219,7 +220,7 @@ class DrawerWidget extends StatelessWidget {
                       Text(
                         "Click To",
                         style: TextStyle(
-                          color: ThemeClass.darkgreyColor,
+                          color: ThemeClass.orangeColor,
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
                         ),
@@ -239,7 +240,7 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 16.0),
+            padding: const EdgeInsets.only(top: 10.0),
             child: Divider(
               thickness: 2,
               color: ThemeClass.orangeColor.withOpacity(0.1),

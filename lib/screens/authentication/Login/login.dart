@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
+import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
+import 'package:oyo_labs/services/product_category/product_category_service.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -30,13 +32,43 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   Validation? validation;
+
   final _formKey = GlobalKey<FormState>();
 
   UserController userController = Get.put(UserController());
 
+  final DashboardController dashboardController =
+      Get.put(DashboardController());
+
+  final ProductCategoryController _categoryController =
+      Get.put(ProductCategoryController());
+
+  @override
+  void initState() {
+    _categoryController.getProductCategory();
+    super.initState();
+  }
+
   _clearTextFields() {
     _emailOrPhoneController.clear();
     _passwordController.clear();
+  }
+
+  _onSubmit() async {
+    if (_formKey.currentState!.validate()) {
+      var mapData = <String, dynamic>{};
+      mapData['username'] = _emailOrPhoneController.text.trim();
+      mapData['password'] = _passwordController.text.trim();
+      mapData['device_token'] = "0";
+      mapData['device_type'] = Platform.isAndroid ? "android" : "ios";
+
+      try {
+        await userController.loginServices(mapData);
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+      _clearTextFields();
+    }
   }
 
   @override
@@ -65,13 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: height * 0.67,
                 child: Column(
                   children: [
-                    Text(
-                      'key_login_title'.tr,
-                      style: TextStyle(
-                          color: ThemeClass.orangeColor,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700),
-                    ),
+                    _buildLoginTitle(),
                     const SizedBox(height: 25),
                     Padding(
                       padding: const EdgeInsets.all(25.0),
@@ -105,19 +131,22 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Text _buildLoginTitle() {
+    return Text(
+      'key_login_title'.tr,
+      style: TextStyle(
+          color: ThemeClass.orangeColor,
+          fontSize: 24,
+          fontWeight: FontWeight.w700),
+    );
+  }
+
   RoundButton _buildLoginButton() {
     return RoundButton(
       buttonLabel: 'key_login_btn'.tr,
       onTap: () async {
-        if (_formKey.currentState!.validate()) {
-          var mapData = <String, dynamic>{};
-          mapData['username'] = _emailOrPhoneController.text.trim();
-          mapData['password'] = _passwordController.text.trim();
-          mapData['device_token'] = "0";
-          mapData['device_type'] = Platform.isAndroid ? "android" : "ios";
-          await userController.loginServices(mapData);
-          _clearTextFields();
-        }
+        _onSubmit();
+        await dashboardController.getDashboardData();
       },
       fontSize: 16,
       fontWeight: FontWeight.w500,
