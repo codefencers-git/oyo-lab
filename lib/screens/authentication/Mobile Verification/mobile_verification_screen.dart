@@ -4,11 +4,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../widgets/buttons/round_button.dart';
 import '../../../widgets/container_with_inner_shadow.dart';
+import '../user_controller.dart';
 import 'mobile_verification_controller.dart';
 
 class MobileVerification extends StatefulWidget {
@@ -90,6 +90,7 @@ class _MobileVerificationState extends State<MobileVerification> {
 
   MobileVerificationController mobileVerificationControllerController =
       Get.put(MobileVerificationController());
+  UserController userController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     print(widget.fromScreen);
@@ -208,7 +209,7 @@ class _MobileVerificationState extends State<MobileVerification> {
               ? mobileVerificationControllerController
                   .checkOtpForChangePassword(
                       widget.userNameorPhoneNumber, _otpController.text)
-              : mobileVerificationControllerController.checkOtp(
+              : userController.checkOtp(
                   widget.userNameorPhoneNumber, _otpController.text);
         },
         fontSize: 16,

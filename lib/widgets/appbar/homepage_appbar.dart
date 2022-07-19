@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/screens/home/google_place_picker/google_place_picker_screen.dart';
 import 'package:oyo_labs/themedata.dart';
-import 'package:oyo_labs/screens/authentication/Login/login_controller.dart';
+import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import '../../routes.dart';
 
 class HomePageAppBar extends StatefulWidget {
@@ -18,7 +18,7 @@ class HomePageAppBar extends StatefulWidget {
 
 class _HomePageAppBarState extends State<HomePageAppBar> {
   var _currentAddress = "350001 Ahmedabad";
-  final LoginController _loginController = Get.put(LoginController());
+  final UserController _loginController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return AppBar(

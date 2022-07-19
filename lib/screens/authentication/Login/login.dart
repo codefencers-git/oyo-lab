@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
-import 'package:oyo_labs/screens/authentication/Login/login_controller.dart';
+import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/services/validation_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Validation? validation;
   final _formKey = GlobalKey<FormState>();
 
-  var loginController = Get.put(LoginController());
+  UserController userController = Get.put(UserController());
 
   _clearTextFields() {
     _emailOrPhoneController.clear();
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mapData['password'] = _passwordController.text.trim();
           mapData['device_token'] = "0";
           mapData['device_type'] = Platform.isAndroid ? "android" : "ios";
-          loginController.loginServices(mapData);
+          userController.loginServices(mapData);
           _clearTextFields();
         }
       },
