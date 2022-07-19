@@ -117,7 +117,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
 
   Container _buildTestDetail() {
     return Container(
-      height: 150,
+      height: 100,
       color: ThemeClass.skyblueColor,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -133,52 +133,6 @@ class _LabtestDetailState extends State<LabtestDetail> {
             ),
             const SizedBox(
               height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      "assets/icons/icon_lab.png",
-                      height: 30,
-                    ),
-                    const SizedBox(
-                      width: 9,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "ABO Group & RH Type",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "W B-ED TA (3ml)",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: ThemeClass.greyColor,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Text(
-                  "₹120.00",
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: ThemeClass.orangeColor,
-                      fontWeight: FontWeight.w600),
-                )
-              ],
-            ),
-            Divider(
-              thickness: 0.2,
-              indent: 2,
-              endIndent: 2,
-              color: ThemeClass.greyColor2,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

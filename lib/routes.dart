@@ -25,7 +25,7 @@ import 'screens/authentication/Forgot Password/forgot_password_screen.dart';
 import 'screens/authentication/Login/login.dart';
 import 'screens/home/home_page.dart';
 import 'screens/laboratory/book_appointment.dart';
-import 'screens/Drawer/Settings/notification_setting.dart';
+
 import 'screens/onBoarding/onboarding_screen.dart';
 import 'screens/onBoarding/splash_screen.dart';
 
@@ -74,9 +74,6 @@ class Routes {
 
     GetPage(name: homeScreen, page: () => const HomePage()),
 
-    GetPage(
-        name: notificationSettingScreen,
-        page: () => const NotificationSetting()),
     GetPage(name: aboutUsScreen, page: () => const AboutUs()),
     GetPage(name: contactUsScreen, page: () => const ContactUs()),
     GetPage(name: bookingSuccessScreen, page: () => const BookingSuccess()),
