@@ -8,7 +8,7 @@ import 'package:oyo_labs/services/http_services.dart';
 
 class ChangePasswordController extends GetxController {
   RxBool isError = false.obs;
-  RxString  errorMessage = "".obs;
+  RxString errorMessage = "".obs;
   RxBool isloading = false.obs;
 
   changePasswordService(dynamic mapData) async {
@@ -21,7 +21,7 @@ class ChangePasswordController extends GetxController {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message']);
-     
+
           Get.offAllNamed(Routes.loginScreen);
 
           isError(false);

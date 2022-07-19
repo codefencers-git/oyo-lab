@@ -80,6 +80,7 @@ class LanguageLocaleString extends Translations {
           'key_document': 'Document',
           //-------------------My Test Report
           'key_download_btn': 'Download',
+
           //-------------------Members - add member
           'key_add_new_member': 'Add New Member',
           'key_add_member': 'Add Member',

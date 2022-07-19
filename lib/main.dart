@@ -8,12 +8,12 @@ import 'package:oyo_labs/themedata.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
-  runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
-
+  runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   configLoading();
 }
 

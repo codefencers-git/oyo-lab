@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 
 import 'package:oyo_labs/screens/home/Drawer%20screen/drawer_sceen.dart';
+import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/homepage_appbar.dart';
 import '../laboratory/labtest_tile_widget.dart';
@@ -23,11 +24,11 @@ class _HomePageState extends State<HomePage> {
   final CarouselController _controller = CarouselController();
   DashboardController dashboardController = Get.find<DashboardController>();
 
-  final List<String> imgList = [
-    'assets/images/home-page-slider.png',
-    'assets/images/home-page-slider.png',
-    'assets/images/home-page-slider.png',
-  ];
+  // final List<String> imgList = [
+  //   'assets/images/home-page-slider.png',
+  //   'assets/images/home-page-slider.png',
+  //   'assets/images/home-page-slider.png',
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,8 @@ class _HomePageState extends State<HomePage> {
                 : SingleChildScrollView(
                     child: Column(
                     children: [
-                      _buildSlider(width, height),
+                      _buildSlider(width, height,
+                          dashboardController.dashboardData.value),
                       _buildSearchBar(),
                       const SizedBox(
                         height: 15,
@@ -219,11 +221,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildSlider(double width, double height) {
+  Widget _buildSlider(double width, double height, DashboardData data) {
     return Column(
       children: [
         CarouselSlider(
-          items: imgList
+          items: data.slider!
               .map((item) => Container(
                     margin: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -293,7 +295,7 @@ class _HomePageState extends State<HomePage> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: imgList.asMap().entries.map((entry) {
+          children: data.slider!.asMap().entries.map((entry) {
             return GestureDetector(
               onTap: () => _controller.animateToPage(entry.key),
               child: Container(

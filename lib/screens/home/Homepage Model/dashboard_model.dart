@@ -2,8 +2,6 @@
 //
 //     final dashboardModel = dashboardModelFromJson(jsonString);
 
-// ignore_for_file: prefer_if_null_operators, prefer_conditional_assignment
-
 import 'dart:convert';
 
 DashboardModel dashboardModelFromJson(String str) =>
@@ -46,24 +44,69 @@ class DashboardData {
     this.tests,
   });
 
-  List<dynamic>? slider;
+  List<Slider>? slider;
   List<Test>? tests;
 
   factory DashboardData.fromJson(Map<String, dynamic> json) => DashboardData(
         slider: json["slider"] == null
             ? null
-            : List<dynamic>.from(json["slider"].map((x) => x)),
+            : List<Slider>.from(json["slider"].map((x) => Slider.fromJson(x))),
         tests: json["tests"] == null
             ? null
             : List<Test>.from(json["tests"].map((x) => Test.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "slider":
-            slider == null ? null : List<dynamic>.from(slider!.map((x) => x)),
+        "slider": slider == null
+            ? null
+            : List<dynamic>.from(slider!.map((x) => x.toJson())),
         "tests": tests == null
             ? null
             : List<dynamic>.from(tests!.map((x) => x.toJson())),
+      };
+}
+
+class Slider {
+  Slider({
+    this.id,
+    this.title,
+    this.tagline,
+    this.image,
+    this.isClickable,
+    this.redirectTo,
+    this.buttonText,
+    this.description,
+  });
+
+  String? id;
+  String? title;
+  String? tagline;
+  String? image;
+  String? isClickable;
+  String? redirectTo;
+  String? buttonText;
+  String? description;
+
+  factory Slider.fromJson(Map<String, dynamic> json) => Slider(
+        id: json["id"] == null ? null : json["id"],
+        title: json["title"] == null ? null : json["title"],
+        tagline: json["tagline"] == null ? null : json["tagline"],
+        image: json["image"] == null ? null : json["image"],
+        isClickable: json["is_clickable"] == null ? null : json["is_clickable"],
+        redirectTo: json["redirect_to"] == null ? null : json["redirect_to"],
+        buttonText: json["button_text"] == null ? null : json["button_text"],
+        description: json["description"] == null ? null : json["description"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
+        "title": title == null ? null : title,
+        "tagline": tagline == null ? null : tagline,
+        "image": image == null ? null : image,
+        "is_clickable": isClickable == null ? null : isClickable,
+        "redirect_to": redirectTo == null ? null : redirectTo,
+        "button_text": buttonText == null ? null : buttonText,
+        "description": description == null ? null : description,
       };
 }
 
@@ -90,7 +133,7 @@ class Test {
   String? price;
   String? priceTxt;
   String? description;
-  Status? status;
+  String? status;
 
   factory Test.fromJson(Map<String, dynamic> json) => Test(
         id: json["id"] == null ? null : json["id"],
@@ -103,8 +146,7 @@ class Test {
         price: json["price"] == null ? null : json["price"],
         priceTxt: json["price_txt"] == null ? null : json["price_txt"],
         description: json["description"] == null ? null : json["description"],
-        status:
-            json["status"] == null ? null : statusValues.map![json["status"]],
+        status: json["status"] == null ? null : json["status"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -117,25 +159,6 @@ class Test {
         "price": price == null ? null : price,
         "price_txt": priceTxt == null ? null : priceTxt,
         "description": description == null ? null : description,
-        "status": status == null ? null : statusValues.reverse![status],
+        "status": status == null ? null : status,
       };
-}
-
-enum Status { ACTIVE, INACTIVE }
-
-final statusValues =
-    EnumValues({"active": Status.ACTIVE, "inactive": Status.INACTIVE});
-
-class EnumValues<T> {
-  Map<String, T>? map;
-  Map<T, String>? reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String>? get reverse {
-    if (reverseMap == null) {
-      reverseMap = map!.map((k, v) => MapEntry(v, k));
-    }
-    return reverseMap;
-  }
 }

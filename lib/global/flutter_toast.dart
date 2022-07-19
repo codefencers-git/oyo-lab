@@ -7,6 +7,6 @@ showToast(String msg) {
     gravity: ToastGravity.BOTTOM,
     backgroundColor: Colors.black,
     textColor: Colors.white,
-    toastLength: Toast.LENGTH_LONG,
+    toastLength: Toast.LENGTH_SHORT,
   );
 }

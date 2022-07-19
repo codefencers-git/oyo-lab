@@ -7,7 +7,7 @@ import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_detail.dart';
 import 'package:oyo_labs/screens/Drawer/Member/members.dart';
 import 'package:oyo_labs/screens/authentication/Signup/signup_screen.dart';
-import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_tests.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_tests_screen.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/rating_screen.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
@@ -72,10 +72,9 @@ class Routes {
     GetPage(name: loginScreen, page: () => const LoginScreen()),
     GetPage(name: forgotPasswordScreen, page: () => ForgotPassword()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
-    // GetPage(name: mobileVerificationScreen, page: () => MobileVerification()),
+
     GetPage(name: homeScreen, page: () => const HomePage()),
-    // GetPage(
-    //     name: changePasswordScreen, page: () =>  ChangePasswordScreen()),
+
     GetPage(
         name: notificationSettingScreen,
         page: () => const NotificationSetting()),
@@ -92,7 +91,7 @@ class Routes {
               type: "",
             )),
     // GetPage(name: labTileScreen, page: () => const LaboratoryDetail()),
-    GetPage(name: allLabTests, page: () => const AllLabTests()),
+    GetPage(name: allLabTests, page: () => const AllLabTestsScreen()),
     GetPage(name: addMemberScreen, page: () => const AddNewMember()),
     GetPage(name: myPrescritionSreen, page: () => const MyPrescription()),
     GetPage(name: myTestReportScreen, page: () => const MyTestRepoer()),
