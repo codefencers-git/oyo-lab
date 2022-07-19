@@ -2,11 +2,14 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 
 import 'package:oyo_labs/screens/home/Drawer%20screen/drawer_sceen.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_model.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_service.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/homepage_appbar.dart';
 import '../laboratory/labtest_tile_widget.dart';
@@ -24,11 +27,37 @@ class _HomePageState extends State<HomePage> {
   final CarouselController _controller = CarouselController();
   DashboardController dashboardController = Get.find<DashboardController>();
 
-  // final List<String> imgList = [
-  //   'assets/images/home-page-slider.png',
-  //   'assets/images/home-page-slider.png',
-  //   'assets/images/home-page-slider.png',
-  // ];
+  bool isFirst = true;
+  final TextEditingController _searchQuery = TextEditingController();
+
+  LabTestController _labtestController = Get.put(LabTestController());
+  ScrollController _scrollController = ScrollController();
+  FocusNode _focus = FocusNode();
+
+  _moveToTop(val) {
+    _scrollController.jumpTo(val);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _focus.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focus.removeListener(_onFocusChange);
+    _focus.dispose();
+  }
+
+  void _onFocusChange() {
+    debugPrint("Focus: ${_focus.hasFocus.toString()}");
+    if (_focus.hasFocus == false) {
+      _searchQuery.clear();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,43 +80,44 @@ class _HomePageState extends State<HomePage> {
                         Text(dashboardController.errorMessage.value.toString()),
                   )
                 : SingleChildScrollView(
+                    controller: _scrollController,
                     child: Column(
-                    children: [
-                      _buildSlider(width, height,
-                          dashboardController.dashboardData.value),
-                      _buildSearchBar(),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      _buildUploadPrescription(context, width),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      _buildTestNearYouTitleRow(),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 0.7,
-                          ),
-                          itemCount: dashboardController
-                              .dashboardData.value.tests!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            var dashboardData = dashboardController
-                                .dashboardData.value.tests![index];
-                            return AllLabsGridTileWidget(
-                                labTestData: dashboardData);
-                          },
+                      children: [
+                        _buildSlider(width, height,
+                            dashboardController.dashboardData.value),
+                        _buildSearchBar(),
+                        const SizedBox(
+                          height: 15,
                         ),
-                      ),
-                    ],
-                  ))
+                        _buildUploadPrescription(context, width),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        _buildTestNearYouTitleRow(),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 0.7,
+                            ),
+                            itemCount: dashboardController
+                                .dashboardData.value.tests!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var dashboardData = dashboardController
+                                  .dashboardData.value.tests![index];
+                              return AllLabsGridTileWidget(
+                                  labTestData: dashboardData);
+                            },
+                          ),
+                        ),
+                      ],
+                    ))
             : Container(
                 height: height,
                 width: width,
@@ -202,20 +232,80 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Padding _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextField(
-        cursorColor: ThemeClass.orangeColor,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: ThemeClass.skyblueColor,
-          border: InputBorder.none,
-          hintText: 'key_searchbar_label'.tr,
-          hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-          suffixIcon: SizedBox(
-            child: Image.asset("assets/icons/icon_search.png", scale: 3),
+  Widget _buildSearchBar() {
+    return WillPopScope(
+      onWillPop: () async {
+        _searchQuery.clear();
+        return Future.value(true);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: TypeAheadField(
+          textFieldConfiguration: TextFieldConfiguration(
+            autofocus: false,
+            focusNode: _focus,
+            controller: _searchQuery,
+            cursorColor: ThemeClass.orangeColor,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: ThemeClass.skyblueColor,
+              border: InputBorder.none,
+              hintText: 'key_searchbar_label'.tr,
+              hintStyle:
+                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              suffixIcon: SizedBox(
+                child: Image.asset("assets/icons/icon_search.png", scale: 3),
+              ),
+            ),
+            onTap: () {
+              _moveToTop(MediaQuery.of(context).size.height * 0.3);
+              print("object");
+            },
+            onEditingComplete: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              _searchQuery.clear();
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
           ),
+          hideOnEmpty: false,
+          hideOnLoading: false,
+          hideOnError: false,
+          getImmediateSuggestions: true,
+          loadingBuilder: (context) {
+            return Container(
+              height: 100,
+              child: Center(
+                child: CircularProgressIndicator(color: ThemeClass.orangeColor),
+              ),
+            );
+          },
+          suggestionsCallback: (pattern) async {
+            var data = await LabTestController().getLabTestForSearch(pattern);
+            print("-----------------$data");
+            return data!.map((e) => e);
+          },
+          itemBuilder: (context, LabTestProductData suggestion) {
+            return ListTile(
+              leading: Icon(
+                Icons.medication_rounded,
+                color: ThemeClass.orangeColor,
+              ),
+              title: Text(suggestion.title.toString()),
+            );
+          },
+          noItemsFoundBuilder: (contex) {
+            return Center(
+              child: Text("no data found"),
+            );
+          },
+          onSuggestionSelected: (suggestion) {
+            print(suggestion);
+          },
+          errorBuilder: (context, data) {
+            return Center(
+              child: Text(data.toString()),
+            );
+          },
         ),
       ),
     );
@@ -325,14 +415,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
       onPressed: () {
-        // showModalBottomSheet<void>(
-        //   context: context,
-        //   backgroundColor: Colors.transparent,
-        //   builder: (BuildContext context) {
-        //     return const SelectImageBottomSheet();
-        //   },
-        // );
-
         dashboardController.showdialog();
       },
       child: Text(

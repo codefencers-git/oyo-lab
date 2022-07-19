@@ -48,11 +48,11 @@ dependencies:
   fluttertoast: ^8.0.9
   shared_preferences: ^2.0.15
   google_place: ^0.4.7
+  flutter_typeahead: ^3.2.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-    
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

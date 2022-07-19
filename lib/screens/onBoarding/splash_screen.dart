@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
+import 'package:oyo_labs/screens/home/home_page.dart';
 import 'package:oyo_labs/screens/onBoarding/onboarding_screen.dart';
 import 'package:oyo_labs/screens/onBoarding/onboarding_services.dart';
 import 'package:oyo_labs/services/product_category/product_category_service.dart';
@@ -43,7 +44,13 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       } else if (!isOnboard) {
         await dashboardController.getDashboardData();
-        Get.toNamed(Routes.homeScreen);
+        // Get.toNamed(Routes.homeScreen);
+        Navigator.pushAndRemoveUntil<void>(
+          context,
+          MaterialPageRoute<void>(
+              builder: (BuildContext context) => HomePage()),
+          ModalRoute.withName(Routes.onboardingScreen),
+        );
       } else {
         Navigator.pushAndRemoveUntil<void>(
           context,

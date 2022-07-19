@@ -157,8 +157,7 @@ class _AllLabTestsScreenState extends State<AllLabTestsScreen> {
           Row(
             children: [
               Text(
-                " ${_labTestController.labTestData.length.toString()} " +
-                    'key_test_available'.tr,
+                " ${_labTestController.totalCount} " + 'key_test_available'.tr,
                 style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,

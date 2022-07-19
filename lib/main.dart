@@ -9,6 +9,10 @@ import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding.instance!.addPostFrameCallback((_) {
+    // providerDrawerRead = context.read<DrawerProvider>();
+    // providerDrawerRead!.setSelectedIndex(0);
+  });
   runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
