@@ -13,7 +13,6 @@ import 'package:oyo_labs/screens/laboratory/all%20lab%20test/rating_screen.dart'
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_drawer_detail.dart';
-import 'package:oyo_labs/screens/laboratory/product_detail.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment.dart';
 import 'screens/ContactUs/contact_us.dart';
 import 'screens/Drawer/ManageAddress/add_address.dart';
@@ -26,7 +25,7 @@ import 'screens/authentication/Forgot Password/forgot_password_screen.dart';
 import 'screens/authentication/Login/login.dart';
 import 'screens/home/home_page.dart';
 import 'screens/laboratory/book_appointment.dart';
-import 'screens/Drawer/Settings/notification_setting.dart';
+
 import 'screens/onBoarding/onboarding_screen.dart';
 import 'screens/onBoarding/splash_screen.dart';
 
@@ -75,9 +74,6 @@ class Routes {
 
     GetPage(name: homeScreen, page: () => const HomePage()),
 
-    GetPage(
-        name: notificationSettingScreen,
-        page: () => const NotificationSetting()),
     GetPage(name: aboutUsScreen, page: () => const AboutUs()),
     GetPage(name: contactUsScreen, page: () => const ContactUs()),
     GetPage(name: bookingSuccessScreen, page: () => const BookingSuccess()),

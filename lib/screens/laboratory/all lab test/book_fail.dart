@@ -20,19 +20,19 @@ class _BookingSuccessState extends State<BookingSuccess> {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
-        child: AppbarWithBackButton(appbarTitle: 'key_success'.tr),
+        child: AppbarWithBackButton(appbarTitle: 'key_failed'.tr),
       ),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
-            child: Image.asset("assets/images/booking_successfull.png"),
+            child: Image.asset("assets/images/booking_failed.png"),
           ),
           Text(
-            'key_booking_successfull'.tr,
+            'key_booking_unsuccessfull'.tr,
             style: TextStyle(
                 fontSize: 24,
-                color: ThemeClass.greenColor,
+                color: ThemeClass.redColor,
                 fontWeight: FontWeight.w700),
           ),
           const SizedBox(
@@ -59,7 +59,7 @@ class _BookingSuccessState extends State<BookingSuccess> {
           onTap: () {
             Get.toNamed(Routes.checkAppointment);
           },
-          buttonLabel: 'key_check_appointment'.tr,
+          buttonLabel: 'key_book_again'.tr,
         ),
       ),
     );
