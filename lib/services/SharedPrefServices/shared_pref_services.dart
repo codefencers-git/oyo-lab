@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserPrefService extends GetxController {
   static SharedPreferences? preferences;
 
-  var globleUserModel = UserModel().obs;
-  var token = "".obs;
+  Rx<UserModel> globleUserModel = UserModel().obs;
+  RxString token = "".obs;
 
   Future<void> setUserData({required UserModel? userModel}) async {
     preferences = await SharedPreferences.getInstance();

@@ -4,7 +4,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
-
 import 'package:oyo_labs/screens/home/Drawer%20screen/drawer_sceen.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
 import 'package:oyo_labs/themedata.dart';
@@ -22,13 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
-  DashboardController dashboardController = Get.find<DashboardController>();
-
-  // final List<String> imgList = [
-  //   'assets/images/home-page-slider.png',
-  //   'assets/images/home-page-slider.png',
-  //   'assets/images/home-page-slider.png',
-  // ];
+  DashboardController dashboardController = Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
@@ -226,58 +219,64 @@ class _HomePageState extends State<HomePage> {
       children: [
         CarouselSlider(
           items: data.slider!
-              .map((item) => Container(
+              .map(
+                (item) => Container(
                     margin: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         color: ThemeClass.skyblueColor,
                         borderRadius: BorderRadius.circular(7)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(25),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'key_homepage_slider_title'.tr,
-                                style: TextStyle(
-                                    fontSize: 24,
-                                    color: ThemeClass.redColor,
-                                    fontWeight: FontWeight.w900),
-                              ),
-                              Text(
-                                'key_homepage_slider_subtitle'.tr,
-                                softWrap: true,
-                                style: TextStyle(
-                                    height: 1.5,
-                                    fontSize: 14,
-                                    color: ThemeClass.blackColor1,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                'key_homepage_slider_description'.tr,
-                                softWrap: true,
-                                style: TextStyle(
-                                    height: 1.5,
-                                    fontSize: 10,
-                                    color: ThemeClass.greyColor1,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/images/home-page-slider.png',
-                          width: width / 2.5,
-                          height: height / 3,
-                          fit: BoxFit.fill,
-                        )
-                      ],
+                    child: Image.network(
+                      item.image.toString(),
+                      fit: BoxFit.contain,
+                    )
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Container(
+                    //       padding: const EdgeInsets.all(25),
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           Text(
+                    //             'key_homepage_slider_title'.tr,
+                    //             style: TextStyle(
+                    //                 fontSize: 24,
+                    //                 color: ThemeClass.redColor,
+                    //                 fontWeight: FontWeight.w900),
+                    //           ),
+                    //           Text(
+                    //             'key_homepage_slider_subtitle'.tr,
+                    //             softWrap: true,
+                    //             style: TextStyle(
+                    //                 height: 1.5,
+                    //                 fontSize: 14,
+                    //                 color: ThemeClass.blackColor1,
+                    //                 fontWeight: FontWeight.w600),
+                    //           ),
+                    //           const SizedBox(height: 5),
+                    //           Text(
+                    //             'key_homepage_slider_description'.tr,
+                    //             softWrap: true,
+                    //             style: TextStyle(
+                    //                 height: 1.5,
+                    //                 fontSize: 10,
+                    //                 color: ThemeClass.greyColor1,
+                    //                 fontWeight: FontWeight.w400),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     Image.asset(
+                    //       'assets/images/home-page-slider.png',
+                    //       width: width / 2.5,
+                    //       height: height / 3,
+                    //       fit: BoxFit.fill,
+                    //     )
+                    //   ],
+                    // ),
                     ),
-                  ))
+              )
               .toList(),
           carouselController: _controller,
           options: CarouselOptions(

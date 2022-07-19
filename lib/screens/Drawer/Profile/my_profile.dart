@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/themedata.dart';
-
 import '../../../global/global_enum_class.dart';
-import '../../../routes.dart';
-import '../../../services/validation_services.dart';
 import '../../../widgets/appbar/appbar_with_back_button.dart';
 import '../../../widgets/buttons/round_button.dart';
 import '../../../widgets/textfield/textfield_with_suffix.dart';

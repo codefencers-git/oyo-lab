@@ -1,9 +1,12 @@
 // ignore_for_file: unused_element, must_be_immutable
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/Drawer%20screen/logout_controller.dart';
 import 'package:oyo_labs/themedata.dart';
+
+import '../../authentication/user_controller.dart';
 
 class DrawerWidget extends StatelessWidget {
   DrawerWidget({
@@ -13,125 +16,233 @@ class DrawerWidget extends StatelessWidget {
 
   final double width;
 
-  var logoutController = Get.put(LogoutController());
+  LogoutController logoutController = Get.put(LogoutController());
+  final UserController _loginController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: ThemeClass.whiteColor,
       elevation: 0,
+      child: _loginController.islogin.value == true
+          ? _buildMenuOfUser(context)
+          : _buildMenuForLogin(context),
+    );
+  }
+
+  Column _buildMenuOfUser(BuildContext context) {
+    return Column(
+      children: [
+        _buildProfileWidget(onTap: () {
+          Get.toNamed(Routes.myProfileScreen);
+        }),
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            children: [
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.allLabTests);
+                },
+                tileLabel: 'key_book_lab_lest'.tr,
+                tileIconPath: "assets/icons/lab-test-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.checkAppointment);
+                },
+                tileLabel: 'key_my_appointments'.tr,
+                tileIconPath: "assets/icons/appointment-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.myPrescritionSreen);
+                },
+                tileLabel: 'key_my_prescription'.tr,
+                tileIconPath: "assets/icons/icon_prescription.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.myTestReportScreen);
+                },
+                tileLabel: 'key_my_test_report'.tr,
+                tileIconPath: "assets/icons/icon_lab_test_reort.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.addMemberScreen);
+                },
+                tileLabel: 'key_members'.tr,
+                tileIconPath: "assets/icons/icon_members.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {},
+                tileLabel: 'key_help_n_faq'.tr,
+                tileIconPath: "assets/icons/help-faq-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.manageAddressScreen);
+                },
+                tileLabel: 'key_manage_address'.tr,
+                tileIconPath: "assets/icons/icon_location.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.settingScreen);
+                },
+                tileLabel: 'key_settings'.tr,
+                tileIconPath: "assets/icons/setting-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.aboutUsScreen);
+                },
+                tileLabel: 'key_about_us'.tr,
+                tileIconPath: "assets/icons/info-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {},
+                tileLabel: 'key_terms_policy'.tr,
+                tileIconPath: "assets/icons/icon-terms&policy.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.contactUsScreen);
+                },
+                tileLabel: 'key_contact_us'.tr,
+                tileIconPath: "assets/icons/icon-contactus.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  logoutController.logout(context);
+                },
+                tileLabel: 'key_logout'.tr,
+                tileIconPath: "assets/icons/logout-icon.png",
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column _buildMenuForLogin(BuildContext context) {
+    return Column(
+      children: [
+        _buildClickToLoginWidget(onTap: () {
+          Get.toNamed(Routes.loginScreen);
+        }),
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            children: [
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.allLabTests);
+                },
+                tileLabel: 'key_book_lab_lest'.tr,
+                tileIconPath: "assets/icons/lab-test-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {},
+                tileLabel: 'key_help_n_faq'.tr,
+                tileIconPath: "assets/icons/help-faq-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.manageAddressScreen);
+                },
+                tileLabel: 'key_manage_address'.tr,
+                tileIconPath: "assets/icons/icon_location.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.settingScreen);
+                },
+                tileLabel: 'key_settings'.tr,
+                tileIconPath: "assets/icons/setting-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.aboutUsScreen);
+                },
+                tileLabel: 'key_about_us'.tr,
+                tileIconPath: "assets/icons/info-icon.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {},
+                tileLabel: 'key_terms_policy'.tr,
+                tileIconPath: "assets/icons/icon-terms&policy.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  Get.toNamed(Routes.contactUsScreen);
+                },
+                tileLabel: 'key_contact_us'.tr,
+                tileIconPath: "assets/icons/icon-contactus.png",
+              ),
+              _buildDrawerListTile(
+                onTileTap: () {
+                  logoutController.logout(context);
+                },
+                tileLabel: 'key_logout'.tr,
+                tileIconPath: "assets/icons/logout-icon.png",
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  InkWell _buildClickToLoginWidget({
+    VoidCallback? onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
       child: Column(
         children: [
-          _buildProfileWidget(onTap: () {
-            Get.toNamed(Routes.myProfileScreen);
-          }),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
+          Padding(
+            padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
+            child: Row(
               children: [
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.allLabTests);
-                  },
-                  tileLabel: 'key_book_lab_lest'.tr,
-                  tileIconPath: "assets/icons/lab-test-icon.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.checkAppointment);
-                  },
-                  tileLabel: 'key_my_appointments'.tr,
-                  tileIconPath: "assets/icons/appointment-icon.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.myPrescritionSreen);
-                  },
-                  tileLabel: 'key_my_prescription'.tr,
-                  tileIconPath: "assets/icons/icon_prescription.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.myTestReportScreen);
-                  },
-                  tileLabel: 'key_my_test_report'.tr,
-                  tileIconPath: "assets/icons/icon_lab_test_reort.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.addMemberScreen);
-                  },
-                  tileLabel: 'key_members'.tr,
-                  tileIconPath: "assets/icons/icon_members.png",
-                ),
-                // _buildDrawerListTile(
-                //   onTileTap: () {
-                //     Get.toNamed(Routes.notificationSettingScreen);
-                //   },
-                //   tileLabel: "Notification",
-                //   tileIconPath: "assets/icons/notification-icon.png",
-                // ),
-                _buildDrawerListTile(
-                  onTileTap: () {},
-                  tileLabel: 'key_help_n_faq'.tr,
-                  tileIconPath: "assets/icons/help-faq-icon.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.manageAddressScreen);
-                  },
-                  tileLabel: 'key_manage_address'.tr,
-                  tileIconPath: "assets/icons/icon_location.png",
-                ),
-                // _buildDrawerListTile(
-                //   onTileTap: () {
-                //     Get.toNamed(Routes.referandEarnScreen);
-                //   },
-                //   tileLabel: 'key_refer_n_earn'.tr,
-                //   tileIconPath: "assets/icons/icon-dollor.png",
-                // ),
-                // _buildDrawerListTile(
-                //   onTileTap: () {
-                //     Get.toNamed(Routes.walletScreen);
-                //   },
-                //   tileLabel: 'key_wallet'.tr,
-                //   tileIconPath: "assets/icons/icon-wallet.png",
-                // ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.settingScreen);
-                  },
-                  tileLabel: 'key_settings'.tr,
-                  tileIconPath: "assets/icons/setting-icon.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.aboutUsScreen);
-                  },
-                  tileLabel: 'key_about_us'.tr,
-                  tileIconPath: "assets/icons/info-icon.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {},
-                  tileLabel: 'key_terms_policy'.tr,
-                  tileIconPath: "assets/icons/icon-terms&policy.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    Get.toNamed(Routes.contactUsScreen);
-                  },
-                  tileLabel: 'key_contact_us'.tr,
-                  tileIconPath: "assets/icons/icon-contactus.png",
-                ),
-                _buildDrawerListTile(
-                  onTileTap: () {
-                    logoutController.logout(context);
-                  },
-                  tileLabel: 'key_logout'.tr,
-                  tileIconPath: "assets/icons/logout-icon.png",
-                ),
+                Image.network("assets/images/profile-picture.png"),
+                const SizedBox(width: 8),
+                SizedBox(
+                  width: width * 0.45,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Click To",
+                        style: TextStyle(
+                          color: ThemeClass.darkgreyColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                          color: ThemeClass.orangeColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: Divider(
+              thickness: 2,
+              color: ThemeClass.orangeColor.withOpacity(0.1),
             ),
           ),
         ],
@@ -187,9 +298,25 @@ class DrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: 30,
-                  child: Image.asset("assets/images/profile-picture.png"),
+                CachedNetworkImage(
+                  imageUrl:
+                      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+                  imageBuilder: (context, imageProvider) => Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.cover),
+                        borderRadius: BorderRadius.circular(50)),
+                  ),
+                  placeholder: (context, url) => SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: CircularProgressIndicator(
+                        color: ThemeClass.orangeColor,
+                        strokeWidth: 3,
+                      )),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
                 const SizedBox(width: 8),
                 SizedBox(

@@ -61,42 +61,43 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               ContainerWithInnerShadow(
-                  width: width,
-                  height: height * 0.67,
-                  child: Column(
-                    children: [
-                      Text(
-                        'key_login_title'.tr,
-                        style: TextStyle(
-                            color: ThemeClass.orangeColor,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(height: 25),
-                      Padding(
-                        padding: const EdgeInsets.all(25.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              _buildEmailField(),
-                              const SizedBox(height: 20),
-                              _buildPasswordField(),
-                              const SizedBox(height: 10),
-                              _buildForgotPassword(),
-                              SizedBox(
-                                height: height / 8,
-                              ),
-                              _buildLoginButton(),
-                              const SizedBox(height: 20),
-                              _buildKeyNewHere()
-                            ],
-                          ),
+                width: width,
+                height: height * 0.67,
+                child: Column(
+                  children: [
+                    Text(
+                      'key_login_title'.tr,
+                      style: TextStyle(
+                          color: ThemeClass.orangeColor,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 25),
+                    Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            _buildEmailField(),
+                            const SizedBox(height: 20),
+                            _buildPasswordField(),
+                            const SizedBox(height: 10),
+                            _buildForgotPassword(),
+                            SizedBox(
+                              height: height / 8,
+                            ),
+                            _buildLoginButton(),
+                            const SizedBox(height: 20),
+                            _buildKeyNewHere()
+                          ],
                         ),
                       ),
-                    ],
-                  ))
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -107,14 +108,14 @@ class _LoginScreenState extends State<LoginScreen> {
   RoundButton _buildLoginButton() {
     return RoundButton(
       buttonLabel: 'key_login_btn'.tr,
-      onTap: () {
+      onTap: () async {
         if (_formKey.currentState!.validate()) {
           var mapData = <String, dynamic>{};
           mapData['username'] = _emailOrPhoneController.text.trim();
           mapData['password'] = _passwordController.text.trim();
           mapData['device_token'] = "0";
           mapData['device_type'] = Platform.isAndroid ? "android" : "ios";
-          userController.loginServices(mapData);
+          await userController.loginServices(mapData);
           _clearTextFields();
         }
       },

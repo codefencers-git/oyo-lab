@@ -16,8 +16,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var dashboardController = Get.put(DashboardController());
-  var _categoryController = Get.put(ProductCategoryController());
+  DashboardController dashboardController = Get.put(DashboardController());
+  final _categoryController = Get.put(ProductCategoryController());
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
@@ -60,7 +60,6 @@ class _SplashScreenState extends State<SplashScreen> {
         ModalRoute.withName(Routes.onboardingScreen),
       );
     }
-    // Get.toNamed(Routes.onboardingScreen);
   }
 
   @override

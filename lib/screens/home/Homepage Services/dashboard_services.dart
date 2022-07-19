@@ -18,7 +18,7 @@ class DashboardController extends GetxController {
           height: 100,
           width: 100,
           color: Colors.white,
-          child: Text("code here"),
+          child: const Text("code here"),
         ),
       ),
     );

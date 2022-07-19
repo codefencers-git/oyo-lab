@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
@@ -29,11 +30,14 @@ class UserController extends GetxController {
 
           userPrefController.setUserData(userModel: userData);
           userPrefController.setToken(userData.data!.token);
-
+          print("------------Token" + userData.data!.token.toString());
           islogin(true);
+          print(
+              "------------login done------------" + islogin.value.toString());
 
+          debugPrint(jasonData['message']);
           showToast(jasonData['message']);
-          Get.offAllNamed(Routes.homeScreen);
+          Get.toNamed(Routes.homeScreen);
 
           isError(false);
           errorMessage("");

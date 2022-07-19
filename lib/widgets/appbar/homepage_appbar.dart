@@ -17,10 +17,12 @@ class HomePageAppBar extends StatefulWidget {
 }
 
 class _HomePageAppBarState extends State<HomePageAppBar> {
-  var _currentAddress = "350001 Ahmedabad";
+  String _currentAddress = "350001 Ahmedabad";
   final UserController _loginController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
+    print("in appbar------------------" +
+        _loginController.islogin.value.toString());
     return AppBar(
       backgroundColor: ThemeClass.orangeColor,
       toolbarHeight: 70,
