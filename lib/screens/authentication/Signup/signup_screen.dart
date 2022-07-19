@@ -10,7 +10,7 @@ import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
-import 'signup_service_controller.dart';
+import '../user_controller.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -58,7 +58,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  var signUpController = Get.put(SignupController());
+  UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -322,7 +322,7 @@ class _SignupScreenState extends State<SignupScreen> {
               mapData['gender'] = _radioMF.name.trim();
               mapData['dob'] = _dobController.text.trim();
 
-              signUpController.signupServices(mapData);
+              userController.signupServices(mapData);
             }
           }
         },
