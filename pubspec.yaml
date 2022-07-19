@@ -48,6 +48,8 @@ dependencies:
   fluttertoast: ^8.0.9
   shared_preferences: ^2.0.15
   google_place: ^0.4.7
+  geolocator: ^8.1.0
+  geocoding: ^2.0.4
 
 dev_dependencies:
   flutter_test:

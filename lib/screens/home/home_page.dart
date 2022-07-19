@@ -2,13 +2,17 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/app_info/google_key_services.dart';
 import 'package:oyo_labs/routes.dart';
 
 import 'package:oyo_labs/screens/home/Drawer%20screen/drawer_sceen.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/homepage_appbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/user_location_service.dart';
 import '../laboratory/labtest_tile_widget.dart';
 import 'Homepage Services/dashboard_services.dart';
 
@@ -23,12 +27,51 @@ class _HomePageState extends State<HomePage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
   DashboardController dashboardController = Get.find<DashboardController>();
+  UserLocationController userLocationController =
+      Get.put(UserLocationController());
+  @override
+  void initState() {
+    super.initState();
+    _determinePosition();
+    userLocationController.getCurrentLocation();
+  }
 
-  // final List<String> imgList = [
-  //   'assets/images/home-page-slider.png',
-  //   'assets/images/home-page-slider.png',
-  //   'assets/images/home-page-slider.png',
-  // ];
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +84,10 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
-        child: HomePageAppBar(onTap: () {}),
+        child: HomePageAppBar(
+          onTap: () {},
+          address: userLocationController.currentAddress.toLowerCase(),
+        ),
       ),
       body: Obx(
         () => (dashboardController.isloading.value == false)

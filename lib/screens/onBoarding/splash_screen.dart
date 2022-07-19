@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/app_info/google_key_services.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
 import 'package:oyo_labs/screens/onBoarding/onboarding_screen.dart';
@@ -18,6 +19,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   var dashboardController = Get.put(DashboardController());
   var _categoryController = Get.put(ProductCategoryController());
+
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
@@ -26,6 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     _categoryController.getProductCategory();
+
     super.initState();
   }
 
