@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/themedata.dart';
 
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -23,7 +24,32 @@ class _BookingSuccessState extends State<BookingSuccess> {
       ),
       body: Column(
         children: [
-          Image.asset("assets/images/booking_successfull.png"),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
+            child: Image.asset("assets/images/booking_successfull.png"),
+          ),
+          Text(
+            'key_booking_successfull'.tr,
+            style: TextStyle(
+                fontSize: 24,
+                color: ThemeClass.greenColor,
+                fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
+                  .tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: ThemeClass.greyColor1,
+                  fontWeight: FontWeight.w700),
+            ),
+          )
         ],
       ),
       bottomNavigationBar: Container(

@@ -1,29 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/themedata.dart';
 
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 
-class BookingFailed extends StatefulWidget {
-  const BookingFailed({Key? key}) : super(key: key);
+class BookingSuccess extends StatefulWidget {
+  const BookingSuccess({Key? key}) : super(key: key);
 
   @override
-  State<BookingFailed> createState() => _BookingFailedState();
+  State<BookingSuccess> createState() => _BookingSuccessState();
 }
 
-class _BookingFailedState extends State<BookingFailed> {
+class _BookingSuccessState extends State<BookingSuccess> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
-        child: AppbarWithBackButton(appbarTitle: 'Failed'),
+        child: AppbarWithBackButton(appbarTitle: 'key_failed'.tr),
       ),
       body: Column(
         children: [
-          Image.asset("assets/images/booking_failed.png"),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
+            child: Image.asset("assets/images/booking_failed.png"),
+          ),
+          Text(
+            'key_booking_unsuccessfull'.tr,
+            style: TextStyle(
+                fontSize: 24,
+                color: ThemeClass.redColor,
+                fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
+                  .tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: ThemeClass.greyColor1,
+                  fontWeight: FontWeight.w700),
+            ),
+          )
         ],
       ),
       bottomNavigationBar: Container(
@@ -33,7 +59,7 @@ class _BookingFailedState extends State<BookingFailed> {
           onTap: () {
             Get.toNamed(Routes.checkAppointment);
           },
-          buttonLabel: 'Book Again',
+          buttonLabel: 'key_book_again'.tr,
         ),
       ),
     );

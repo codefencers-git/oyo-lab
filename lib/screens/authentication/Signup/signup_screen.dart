@@ -59,6 +59,29 @@ class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
   UserController userController = Get.put(UserController());
+  _onSubmit() {
+    if (_formKey.currentState!.validate()) {
+      if (check != false) {
+        var mapData = <String, dynamic>{};
+
+        mapData['name'] = _nameController.text.trim();
+        mapData['email'] = _emailController.text.trim();
+        mapData['country_code'] = "+91";
+        mapData['phone_number'] = _phoneNumberController.text.trim();
+        mapData['password'] = _passwordController.text.trim();
+        mapData['gender'] = _radioMF.name.trim();
+        mapData['dob'] = _dobController.text.trim();
+
+        try {
+          userController.signupServices(mapData);
+        } catch (e) {
+          debugPrint(e.toString());
+        }
+      } else {
+        showToast('key_accept_terms_msg'.tr);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,13 +171,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                               fontWeight: FontWeight.w400,
                                             )),
                                         TextSpan(
-                                            text: 'Terms',
+                                            text: ' Terms',
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400,
                                                 color: ThemeClass.orangeColor)),
                                         const TextSpan(
-                                            text: '& ',
+                                            text: ' & ',
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w400,
@@ -172,7 +195,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               ],
                             ),
                           ),
-                          _buildRegisterWidget(),
+                          _buildRegisterWidget(_onSubmit),
                           const SizedBox(height: 15),
                           _buildAlreadyExistWidget(),
                         ],
@@ -303,29 +326,12 @@ class _SignupScreenState extends State<SignupScreen> {
         });
   }
 
-  Padding _buildRegisterWidget() {
+  Padding _buildRegisterWidget(void Function() onTap) {
     return Padding(
       padding: const EdgeInsets.only(top: 30, bottom: 20),
       child: RoundButton(
         buttonLabel: 'key_register'.tr,
-        onTap: () {
-          if (_formKey.currentState!.validate()) {
-            if (check == false) {
-              showToast('key_accept_terms_msg'.tr);
-              var mapData = <String, dynamic>{};
-
-              mapData['name'] = _nameController.text.trim();
-              mapData['email'] = _emailController.text.trim();
-              mapData['country_code'] = "+91";
-              mapData['phone_number'] = _phoneNumberController.text.trim();
-              mapData['password'] = _passwordController.text.trim();
-              mapData['gender'] = _radioMF.name.trim();
-              mapData['dob'] = _dobController.text.trim();
-
-              userController.signupServices(mapData);
-            }
-          }
-        },
+        onTap: onTap,
         fontSize: 16,
         fontWeight: FontWeight.w500,
         fontFamily: 'Poppins',

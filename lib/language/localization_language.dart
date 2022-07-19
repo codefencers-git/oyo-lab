@@ -80,6 +80,15 @@ class LanguageLocaleString extends Translations {
           'key_document': 'Document',
           //-------------------My Test Report
           'key_download_btn': 'Download',
+          //-------------------Book Failed
+          'key_failed': 'Failed',
+          'key_book_again': 'Book Again',
+          'key_booking_unsuccessfull': 'Booking Unsuccessfull',
+
+          //-------------------Book Successfull
+          'key_booking_successfull': 'Booking Successfull',
+          'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry':
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
 
           //-------------------Members - add member
           'key_add_new_member': 'Add New Member',
