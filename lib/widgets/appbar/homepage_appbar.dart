@@ -9,8 +9,13 @@ import '../../routes.dart';
 import '../../services/SharedPrefServices/shared_pref_services.dart';
 
 class HomePageAppBar extends StatefulWidget {
+  final bool isDelivered;
   final String address;
-  HomePageAppBar({Key? key, required this.onTap, required this.address})
+  HomePageAppBar(
+      {Key? key,
+      required this.onTap,
+      required this.address,
+      required this.isDelivered})
       : super(key: key);
 
   VoidCallback onTap;
@@ -59,14 +64,16 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                   },
                   child: Row(
                     children: [
-                      Text(
-                        'key_delivered_to_appbar'.tr + " ",
-                        style: const TextStyle(
-                          color: ThemeClass.whiteColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
+                      widget.isDelivered == false
+                          ? SizedBox()
+                          : Text(
+                              'key_delivered_to_appbar'.tr + " ",
+                              style: const TextStyle(
+                                color: ThemeClass.whiteColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
                       Expanded(
                         child: Text(
                           widget.address,
@@ -74,7 +81,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                             // overflow: TextOverflow.ellipsis,
                             color: ThemeClass.whiteColor,
                             fontSize: 12,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),

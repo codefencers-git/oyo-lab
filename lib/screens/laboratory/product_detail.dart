@@ -154,6 +154,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
   }
 
   SingleChildScrollView _buildView(LAbTestDetailData? data) {
+    print(data!.labList!.length);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -164,7 +165,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                 height: 200,
                 width: MediaQuery.of(context).size.width,
                 child: Image.network(
-                  data!.image.toString(),
+                  data.image.toString(),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -174,10 +175,12 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
           const SizedBox(
             height: 45,
           ),
-          _buildLaboratoryImage(),
+          _buildLaboratoryImage(data.gallery),
           _buildLaboratoryNearTitle(data.labList),
           _buildNearLaboratory(data.labList),
-          data.labList!.isEmpty ? const SizedBox() : _buildLoadMoreButton(),
+          data.labList!.isEmpty || data.labList!.length <= 3
+              ? const SizedBox()
+              : _buildLoadMoreButton(),
           const SizedBox(
             height: 10,
           ),
@@ -373,7 +376,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                             height: 5,
                           ),
                           Text(
-                            "₹ ${recommadProduct[index]..toString()}",
+                            recommadProduct[index].area.toString(),
                             style: TextStyle(
                                 fontSize: 12,
                                 color: ThemeClass.orangeColor,
@@ -429,7 +432,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
     );
   }
 
-  SizedBox _buildLaboratoryImage() {
+  SizedBox _buildLaboratoryImage(List<Gallery>? image) {
     return SizedBox(
       height: 100,
       child: ListView.builder(
@@ -442,7 +445,10 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
             margin: const EdgeInsets.all(5),
             height: 64,
             width: 78,
-            child: Image.asset("assets/images/lab_listview_builder.png"),
+            child: Image.network(
+              image![index].image.toString(),
+              fit: BoxFit.contain,
+            ),
           );
         },
       ),

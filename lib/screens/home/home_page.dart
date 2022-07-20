@@ -9,6 +9,7 @@ import 'package:oyo_labs/app_info/google_key_services.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/Drawer%20screen/drawer_sceen.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
+import 'package:oyo_labs/screens/home/imagebottomsheet.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_model.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_service.dart';
 import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
@@ -33,7 +34,6 @@ class _HomePageState extends State<HomePage> {
   bool isFirst = true;
   final TextEditingController _searchQuery = TextEditingController();
 
-  LabTestController _labtestController = Get.put(LabTestController());
   DashboardController dashboardController = Get.find<DashboardController>();
   UserLocationController userLocationController =
       Get.put(UserLocationController());
@@ -114,12 +114,20 @@ class _HomePageState extends State<HomePage> {
         width: width,
       ),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(65.0),
-        child: HomePageAppBar(
-          onTap: () {},
-          address: userLocationController.currentAddress.toLowerCase(),
-        ),
-      ),
+          preferredSize: const Size.fromHeight(65.0),
+          child: Obx(
+            () => userLocationController.currentAddress.toString() == ''
+                ? HomePageAppBar(
+                    onTap: () {},
+                    address: "",
+                    isDelivered: false,
+                  )
+                : HomePageAppBar(
+                    onTap: () {},
+                    isDelivered: true,
+                    address: userLocationController.currentAddress.toString(),
+                  ),
+          )),
       body: Obx(
         () => (dashboardController.isloading.value == false)
             ? dashboardController.isError.value == true
@@ -422,7 +430,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
       onPressed: () {
-        dashboardController.showdialog();
+        showModalBottomSheet<void>(
+          context: context,
+          backgroundColor: Colors.transparent,
+          builder: (BuildContext context) {
+            return const SelectImageBottomSheet();
+          },
+        );
       },
       child: Text(
         'key_upload_btn_label'.tr,

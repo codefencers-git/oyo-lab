@@ -262,21 +262,25 @@ class DrawerWidget extends StatelessWidget {
           onTap: onTileTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-            child: Row(
-              children: [
-                Image(
-                  image: AssetImage(tileIconPath),
-                  height: 35,
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  tileLabel,
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: ThemeClass.darkgreyColor),
-                )
-              ],
+            child: SizedBox(
+              child: Row(
+                children: [
+                  Image(
+                    image: AssetImage(tileIconPath),
+                    height: 35,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      tileLabel,
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: ThemeClass.darkgreyColor),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

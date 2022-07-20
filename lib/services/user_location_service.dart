@@ -36,10 +36,9 @@ class UserLocationController extends GetxController {
       position.longitude,
     );
 
-    var tempcurrentLocationCity = placemarks[0].subAdministrativeArea != null &&
-            placemarks[0].subAdministrativeArea != ""
-        ? placemarks[0].toString()
-        : "";
+    var tempcurrentLocationCity = placemarks[0].subLocality != ""
+        ? placemarks[0].subLocality.toString()
+        : "kyk to aavu joyene";
     currentAddress(tempcurrentLocationCity);
   }
 }
