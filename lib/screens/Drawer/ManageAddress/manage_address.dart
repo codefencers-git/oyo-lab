@@ -15,28 +15,24 @@ class ManageAddress extends StatefulWidget {
 class _ManageAddressState extends State<ManageAddress> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: 'key_manage_address'.tr),
-        ),
-        body: Container(
-          padding: const EdgeInsets.all(16),
-          child: _buildManageAdd(),
-        ),
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.all(16),
-          height: 45,
-          child: RoundButton(
-            onTap: () {
-              Get.toNamed(Routes.addNewAddressScreen);
-            },
-            buttonLabel: 'key_add_new_address'.tr,
-          ),
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65.0),
+        child: AppbarWithBackButton(appbarTitle: 'key_manage_address'.tr),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        child: _buildManageAdd(),
+      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.all(16),
+        height: 45,
+        child: RoundButton(
+          onTap: () {
+            Get.toNamed(Routes.addNewAddressScreen);
+          },
+          buttonLabel: 'key_add_new_address'.tr,
         ),
       ),
     );

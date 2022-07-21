@@ -17,22 +17,50 @@ class _AddAddressState extends State<AddAddress> {
   final TextEditingController _textaddController2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor2,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: 'key_manage_address'.tr),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
-          child: Column(
-            children: [
-              TextFormField(
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor2,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65.0),
+        child: AppbarWithBackButton(appbarTitle: 'key_manage_address'.tr),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'key_name'.tr,
+                hintStyle: TextStyle(
+                  fontSize: 12,
+                  color: ThemeClass.greyColor,
+                  fontWeight: FontWeight.w400,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                filled: true,
+              ),
+              controller: _textController,
+              validator: (value) {
+                if (value == null) {
+                  return 'key_full_name'.tr;
+                } else if (value.length < 2) {
+                  return 'key_name_validation'.tr;
+                }
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 100,
+              child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                minLines: 6,
                 decoration: InputDecoration(
-                  hintText: 'key_name'.tr,
+                  hintText: 'key_address_line-1'.tr,
                   hintStyle: TextStyle(
                     fontSize: 12,
                     color: ThemeClass.greyColor,
@@ -44,91 +72,85 @@ class _AddAddressState extends State<AddAddress> {
                   ),
                   filled: true,
                 ),
-                controller: _textController,
+                controller: _textaddController,
                 validator: (value) {
                   if (value == null) {
-                    return 'key_full_name'.tr;
+                    return 'key_address_line-1'.tr;
                   } else if (value.length < 2) {
-                    return 'key_name_validation'.tr;
+                    return 'key_address_validation'.tr;
                   }
                 },
               ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 100,
-                child: TextFormField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  minLines: 6,
-                  decoration: InputDecoration(
-                    hintText: 'key_address_line-1'.tr,
-                    hintStyle: TextStyle(
-                      fontSize: 12,
-                      color: ThemeClass.greyColor,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    filled: true,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 100,
+              child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                minLines: 6,
+                decoration: InputDecoration(
+                  hintText: 'key_address_line-2'.tr,
+                  hintStyle: TextStyle(
+                    fontSize: 12,
+                    color: ThemeClass.greyColor,
+                    fontWeight: FontWeight.w400,
                   ),
-                  controller: _textaddController,
-                  validator: (value) {
-                    if (value == null) {
-                      return 'key_address_line-1'.tr;
-                    } else if (value.length < 2) {
-                      return 'key_address_validation'.tr;
-                    }
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 100,
-                child: TextFormField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  minLines: 6,
-                  decoration: InputDecoration(
-                    hintText: 'key_address_line-2'.tr,
-                    hintStyle: TextStyle(
-                      fontSize: 12,
-                      color: ThemeClass.greyColor,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    filled: true,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
-                  controller: _textaddController2,
-                  validator: (value) {
-                    if (value == null) {
-                      return 'key_address_line-2'.tr;
-                    } else if (value.length < 2) {
-                      return 'key_address_validation'.tr;
-                    }
-                  },
+                  filled: true,
                 ),
+                controller: _textaddController2,
+                validator: (value) {
+                  if (value == null) {
+                    return 'key_address_line-2'.tr;
+                  } else if (value.length < 2) {
+                    return 'key_address_validation'.tr;
+                  }
+                },
               ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'key_pincode'.tr,
+                hintStyle: TextStyle(
+                  fontSize: 12,
+                  color: ThemeClass.greyColor,
+                  fontWeight: FontWeight.w400,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                filled: true,
+              ),
+              controller: _textController,
+              validator: (value) {
+                if (value == null) {
+                  return 'key_full_name'.tr;
+                } else if (value.length < 2) {
+                  return 'key_name_validation'.tr;
+                }
+              },
+            ),
+          ],
         ),
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.all(16),
-          height: 45,
-          child: RoundButton(
-            onTap: () {
-              //Get.toNamed(Routes.bookingSuccessScreen);
-            },
-            buttonLabel: 'key_add_address'.tr,
-          ),
+      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.all(16),
+        height: 45,
+        child: RoundButton(
+          onTap: () {
+            //Get.toNamed(Routes.bookingSuccessScreen);
+          },
+          buttonLabel: 'key_add_address'.tr,
         ),
       ),
     );

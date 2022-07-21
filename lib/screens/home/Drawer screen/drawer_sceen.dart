@@ -78,7 +78,9 @@ class DrawerWidget extends StatelessWidget {
                 tileIconPath: "assets/icons/icon_members.png",
               ),
               _buildDrawerListTile(
-                onTileTap: () {},
+                onTileTap: () {
+                  Get.toNamed(Routes.helpAndSupportScreen);
+                },
                 tileLabel: 'key_help_n_faq'.tr,
                 tileIconPath: "assets/icons/help-faq-icon.png",
               ),

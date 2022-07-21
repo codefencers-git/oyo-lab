@@ -34,6 +34,7 @@ class LanguageLocaleString extends Translations {
           'key_view_all': 'View All',
           //-------------------Drawer screen
           'key_book_lab_lest': 'Book Lab Test',
+          'key_help_&_faq': "Help & FAQ's ",
           'key_my_appointments': 'My Appointments',
           'key_my_prescription': 'My Prescription',
           'key_my_test_report': 'My Test Report',
@@ -101,6 +102,7 @@ class LanguageLocaleString extends Translations {
           'key_update_btn': 'Update',
           //-------------------Manange address - add address
           'key_full_name': 'Full Name',
+          'key_pincode': 'Pincode',
           'key_name_validation': 'Please enter valid Name',
           'key_address_line-1': 'Address Line-1',
           'key_address_line-2': 'Address Line-2',

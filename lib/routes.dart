@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:oyo_labs/screens/AboutUs/about_us.dart';
+import 'package:oyo_labs/screens/Drawer/Help&FAQ%20screen/help_and_support.dart';
 import 'package:oyo_labs/screens/Drawer/Member/update_member.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/my_prescription.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/my_profile.dart';
@@ -64,6 +65,7 @@ class Routes {
   static const String myProfileScreen = '/myProfileScreen';
   static const String ratingScreen = '/ratingScreen';
   static const String drawerLabTestScreen = '/drawerLabTestScreen';
+  static const String helpAndSupportScreen = '/helpAndSupportScreen';
 
   static List<GetPage> gobalRoutes = [
     GetPage(name: splashRoute, page: () => const SplashScreen()),
@@ -106,5 +108,7 @@ class Routes {
               id: '',
             )),
     GetPage(name: drawerLabTestScreen, page: () => const DrawerLabTestScreen()),
+    GetPage(
+        name: helpAndSupportScreen, page: () => const HelpAndSupportScreen()),
   ];
 }

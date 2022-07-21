@@ -14,75 +14,70 @@ class MyPrescription extends StatefulWidget {
 class _MyPrescriptionState extends State<MyPrescription> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: 'key_my_prescription'.tr),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 10,
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65.0),
+        child: AppbarWithBackButton(appbarTitle: 'key_my_prescription'.tr),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'key_prescriptions'.tr,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'key_prescriptions'.tr,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged five centuries, but also the leap into electronic.',
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: ThemeClass.greyColor),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'key_past_7_days'.tr,
-                style: const TextStyle(
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged five centuries, but also the leap into electronic.',
+              style: TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
+                  fontWeight: FontWeight.w400,
+                  color: ThemeClass.greyColor),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'key_past_7_days'.tr,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            _buildTestCase(),
-            const SizedBox(
-              height: 15,
-            ),
-            _buildTestCase(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'key_past_22_days'.tr,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: ThemeClass.blackColor,
-                  fontWeight: FontWeight.w500,
-                ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _buildTestCase(),
+          const SizedBox(
+            height: 15,
+          ),
+          _buildTestCase(),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'key_past_22_days'.tr,
+              style: TextStyle(
+                fontSize: 12,
+                color: ThemeClass.blackColor,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            _buildTestCase(),
-          ],
-        ),
+          ),
+          _buildTestCase(),
+        ],
       ),
     );
   }

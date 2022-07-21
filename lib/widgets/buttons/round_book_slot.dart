@@ -13,11 +13,13 @@ class RoundButtonBookSlot extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(top: 30, right: 10, left: 10),
+        padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
         child: Container(
           width: double.infinity,
-          height: 20,
-          padding: const EdgeInsets.symmetric(vertical: 5),
+          height: 25,
+          padding: const EdgeInsets.symmetric(
+            vertical: 6,
+          ),
           decoration: BoxDecoration(
               color: ThemeClass.orangeColor,
               borderRadius: BorderRadius.circular(10)),
