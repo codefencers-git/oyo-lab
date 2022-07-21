@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_service.dart';
@@ -18,12 +20,12 @@ class AllLabTestsScreen extends StatefulWidget {
 
 class _AllLabTestsScreenState extends State<AllLabTestsScreen> {
   late TextEditingController _controller;
-  var _scrollcontroller = ScrollController();
-  var _categoryController = Get.find<ProductCategoryController>();
+  final ScrollController _scrollcontroller = ScrollController();
+  final ProductCategoryController  _categoryController = Get.find<ProductCategoryController>();
 
   // final ProductCategoryController _categoryController =
   //     Get.put(ProductCategoryController());
-  var _labTestController = Get.put(LabTestController());
+  final LabTestController _labTestController = Get.put(LabTestController());
   @override
   void initState() {
     super.initState();
@@ -98,7 +100,7 @@ class _AllLabTestsScreenState extends State<AllLabTestsScreen> {
                               _labTestController.errorMessage.value.toString()),
                         )
                       : _labTestController.labTestData.value.isEmpty
-                          ? Center(
+                          ? const Center(
                               child: Text("No Data Found"),
                             )
                           : Column(
@@ -134,7 +136,7 @@ class _AllLabTestsScreenState extends State<AllLabTestsScreen> {
                                     ? CircularProgressIndicator(
                                         color: ThemeClass.orangeColor,
                                       )
-                                    : SizedBox()
+                                    : const SizedBox()
                               ],
                             )
             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/Drawer/ManageAddress/services%20and%20model/address_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -13,6 +14,11 @@ class ManageAddress extends StatefulWidget {
 }
 
 class _ManageAddressState extends State<ManageAddress> {
+  final AddressServicesController _addressController =
+      Get.put(AddressServicesController(), permanent: true);
+
+  //Model and services creation is done, only api call is remaining
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +54,7 @@ class _ManageAddressState extends State<ManageAddress> {
               "assets/icons/icon_manage_add_home.png",
               height: 25,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Expanded(
@@ -77,7 +83,7 @@ class _ManageAddressState extends State<ManageAddress> {
               ),
             ),
             DropdownButton(
-                underline: SizedBox(),
+                underline: const SizedBox(),
                 icon: Image.asset(
                   'assets/icons/icon_3_dots.png',
                   height: 20,
@@ -106,8 +112,8 @@ class _ManageAddressState extends State<ManageAddress> {
                         borderRadius: BorderRadius.circular(5),
                       ),
 
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
                       // margin: const EdgeInsets.only(right: 10),
                       child: Text(
                         'key_edit_btn'.tr,
@@ -123,10 +129,10 @@ class _ManageAddressState extends State<ManageAddress> {
                 onChanged: (val) {}),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
-        Divider(),
+        const Divider(),
         Column(
           children: [
             Row(
@@ -135,7 +141,7 @@ class _ManageAddressState extends State<ManageAddress> {
                   "assets/icons/icon_building.png",
                   height: 30,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -164,7 +170,7 @@ class _ManageAddressState extends State<ManageAddress> {
                   ),
                 ),
                 DropdownButton(
-                    underline: SizedBox(),
+                    underline: const SizedBox(),
                     icon: Image.asset(
                       'assets/icons/icon_3_dots.png',
                       height: 20,
@@ -193,7 +199,7 @@ class _ManageAddressState extends State<ManageAddress> {
                             borderRadius: BorderRadius.circular(5),
                           ),
 
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 20),
                           // margin: const EdgeInsets.only(right: 10),
                           child: Text(
@@ -210,10 +216,10 @@ class _ManageAddressState extends State<ManageAddress> {
                     onChanged: (val) {}),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Divider(),
+            const Divider(),
             Column(
               children: [
                 Row(
@@ -222,7 +228,7 @@ class _ManageAddressState extends State<ManageAddress> {
                       "assets/icons/icon_manage_add_home.png",
                       height: 25,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Expanded(
@@ -251,7 +257,7 @@ class _ManageAddressState extends State<ManageAddress> {
                       ),
                     ),
                     DropdownButton(
-                        underline: SizedBox(),
+                        underline: const SizedBox(),
                         icon: Image.asset(
                           'assets/icons/icon_3_dots.png',
                           height: 20,
@@ -281,7 +287,7 @@ class _ManageAddressState extends State<ManageAddress> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
 
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 20),
                               // margin: const EdgeInsets.only(right: 10),
                               child: Text(
@@ -298,10 +304,10 @@ class _ManageAddressState extends State<ManageAddress> {
                         onChanged: (val) {}),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Divider(),
+                const Divider(),
               ],
             )
           ],

@@ -5,15 +5,12 @@ import 'dart:io';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/services/http_services.dart';
-import '../../../services/SharedPrefServices/shared_pref_services.dart';
 import '../Change Password/change_password_screen.dart';
 
 class MobileVerificationController extends GetxController {
   var isError = false.obs;
   var errorMessage = "".obs;
   var isLoading = false.obs;
-
-  var userPrefController = Get.find<UserPrefService>();
 
   checkOtpForChangePassword(String phoneNumber, String otp) async {
     try {
@@ -32,12 +29,6 @@ class MobileVerificationController extends GetxController {
           showToast(jasonData['message']);
           Get.to(ChangePasswordScreen(
               otp: otp, usernameOrPhoneNumber: mapData['username']));
-          // Get.offAllNamed(Routes.changePasswordScreen, arguments: [
-          //   {
-          //     'userName': mapData['phone_number'],
-          //     'otp': otp,
-          //   }
-          // ]);
 
           isError(false);
           errorMessage("");

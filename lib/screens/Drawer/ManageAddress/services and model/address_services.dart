@@ -1,35 +1,22 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
-import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
+import 'package:oyo_labs/screens/Drawer/ManageAddress/services%20and%20model/address_model.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
-class DashboardController extends GetxController {
-  Rx<DashboardData> dashboardData = DashboardData().obs;
+class AddressServicesController extends GetxController {
   RxBool isError = false.obs;
   RxString errorMessage = "".obs;
   RxBool isloading = false.obs;
 
-  showdialog() {
-    Get.dialog(
-      Center(
-        child: Container(
-          height: 100,
-          width: 100,
-          color: Colors.white,
-          child: const Text("code here"),
-        ),
-      ),
-    );
-  }
+  RxList<AddrressData?> memberData = (List<AddrressData?>.of([])).obs;
 
-  Future<void> getDashboardData() async {
+  Future<void> getAddressList() async {
     isloading(true);
-    try {
-      String url = 'get_dashboard_data';
-      var response = await HttpServices.httpGetWithoutToken(url);
 
+    try {
+      String url = 'get_addresses';
+      var response = await HttpServices.httpGet(url);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jasonData = json.decode(response.body);
@@ -37,9 +24,9 @@ class DashboardController extends GetxController {
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           isError(false);
           errorMessage("");
-          DashboardModel dashboardData1 = DashboardModel.fromJson(jasonData);
+          AddressModel address = AddressModel.fromJson(jasonData);
 
-          dashboardData(dashboardData1.data);
+          memberData(address.data);
         } else {
           isError(true);
           errorMessage(jasonData['message'].toString());

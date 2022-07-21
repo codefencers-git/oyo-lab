@@ -24,7 +24,7 @@ class HttpServices {
   }
 
   static Future<Response> httpGet(String url) async {
-    // var token = await UserPrefService().getToken();
+    var token = await UserPrefService().getToken();
 
     print(API_BASE_URL + url);
 
@@ -32,7 +32,7 @@ class HttpServices {
       Uri.parse(API_BASE_URL + url),
       headers: requestHeaders
         ..addAll({
-          // 'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $token',
         }),
     );
   }
@@ -51,18 +51,16 @@ class HttpServices {
     );
   }
 
-  static Future<Response> httpPost(String url, dynamic data,
-      {required BuildContext context}) async {
-    // var token = await UserPrefService().getToken();
+  static Future<Response> httpPost(String url, dynamic data) async {
+    var token = await UserPrefService().getToken();
 
     return http.post(
       Uri.parse(API_BASE_URL + url),
       body: jsonEncode(data),
       headers: requestHeaders
         ..addAll({
-          //  'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $token',
         }),
-      // headers: requestHeaders,
     );
   }
 

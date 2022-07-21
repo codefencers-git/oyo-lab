@@ -137,77 +137,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           const SizedBox(height: 10),
                           _buildDoBWidget(context),
                           const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: Transform.scale(
-                                    scale: 0.9,
-                                    child: Checkbox(
-                                      side: MaterialStateBorderSide.resolveWith(
-                                        (states) => BorderSide(
-                                            width: 1.0,
-                                            color: ThemeClass.orangeColor),
-                                      ),
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                      activeColor: ThemeClass.orangeColor,
-                                      value: check,
-                                      onChanged: (b) {
-                                        setState(
-                                          () {
-                                            check = !check;
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: DefaultTextStyle.of(context).style,
-                                      children: <TextSpan>[
-                                        const TextSpan(
-                                            text: 'Accept',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                        TextSpan(
-                                            text: ' Terms',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: ThemeClass.orangeColor)),
-                                        const TextSpan(
-                                            text: ' & ',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                        TextSpan(
-                                            text: 'Condition',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: ThemeClass.orangeColor)),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          _buildTermsPolicyWidget(context),
                           _buildRegisterWidget(_onSubmit),
                           const SizedBox(height: 15),
                           _buildAlreadyExistWidget(),
@@ -224,28 +154,7 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Text _buildRegisterTitle() {
-    return Text(
-      'key_register_title'.tr,
-      style: TextStyle(
-          color: ThemeClass.orangeColor,
-          fontSize: 24,
-          fontWeight: FontWeight.w700),
-    );
-  }
-
-  Container _buildLogoWidget(double width, double height) {
-    return Container(
-      width: width * 0.45,
-      height: height * 0.2,
-      child: Image.asset(
-        "assets/images/logo.png",
-        fit: BoxFit.fitWidth,
-      ),
-    );
-  }
-
-  Padding _buildTemsNconditionWidget(BuildContext context) {
+  Padding _buildTermsPolicyWidget(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 8.0,
@@ -266,9 +175,11 @@ class _SignupScreenState extends State<SignupScreen> {
                 activeColor: ThemeClass.orangeColor,
                 value: check,
                 onChanged: (b) {
-                  setState(() {
-                    check = !check;
-                  });
+                  setState(
+                    () {
+                      check = !check;
+                    },
+                  );
                 },
               ),
             ),
@@ -283,19 +194,19 @@ class _SignupScreenState extends State<SignupScreen> {
                 style: DefaultTextStyle.of(context).style,
                 children: <TextSpan>[
                   const TextSpan(
-                      text: 'Accept ',
+                      text: 'Accept',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                       )),
                   TextSpan(
-                      text: 'Terms ',
+                      text: ' Terms',
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
                           color: ThemeClass.orangeColor)),
                   const TextSpan(
-                      text: '& ',
+                      text: ' & ',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -309,8 +220,29 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
             ),
-          )
+          ),
         ],
+      ),
+    );
+  }
+
+  Text _buildRegisterTitle() {
+    return Text(
+      'key_register_title'.tr,
+      style: TextStyle(
+          color: ThemeClass.orangeColor,
+          fontSize: 24,
+          fontWeight: FontWeight.w700),
+    );
+  }
+
+  Widget _buildLogoWidget(double width, double height) {
+    return SizedBox(
+      width: width * 0.45,
+      height: height * 0.2,
+      child: Image.asset(
+        "assets/images/logo.png",
+        fit: BoxFit.fitWidth,
       ),
     );
   }

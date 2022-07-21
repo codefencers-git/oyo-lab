@@ -49,7 +49,6 @@ class Routes {
   static const String myAppointmentComplete = '/myAppointmentCompete';
   static const String checkAppointment = '/checkAppointment';
   static const String labDetailScreen = '/labDetailScreen';
-  // static const String labTileScreen = '/labTileScreen';
   static const String allLabTests = '/allLabTests';
   static const String addMemberScreen = '/memberScreen';
   static const String myPrescritionSreen = '/myPrescription';
@@ -88,7 +87,6 @@ class Routes {
         page: () => const BookAppointment(
               type: "",
             )),
-    // GetPage(name: labTileScreen, page: () => const LaboratoryDetail()),
     GetPage(name: allLabTests, page: () => const AllLabTestsScreen()),
     GetPage(name: addMemberScreen, page: () => const AddNewMember()),
     GetPage(name: myPrescritionSreen, page: () => const MyPrescription()),
@@ -97,7 +95,6 @@ class Routes {
     GetPage(name: manageAddressScreen, page: () => const ManageAddress()),
     GetPage(name: addNewAddressScreen, page: () => const AddAddress()),
     GetPage(name: addNewMembers, page: () => const AddnewMemberScreen()),
-    GetPage(name: updateNewMemberScreen, page: () => UpdateNewMemberScreen()),
     GetPage(name: referandEarnScreen, page: () => const ReferEarnScreen()),
     GetPage(name: walletScreen, page: () => const WalletScreen()),
     GetPage(name: settingScreen, page: () => const SettingScreen()),
