@@ -48,6 +48,7 @@ class LAbTestDetailData {
     this.category,
     this.testType,
     this.image,
+    this.testcode,
     this.gallery,
     this.price,
     this.priceTxt,
@@ -64,6 +65,7 @@ class LAbTestDetailData {
   String? category;
   String? testType;
   String? image;
+  String? testcode;
   List<Gallery>? gallery;
   String? price;
   String? priceTxt;
@@ -79,6 +81,7 @@ class LAbTestDetailData {
         id: json["id"] == null ? null : json["id"],
         title: json["title"] == null ? null : json["title"],
         category: json["category"] == null ? null : json["category"],
+        testcode: json["test_code"] == null ? null : json["test_code"],
         testType: json["test_type"] == null ? null : json["test_type"],
         image: json["image"] == null ? null : json["image"],
         gallery: json["gallery"] == null
