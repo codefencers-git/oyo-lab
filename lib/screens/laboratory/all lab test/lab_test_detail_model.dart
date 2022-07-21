@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final LAbTestDetailModel = LAbTestDetailModelFromJson(jsonString);
+//     final lAbTestDetailModel = lAbTestDetailModelFromJson(jsonString);
 
 import 'dart:convert';
 
-LAbTestDetailModel LAbTestDetailModelFromJson(String str) =>
+LAbTestDetailModel lAbTestDetailModelFromJson(String str) =>
     LAbTestDetailModel.fromJson(json.decode(str));
 
-String LAbTestDetailModelToJson(LAbTestDetailModel data) =>
+String lAbTestDetailModelToJson(LAbTestDetailModel data) =>
     json.encode(data.toJson());
 
 class LAbTestDetailModel {
@@ -45,46 +45,46 @@ class LAbTestDetailData {
   LAbTestDetailData({
     this.id,
     this.title,
+    this.category,
+    this.testType,
     this.image,
-    this.ownerId,
-    this.countInCart,
-    this.quantity,
+    this.gallery,
     this.price,
     this.priceTxt,
     this.isDiscount,
     this.discountPrice,
     this.discountLabel,
     this.description,
-    this.status,
+    this.labList,
     this.reviews,
-    this.recommendedProduct,
   });
 
   String? id;
   String? title;
+  String? category;
+  String? testType;
   String? image;
-  String? ownerId;
-  String? countInCart;
-  String? quantity;
+  List<Gallery>? gallery;
   String? price;
   String? priceTxt;
   String? isDiscount;
   String? discountPrice;
   String? discountLabel;
   String? description;
-  String? status;
-  dynamic reviews;
-  List<RecommendedProduct>? recommendedProduct;
+  List<RecommendedProduct>? labList;
+  List<Review>? reviews;
 
   factory LAbTestDetailData.fromJson(Map<String, dynamic> json) =>
       LAbTestDetailData(
         id: json["id"] == null ? null : json["id"],
         title: json["title"] == null ? null : json["title"],
+        category: json["category"] == null ? null : json["category"],
+        testType: json["test_type"] == null ? null : json["test_type"],
         image: json["image"] == null ? null : json["image"],
-        ownerId: json["owner_id"] == null ? null : json["owner_id"],
-        countInCart:
-            json["count_in_cart"] == null ? null : json["count_in_cart"],
-        quantity: json["quantity"] == null ? null : json["quantity"],
+        gallery: json["gallery"] == null
+            ? null
+            : List<Gallery>.from(
+                json["gallery"].map((x) => Gallery.fromJson(x))),
         price: json["price"] == null ? null : json["price"],
         priceTxt: json["price_txt"] == null ? null : json["price_txt"],
         isDiscount: json["is_discount"] == null ? null : json["is_discount"],
@@ -93,85 +93,112 @@ class LAbTestDetailData {
         discountLabel:
             json["discount_label"] == null ? null : json["discount_label"],
         description: json["description"] == null ? null : json["description"],
-        status: json["status"] == null ? null : json["status"],
-        reviews: json["reviews"],
-        recommendedProduct: json["recommended_product"] == null
+        labList: json["lab_list"] == null
             ? null
-            : List<RecommendedProduct>.from(json["recommended_product"]
-                .map((x) => RecommendedProduct.fromJson(x))),
+            : List<RecommendedProduct>.from(
+                json["lab_list"].map((x) => RecommendedProduct.fromJson(x))),
+        reviews: json["reviews"] == null
+            ? null
+            : List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "title": title == null ? null : title,
+        "category": category == null ? null : category,
+        "test_type": testType == null ? null : testType,
         "image": image == null ? null : image,
-        "owner_id": ownerId == null ? null : ownerId,
-        "count_in_cart": countInCart == null ? null : countInCart,
-        "quantity": quantity == null ? null : quantity,
+        "gallery": gallery == null
+            ? null
+            : List<dynamic>.from(gallery!.map((x) => x.toJson())),
         "price": price == null ? null : price,
         "price_txt": priceTxt == null ? null : priceTxt,
         "is_discount": isDiscount == null ? null : isDiscount,
         "discount_price": discountPrice == null ? null : discountPrice,
         "discount_label": discountLabel == null ? null : discountLabel,
         "description": description == null ? null : description,
-        "status": status == null ? null : status,
-        "reviews": reviews,
-        "recommended_product": recommendedProduct == null
+        "lab_list": labList == null
             ? null
-            : List<dynamic>.from(recommendedProduct!.map((x) => x.toJson())),
+            : List<dynamic>.from(labList!.map((x) => x.toJson())),
+        "reviews": reviews == null
+            ? null
+            : List<dynamic>.from(reviews!.map((x) => x.toJson())),
+      };
+}
+
+class Gallery {
+  Gallery({
+    this.image,
+  });
+
+  String? image;
+
+  factory Gallery.fromJson(Map<String, dynamic> json) => Gallery(
+        image: json["image"] == null ? null : json["image"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "image": image == null ? null : image,
       };
 }
 
 class RecommendedProduct {
-  RecommendedProduct({
-    this.id,
-    this.title,
-    this.image,
-    this.ownerId,
-    this.countInCart,
-    this.quantity,
-    this.price,
-    this.priceTxt,
-    this.description,
-    this.status,
-  });
+  RecommendedProduct({this.id, this.name, this.image, this.area});
 
   String? id;
-  String? title;
+  String? name;
+
   String? image;
-  String? ownerId;
-  String? countInCart;
-  String? quantity;
-  String? price;
-  String? priceTxt;
-  String? description;
-  String? status;
+  String? area;
 
   factory RecommendedProduct.fromJson(Map<String, dynamic> json) =>
       RecommendedProduct(
         id: json["id"] == null ? null : json["id"],
-        title: json["title"] == null ? null : json["title"],
+        name: json["name"] == null ? null : json["name"],
         image: json["image"] == null ? null : json["image"],
-        ownerId: json["owner_id"] == null ? null : json["owner_id"],
-        countInCart:
-            json["count_in_cart"] == null ? null : json["count_in_cart"],
-        quantity: json["quantity"] == null ? null : json["quantity"],
-        price: json["price"] == null ? null : json["price"],
-        priceTxt: json["price_txt"] == null ? null : json["price_txt"],
-        description: json["description"] == null ? null : json["description"],
-        status: json["status"] == null ? null : json["status"],
+        area: json["area"] == null ? null : json["area"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
-        "title": title == null ? null : title,
+        "name": name == null ? null : name,
         "image": image == null ? null : image,
-        "owner_id": ownerId == null ? null : ownerId,
-        "count_in_cart": countInCart == null ? null : countInCart,
-        "quantity": quantity == null ? null : quantity,
-        "price": price == null ? null : price,
-        "price_txt": priceTxt == null ? null : priceTxt,
-        "description": description == null ? null : description,
-        "status": status == null ? null : status,
+        "area": area == null ? null : area,
+      };
+}
+
+class Review {
+  Review({
+    this.id,
+    this.name,
+    this.image,
+    this.date,
+    this.rating,
+    this.review,
+  });
+
+  String? id;
+  String? name;
+  String? image;
+  String? date;
+  String? rating;
+  String? review;
+
+  factory Review.fromJson(Map<String, dynamic> json) => Review(
+        id: json["id"] == null ? null : json["id"],
+        name: json["name"] == null ? null : json["name"],
+        image: json["image"] == null ? null : json["image"],
+        date: json["date"] == null ? null : json["date"],
+        rating: json["rating"] == null ? null : json["rating"],
+        review: json["review"] == null ? null : json["review"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
+        "name": name == null ? null : name,
+        "image": image == null ? null : image,
+        "date": date == null ? null : date,
+        "rating": rating == null ? null : rating,
+        "review": review == null ? null : review,
       };
 }

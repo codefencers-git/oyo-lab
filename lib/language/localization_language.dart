@@ -130,6 +130,7 @@ class LanguageLocaleString extends Translations {
           'key_load_more': 'Load More',
           'key_less': 'Less',
           'key_customer_reviews': 'Customer Reviews',
+          'key_no_laboratory_near_you': 'There is no laboratory near by you',
           //-------------------BookAppointment
           'key_select_date': 'Select a Date',
           'key_write_your_remark': 'Write Your Remark...',

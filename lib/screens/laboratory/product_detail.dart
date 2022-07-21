@@ -12,6 +12,9 @@ import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_mod
 import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import '../../widgets/appbar/appbar_with_back_button.dart';
+import 'package:geolocator/geolocator.dart';
+
+/// Determine the current position of the device.
 
 class LaboratoryDetail extends StatefulWidget {
   LaboratoryDetail({Key? key, required this.id}) : super(key: key);
@@ -23,15 +26,20 @@ class LaboratoryDetail extends StatefulWidget {
 class _LabTestScreenState extends State<LaboratoryDetail> {
   bool isLoadMore = false;
   var _futureCall;
+  var latlong;
   @override
   void initState() {
     super.initState();
+    latlong = _determinePosition();
     _futureCall = _loadData();
   }
 
   Future<LAbTestDetailData?> _loadData() async {
     try {
-      var response = await HttpServices.httpGet("product/${widget.id}");
+      var response = await HttpServices.httpPostWithoutToken(
+        "product/${widget.id}",
+        {"latitude": "23.0771593", "longitude": "72.5047247"},
+      );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final body = json.decode(response.body);
 
@@ -60,6 +68,46 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
         throw e.toString();
       }
     }
+  }
+
+  ///
+  /// When the location services are not enabled or permissions
+  /// are denied the `Future` will return an error.
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition();
   }
 
   @override
@@ -127,9 +175,9 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
             height: 45,
           ),
           _buildLaboratoryImage(),
-          _buildLaboratoryNearTitle(),
-          _buildNearLaboratory(data.recommendedProduct),
-          _buildLoadMoreButton(),
+          _buildLaboratoryNearTitle(data.labList),
+          _buildNearLaboratory(data.labList),
+          data.labList!.isEmpty ? const SizedBox() : _buildLoadMoreButton(),
           const SizedBox(
             height: 10,
           ),
@@ -137,25 +185,25 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
           const SizedBox(
             height: 10,
           ),
-          _buildReviewList(),
+          _buildReviewList(data.reviews),
         ],
       ),
     );
   }
 
-  ListView _buildReviewList() {
+  ListView _buildReviewList(List<Review>? reviews) {
     return ListView.builder(
-      scrollDirection: Axis.vertical,
+      //scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 5,
+      itemCount: reviews!.length,
       itemBuilder: (context, index) {
-        return _buildReviewListTile();
+        return _buildReviewListTile(reviews, index);
       },
     );
   }
 
-  Padding _buildReviewListTile() {
+  Padding _buildReviewListTile(List<Review> data, int index) {
     return Padding(
       padding: const EdgeInsets.all(9.0),
       child: Column(
@@ -163,21 +211,28 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
         children: [
           Row(
             children: [
-              Image.asset("assets/images/john_image.png"),
+              CircleAvatar(
+                child: Image.network(
+                  data[index].image.toString(),
+                  fit: BoxFit.fill,
+                  // fit: BoxFit.cover,
+                ),
+              ),
               const SizedBox(
                 width: 8,
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "John Doe",
+                    data[index].name.toString(),
                     style: TextStyle(
                         fontSize: 10,
                         color: ThemeClass.darkgreyColor,
                         fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    "October, 2021",
+                    data[index].date.toString().substring(0, 10),
                     style: TextStyle(
                         fontSize: 6,
                         color: ThemeClass.orangeColor,
@@ -193,7 +248,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
           Row(
             children: [
               RatingBar(
-                initialRating: 3,
+                initialRating: double.parse(data[index].rating.toString()),
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemSize: 16,
@@ -215,7 +270,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
             height: 10,
           ),
           Text(
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+            data[index].review.toString(),
             style: TextStyle(
                 fontSize: 9,
                 color: ThemeClass.greyColor1,
@@ -310,15 +365,15 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            recommadProduct[index].title.toString(),
-                            style: TextStyle(
+                            recommadProduct[index].name.toString(),
+                            style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
                             height: 5,
                           ),
                           Text(
-                            "₹ ${recommadProduct[index].price.toString()}",
+                            "₹ ${recommadProduct[index]..toString()}",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: ThemeClass.orangeColor,
@@ -354,14 +409,16 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
     );
   }
 
-  Padding _buildLaboratoryNearTitle() {
+  Padding _buildLaboratoryNearTitle(List<RecommendedProduct>? labList) {
     return Padding(
       padding: const EdgeInsets.only(left: 14.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'key_laboratories_near_you'.tr,
+            labList!.isNotEmpty
+                ? 'key_laboratories_near_you'.tr
+                : 'key_no_laboratory_near_you'.tr,
             style: TextStyle(
                 fontSize: 14,
                 color: ThemeClass.blackColor,

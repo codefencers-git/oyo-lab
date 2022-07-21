@@ -30,8 +30,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
-    _navigateTo();
     _categoryController.getProductCategory();
+     Future.delayed(const Duration(seconds: 1), () async {
+      _navigateTo();
+    });
 
     super.initState();
   }
@@ -85,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     } catch (e) {
       _userController.setIsLogin(false);
-      print("------------> ${e}");
+      print("------------> $e");
     }
   }
 
