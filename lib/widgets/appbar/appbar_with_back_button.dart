@@ -38,8 +38,8 @@ class AppbarWithBackButton extends StatelessWidget {
                 onPressed: () {
                   onIconPress!();
                 },
-                icon: Icon(Icons.search))
-            : SizedBox()
+                icon: const Icon(Icons.search))
+            : const SizedBox()
       ],
       centerTitle: false,
       title: Row(
@@ -47,7 +47,7 @@ class AppbarWithBackButton extends StatelessWidget {
         children: [
           Text(
             appbarTitle,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 14,
                 color: ThemeClass.whiteColor,
                 fontWeight: FontWeight.w400),

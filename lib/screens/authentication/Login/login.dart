@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
@@ -63,9 +64,12 @@ class _LoginScreenState extends State<LoginScreen> {
       mapData['device_type'] = Platform.isAndroid ? "android" : "ios";
 
       try {
+        EasyLoading.show();
         await userController.loginServices(mapData);
       } catch (e) {
         debugPrint(e.toString());
+      } finally {
+        EasyLoading.dismiss();
       }
       _clearTextFields();
     }

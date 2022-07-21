@@ -1,7 +1,6 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-
 import '../global/flutter_toast.dart';
 
 class UserLocationController extends GetxController {
@@ -38,8 +37,10 @@ class UserLocationController extends GetxController {
 
     var tempcurrentLocationCity = placemarks[0].subAdministrativeArea != null &&
             placemarks[0].subAdministrativeArea != ""
-        ? placemarks[0].toString()
+        ? placemarks[0].name.toString()
         : "";
     currentAddress(tempcurrentLocationCity);
+    print("-0-0-0-0-----" + currentAddress.value);
+    print("-1-1-1-1-1------" + tempcurrentLocationCity);
   }
 }
