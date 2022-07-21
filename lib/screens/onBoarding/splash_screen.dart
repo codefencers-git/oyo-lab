@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/app_info/google_key_services.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
@@ -31,8 +30,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
-    _navigateTo();
     _categoryController.getProductCategory();
+     Future.delayed(const Duration(seconds: 1), () async {
+      _navigateTo();
+    });
 
     super.initState();
   }
@@ -86,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     } catch (e) {
       _userController.setIsLogin(false);
-      print("------------> ${e}");
+      print("------------> $e");
     }
   }
 

@@ -29,7 +29,6 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _referralCodeController = TextEditingController();
 
   bool isObs = true;
 
@@ -137,8 +136,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           _buildGenderWidget(),
                           const SizedBox(height: 10),
                           _buildDoBWidget(context),
-                          const SizedBox(height: 15),
-                          _buildReferralCodeWidget(),
                           const SizedBox(height: 20),
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -315,18 +312,6 @@ class _SignupScreenState extends State<SignupScreen> {
           )
         ],
       ),
-    );
-  }
-
-  TextFieldWithSuffixIcon _buildReferralCodeWidget() {
-    return TextFieldWithSuffixIcon(
-      textController: _referralCodeController,
-      isReadOnly: false,
-      isObscureText: false,
-      keyboardType: TextInputType.text,
-      hintText: 'key_referral_code'.tr,
-      iconData: "assets/icons/referral-code-icon.png",
-      onIconTap: () {},
     );
   }
 

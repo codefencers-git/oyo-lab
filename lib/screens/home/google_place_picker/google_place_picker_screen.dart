@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_is_empty, unnecessary_null_comparison, unnecessary_this
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
@@ -34,7 +34,21 @@ class _GooglePlacePickerScreenState extends State<GooglePlacePickerScreen> {
           margin: EdgeInsets.only(right: 20, left: 20, top: 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: ImageIcon(
+                    AssetImage("assets/icons/icon-back.png"),
+                    color: ThemeClass.orangeColor,
+                  ),
+                ),
+              ),
               TextField(
                 decoration: InputDecoration(
                   filled: true,
@@ -54,25 +68,6 @@ class _GooglePlacePickerScreenState extends State<GooglePlacePickerScreen> {
                         Image.asset("assets/icons/icon_search.png", scale: 3),
                   ),
                 ),
-                // decoration: InputDecoration(
-                //   labelText: "Search",
-                //   hintText: "Type here...",
-                //   filled: true,
-                //   fillColor: ThemeClass.skyblueColor,
-                //   border: InputBorder.none,
-                //   focusedBorder: OutlineInputBorder(
-                //     borderSide: BorderSide(
-                //       color: Colors.blue,
-                //       width: 2.0,
-                //     ),
-                //   ),
-                //   enabledBorder: OutlineInputBorder(
-                //     borderSide: BorderSide(
-                //       color: Colors.black54,
-                //       width: 2.0,
-                //     ),
-                //   ),
-                // ),
                 onChanged: (value) {
                   if (value.isNotEmpty) {
                     autoCompleteSearch(value);
@@ -110,19 +105,10 @@ class _GooglePlacePickerScreenState extends State<GooglePlacePickerScreen> {
                         ],
                       ),
                       onTap: () {
-                        debugPrint(predictions[index].placeId);
+                        debugPrint("-*-*-*-*-*------" +
+                            predictions[index].description.toString());
                         Navigator.pop(
                             context, predictions[index].description.toString());
-
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => DetailsPage(
-                        //       placeId: predictions[index].placeId.toString(),
-                        //       googlePlace: googlePlace,
-                        //     ),
-                        //   ),
-                        // );
                       },
                     );
                   },
@@ -136,7 +122,7 @@ class _GooglePlacePickerScreenState extends State<GooglePlacePickerScreen> {
   }
 
   void autoCompleteSearch(String value) async {
-    var result = await googlePlace.autocomplete.get(value);
+    AutocompleteResponse? result = await googlePlace.autocomplete.get(value);
     if (result != null && result.predictions != null && mounted) {
       setState(() {
         predictions = result.predictions!;
@@ -149,7 +135,8 @@ class DetailsPage extends StatefulWidget {
   final String placeId;
   final GooglePlace googlePlace;
 
-  DetailsPage({Key? key, required this.placeId, required this.googlePlace})
+  const DetailsPage(
+      {Key? key, required this.placeId, required this.googlePlace})
       : super(key: key);
 
   @override
@@ -191,13 +178,13 @@ class _DetailsPageState extends State<DetailsPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: images.length,
                   itemBuilder: (context, index) {
-                    return Container(
+                    return SizedBox(
                       width: 250,
                       child: Card(
                         elevation: 4,
@@ -275,35 +262,6 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                         ),
                       ),
-                      // Container(
-                      //   margin: EdgeInsets.only(left: 15, top: 10),
-                      //   child: ListTile(
-                      //     leading: CircleAvatar(
-                      //       child: Icon(Icons.location_searching),
-                      //     ),
-                      //     title: Text(
-                      //       detailsResult != null &&
-                      //               detailsResult.geometry != null &&
-                      //               detailsResult.geometry.location != null
-                      //           ? 'Geometry: ${detailsResult.geometry.location.lat.toString()},${detailsResult.geometry.location.lng.toString()}'
-                      //           : "Geometry: null",
-                      //     ),
-                      //   ),
-                      // ),
-                      // Container(
-                      //   margin: EdgeInsets.only(left: 15, top: 10),
-                      //   child: ListTile(
-                      //     leading: CircleAvatar(
-                      //       child: Icon(Icons.timelapse),
-                      //     ),
-                      //     title: Text(
-                      //       detailsResult != null &&
-                      //               detailsResult.utcOffset != null
-                      //           ? 'UTC offset: ${detailsResult.utcOffset.toString()} min'
-                      //           : "UTC offset: null",
-                      //     ),
-                      //   ),
-                      // ),
                       Container(
                         margin: EdgeInsets.only(left: 15, top: 10),
                         child: ListTile(
@@ -354,21 +312,6 @@ class _DetailsPageState extends State<DetailsPage> {
         detailsResult = result.result!;
         images = [];
       });
-
-      // if (result.result.photos != null) {
-      //   for (var photo in result.result.photos) {
-      //     getPhoto(photo.photoReference);
-      //   }
-      // }
     }
   }
-
-  // void getPhoto(String photoReference) async {
-  //   var result = await this.googlePlace.photos.get(photoReference, null, 400);
-  //   if (result != null && mounted) {
-  //     setState(() {
-  //       images.add(result);
-  //     });
-  //   }
-  // }
 }
