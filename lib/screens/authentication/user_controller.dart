@@ -14,15 +14,13 @@ import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/services/navigation_service.dart';
 
 class UserController extends GetxController {
-  // UserPrefService userPrefController = Get.find<UserPrefService>();
-
   RxBool isError = false.obs;
   RxString errorMessage = "".obs;
   RxBool isloading = false.obs;
 
   RxBool setIsLogin = false.obs;
 
-  loginServices(dynamic mapData) async {
+  Future<void> loginServices(dynamic mapData) async {
     isloading(true);
     try {
       String url = 'login';
@@ -44,7 +42,7 @@ class UserController extends GetxController {
           Navigator.pushAndRemoveUntil<void>(
             navigationService.navigationKey.currentContext!,
             MaterialPageRoute<void>(
-                builder: (BuildContext context) => HomePage()),
+                builder: (BuildContext context) => const HomePage()),
             ModalRoute.withName(Routes.loginScreen),
           );
 
@@ -78,7 +76,7 @@ class UserController extends GetxController {
   }
 
 //------------------- Sign up services
-  signupServices(dynamic mapData) async {
+  Future<void> signupServices(dynamic mapData) async {
     try {
       var url = 'registration';
       var response = await HttpServices.httpPostWithoutToken(url, mapData);
@@ -121,7 +119,7 @@ class UserController extends GetxController {
   }
 
 //------------------- Mobile verification
-  checkOtp(String phoneNumber, String otp) async {
+  Future<void> checkOtp(String phoneNumber, String otp) async {
     try {
       var mapData = <String, dynamic>{};
       mapData['otp'] = otp;
@@ -170,7 +168,7 @@ class UserController extends GetxController {
     }
   }
 
-  logout(context) async {
+  Future<void> logout(context) async {
     var value = await showAlertDialog(context);
     if (value == true) {
       isloading(true);

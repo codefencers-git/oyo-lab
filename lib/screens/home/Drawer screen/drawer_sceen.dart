@@ -309,13 +309,10 @@ class DrawerWidget extends StatelessWidget {
                             image: imageProvider, fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(50)),
                   ),
-                  placeholder: (context, url) => SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: CircularProgressIndicator(
-                        color: ThemeClass.orangeColor,
-                        strokeWidth: 3,
-                      )),
+                  placeholder: (context, url) => CircularProgressIndicator(
+                    color: ThemeClass.orangeColor,
+                    strokeWidth: 3,
+                  ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
                 const SizedBox(width: 8),

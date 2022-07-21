@@ -52,8 +52,6 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
         }
       } else if (response.statusCode == 401) {
         showToast(GlobalMessages.unauthorizedUser);
-        // await UserPrefService().removeUserData();
-        // NavigationService().navigatWhenUnautorized();
       } else if (response.statusCode == 500) {
         throw GlobalMessages.internalservererror;
       } else {

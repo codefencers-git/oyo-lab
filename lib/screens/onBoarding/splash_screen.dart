@@ -80,6 +80,7 @@ class _SplashScreenState extends State<SplashScreen> {
   _checkUserLogin() async {
     try {
       var getToken = await UserPrefService().getToken();
+      print("--------$getToken");
       if (getToken != "" && getToken != null) {
         _userController.setIsLogin(true);
       } else {

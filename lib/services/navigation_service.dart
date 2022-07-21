@@ -1,15 +1,17 @@
+// ignore_for_file: prefer_conditional_assignment
+
 import 'package:flutter/material.dart';
 
 NavigationService navigationService = NavigationService().get();
 
 class NavigationService {
-  GlobalKey<NavigatorState> _navigationKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _navigationKey = GlobalKey<NavigatorState>();
 
   NavigationService();
 
   NavigationService? _instance;
   NavigationService get() {
-    if (_instance == null) _instance = new NavigationService();
+    if (_instance == null) _instance = NavigationService();
 
     return _instance!;
   }
@@ -18,10 +20,4 @@ class NavigationService {
 
   popPage() => _navigationKey.currentState!.pop();
 
-  // navigatWhenUnautorized() {
-  //   Navigator.pushNamedAndRemoveUntil(
-  //       navigationService.navigationKey.currentContext!,
-  //       Routes.loginScreen,
-  //       (route) => false);
-  // }
 }
