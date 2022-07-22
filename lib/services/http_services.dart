@@ -52,7 +52,7 @@ class HttpServices {
   }
 
   static Future<Response> httpPost(String url, dynamic data,
-      {required BuildContext context}) async {
+      {BuildContext? context}) async {
     var token = await UserPrefService().getToken();
 
     return http.post(

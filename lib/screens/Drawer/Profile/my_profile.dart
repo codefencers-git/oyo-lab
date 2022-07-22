@@ -28,18 +28,18 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   @override
   void initState() {
-    profileController.getprofileData();
+    _onInit();
     super.initState();
   }
-  _onInit(){
-    profileController.getprofileData();
+
+  _onInit() async {
+    await profileController.getprofileData();
   }
 
-  Validation? validation;
+  Validation validation = Validation();
 
   DateTime currentDate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
-    validation = Validation();
     final DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: currentDate,
@@ -55,10 +55,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   final _formKey = GlobalKey<FormState>();
-
+  var image;
   //Validation? validation;
   @override
   Widget build(BuildContext context) {
+    validation = Validation();
     return Scaffold(
       backgroundColor: ThemeClass.whiteColor,
       appBar: PreferredSize(
@@ -69,19 +70,25 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ),
       body: Obx(() {
         if (profileController.isloading.value != true) {
-          if (profileController.profileData.value.gender.toString()=="Male") {
+          if (profileController.profileData.value.gender.toString() == "Male") {
             _radioMF = enumForMF.Male;
-          }
-          else{
+          } else {
             _radioMF = enumForMF.Female;
           }
           _phoneNumberController.text =
               profileController.profileData.value.phoneNumber.toString();
           _emailController.text =
               profileController.profileData.value.email.toString();
-          _dobController.text=profileController.profileData.value.dob.toString();
+          _dobController.text =
+              profileController.profileData.value.dob.toString();
           _nameController.text =
               profileController.profileData.value.name.toString();
+          image = profileController.profileData.value.profileImage.toString();
+          print(_phoneNumberController.text);
+          print(_emailController.text);
+          print(_dobController.text);
+          print(_nameController.text);
+          print(image);
         }
         return profileController.isloading.value
             ? const Center(
@@ -99,10 +106,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             width: 150,
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(400.0),
-                                child: Image(
-                                    image: NetworkImage(profileController
-                                        .profileData.value.profileImage
-                                        .toString()))),
+                                child: Image(image: NetworkImage(image))),
                           ),
                           Positioned(
                             top: 135,
@@ -165,21 +169,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: _buildTextTitle("Full Name")),
-                            _buildFullNameWidget(),
+                            _buildFullNameWidget(_nameController),
                             Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: _buildTextTitle("Email Address")),
-                            _buildEmailWidget(),
+                            _buildEmailWidget(_emailController),
                             Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: _buildTextTitle("Phone Number")),
-                            _buildPhoneNumberWidget(),
+                            _buildPhoneNumberWidget(_phoneNumberController),
                             Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -190,11 +190,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                               child: _buildGenderWidget(),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: _buildTextTitle("Date of  Birth")
-                            ),
-                            _buildDoBWidget(context),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: _buildTextTitle("Date of  Birth")),
+                            _buildDoBWidget(context, _dobController),
                           ],
                         ),
                       ),
@@ -207,33 +206,32 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         height: 44,
         child: RoundButton(
-          onTap: () {
-           
-            // Get.toNamed(Routes.bookingSuccessScreen);
-          },
+          onTap: _onEdit,
           buttonLabel: 'Edit Profile',
         ),
       ),
     );
   }
-  _onEdit(){
-     Map<String,dynamic> mapdata={
-              "name":_nameController.text,
-              "email":_emailController.text,
-              "country_code":profileController.profileData.value.countryCode.toString(),
-              "phone_number":_phoneNumberController.text,
-              "gender":_radioMF.toString(),
-              "dob":_dobController.text
-            };
-            try {
-              EasyLoading.show();
-              profileController.updateProfileData(mapdata, context);
-              _onInit();
-              EasyLoading.dismiss();
-            } catch (e) {
-              EasyLoading.dismiss();
-              showToast(e.toString());
-            }
+
+  _onEdit() {
+    Map<String, dynamic> mapdata = {
+      "name": _nameController.text,
+      "email": _emailController.text,
+      "country_code":
+          profileController.profileData.value.countryCode.toString(),
+      "phone_number": _phoneNumberController.text,
+      "gender": _radioMF.toString(),
+      "dob": _dobController.text
+    };
+    try {
+      EasyLoading.show();
+      profileController.updateProfileData(mapdata, context);
+      _onInit();
+      EasyLoading.dismiss();
+    } catch (e) {
+      EasyLoading.dismiss();
+      showToast(e.toString());
+    }
   }
 
   Padding _buildTextTitle(String title) {
@@ -246,43 +244,43 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
-  TextFieldWithSuffixIcon _buildFullNameWidget() {
+  TextFieldWithSuffixIcon _buildFullNameWidget(
+      TextEditingController textController) {
     return TextFieldWithSuffixIcon(
-      textController: _nameController,
+      textController: textController,
       color: ThemeClass.greyLightColor,
       isReadOnly: false,
       isObscureText: false,
       keyboardType: TextInputType.text,
-       validator: validation!.nameValidation,
-
+      validator: validation.nameValidation,
       iconData: "assets/icons/icon-user.png",
       onIconTap: () {},
     );
   }
 
-  TextFieldWithSuffixIcon _buildEmailWidget() {
+  TextFieldWithSuffixIcon _buildEmailWidget(
+      TextEditingController textController) {
     return TextFieldWithSuffixIcon(
-      textController: _emailController,
+      textController: textController,
       color: ThemeClass.greyLightColor,
       isReadOnly: false,
       isObscureText: false,
       keyboardType: TextInputType.emailAddress,
-       validator: validation!.emailValidation,
-
+      validator: validation.emailValidation,
       iconData: "assets/icons/icon-mail.png",
       onIconTap: () {},
     );
   }
 
-  TextFieldWithSuffixIcon _buildPhoneNumberWidget() {
+  TextFieldWithSuffixIcon _buildPhoneNumberWidget(
+      TextEditingController textController) {
     return TextFieldWithSuffixIcon(
-      textController: _phoneNumberController,
+      textController: textController,
       color: ThemeClass.greyLightColor,
       isReadOnly: false,
       isObscureText: false,
       keyboardType: TextInputType.number,
-       validator: validation!.phoneNumverValidation,
-
+      validator: validation.phoneNumverValidation,
       iconData: "assets/icons/icon-phone.png",
       onIconTap: () {},
     );
@@ -324,12 +322,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ],
     );
   }
-  TextFieldWithSuffixIcon _buildDoBWidget(BuildContext context) {
+
+  TextFieldWithSuffixIcon _buildDoBWidget(
+      BuildContext context, TextEditingController textController) {
     return TextFieldWithSuffixIcon(
-        textController: _dobController,
+        textController: textController,
         isReadOnly: true,
         isObscureText: false,
-        validator: (val){
+        validator: (val) {
           if (val!.isEmpty) {
             return "Enter Date of Birth";
           }
