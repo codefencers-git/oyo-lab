@@ -2,7 +2,7 @@
 //
 //     final addressModel = addressModelFromJson(jsonString);
 
-// ignore_for_file: prefer_if_null_operators, unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, prefer_if_null_operators
 
 import 'dart:convert';
 
@@ -30,7 +30,8 @@ class AddressModel {
         message: json["message"] == null ? null : json["message"],
         data: json["data"] == null
             ? null
-            : List<AddrressData>.from(json["data"].map((x) => AddrressData.fromJson(x))),
+            : List<AddrressData>.from(
+                json["data"].map((x) => AddrressData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +50,7 @@ class AddrressData {
     this.name,
     this.addressLine1,
     this.addressLine2,
+    this.addressType,
     this.pincode,
   });
 
@@ -56,6 +58,7 @@ class AddrressData {
   String? name;
   String? addressLine1;
   String? addressLine2;
+  String? addressType;
   String? pincode;
 
   factory AddrressData.fromJson(Map<String, dynamic> json) => AddrressData(
@@ -65,6 +68,7 @@ class AddrressData {
             json["address_line_1"] == null ? null : json["address_line_1"],
         addressLine2:
             json["address_line_2"] == null ? null : json["address_line_2"],
+        addressType: json["address_type"] == null ? null : json["address_type"],
         pincode: json["pincode"] == null ? null : json["pincode"],
       );
 
@@ -73,6 +77,7 @@ class AddrressData {
         "name": name == null ? null : name,
         "address_line_1": addressLine1 == null ? null : addressLine1,
         "address_line_2": addressLine2 == null ? null : addressLine2,
+        "address_type": addressType == null ? null : addressType,
         "pincode": pincode == null ? null : pincode,
       };
 }

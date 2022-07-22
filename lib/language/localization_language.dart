@@ -108,6 +108,9 @@ class LanguageLocaleString extends Translations {
           'key_add_address': 'Add Address',
           'key_add_new_address': 'Add New Address',
           'key_edit_btn': 'Edit',
+          'key_home': 'Home',
+          'key_office': 'Office',
+          'key_other': 'Other',
           //-------------------Refer And Earn
           'key_refer_your_friend_n_earn': 'Refer your friend and earn',
           'key_refer_n_earn_description':

@@ -9,11 +9,10 @@ class AddressServicesController extends GetxController {
   RxString errorMessage = "".obs;
   RxBool isloading = false.obs;
 
-  RxList<AddrressData?> memberData = (List<AddrressData?>.of([])).obs;
+  RxList<AddrressData?> addressData = (List<AddrressData?>.of([])).obs;
 
   Future<void> getAddressList() async {
     isloading(true);
-
     try {
       String url = 'get_addresses';
       var response = await HttpServices.httpGet(url);
@@ -26,7 +25,7 @@ class AddressServicesController extends GetxController {
           errorMessage("");
           AddressModel address = AddressModel.fromJson(jasonData);
 
-          memberData(address.data);
+          addressData(address.data);
         } else {
           isError(true);
           errorMessage(jasonData['message'].toString());

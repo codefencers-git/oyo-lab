@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:oyo_labs/screens/Drawer/Member/services/member_services.dart';
@@ -77,12 +78,14 @@ class _AddnewMemberScreenState extends State<AddnewMemberScreen> {
           child: RoundButton(
             onTap: () async {
               if (_formKey.currentState!.validate()) {
-              await  _membersController.updateMemberDetail(
+                EasyLoading.show();
+                await _membersController.updateMemberDetail(
                     _nameController.text,
                     _dobController.text,
                     _emailController.text,
                     _phoneNumberController.text);
               }
+              EasyLoading.dismiss();
               Get.back();
             },
             buttonLabel: 'key_add_member'.tr,
