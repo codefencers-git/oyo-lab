@@ -11,10 +11,14 @@ class AddAddress extends StatefulWidget {
   State<AddAddress> createState() => _AddAddressState();
 }
 
+enum AddressTypeLabel { home, office, other }
+
 class _AddAddressState extends State<AddAddress> {
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _textaddController = TextEditingController();
   final TextEditingController _textaddController2 = TextEditingController();
+
+  AddressTypeLabel? _addressType = AddressTypeLabel.home;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +86,39 @@ class _AddAddressState extends State<AddAddress> {
                 },
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             SizedBox(
+              height: 100,
+              child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                minLines: 6,
+                decoration: InputDecoration(
+                  hintText: 'key_address_line-1'.tr,
+                  hintStyle: TextStyle(
+                    fontSize: 12,
+                    color: ThemeClass.greyColor,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  filled: true,
+                ),
+                controller: _textaddController2,
+                validator: (value) {
+                  if (value == null) {
+                    return 'key_address_line-2'.tr;
+                  } else if (value.length < 2) {
+                    return 'key_address_validation'.tr;
+                  }
+                },
+              ),
+            ),
+            const SizedBox(
               height: 20,
             ),
             SizedBox(
@@ -114,32 +150,70 @@ class _AddAddressState extends State<AddAddress> {
                 },
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: 'key_pincode'.tr,
-                hintStyle: TextStyle(
-                  fontSize: 12,
-                  color: ThemeClass.greyColor,
-                  fontWeight: FontWeight.w400,
+            Row(
+              children: [
+                Radio(
+                  value: AddressTypeLabel.home,
+                  activeColor: ThemeClass.orangeColor,
+                  groupValue: _addressType,
+                  onChanged: (AddressTypeLabel? value) {
+                    setState(
+                      () {
+                        _addressType = value;
+                      },
+                    );
+                    print(_addressType);
+                  },
                 ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(25.0),
+                Text(
+                  'key_home'.tr,
+                  style: TextStyle(
+                      color: ThemeClass.blackColor1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700),
                 ),
-                filled: true,
-              ),
-              controller: _textController,
-              validator: (value) {
-                if (value == null) {
-                  return 'key_full_name'.tr;
-                } else if (value.length < 2) {
-                  return 'key_name_validation'.tr;
-                }
-              },
-            ),
+                Radio(
+                  value: AddressTypeLabel.office,
+                  activeColor: ThemeClass.orangeColor,
+                  groupValue: _addressType,
+                  onChanged: (AddressTypeLabel? value) {
+                    setState(
+                      () {
+                        _addressType = value;
+                      },
+                    );
+                    print(_addressType);
+                  },
+                ),
+                Text(
+                  'key_office'.tr,
+                  style: TextStyle(
+                      color: ThemeClass.blackColor1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700),
+                ),
+                Radio(
+                  value: AddressTypeLabel.other,
+                  activeColor: ThemeClass.orangeColor,
+                  groupValue: _addressType,
+                  onChanged: (AddressTypeLabel? value) {
+                    setState(
+                      () {
+                        _addressType = value;
+                      },
+                    );
+                    print(_addressType);
+                  },
+                ),
+                Text(
+                  'key_other'.tr,
+                  style: TextStyle(
+                      color: ThemeClass.blackColor1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700),
+                )
+              ],
+            )
           ],
         ),
       ),
@@ -156,41 +230,3 @@ class _AddAddressState extends State<AddAddress> {
     );
   }
 }
-
-
-
-
-
-// class TestTextFormField extends StatelessWidget {
-//   TestTextFormField(
-//       {Key? key,
-//       required this.lable,
-//       required this.validator,
-//       required this.keyboardType,
-//       required this.controller})
-//       : super(key: key);
-//   String lable;
-
-//   FormFieldValidator validator;
-//   TextInputType keyboardType;
-//   TextEditingController controller;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//           color: const Color(0xffFBFBFB),
-//           borderRadius: BorderRadius.circular(25)),
-//       child: TextFormField(
-//         decoration: InputDecoration(
-//           hintText: lable,
-//           hintStyle:
-//               const TextStyle(color: const Color(0xff5B5B5B), fontSize: 14),
-//           border: const OutlineInputBorder(
-//             borderSide: BorderSide.none,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

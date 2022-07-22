@@ -58,17 +58,21 @@ class _AddNewMemberState extends State<AddNewMember> {
                             child: Text("Members not added"),
                           ),
                   )
-            : Container(
-                height: height,
-                width: width,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: ThemeClass.orangeColor,
-                  ),
-                ),
-              ),
+            : _buildCircularProgressIndicator(height, width),
       ),
       bottomNavigationBar: _buildAddMemberBtn(),
+    );
+  }
+
+  Container _buildCircularProgressIndicator(double height, double width) {
+    return Container(
+      height: height,
+      width: width,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: ThemeClass.orangeColor,
+        ),
+      ),
     );
   }
 
