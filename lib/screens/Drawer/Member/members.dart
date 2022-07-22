@@ -30,49 +30,45 @@ class _AddNewMemberState extends State<AddNewMember> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65.0),
-          child: AppbarWithBackButton(appbarTitle: 'key_members'.tr),
-        ),
-        body: Obx(
-          () => (_membersController.isloading.value == false)
-              ? _membersController.isError.value == true
-                  ? Center(
-                      child: Text(
-                          _membersController.errorMessage.value.toString()),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: _membersController.memberData.isNotEmpty
-                          ? ListView.builder(
-                              itemCount: _membersController.memberData.length,
-                              itemBuilder: (context, index) {
-                                MemberData? memberData =
-                                    _membersController.memberData[index];
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65.0),
+        child: AppbarWithBackButton(appbarTitle: 'key_members'.tr),
+      ),
+      body: Obx(
+        () => (_membersController.isloading.value == false)
+            ? _membersController.isError.value == true
+                ? Center(
+                    child:
+                        Text(_membersController.errorMessage.value.toString()),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: _membersController.memberData.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: _membersController.memberData.length,
+                            itemBuilder: (context, index) {
+                              MemberData? memberData =
+                                  _membersController.memberData[index];
 
-                                return _buildMemberListTile(memberData);
-                              })
-                          : const Center(
-                              child: Text("Members not added"),
-                            ),
-                    )
-              : Container(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: ThemeClass.orangeColor,
-                    ),
+                              return _buildMemberListTile(memberData);
+                            })
+                        : const Center(
+                            child: Text("Members not added"),
+                          ),
+                  )
+            : Container(
+                height: height,
+                width: width,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: ThemeClass.orangeColor,
                   ),
                 ),
-        ),
-        bottomNavigationBar: _buildAddMemberBtn(),
+              ),
       ),
+      bottomNavigationBar: _buildAddMemberBtn(),
     );
   }
 

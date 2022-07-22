@@ -34,6 +34,9 @@ class MembersController extends GetxController {
           isError(true);
           errorMessage(jasonData['message'].toString());
         }
+      } else if (response.statusCode == 401) {
+        isError(true);
+        errorMessage("unauthorized");
       } else {
         isError(true);
         errorMessage(GlobalMessages.internalservererror);

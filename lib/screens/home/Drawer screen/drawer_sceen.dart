@@ -179,7 +179,9 @@ class DrawerWidget extends StatelessWidget {
                 tileIconPath: "assets/icons/info-icon.png",
               ),
               _buildDrawerListTile(
-                onTileTap: () {},
+                onTileTap: () {
+                  Get.toNamed(Routes.termsAndPrivacyPolicy);
+                },
                 tileLabel: 'key_terms_policy'.tr,
                 tileIconPath: "assets/icons/icon-terms&policy.png",
               ),

@@ -4,6 +4,7 @@ import 'package:oyo_labs/screens/Drawer/Help&FAQ%20screen/help_and_support.dart'
 import 'package:oyo_labs/screens/Drawer/Member/update_member.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/my_prescription.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/my_profile.dart';
+import 'package:oyo_labs/screens/Drawer/Terms%20&%20Privacy%20Policy/terms_privacy_screen.dart';
 import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_detail.dart';
 import 'package:oyo_labs/screens/Drawer/Member/members.dart';
@@ -65,6 +66,7 @@ class Routes {
   static const String ratingScreen = '/ratingScreen';
   static const String drawerLabTestScreen = '/drawerLabTestScreen';
   static const String helpAndSupportScreen = '/helpAndSupportScreen';
+  static const String termsAndPrivacyPolicy = '/termsAndPrivacyPolicy';
 
   static List<GetPage> gobalRoutes = [
     GetPage(name: splashRoute, page: () => const SplashScreen()),
@@ -72,9 +74,7 @@ class Routes {
     GetPage(name: loginScreen, page: () => const LoginScreen()),
     GetPage(name: forgotPasswordScreen, page: () => ForgotPassword()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
-
     GetPage(name: homeScreen, page: () => const HomePage()),
-
     GetPage(name: aboutUsScreen, page: () => const AboutUs()),
     GetPage(name: contactUsScreen, page: () => const ContactUs()),
     GetPage(name: bookingSuccessScreen, page: () => const BookingSuccess()),
@@ -107,5 +107,7 @@ class Routes {
     GetPage(name: drawerLabTestScreen, page: () => const DrawerLabTestScreen()),
     GetPage(
         name: helpAndSupportScreen, page: () => const HelpAndSupportScreen()),
+    GetPage(
+        name: termsAndPrivacyPolicy, page: () => const TermsAndPrivacyScreen()),
   ];
 }
