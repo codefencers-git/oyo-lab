@@ -29,42 +29,12 @@ class _AddAddressState extends State<AddAddress> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: 'key_name'.tr,
-                hintStyle: TextStyle(
-                  fontSize: 12,
-                  color: ThemeClass.greyColor,
-                  fontWeight: FontWeight.w400,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                filled: true,
-              ),
-              controller: _textController,
-              validator: (value) {
-                if (value == null) {
-                  return 'key_full_name'.tr;
-                } else if (value.length < 2) {
-                  return 'key_name_validation'.tr;
-                }
-              },
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 100,
-              child: TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                minLines: 6,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'key_address_line-1'.tr,
+                  hintText: 'key_name'.tr,
                   hintStyle: TextStyle(
                     fontSize: 12,
                     color: ThemeClass.greyColor,
@@ -76,145 +46,177 @@ class _AddAddressState extends State<AddAddress> {
                   ),
                   filled: true,
                 ),
-                controller: _textaddController,
+                controller: _textController,
                 validator: (value) {
                   if (value == null) {
-                    return 'key_address_line-1'.tr;
+                    return 'key_full_name'.tr;
                   } else if (value.length < 2) {
-                    return 'key_address_validation'.tr;
+                    return 'key_name_validation'.tr;
                   }
                 },
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 100,
-              child: TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                minLines: 6,
-                decoration: InputDecoration(
-                  hintText: 'key_address_line-1'.tr,
-                  hintStyle: TextStyle(
-                    fontSize: 12,
-                    color: ThemeClass.greyColor,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  filled: true,
-                ),
-                controller: _textaddController2,
-                validator: (value) {
-                  if (value == null) {
-                    return 'key_address_line-2'.tr;
-                  } else if (value.length < 2) {
-                    return 'key_address_validation'.tr;
-                  }
-                },
+              SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 100,
-              child: TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                minLines: 6,
-                decoration: InputDecoration(
-                  hintText: 'key_address_line-2'.tr,
-                  hintStyle: TextStyle(
-                    fontSize: 12,
-                    color: ThemeClass.greyColor,
-                    fontWeight: FontWeight.w400,
+              SizedBox(
+                height: 100,
+                child: TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  minLines: 6,
+                  decoration: InputDecoration(
+                    hintText: 'key_address_line-1'.tr,
+                    hintStyle: TextStyle(
+                      fontSize: 12,
+                      color: ThemeClass.greyColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    filled: true,
                   ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  filled: true,
+                  controller: _textaddController,
+                  validator: (value) {
+                    if (value == null) {
+                      return 'key_address_line-1'.tr;
+                    } else if (value.length < 2) {
+                      return 'key_address_validation'.tr;
+                    }
+                  },
                 ),
-                controller: _textaddController2,
-                validator: (value) {
-                  if (value == null) {
-                    return 'key_address_line-2'.tr;
-                  } else if (value.length < 2) {
-                    return 'key_address_validation'.tr;
-                  }
-                },
               ),
-            ),
-            Row(
-              children: [
-                Radio(
-                  value: AddressTypeLabel.home,
-                  activeColor: ThemeClass.orangeColor,
-                  groupValue: _addressType,
-                  onChanged: (AddressTypeLabel? value) {
-                    setState(
-                      () {
-                        _addressType = value;
-                      },
-                    );
-                    print(_addressType);
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 100,
+                child: TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  minLines: 6,
+                  decoration: InputDecoration(
+                    hintText: 'key_address_line-1'.tr,
+                    hintStyle: TextStyle(
+                      fontSize: 12,
+                      color: ThemeClass.greyColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    filled: true,
+                  ),
+                  controller: _textaddController2,
+                  validator: (value) {
+                    if (value == null) {
+                      return 'key_address_line-2'.tr;
+                    } else if (value.length < 2) {
+                      return 'key_address_validation'.tr;
+                    }
                   },
                 ),
-                Text(
-                  'key_home'.tr,
-                  style: TextStyle(
-                      color: ThemeClass.blackColor1,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 100,
+                child: TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  minLines: 6,
+                  decoration: InputDecoration(
+                    hintText: 'key_address_line-2'.tr,
+                    hintStyle: TextStyle(
                       fontSize: 12,
-                      fontWeight: FontWeight.w700),
-                ),
-                Radio(
-                  value: AddressTypeLabel.office,
-                  activeColor: ThemeClass.orangeColor,
-                  groupValue: _addressType,
-                  onChanged: (AddressTypeLabel? value) {
-                    setState(
-                      () {
-                        _addressType = value;
-                      },
-                    );
-                    print(_addressType);
+                      color: ThemeClass.greyColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    filled: true,
+                  ),
+                  controller: _textaddController2,
+                  validator: (value) {
+                    if (value == null) {
+                      return 'key_address_line-2'.tr;
+                    } else if (value.length < 2) {
+                      return 'key_address_validation'.tr;
+                    }
                   },
                 ),
-                Text(
-                  'key_office'.tr,
-                  style: TextStyle(
-                      color: ThemeClass.blackColor1,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700),
-                ),
-                Radio(
-                  value: AddressTypeLabel.other,
-                  activeColor: ThemeClass.orangeColor,
-                  groupValue: _addressType,
-                  onChanged: (AddressTypeLabel? value) {
-                    setState(
-                      () {
-                        _addressType = value;
-                      },
-                    );
-                    print(_addressType);
-                  },
-                ),
-                Text(
-                  'key_other'.tr,
-                  style: TextStyle(
-                      color: ThemeClass.blackColor1,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700),
-                )
-              ],
-            )
-          ],
+              ),
+              Row(
+                children: [
+                  Radio(
+                    value: AddressTypeLabel.home,
+                    activeColor: ThemeClass.orangeColor,
+                    groupValue: _addressType,
+                    onChanged: (AddressTypeLabel? value) {
+                      setState(
+                        () {
+                          _addressType = value;
+                        },
+                      );
+                      print(_addressType);
+                    },
+                  ),
+                  Text(
+                    'key_home'.tr,
+                    style: TextStyle(
+                        color: ThemeClass.blackColor1,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Radio(
+                    value: AddressTypeLabel.office,
+                    activeColor: ThemeClass.orangeColor,
+                    groupValue: _addressType,
+                    onChanged: (AddressTypeLabel? value) {
+                      setState(
+                        () {
+                          _addressType = value;
+                        },
+                      );
+                      print(_addressType);
+                    },
+                  ),
+                  Text(
+                    'key_office'.tr,
+                    style: TextStyle(
+                        color: ThemeClass.blackColor1,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Radio(
+                    value: AddressTypeLabel.other,
+                    activeColor: ThemeClass.orangeColor,
+                    groupValue: _addressType,
+                    onChanged: (AddressTypeLabel? value) {
+                      setState(
+                        () {
+                          _addressType = value;
+                        },
+                      );
+                      print(_addressType);
+                    },
+                  ),
+                  Text(
+                    'key_other'.tr,
+                    style: TextStyle(
+                        color: ThemeClass.blackColor1,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
