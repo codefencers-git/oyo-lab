@@ -11,7 +11,7 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
     required this.isObscureText,
     this.keyboardType = TextInputType.text,
     this.validator,
-    required this.hintText,
+     this.hintText,
     required this.iconData,
     required this.onIconTap,
     this.color = ThemeClass.whiteColor,
@@ -22,7 +22,7 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
   final bool isObscureText;
   TextInputType keyboardType;
   final String? Function(String?)? validator;
-  final String hintText;
+  final String? hintText;
   final String iconData;
   final Color? color;
   final VoidCallback onIconTap;
