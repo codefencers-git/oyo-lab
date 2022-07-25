@@ -84,7 +84,7 @@ class Routes {
     GetPage(name: checkAppointment, page: () => const MyAppointment()),
     GetPage(
         name: labDetailScreen,
-        page: () => const BookAppointment(
+        page: () => BookAppointment(
               type: "",
             )),
     GetPage(name: allLabTests, page: () => const AllLabTestsScreen()),
@@ -93,7 +93,7 @@ class Routes {
     GetPage(name: myTestReportScreen, page: () => const MyTestRepoer()),
     GetPage(name: prescriptionDetails, page: () => const PrescriptionDetail()),
     GetPage(name: manageAddressScreen, page: () => const ManageAddress()),
-    GetPage(name: addNewAddressScreen, page: () => const AddAddress()),
+    GetPage(name: addNewAddressScreen, page: () => AddAddress()),
     GetPage(name: addNewMembers, page: () => const AddnewMemberScreen()),
     GetPage(name: referandEarnScreen, page: () => const ReferEarnScreen()),
     GetPage(name: walletScreen, page: () => const WalletScreen()),

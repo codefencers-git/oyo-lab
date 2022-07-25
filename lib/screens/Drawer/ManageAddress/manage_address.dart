@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/Drawer/ManageAddress/add_address.dart';
 import 'package:oyo_labs/screens/Drawer/ManageAddress/services%20and%20model/address_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
@@ -80,7 +81,8 @@ class _ManageAddressState extends State<ManageAddress> {
         Row(
           children: [
             Image.asset(
-              addressData!.addressType.toString() == "Home"
+              addressData!.addressType.toString() == "Home" ||
+                      addressData.addressType.toString().toLowerCase() == "home"
                   ? "assets/icons/icon_manage_add_home.png"
                   : "assets/icons/icon_building.png",
               height: 25,
@@ -89,7 +91,7 @@ class _ManageAddressState extends State<ManageAddress> {
               width: 10,
             ),
             _buildAddress(addressData),
-            _buildEditBtn(),
+            _buildEditBtn(addressData),
           ],
         ),
         const SizedBox(
@@ -100,7 +102,7 @@ class _ManageAddressState extends State<ManageAddress> {
     );
   }
 
-  DropdownButton<int> _buildEditBtn() {
+  DropdownButton<int> _buildEditBtn(AddrressData? addressData) {
     return DropdownButton(
         underline: const SizedBox(),
         icon: Image.asset(
@@ -120,10 +122,7 @@ class _ManageAddressState extends State<ManageAddress> {
                 border: Border.all(width: 0, color: Colors.white),
                 boxShadow: [
                   BoxShadow(
-                    offset: const Offset(
-                      5,
-                      2,
-                    ),
+                    offset: const Offset(5, 2),
                     blurRadius: 6,
                     color: Colors.black.withOpacity(0.2),
                   ),
@@ -133,12 +132,17 @@ class _ManageAddressState extends State<ManageAddress> {
 
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               // margin: const EdgeInsets.only(right: 10),
-              child: Text(
-                'key_edit_btn'.tr,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: ThemeClass.blackColor,
-                  fontWeight: FontWeight.w500,
+              child: InkWell(
+                onTap: () {
+                  Get.to(AddAddress(isEdit: true, addressData: addressData));
+                },
+                child: Text(
+                  'key_edit_btn'.tr,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: ThemeClass.blackColor,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),

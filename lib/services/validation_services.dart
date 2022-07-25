@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 
 class Validation {
@@ -49,12 +50,39 @@ class Validation {
   }
 
   String? nameValidation(String? value) {
-        if (value!.isEmpty) {
-          return GlobalMessages.emptyMessage + 'name';
-        }
-        if (value.length < 3) {
-          return GlobalMessages.nameLengthMessage;
-        }
-        return null;
-      }
+    if (value!.isEmpty) {
+      return GlobalMessages.emptyMessage + 'name';
+    }
+    if (value.length < 3) {
+      return GlobalMessages.nameLengthMessage;
+    }
+    return null;
+  }
+
+  String? addressValidation(value) {
+    if (value == null) {
+      return 'key_address_line-1'.tr;
+    } else if (value.length < 2) {
+      return 'key_address_validation'.tr;
+    }
+    return null;
+  }
+
+  String? address2Validation(value) {
+    if (value == null) {
+      return 'key_address_line-2'.tr;
+    } else if (value.length < 2) {
+      return 'key_address_validation'.tr;
+    }
+    return null;
+  }
+
+  String? pincodeValidation(value) {
+    if (value == null) {
+      return 'Please enter pincode';
+    } else if (value.length < 6) {
+      return 'Enter valid pincode';
+    }
+    return null;
+  }
 }

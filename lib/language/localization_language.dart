@@ -109,6 +109,7 @@ class LanguageLocaleString extends Translations {
           'key_address_validation': 'Please enter valid Address',
           'key_add_address': 'Add Address',
           'key_add_new_address': 'Add New Address',
+          'key_edit_address': 'Edit Address',
           'key_edit_btn': 'Edit',
           'key_home': 'Home',
           'key_office': 'Office',

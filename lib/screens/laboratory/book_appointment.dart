@@ -1,9 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:intl/intl.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/member_selection_bottomsheet.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
@@ -11,11 +10,13 @@ import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import '../../widgets/buttons/round_button.dart';
 
 class BookAppointment extends StatefulWidget {
-  final String type;
-  const BookAppointment({
+  BookAppointment({
     Key? key,
-    required this.type,
+    this.labId,
+    this.type,
   }) : super(key: key);
+  String? type;
+  String? labId;
 
   @override
   State<BookAppointment> createState() => _BookAppointmentState();
@@ -49,64 +50,12 @@ class _BookAppointmentState extends State<BookAppointment> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 12.0, top: 10),
-                  child: Text(
-                    'key_select_date'.tr,
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: ThemeClass.blackColor1,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
-                DatePicker(
-                  dateController: _date,
-                ),
+                _buildDatePicker(),
                 _buildSelectSlot(),
-                Padding(
-                  padding: const EdgeInsets.all(9.0),
-                  child: SizedBox(
-                    child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 10,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                crossAxisSpacing: 5,
-                                mainAxisSpacing: 5,
-                                childAspectRatio: 4 / 1.8),
-                        itemBuilder: (context, index) {
-                          return _buildTrainerBox(index);
-                        }),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  //keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  minLines: 3,
-                  decoration: InputDecoration(
-                    hintText: 'key_write_your_remark'.tr,
-                    hintStyle: TextStyle(
-                      fontSize: 12,
-                      color: ThemeClass.greyColor,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    filled: true,
-                  ),
-                  //controller: _textaddController2,
-                  validator: (value) {},
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                _buildTimeSlotWidget(),
+                const SizedBox(height: 10),
+                _buildRemarkWidget(),
+                const SizedBox(height: 10),
                 Text(
                   'key_have_prescription'.tr,
                   style: TextStyle(
@@ -114,13 +63,11 @@ class _BookAppointmentState extends State<BookAppointment> {
                       color: ThemeClass.blackColor2,
                       fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
-                widget.type != "Reschedule" ? _priscripion(width) : SizedBox(),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 15),
+                widget.type != "Reschedule"
+                    ? _priscripion(width)
+                    : const SizedBox(),
+                SizedBox(height: 10),
                 Text(
                   'Uploaded Prescription',
                   style: TextStyle(
@@ -141,78 +88,150 @@ class _BookAppointmentState extends State<BookAppointment> {
                 const SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'key_item_total_mrp'.tr,
-                      style: TextStyle(
-                          fontSize: 10,
-                          color: ThemeClass.greyColor1,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "₹120.00",
-                          style: TextStyle(
-                              fontSize: 10,
-                              color: ThemeClass.greyColor1,
-                              fontWeight: FontWeight.w400),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Divider(
-                  color: ThemeClass.greyColor1,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'key_payable_amount'.tr,
-                      style: TextStyle(
-                          fontSize: 10,
-                          color: ThemeClass.blackColor1,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "₹120.00",
-                          style: TextStyle(
-                              fontSize: 10,
-                              color: ThemeClass.blackColor1,
-                              fontWeight: FontWeight.w500),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                _buildTotalMRPWidget(),
+                Divider(color: ThemeClass.greyColor1),
+                _buildPayableAmtWidget(),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(16),
-        height: 45,
-        child: RoundButton(
-          onTap: () {
-            showModalBottomSheet<void>(
-              context: context,
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              builder: (BuildContext context) {
-                return const MemberSelectionBottomSheet();
-              },
-            );
-            // Get.toNamed(Routes.bookingSuccessScreen);
-          },
-          buttonLabel: 'key_book_appointment_btn'.tr,
-        ),
+      bottomNavigationBar: _buildBookAppointmentBtn(context),
+    );
+  }
+
+  Container _buildBookAppointmentBtn(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(16),
+      height: 45,
+      child: RoundButton(
+        onTap: () {
+          showModalBottomSheet<void>(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (BuildContext context) {
+              return const MemberSelectionBottomSheet();
+            },
+          );
+          // Get.toNamed(Routes.bookingSuccessScreen);
+        },
+        buttonLabel: 'key_book_appointment_btn'.tr,
       ),
+    );
+  }
+
+  Row _buildPayableAmtWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'key_payable_amount'.tr,
+          style: TextStyle(
+              fontSize: 10,
+              color: ThemeClass.blackColor1,
+              fontWeight: FontWeight.w400),
+        ),
+        Row(
+          children: [
+            Text(
+              "₹120.00",
+              style: TextStyle(
+                  fontSize: 10,
+                  color: ThemeClass.blackColor1,
+                  fontWeight: FontWeight.w500),
+            )
+          ],
+        )
+      ],
+    );
+  }
+
+  Row _buildTotalMRPWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'key_item_total_mrp'.tr,
+          style: TextStyle(
+              fontSize: 10,
+              color: ThemeClass.greyColor1,
+              fontWeight: FontWeight.w400),
+        ),
+        Row(
+          children: [
+            Text(
+              "₹120.00",
+              style: TextStyle(
+                  fontSize: 10,
+                  color: ThemeClass.greyColor1,
+                  fontWeight: FontWeight.w400),
+            )
+          ],
+        )
+      ],
+    );
+  }
+
+  TextFormField _buildRemarkWidget() {
+    return TextFormField(
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      minLines: 3,
+      decoration: InputDecoration(
+        hintText: 'key_write_your_remark'.tr,
+        hintStyle: TextStyle(
+          fontSize: 12,
+          color: ThemeClass.greyColor,
+          fontWeight: FontWeight.w400,
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        filled: true,
+      ),
+    
+    );
+  }
+
+  Padding _buildTimeSlotWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(9.0),
+      child: SizedBox(
+        child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 10,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                childAspectRatio: 4 / 1.8),
+            itemBuilder: (context, index) {
+              return _buildTrainerBox(index);
+            }),
+      ),
+    );
+  }
+
+  Column _buildDatePicker() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 12.0, top: 10),
+          child: Text(
+            'key_select_date'.tr,
+            style: TextStyle(
+                fontSize: 12,
+                color: ThemeClass.blackColor1,
+                fontWeight: FontWeight.w700),
+          ),
+        ),
+        DatePicker(
+          dateController: _date,
+        ),
+      ],
     );
   }
 
