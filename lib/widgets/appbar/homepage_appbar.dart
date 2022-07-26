@@ -40,7 +40,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    print("-----------" + _userLocationController.currentAddress.value);
+    // print("-----------" + _userLocationController.currentAddress.value);
     return AppBar(
       backgroundColor: ThemeClass.orangeColor,
       toolbarHeight: 70,

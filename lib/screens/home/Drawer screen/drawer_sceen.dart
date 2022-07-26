@@ -106,7 +106,9 @@ class DrawerWidget extends StatelessWidget {
                 tileIconPath: "assets/icons/info-icon.png",
               ),
               _buildDrawerListTile(
-                onTileTap: () {},
+                onTileTap: () {
+                  Get.toNamed(Routes.termsAndPrivacyPolicy);
+                },
                 tileLabel: 'key_terms_policy'.tr,
                 tileIconPath: "assets/icons/icon-terms&policy.png",
               ),
@@ -116,6 +118,9 @@ class DrawerWidget extends StatelessWidget {
                 },
                 tileLabel: 'key_contact_us'.tr,
                 tileIconPath: "assets/icons/icon-contactus.png",
+              ),
+              SizedBox(
+                height: 16,
               ),
               _buildDrawerListTile(
                 onTileTap: () {

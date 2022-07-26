@@ -32,6 +32,12 @@ class LanguageLocaleString extends Translations {
           'key_upload_btn_label': 'Upload',
           'key_test_near_by_you': 'Test Near by You',
           'key_view_all': 'View All',
+
+          //-------------------Profile Detail
+          'key_change_password': 'Change Password',
+          'key_profile_detail': 'Profile Detail',
+          'key_edit_profile': 'Edit Profile',
+
           //-------------------Drawer screen
           'key_book_lab_lest': 'Book Lab Test',
           'key_help_&_faq': "Help & FAQ's ",

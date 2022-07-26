@@ -51,42 +51,38 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     validation = Validation();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildLogoWidget(width),
-              ContainerWithInnerShadow(
-                width: width,
-                height: height * 0.55,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Form(
-                      key: _formKey,
-                      child: _buildChangePwdTitleNdiscription(width),
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildLogoWidget(width),
+            ContainerWithInnerShadow(
+              width: width,
+              height: height * 0.55,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Form(
+                    key: _formKey,
+                    child: _buildChangePwdTitleNdiscription(width),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Column(
+                      children: [
+                        _buildPasswordField(),
+                        const SizedBox(height: 15),
+                        _buildConfirmPasswordField()
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Column(
-                        children: [
-                          _buildPasswordField(),
-                          const SizedBox(height: 15),
-                          _buildConfirmPasswordField()
-                        ],
-                      ),
-                    ),
-                    _buildButtonWidget(),
-                  ],
-                ),
+                  ),
+                  _buildButtonWidget(),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
