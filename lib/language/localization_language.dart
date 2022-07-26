@@ -112,7 +112,10 @@ class LanguageLocaleString extends Translations {
           'key_name_validation': 'Please enter valid Name',
           'key_address_line-1': 'Address Line-1',
           'key_address_line-2': 'Address Line-2',
-          'key_address_validation': 'Please enter valid Address',
+          'key_pincode': 'Pincode',
+
+          'key_pincode_validation': 'Please Enter valid Pincode',
+          'key_address_validation': 'Please Enter valid Address',
           'key_add_address': 'Add Address',
           'key_add_new_address': 'Add New Address',
           'key_edit_btn': 'Edit',

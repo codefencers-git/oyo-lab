@@ -188,10 +188,10 @@ class UserController extends GetxController {
               res['status'].toString() == "200") {
             await UserPrefService().removeUserData();
             await UserPrefService().removeToken();
-
             showToast(GlobalMessages.logoutSuccess);
 
             setIsLogin(false);
+
             // Get.back();
             Navigator.pushAndRemoveUntil<void>(
               navigationService.navigationKey.currentContext!,
