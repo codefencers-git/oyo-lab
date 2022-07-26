@@ -8,15 +8,17 @@ import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 
 import '../../widgets/buttons/round_button.dart';
+import 'all lab test/lab_test_detail_model.dart';
 
 class BookAppointment extends StatefulWidget {
   BookAppointment({
     Key? key,
-    this.labId,
+    this.labData,
     this.type,
   }) : super(key: key);
+
   String? type;
-  String? labId;
+  RecommendedProduct? labData;
 
   @override
   State<BookAppointment> createState() => _BookAppointmentState();
@@ -25,13 +27,40 @@ class BookAppointment extends StatefulWidget {
 class _BookAppointmentState extends State<BookAppointment> {
   final TextEditingController _date = TextEditingController();
   late List<bool> isSelected;
-  String? time;
+
   int? select;
   @override
   void initState() {
     isSelected = [true, false];
     super.initState();
   }
+
+  List<String> amTimeSlot = [
+    "12:00 AM",
+    "12:30 AM",
+    "01:00 AM",
+    "01:30 AM",
+    "02:00 AM",
+    "02:30 AM",
+    "03:00 AM",
+    "03:30 AM",
+    "04:00 AM",
+    "04:30 AM",
+  ];
+  List<String> pmTimeSlot = [
+    "12:00 PM",
+    "12:30 PM",
+    "01:00 PM",
+    "01:30 PM",
+    "02:00 PM",
+    "02:30 PM",
+    "03:00 PM",
+    "03:30 PM",
+    "04:00 PM",
+    "04:30 PM",
+  ];
+
+  String selectedTimeSlot = "";
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +69,8 @@ class _BookAppointmentState extends State<BookAppointment> {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
-        child: AppbarWithBackButton(appbarTitle: "ABO Group & RH Type"),
+        child:
+            AppbarWithBackButton(appbarTitle: widget.labData!.name.toString()),
       ),
       body: Padding(
         padding: const EdgeInsets.all(9.0),
@@ -67,7 +97,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                 widget.type != "Reschedule"
                     ? _priscripion(width)
                     : const SizedBox(),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   'Uploaded Prescription',
                   style: TextStyle(
@@ -114,7 +144,6 @@ class _BookAppointmentState extends State<BookAppointment> {
               return const MemberSelectionBottomSheet();
             },
           );
-          // Get.toNamed(Routes.bookingSuccessScreen);
         },
         buttonLabel: 'key_book_appointment_btn'.tr,
       ),
@@ -191,7 +220,6 @@ class _BookAppointmentState extends State<BookAppointment> {
         ),
         filled: true,
       ),
-    
     );
   }
 
@@ -202,14 +230,52 @@ class _BookAppointmentState extends State<BookAppointment> {
         child: GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 10,
+            itemCount: amTimeSlot.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
                 childAspectRatio: 4 / 1.8),
             itemBuilder: (context, index) {
-              return _buildTrainerBox(index);
+              return InkWell(
+                onTap: () {
+                  setState(() {
+                    select = index;
+                  });
+                  selectedTimeSlot = isSelected[0] == true
+                      ? amTimeSlot[int.parse(select.toString())].toString()
+                      : pmTimeSlot[int.parse(select.toString())].toString();
+                  print(selectedTimeSlot);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: select == index
+                        ? ThemeClass.orangeColor
+                        : ThemeClass.orangeLightColor,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        isSelected[0] == true
+                            ? amTimeSlot[index].toString()
+                            : pmTimeSlot[index].toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 10,
+                            color: select == index
+                                ? ThemeClass.whiteColor
+                                : ThemeClass.blackColor,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                ),
+              );
             }),
       ),
     );
@@ -217,6 +283,7 @@ class _BookAppointmentState extends State<BookAppointment> {
 
   Column _buildDatePicker() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 12.0, top: 10),
@@ -235,108 +302,129 @@ class _BookAppointmentState extends State<BookAppointment> {
     );
   }
 
-  Container _priscripion(double width) {
-    return Container(
-      decoration: BoxDecoration(
-        color: ThemeClass.skyblueColor,
-        border: Border.all(width: 1, color: Colors.red),
-        borderRadius: const BorderRadius.all(Radius.circular(5)),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      height: 75,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            width: width / 2.8,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/icons/icon_camera.png",
-                    height: 30,
+  Widget _priscripion(double width) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: ThemeClass.skyblueColor,
+            border: Border.all(width: 1, color: Colors.red),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          height: 75,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: width / 2.8,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/icons/icon_camera.png",
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'key_camera'.tr,
+                        style: const TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.w900),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'key_camera'.tr,
-                    style: const TextStyle(
-                        fontSize: 10, fontWeight: FontWeight.w900),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-          VerticalDivider(
-            thickness: 1,
-            indent: 15,
-            endIndent: 15,
-            color: ThemeClass.orangeColor,
-          ),
-          SizedBox(
-            width: width / 2.8,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/icons/icon_gallery.png",
-                    height: 30,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'key_gallery'.tr,
-                    style: const TextStyle(
-                        fontSize: 10, fontWeight: FontWeight.w900),
-                  ),
-                ],
+              VerticalDivider(
+                thickness: 1,
+                indent: 15,
+                endIndent: 15,
+                color: ThemeClass.orangeColor,
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  InkWell _buildTrainerBox(index) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          select = index;
-        });
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: select == index
-              ? ThemeClass.orangeColor
-              : ThemeClass.orangeLightColor,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(100),
+              SizedBox(
+                width: width / 2.8,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/icons/icon_gallery.png",
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'key_gallery'.tr,
+                        style: const TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.w900),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              isSelected[0] == true ? "12:00 AM" : "12:00 PM",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: 10,
-                  color: select == index
-                      ? ThemeClass.whiteColor
-                      : ThemeClass.blackColor,
-                  fontWeight: FontWeight.w500),
-            ),
+        Container(
+          height: 100,
+          padding: const EdgeInsets.only(top: 15),
+          child: ListView.builder(
+            itemCount: 1,
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, i) {
+              return Container(
+                padding: const EdgeInsets.only(bottom: 0, left: 10),
+                height: 100.0,
+                child: Stack(
+                  // overflow: Overflow.visible,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: ThemeClass.greyColor2,
+                          )),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          "https://cdn.pixabay.com/photo/2016/12/05/19/45/pill-1884777__340.jpg",
+                          height: 65,
+                          width: 50.0,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 58,
+                      left: 17.0,
+                      child: InkWell(
+                        onTap: () {
+                          // imageList.removeAt(i);
+                          // uploadImageList.removeAt(i);
+                          setState(() {});
+                        },
+                        child: Image.asset(
+                          "assets/icons/close-icon.png",
+                          width: 15,
+                          height: 15,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -424,6 +512,12 @@ class DatePicker extends StatefulWidget {
 
 // ignore: camel_case_types
 class _date_pickerState extends State<DatePicker> {
+  String currentDate() {
+    DateTime currentDate = DateTime.now();
+    String formattedDate = DateFormat('dd-MM-yyyy').format(currentDate);
+    return formattedDate;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -440,7 +534,7 @@ class _date_pickerState extends State<DatePicker> {
           fillColor: ThemeClass.greyLightColor,
           filled: true,
           border: InputBorder.none,
-          hintText: '30-08-1994',
+          hintText: currentDate(),
           hintStyle: TextStyle(
               color: ThemeClass.greyColor1,
               fontWeight: FontWeight.w400,

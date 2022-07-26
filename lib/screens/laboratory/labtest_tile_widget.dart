@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/routes.dart';
-import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
 import 'package:oyo_labs/screens/laboratory/product_detail.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_book_slot.dart';
@@ -27,7 +25,7 @@ class AllLabsGridTileWidget extends StatelessWidget {
             BoxShadow(
               blurRadius: 7.0,
               spreadRadius: 0.0,
-              offset: Offset(2, 0),
+              offset: const Offset(2, 0),
               color: Colors.grey.withOpacity(0.5),
             ),
           ],
@@ -81,8 +79,8 @@ class AllLabsGridTileWidget extends StatelessWidget {
                 onTap: () {
                   Get.to(LaboratoryDetail(
                     id: labTestData.id.toString(),
+                    productTitle: labTestData.title.toString(),
                   ));
-                  print("object");
                 },
                 label: 'Book a Slot',
               ),

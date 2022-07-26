@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -18,8 +20,10 @@ import 'package:geolocator/geolocator.dart';
 /// Determine the current position of the device.
 
 class LaboratoryDetail extends StatefulWidget {
-  LaboratoryDetail({Key? key, required this.id}) : super(key: key);
+  LaboratoryDetail({Key? key, this.productTitle, required this.id})
+      : super(key: key);
   String id;
+  String? productTitle;
   @override
   State<LaboratoryDetail> createState() => _LabTestScreenState();
 }
@@ -98,30 +102,32 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: _buildAppbar(),
-        body: FutureBuilder(
-            future: _futureCall,
-            builder: (context, AsyncSnapshot<LAbTestDetailData?> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  if (snapshot.data != null) {
-                    return _buildView(snapshot.data);
-                  } else {
-                    return _buildDataNotFound1("Data Not Found!");
-                  }
-                } else if (snapshot.hasError) {
-                  return _buildDataNotFound1(snapshot.error.toString());
-                } else {
-                  return _buildDataNotFound1("Data Not Found!");
-                }
+      appBar: _buildAppbar(),
+      body: FutureBuilder(
+        future: _futureCall,
+        builder: (context, AsyncSnapshot<LAbTestDetailData?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              if (snapshot.data != null) {
+                return _buildView(snapshot.data);
               } else {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: ThemeClass.orangeColor,
-                  ),
-                );
+                return _buildDataNotFound1("Data Not Found!");
               }
-            }));
+            } else if (snapshot.hasError) {
+              return _buildDataNotFound1(snapshot.error.toString());
+            } else {
+              return _buildDataNotFound1("Data Not Found!");
+            }
+          } else {
+            return Center(
+              child: CircularProgressIndicator(
+                color: ThemeClass.orangeColor,
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 
   Center _buildDataNotFound1(
@@ -133,7 +139,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
   PreferredSize _buildAppbar() {
     return PreferredSize(
       preferredSize: const Size.fromHeight(65.0),
-      child: AppbarWithBackButton(appbarTitle: "ABO Group & RH Type"),
+      child: AppbarWithBackButton(appbarTitle: widget.productTitle.toString()),
     );
   }
 
@@ -145,7 +151,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
           Stack(
             clipBehavior: Clip.none,
             children: [
-              Container(
+              SizedBox(
                 height: 200,
                 width: MediaQuery.of(context).size.width,
                 child: Image.network(
@@ -180,7 +186,6 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
 
   ListView _buildReviewList(List<Review>? reviews) {
     return ListView.builder(
-      //scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: reviews!.length,
@@ -379,7 +384,9 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                       ),
                       onPressed: () {
                         Get.to(BookAppointment(
-                            labId: recommadProduct[index].id.toString()));
+                          labData: recommadProduct[index],
+              
+                        ));
                       },
                     ),
                   ),
