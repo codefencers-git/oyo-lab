@@ -167,7 +167,11 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
           ),
           _buildLaboratoryImage(data.gallery),
           _buildLaboratoryNearTitle(data.labList),
-          _buildNearLaboratory(data.labList),
+          _buildNearLaboratory(
+            data.labList,
+            data.price.toString(),
+            data.id.toString(),
+          ),
           data.labList!.isEmpty || data.labList!.length <= 3
               ? const SizedBox()
               : _buildLoadMoreButton(),
@@ -321,7 +325,8 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
     );
   }
 
-  Padding _buildNearLaboratory(List<RecommendedProduct>? recommadProduct) {
+  Padding _buildNearLaboratory(List<RecommendedProduct>? recommadProduct,
+      String testPrice, String testid) {
     return Padding(
       padding: const EdgeInsets.all(9.0),
       child: ListView.builder(
@@ -384,9 +389,9 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                       ),
                       onPressed: () {
                         Get.to(BookAppointment(
-                          labData: recommadProduct[index],
-              
-                        ));
+                            labData: recommadProduct[index],
+                            testPrice: testPrice,
+                            testId: testid));
                       },
                     ),
                   ),

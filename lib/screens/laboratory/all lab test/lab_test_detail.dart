@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -9,7 +11,27 @@ import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import '../../../routes.dart';
 
 class LabtestDetail extends StatefulWidget {
-  const LabtestDetail({Key? key}) : super(key: key);
+   LabtestDetail({
+    Key? key,
+    required this.testId,
+    required this.laboratoryId,
+    required this.date,
+    required this.time,
+    required this.prescription,
+    required this.bookingFor,
+    this.memberId,
+    this.remarks,
+  }) : super(key: key);
+
+  String testId;
+  String laboratoryId;
+  String date;
+  String time;
+  List<File> prescription;
+  String bookingFor;
+  String? memberId;
+  String? remarks;
+
 
   @override
   State<LabtestDetail> createState() => _LabtestDetailState();

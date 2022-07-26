@@ -1,32 +1,47 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:oyo_labs/screens/laboratory/all%20lab%20test/member_selection_bottomsheet.dart';
+import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
-
 import '../../widgets/buttons/round_button.dart';
+import 'all lab test/lab_test_detail.dart';
 import 'all lab test/lab_test_detail_model.dart';
+import 'package:image_picker/image_picker.dart';
 
 class BookAppointment extends StatefulWidget {
   BookAppointment({
     Key? key,
     this.labData,
+    this.testPrice,
+    this.testId,
     this.type,
   }) : super(key: key);
 
   String? type;
+  String? testId;
+  String? testPrice;
   RecommendedProduct? labData;
 
   @override
   State<BookAppointment> createState() => _BookAppointmentState();
 }
 
+final _formKey = GlobalKey<FormState>();
+
 class _BookAppointmentState extends State<BookAppointment> {
-  final TextEditingController _date = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _remarkController = TextEditingController();
   late List<bool> isSelected;
+
+  String? short;
+
+  final ImagePicker _picker = ImagePicker();
+  File? image;
+  List<File> multiplePrescription = [];
 
   int? select;
   @override
@@ -130,22 +145,161 @@ class _BookAppointmentState extends State<BookAppointment> {
     );
   }
 
+  bool checkValidation() {
+    if (_formKey.currentState!.validate()) {
+      print(_dateController.text);
+    } else {
+      showToast("Please select date.");
+    }
+    if (selectedTimeSlot == "") {
+      showToast("Please select timeslot");
+    }
+    if (multiplePrescription.isEmpty) {
+      showToast("Please upload prescription");
+    }
+    if (_dateController.text != "" &&
+        selectedTimeSlot != "" &&
+        multiplePrescription.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+
   Container _buildBookAppointmentBtn(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(16),
       height: 45,
       child: RoundButton(
-        onTap: () {
-          showModalBottomSheet<void>(
-            context: context,
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            builder: (BuildContext context) {
-              return const MemberSelectionBottomSheet();
-            },
-          );
+        onTap: () async {
+          bool isValidate = checkValidation();
+          isValidate
+              ? showModalBottomSheet<void>(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      child: Container(
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Member Selection',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  InkWell(
+                                    onTap: () => Navigator.pop(context),
+                                    child: Image.asset(
+                                      'assets/icons/icon_cross.png',
+                                      height: 30,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Divider(),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              child: Column(
+                                children: <Widget>[
+                                  _buildListTile("Self"),
+                                  _buildListTile("Member"),
+                                  _buildListTile("Other"),
+                                  const SizedBox(height: 10),
+                                  RoundButton(
+                                      buttonLabel: "confirm",
+                                      onTap: () {
+                                        if (short == null) {
+                                          showToast('Please select member');
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LabtestDetail(
+                                                        testId: widget.testId
+                                                            .toString(),
+                                                        laboratoryId: widget
+                                                            .labData!.id
+                                                            .toString(),
+                                                        date: _dateController
+                                                            .text
+                                                            .trim(),
+                                                        time: selectedTimeSlot,
+                                                        prescription:
+                                                            multiplePrescription,
+                                                        bookingFor:
+                                                            short.toString(),
+                                                        )),
+                                          );
+                                        }
+                                      })
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                )
+              : "";
         },
         buttonLabel: 'key_book_appointment_btn'.tr,
+      ),
+    );
+  }
+
+  ListTile _buildListTile(String value) {
+    return ListTile(
+      dense: true,
+      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+      contentPadding: EdgeInsets.all(5),
+      minVerticalPadding: 0,
+      onTap: () {
+        setState(() {
+          short = value.toString();
+        });
+      },
+      title: Row(
+        children: [
+          SizedBox(
+            height: 15,
+            width: 15,
+            child: Radio(
+                value: value,
+                fillColor: MaterialStateColor.resolveWith(
+                    (states) => ThemeClass.orangeColor),
+                groupValue: short,
+                onChanged: (value) {
+                  setState(() {
+                    short = value.toString();
+                  });
+                  print(short);
+                }),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Text(
+            value,
+            style: TextStyle(
+                fontSize: 12,
+                color: ThemeClass.blackColor,
+                fontWeight: FontWeight.w700),
+          ),
+        ],
       ),
     );
   }
@@ -164,7 +318,7 @@ class _BookAppointmentState extends State<BookAppointment> {
         Row(
           children: [
             Text(
-              "₹120.00",
+              "₹ ${widget.testPrice}",
               style: TextStyle(
                   fontSize: 10,
                   color: ThemeClass.blackColor1,
@@ -190,7 +344,7 @@ class _BookAppointmentState extends State<BookAppointment> {
         Row(
           children: [
             Text(
-              "₹120.00",
+              "₹ ${widget.testPrice}",
               style: TextStyle(
                   fontSize: 10,
                   color: ThemeClass.greyColor1,
@@ -204,6 +358,7 @@ class _BookAppointmentState extends State<BookAppointment> {
 
   TextFormField _buildRemarkWidget() {
     return TextFormField(
+      controller: _remarkController,
       keyboardType: TextInputType.multiline,
       maxLines: null,
       minLines: 3,
@@ -296,7 +451,7 @@ class _BookAppointmentState extends State<BookAppointment> {
           ),
         ),
         DatePicker(
-          dateController: _date,
+          dateController: _dateController,
         ),
       ],
     );
@@ -317,26 +472,36 @@ class _BookAppointmentState extends State<BookAppointment> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: width / 2.8,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/icons/icon_camera.png",
-                        height: 30,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'key_camera'.tr,
-                        style: const TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.w900),
-                      ),
-                    ],
+              InkWell(
+                onTap: () async {
+                  XFile? pickedImage =
+                      await _picker.pickImage(source: ImageSource.camera);
+                  setState(() {
+                    multiplePrescription.add(
+                        File(pickedImage!.path)); //= File(pickedImage!.path);
+                  });
+                },
+                child: SizedBox(
+                  width: width / 2.8,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/icons/icon_camera.png",
+                          height: 30,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'key_camera'.tr,
+                          style: const TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.w900),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -346,84 +511,94 @@ class _BookAppointmentState extends State<BookAppointment> {
                 endIndent: 15,
                 color: ThemeClass.orangeColor,
               ),
-              SizedBox(
-                width: width / 2.8,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/icons/icon_gallery.png",
-                        height: 30,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'key_gallery'.tr,
-                        style: const TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.w900),
-                      ),
-                    ],
+              InkWell(
+                onTap: () async {
+                  List<XFile>? picked = await _picker.pickMultiImage();
+                  setState(() {
+                    multiplePrescription =
+                        picked!.map((e) => File(e.path)).toList();
+                  });
+                },
+                child: SizedBox(
+                  width: width / 2.8,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/icons/icon_gallery.png",
+                          height: 30,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'key_gallery'.tr,
+                          style: const TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.w900),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ],
           ),
         ),
-        Container(
-          height: 100,
-          padding: const EdgeInsets.only(top: 15),
-          child: ListView.builder(
-            itemCount: 1,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, i) {
-              return Container(
-                padding: const EdgeInsets.only(bottom: 0, left: 10),
-                height: 100.0,
-                child: Stack(
-                  // overflow: Overflow.visible,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: ThemeClass.greyColor2,
-                          )),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          "https://cdn.pixabay.com/photo/2016/12/05/19/45/pill-1884777__340.jpg",
-                          height: 65,
-                          width: 50.0,
-                          fit: BoxFit.fitHeight,
-                        ),
+        multiplePrescription.isNotEmpty
+            ? Container(
+                height: 100,
+                padding: const EdgeInsets.only(top: 15),
+                child: ListView.builder(
+                  itemCount: multiplePrescription.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, i) {
+                    return Container(
+                      padding: const EdgeInsets.only(bottom: 0, left: 10),
+                      height: 100.0,
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: ThemeClass.greyColor2,
+                                )),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(
+                                multiplePrescription[i],
+                                height: 65,
+                                width: 50.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 58,
+                            left: 18.0,
+                            child: InkWell(
+                              onTap: () {
+                                multiplePrescription.removeAt(i);
+
+                                setState(() {});
+                              },
+                              child: Image.asset(
+                                "assets/icons/close-icon.png",
+                                width: 15,
+                                height: 15,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Positioned(
-                      top: 58,
-                      left: 17.0,
-                      child: InkWell(
-                        onTap: () {
-                          // imageList.removeAt(i);
-                          // uploadImageList.removeAt(i);
-                          setState(() {});
-                        },
-                        child: Image.asset(
-                          "assets/icons/close-icon.png",
-                          width: 15,
-                          height: 15,
-                        ),
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-        ),
+              )
+            : SizedBox(),
       ],
     );
   }
@@ -522,75 +697,79 @@ class _date_pickerState extends State<DatePicker> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        controller: widget.dateController,
-        decoration: InputDecoration(
-          suffixIcon: Image.asset(
-            "assets/icons/icon-calender.png",
-            scale: 3,
-          ),
-          contentPadding:
-              const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 15),
-          fillColor: ThemeClass.greyLightColor,
-          filled: true,
-          border: InputBorder.none,
-          hintText: currentDate(),
-          hintStyle: TextStyle(
-              color: ThemeClass.greyColor1,
-              fontWeight: FontWeight.w400,
-              fontSize: 12),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(
-              color: Colors.transparent,
-              width: 1.0,
+      child: Form(
+        key: _formKey,
+        child: TextFormField(
+          controller: widget.dateController,
+          decoration: InputDecoration(
+            suffixIcon: Image.asset(
+              "assets/icons/icon-calender.png",
+              scale: 3,
+            ),
+            contentPadding:
+                const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 15),
+            fillColor: ThemeClass.greyLightColor,
+            filled: true,
+            border: InputBorder.none,
+            hintText: currentDate(),
+            hintStyle: TextStyle(
+                color: ThemeClass.greyColor1,
+                fontWeight: FontWeight.w400,
+                fontSize: 12),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: const BorderSide(
+                color: Colors.transparent,
+                width: 1.0,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: const BorderSide(
+                color: Colors.red,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: const BorderSide(
+                color: Colors.transparent,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: const BorderSide(
+                color: Colors.red,
+              ),
             ),
           ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(
-              color: Colors.red,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(
-              color: Colors.red,
-            ),
-          ),
+          readOnly: true,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'key_date_validation'.tr;
+            } else {
+              return null;
+            }
+          },
+          onTap: () async {
+            DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(1885),
+                lastDate: DateTime(2101));
+
+            if (pickedDate != null) {
+              String formattedDate =
+                  DateFormat('dd-MM-yyyy').format(pickedDate);
+
+              setState(() {
+                widget.dateController.text = formattedDate;
+              });
+            } else {
+              // ignore: avoid_print
+              print("Date is not selected");
+            }
+          },
         ),
-        readOnly: true,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'key_date_validation'.tr;
-          } else {
-            return null;
-          }
-        },
-        onTap: () async {
-          DateTime? pickedDate = await showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(1885),
-              lastDate: DateTime(2101));
-
-          if (pickedDate != null) {
-            String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-
-            setState(() {
-              widget.dateController.text = formattedDate;
-            });
-          } else {
-            // ignore: avoid_print
-            print("Date is not selected");
-          }
-        },
       ),
     );
   }

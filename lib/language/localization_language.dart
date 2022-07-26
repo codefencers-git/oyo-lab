@@ -207,6 +207,9 @@ class LanguageLocaleString extends Translations {
           'key_valid_phone_number_msg': 'Please enter valid phone number',
           'key_valid_otp_msg': 'Please enter vaild OTP',
           'key_valid_email_msg': 'Please enter vaild Email',
+
+          'key_member_selection': 'Member Selection',
+          'key_confirm':'Confirm',
         },
         // 'hi_IN': {
         //   'hello': 'नमस्ते दुनिया',
