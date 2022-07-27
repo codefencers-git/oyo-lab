@@ -1,21 +1,21 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
 
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_model.dart';
 import 'package:oyo_labs/screens/laboratory/book_appointment.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import '../../widgets/appbar/appbar_with_back_button.dart';
 import 'package:geolocator/geolocator.dart';
+
+import 'booking model and services/book_appointment_services.dart';
 
 /// Determine the current position of the device.
 
@@ -32,6 +32,9 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
   bool isLoadMore = false;
   var _futureCall;
   var latlong;
+
+  BookAppointmentServicesController _bookAppointmentController =
+      Get.put(BookAppointmentServicesController(), permanent: true);
   @override
   void initState() {
     super.initState();
@@ -168,9 +171,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
           _buildLaboratoryImage(data.gallery),
           _buildLaboratoryNearTitle(data.labList),
           _buildNearLaboratory(
-            data.labList,
-            data.price.toString(),
-            data.id.toString(),
+            data,
           ),
           data.labList!.isEmpty || data.labList!.length <= 3
               ? const SizedBox()
@@ -325,19 +326,20 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
     );
   }
 
-  Padding _buildNearLaboratory(List<RecommendedProduct>? recommadProduct,
-      String testPrice, String testid) {
+  Padding _buildNearLaboratory(
+    LAbTestDetailData labTestDetailData,
+  ) {
     return Padding(
       padding: const EdgeInsets.all(9.0),
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: recommadProduct!.length <= 3
-            ? recommadProduct.length
+        itemCount: labTestDetailData.labList!.length <= 3
+            ? labTestDetailData.labList!.length
             : isLoadMore == false
                 ? 3
-                : recommadProduct.length,
+                : labTestDetailData.labList!.length,
         itemBuilder: (context, index) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -349,7 +351,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                   Padding(
                     padding: const EdgeInsets.only(right: 5),
                     child: Image.network(
-                      recommadProduct[index].image.toString(),
+                      labTestDetailData.labList![index].image.toString(),
                       height: 35,
                       width: 35,
                       fit: BoxFit.contain,
@@ -363,7 +365,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            recommadProduct[index].name.toString(),
+                            labTestDetailData.labList![index].name.toString(),
                             style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
@@ -371,7 +373,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                             height: 5,
                           ),
                           Text(
-                            recommadProduct[index].area.toString(),
+                            labTestDetailData.labList![index].area.toString(),
                             style: TextStyle(
                                 fontSize: 12,
                                 color: ThemeClass.orangeColor,
@@ -388,10 +390,10 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                         height: 30,
                       ),
                       onPressed: () {
-                        Get.to(BookAppointment(
-                            labData: recommadProduct[index],
-                            testPrice: testPrice,
-                            testId: testid));
+                        _bookAppointmentController.tempBookingData(
+                            labTestDetailData,
+                            labTestDetailData.labList![index]);
+                        Get.to(BookAppointment());
                       },
                     ),
                   ),

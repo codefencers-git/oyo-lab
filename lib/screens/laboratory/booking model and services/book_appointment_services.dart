@@ -5,18 +5,22 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_model.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import '../../../services/SharedPrefServices/shared_pref_services.dart';
 
 class BookAppointmentServicesController extends GetxController {
-  Future<void> bookAppointmentService(dynamic parameters) async {
+  Future<void> bookAppointmentService(dynamic parameters, imageFile) async {
     RxBool isError = false.obs;
     RxString errorMessage = "".obs;
     RxBool isloading = false.obs;
 
     isloading(true);
+    String url="place_order";
     try {
-      var response = await HttpServices.httpPost("place_order", parameters);
+      var response = await HttpServices.httpPostWithImageUpload(url, imageFile, parameters, peramterName: 'prescription');
+      
+      // ("place_order", parameters);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jasonData = jsonDecode(response.body);
@@ -51,5 +55,16 @@ class BookAppointmentServicesController extends GetxController {
     } finally {
       isloading(false);
     }
+  }
+
+  Rx<LAbTestDetailData> testDetails = LAbTestDetailData().obs;
+  Rx<RecommendedProduct> labData = RecommendedProduct().obs;
+
+  tempBookingData(testData, labDetail) {
+    testDetails(testData);
+    labData(labDetail);
+
+    print(testDetails);
+    print(labDetail);
   }
 }

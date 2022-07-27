@@ -8,23 +8,17 @@ import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import '../../widgets/buttons/round_button.dart';
-import 'all lab test/lab_test_detail.dart';
-import 'all lab test/lab_test_detail_model.dart';
 import 'package:image_picker/image_picker.dart';
+import 'all lab test/member_selection_bottomsheet.dart';
+import 'booking model and services/book_appointment_services.dart';
 
 class BookAppointment extends StatefulWidget {
   BookAppointment({
     Key? key,
-    this.labData,
-    this.testPrice,
-    this.testId,
     this.type,
   }) : super(key: key);
 
   String? type;
-  String? testId;
-  String? testPrice;
-  RecommendedProduct? labData;
 
   @override
   State<BookAppointment> createState() => _BookAppointmentState();
@@ -37,7 +31,8 @@ class _BookAppointmentState extends State<BookAppointment> {
   final TextEditingController _remarkController = TextEditingController();
   late List<bool> isSelected;
 
-  String? short;
+  final BookAppointmentServicesController _bookAppointmentController =
+      Get.find<BookAppointmentServicesController>();
 
   final ImagePicker _picker = ImagePicker();
   File? image;
@@ -84,8 +79,10 @@ class _BookAppointmentState extends State<BookAppointment> {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
-        child:
-            AppbarWithBackButton(appbarTitle: widget.labData!.name.toString()),
+        child: AppbarWithBackButton(
+            appbarTitle: _bookAppointmentController.testDetails.value.title
+                .toString() //widget.testDetails!.title.toString(),
+            ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(9.0),
@@ -178,128 +175,18 @@ class _BookAppointmentState extends State<BookAppointment> {
                   isScrollControlled: true,
                   backgroundColor: Colors.transparent,
                   builder: (BuildContext context) {
-                    return SizedBox(
-                      child: Container(
-                        color: Colors.white,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10.0, vertical: 8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Member Selection',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  InkWell(
-                                    onTap: () => Navigator.pop(context),
-                                    child: Image.asset(
-                                      'assets/icons/icon_cross.png',
-                                      height: 30,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Divider(),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              child: Column(
-                                children: <Widget>[
-                                  _buildListTile("Self"),
-                                  _buildListTile("Member"),
-                                  _buildListTile("Other"),
-                                  const SizedBox(height: 10),
-                                  RoundButton(
-                                      buttonLabel: "confirm",
-                                      onTap: () {
-                                        if (short == null) {
-                                          showToast('Please select member');
-                                        } else {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    LabtestDetail(
-                                                        testId: widget.testId
-                                                            .toString(),
-                                                        laboratoryId: widget
-                                                            .labData!.id
-                                                            .toString(),
-                                                        date: _dateController
-                                                            .text
-                                                            .trim(),
-                                                        time: selectedTimeSlot,
-                                                        prescription:
-                                                            multiplePrescription,
-                                                        bookingFor:
-                                                            short.toString(),
-                                                        )),
-                                          );
-                                        }
-                                      })
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    return MemberSelectionBottomSheet(
+                      date: _dateController.text.trim(),
+                      time: selectedTimeSlot,
+                      prescription: multiplePrescription,
+                      memberId: "",
+                      remarks: _remarkController.text,
                     );
                   },
                 )
               : "";
         },
         buttonLabel: 'key_book_appointment_btn'.tr,
-      ),
-    );
-  }
-
-  ListTile _buildListTile(String value) {
-    return ListTile(
-      dense: true,
-      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-      contentPadding: EdgeInsets.all(5),
-      minVerticalPadding: 0,
-      onTap: () {
-        setState(() {
-          short = value.toString();
-        });
-      },
-      title: Row(
-        children: [
-          SizedBox(
-            height: 15,
-            width: 15,
-            child: Radio(
-                value: value,
-                fillColor: MaterialStateColor.resolveWith(
-                    (states) => ThemeClass.orangeColor),
-                groupValue: short,
-                onChanged: (value) {
-                  setState(() {
-                    short = value.toString();
-                  });
-                  print(short);
-                }),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Text(
-            value,
-            style: TextStyle(
-                fontSize: 12,
-                color: ThemeClass.blackColor,
-                fontWeight: FontWeight.w700),
-          ),
-        ],
       ),
     );
   }
@@ -318,7 +205,7 @@ class _BookAppointmentState extends State<BookAppointment> {
         Row(
           children: [
             Text(
-              "₹ ${widget.testPrice}",
+              "₹ ${_bookAppointmentController.testDetails.value.price.toString()}",
               style: TextStyle(
                   fontSize: 10,
                   color: ThemeClass.blackColor1,
@@ -344,7 +231,7 @@ class _BookAppointmentState extends State<BookAppointment> {
         Row(
           children: [
             Text(
-              "₹ ${widget.testPrice}",
+              "₹ ${_bookAppointmentController.testDetails.value.price.toString()}",
               style: TextStyle(
                   fontSize: 10,
                   color: ThemeClass.greyColor1,
