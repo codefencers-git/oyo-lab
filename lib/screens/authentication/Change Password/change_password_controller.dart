@@ -35,6 +35,7 @@ class ChangePasswordController extends GetxController {
         }
       } else if (response.statusCode == 401) {
         showToast(GlobalMessages.unauthorizedUser);
+
         await UserPrefService().removeUserData();
       } else {
         isError(true);

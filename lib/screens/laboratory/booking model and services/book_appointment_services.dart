@@ -8,25 +8,35 @@ import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_model.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import '../../../services/SharedPrefServices/shared_pref_services.dart';
+import 'book_appointment_model.dart';
 
 class BookAppointmentServicesController extends GetxController {
-  Future<void> bookAppointmentService(dynamic parameters, imageFile) async {
-    RxBool isError = false.obs;
-    RxString errorMessage = "".obs;
-    RxBool isloading = false.obs;
+  Rx<PaymentURL> paymentUrl = PaymentURL().obs;
+  RxBool isError = false.obs;
+  RxString errorMessage = "".obs;
+  RxBool isloading = false.obs;
 
-    isloading(true);
-    String url="place_order";
+  Future<void> bookAppointmentService(
+      dynamic queryParameters, imageFiles) async {
+    String url = "place_order";
     try {
-      var response = await HttpServices.httpPostWithImageUpload(url, imageFile, parameters, peramterName: 'prescription');
-      
-      // ("place_order", parameters);
+      var response = await HttpServices.httpPostWithMultipleImageUpload(
+        url,
+        imageFiles,
+        queryParameters,
+        peramterName: "prescription",
+      );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jasonData = jsonDecode(response.body);
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message']);
+
+          BookAppointmentModel bookAppointmentModel =
+              BookAppointmentModel.fromJson(jasonData);
+
+          paymentUrl(bookAppointmentModel.data);
 
           isError(false);
           errorMessage("");
@@ -52,8 +62,6 @@ class BookAppointmentServicesController extends GetxController {
       } else {
         showToast(e.toString());
       }
-    } finally {
-      isloading(false);
     }
   }
 

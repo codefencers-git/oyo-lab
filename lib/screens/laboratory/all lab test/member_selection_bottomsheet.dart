@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_model.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -23,7 +24,7 @@ class MemberSelectionBottomSheet extends StatefulWidget {
   RecommendedProduct? laboratoryData;
   String? date;
   String? time;
-  List<File>? prescription;
+  List<XFile>? prescription;
   String? memberId;
   String? remarks;
 
@@ -89,6 +90,7 @@ class _MemberSelectionBottomSheetState
                                       date: widget.date,
                                       time: widget.time,
                                       prescription: widget.prescription,
+                                      bookingFor: short,
                                       memberId: widget.memberId,
                                       remarks: widget.remarks,
                                     )),

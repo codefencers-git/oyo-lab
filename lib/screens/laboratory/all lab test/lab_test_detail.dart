@@ -1,15 +1,17 @@
 // ignore_for_file: must_be_immutable
-
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
+import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
-import '../../../routes.dart';
 import '../booking model and services/book_appointment_services.dart';
+import '../booking model and services/web_view_payment_screen.dart';
 
 class LabtestDetail extends StatefulWidget {
   LabtestDetail({
@@ -24,7 +26,7 @@ class LabtestDetail extends StatefulWidget {
 
   String? date;
   String? time;
-  List<File>? prescription;
+  List<XFile>? prescription;
   String? bookingFor;
   String? memberId;
   String? remarks;
@@ -100,13 +102,45 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 widget.remarks == null ? "" : widget.remarks.toString();
             mapData['contact_number'] =
                 _profileController.profileData.value.phoneNumber.toString();
-
-            // Get.toNamed(Routes.bookingSuccessScreen);
+                
+            _checkOut(mapData);
           },
           buttonLabel: 'Confirm'.tr,
         ),
       ),
     );
+  }
+
+  _checkOut(mapData) async {
+    try {
+      EasyLoading.show();
+
+      await _bookAppointmentController.bookAppointmentService(
+          mapData, widget.prescription);
+
+      String paymentUrl =
+          _bookAppointmentController.paymentUrl.value.paymentUrl.toString();
+
+      print("-----------------------$paymentUrl");
+      EasyLoading.dismiss();
+      var res = await Navigator.of(context, rootNavigator: true).push(
+        MaterialPageRoute<bool>(
+          builder: (BuildContext context) => WebViewScreen(url: paymentUrl),
+        ),
+      );
+      if (res == true) {
+        showToast("Payment Successfully Done.");
+
+        Get.offAll(BookingSuccess(isPaymentDone: true));
+      } else {
+        showToast("Payment Not Done.");
+        Get.offAll(BookingSuccess(isPaymentDone: false));
+      }
+    } catch (e) {
+      showToast(e.toString());
+    } finally {
+      EasyLoading.dismiss();
+    }
   }
 
   Padding _buildPayableAmountWidget() {

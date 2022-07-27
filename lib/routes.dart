@@ -78,7 +78,6 @@ class Routes {
     GetPage(name: homeScreen, page: () => const HomePage()),
     GetPage(name: aboutUsScreen, page: () => AboutUs()),
     GetPage(name: contactUsScreen, page: () => const ContactUs()),
-    GetPage(name: bookingSuccessScreen, page: () => const BookingSuccess()),
     GetPage(name: myUpCommingAppoinmentScreen, page: () => LabtestDetail()),
     GetPage(name: myAppointmentComplete, page: () => const LabTestComplete()),
     GetPage(name: checkAppointment, page: () => const MyAppointment()),

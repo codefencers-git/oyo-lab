@@ -1,14 +1,15 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/themedata.dart';
-
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 
 class BookingSuccess extends StatefulWidget {
-  const BookingSuccess({Key? key}) : super(key: key);
-
+  BookingSuccess({Key? key, required this.isPaymentDone}) : super(key: key);
+  bool isPaymentDone;
   @override
   State<BookingSuccess> createState() => _BookingSuccessState();
 }
@@ -20,16 +21,22 @@ class _BookingSuccessState extends State<BookingSuccess> {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
-        child: AppbarWithBackButton(appbarTitle: 'key_success'.tr),
+        child: AppbarWithBackButton(
+            appbarTitle:
+                widget.isPaymentDone ? 'key_success'.tr : 'key_failed'.tr),
       ),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
-            child: Image.asset("assets/images/booking_successfull.png"),
+            child: Image.asset(widget.isPaymentDone
+                ? "assets/images/booking_successfull.png"
+                : "assets/images/booking_failed.png"),
           ),
           Text(
-            'key_booking_successfull'.tr,
+            widget.isPaymentDone
+                ? 'key_booking_successfull'.tr
+                : 'key_booking_unsuccessfull'.tr,
             style: TextStyle(
                 fontSize: 24,
                 color: ThemeClass.greenColor,
@@ -41,8 +48,11 @@ class _BookingSuccessState extends State<BookingSuccess> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
-                  .tr,
+              widget.isPaymentDone
+                  ? 'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
+                      .tr
+                  : 'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
+                      .tr,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 14,
@@ -59,7 +69,9 @@ class _BookingSuccessState extends State<BookingSuccess> {
           onTap: () {
             Get.toNamed(Routes.checkAppointment);
           },
-          buttonLabel: 'key_check_appointment'.tr,
+          buttonLabel: widget.isPaymentDone
+              ? 'key_check_appointment'.tr
+              : 'key_book_again'.tr,
         ),
       ),
     );

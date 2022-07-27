@@ -35,8 +35,8 @@ class _BookAppointmentState extends State<BookAppointment> {
       Get.find<BookAppointmentServicesController>();
 
   final ImagePicker _picker = ImagePicker();
-  File? image;
-  List<File> multiplePrescription = [];
+  // File? image;
+  List<XFile> multiplePrescription = [];
 
   int? select;
   @override
@@ -177,7 +177,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   builder: (BuildContext context) {
                     return MemberSelectionBottomSheet(
                       date: _dateController.text.trim(),
-                      time: selectedTimeSlot,
+                      time: selectedTimeSlot.substring(0, 5),
                       prescription: multiplePrescription,
                       memberId: "",
                       remarks: _remarkController.text,
@@ -185,6 +185,9 @@ class _BookAppointmentState extends State<BookAppointment> {
                   },
                 )
               : "";
+          print(
+            selectedTimeSlot.substring(0, 5),
+          );
         },
         buttonLabel: 'key_book_appointment_btn'.tr,
       ),
@@ -365,7 +368,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                       await _picker.pickImage(source: ImageSource.camera);
                   setState(() {
                     multiplePrescription.add(
-                        File(pickedImage!.path)); //= File(pickedImage!.path);
+                        XFile(pickedImage!.path)); //= File(pickedImage!.path);
                   });
                 },
                 child: SizedBox(
@@ -403,7 +406,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   List<XFile>? picked = await _picker.pickMultiImage();
                   setState(() {
                     multiplePrescription =
-                        picked!.map((e) => File(e.path)).toList();
+                        picked!.map((e) => XFile(e.path)).toList();
                   });
                 },
                 child: SizedBox(
@@ -456,7 +459,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.file(
-                                multiplePrescription[i],
+                                File(multiplePrescription[i].path),
                                 height: 65,
                                 width: 50.0,
                                 fit: BoxFit.cover,
@@ -576,8 +579,8 @@ class DatePicker extends StatefulWidget {
 class _date_pickerState extends State<DatePicker> {
   String currentDate() {
     DateTime currentDate = DateTime.now();
-    String formattedDate = DateFormat('dd-MM-yyyy').format(currentDate);
-    return formattedDate;
+    //String formattedDate = DateFormat('dd-MM-yyyy').format(currentDate);
+    return currentDate.toString();
   }
 
   @override
@@ -598,7 +601,7 @@ class _date_pickerState extends State<DatePicker> {
             fillColor: ThemeClass.greyLightColor,
             filled: true,
             border: InputBorder.none,
-            hintText: currentDate(),
+            hintText: currentDate().substring(0, 10),
             hintStyle: TextStyle(
                 color: ThemeClass.greyColor1,
                 fontWeight: FontWeight.w400,
@@ -646,7 +649,7 @@ class _date_pickerState extends State<DatePicker> {
 
             if (pickedDate != null) {
               String formattedDate =
-                  DateFormat('dd-MM-yyyy').format(pickedDate);
+                  DateFormat('yyyy-MM-dd').format(pickedDate);
 
               setState(() {
                 widget.dateController.text = formattedDate;
