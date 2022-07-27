@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/Login/user_model.dart';
 import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/home/home_page.dart';
@@ -14,6 +15,10 @@ import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/services/navigation_service.dart';
 
 class UserController extends GetxController {
+  // awa/it profileController.getprofileData();
+
+  final profileController = Get.find<ProfileServiceController>();
+
   RxBool isError = false.obs;
   RxString errorMessage = "".obs;
   RxBool isloading = false.obs;
@@ -38,6 +43,7 @@ class UserController extends GetxController {
           setIsLogin(true);
           debugPrint(jasonData['message']);
           showToast(jasonData['message']);
+          await profileController.getprofileData();
           // Get.toNamed(Routes.homeScreen);
           Navigator.pushAndRemoveUntil<void>(
             navigationService.navigationKey.currentContext!,
@@ -144,6 +150,7 @@ class UserController extends GetxController {
 
           isError(false);
           errorMessage("");
+          await profileController.getprofileData();
           Navigator.pushAndRemoveUntil<void>(
             navigationService.navigationKey.currentContext!,
             MaterialPageRoute<void>(
@@ -184,6 +191,7 @@ class UserController extends GetxController {
             showToast(GlobalMessages.logoutSuccess);
 
             setIsLogin(false);
+
             // Get.back();
             Navigator.pushAndRemoveUntil<void>(
               navigationService.navigationKey.currentContext!,

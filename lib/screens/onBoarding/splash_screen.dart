@@ -2,6 +2,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/Drawer/CMS%20data/cms_service.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
 import 'package:oyo_labs/screens/home/home_page.dart';
@@ -24,14 +26,20 @@ class _SplashScreenState extends State<SplashScreen> {
   final ProductCategoryController _categoryController =
       Get.put(ProductCategoryController(), permanent: true);
 
+  final profileController =
+      Get.put(ProfileServiceController(), permanent: true);
   final UserController _userController =
       Get.put(UserController(), permanent: true);
+  final CmsServices _cmsDataController =
+      Get.put(CmsServices(), permanent: true);
 
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
     _categoryController.getProductCategory();
-     Future.delayed(const Duration(seconds: 1), () async {
+
+    _cmsDataController.getCmsData();
+    Future.delayed(const Duration(seconds: 1), () async {
       _navigateTo();
     });
 
@@ -83,6 +91,8 @@ class _SplashScreenState extends State<SplashScreen> {
       print("--------$getToken");
       if (getToken != "" && getToken != null) {
         _userController.setIsLogin(true);
+        await profileController.getprofileData();
+        print("afer----");
       } else {
         _userController.setIsLogin(false);
       }

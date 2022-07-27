@@ -6,6 +6,7 @@ import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import '../../../global/global_enum_class.dart';
+import '../../../routes.dart';
 import '../../../services/validation_services.dart';
 import '../../../widgets/appbar/appbar_with_back_button.dart';
 import '../../../widgets/buttons/round_button.dart';
@@ -20,7 +21,7 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   enumForMF _radioMF = enumForMF.Male;
-  final _profileController = Get.put(ProfileServiceController(),permanent: true);
+  final _profileController = Get.find<ProfileServiceController>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -33,7 +34,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   _onInit() async {
-    await _profileController.getprofileData();
+    // await profileController.getprofileData();
+
+    _phoneNumberController.text =
+        _profileController.profileData.value.phoneNumber.toString();
+
+    _emailController.text =
+        _profileController.profileData.value.email.toString();
+
+    _dobController.text = _profileController.profileData.value.dob.toString();
+    _nameController.text = _profileController.profileData.value.name.toString();
+    image = _profileController.profileData.value.profileImage.toString();
   }
 
   Validation validation = Validation();
@@ -57,13 +68,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   var image;  @override
   Widget build(BuildContext context) {
-    validation = Validation();
     return Scaffold(
       backgroundColor: ThemeClass.whiteColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
         child: AppbarWithBackButton(
-          appbarTitle: 'Profile Detail'.tr,
+          appbarTitle: 'key_profile_detail'.tr,
         ),
       ),
       body: Obx(() {
@@ -73,20 +83,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           } else {
             _radioMF = enumForMF.Female;
           }
-          _phoneNumberController.text =
-              _profileController.profileData.value.phoneNumber.toString();
-          _emailController.text =
-              _profileController.profileData.value.email.toString();
-          _dobController.text =
-              _profileController.profileData.value.dob.toString();
-          _nameController.text =
-              _profileController.profileData.value.name.toString();
-          image = _profileController.profileData.value.profileImage.toString();
-          print(_phoneNumberController.text);
-          print(_emailController.text);
-          print(_dobController.text);
-          print(_nameController.text);
-          print(image);
         }
         return _profileController.isloading.value
             ? const Center(
@@ -142,16 +138,19 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             ),
                           ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
                           onPressed: () {
-                            showModalBottomSheet<void>(
-                              context: context,
-                              backgroundColor: Colors.transparent,
-                              builder: (BuildContext context) {
-                                return const SizedBox();
-                              },
-                            );
+                            Get.toNamed(Routes.changePasswordScreen);
+
+                            // showModalBottomSheet<void>(
+                            //   context: context,
+
+                            //   backgroundColor: Colors.transparent,
+                            //   builder: (BuildContext context) {
+                            //     return const SizedBox();
+                            //   },
+                            // );
                           },
-                          child: const Text(
-                            'Change Password',
+                          child: Text(
+                            'key_change_password'.tr,
                             style: TextStyle(
                                 fontSize: 10,
                                 color: ThemeClass.whiteColor,
@@ -205,7 +204,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         height: 44,
         child: RoundButton(
           onTap: _onEdit,
-          buttonLabel: 'Edit Profile',
+          buttonLabel: 'key_edit_profile'.tr,
         ),
       ),
     );
@@ -218,13 +217,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       "country_code":
           _profileController.profileData.value.countryCode.toString(),
       "phone_number": _phoneNumberController.text,
-      "gender": _radioMF.toString(),
+      "gender": _radioMF.name.toString(),
       "dob": _dobController.text
     };
     try {
       EasyLoading.show();
       _profileController.updateProfileData(mapdata, context);
-      _onInit();
+      _profileController.getprofileData();
+      // setState(() {
+
+      // });
       EasyLoading.dismiss();
     } catch (e) {
       EasyLoading.dismiss();

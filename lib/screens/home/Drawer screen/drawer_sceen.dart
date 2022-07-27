@@ -106,7 +106,9 @@ class DrawerWidget extends StatelessWidget {
                 tileIconPath: "assets/icons/info-icon.png",
               ),
               _buildDrawerListTile(
-                onTileTap: () {},
+                onTileTap: () {
+                  Get.toNamed(Routes.termsAndPrivacyPolicy);
+                },
                 tileLabel: 'key_terms_policy'.tr,
                 tileIconPath: "assets/icons/icon-terms&policy.png",
               ),
@@ -116,6 +118,9 @@ class DrawerWidget extends StatelessWidget {
                 },
                 tileLabel: 'key_contact_us'.tr,
                 tileIconPath: "assets/icons/icon-contactus.png",
+              ),
+              SizedBox(
+                height: 16,
               ),
               _buildDrawerListTile(
                 onTileTap: () {
@@ -157,13 +162,13 @@ class DrawerWidget extends StatelessWidget {
                 tileLabel: 'key_help_n_faq'.tr,
                 tileIconPath: "assets/icons/help-faq-icon.png",
               ),
-              _buildDrawerListTile(
-                onTileTap: () {
-                  Get.toNamed(Routes.manageAddressScreen);
-                },
-                tileLabel: 'key_manage_address'.tr,
-                tileIconPath: "assets/icons/icon_location.png",
-              ),
+              // _buildDrawerListTile(
+              //   onTileTap: () {
+              //     Get.toNamed(Routes.manageAddressScreen);
+              //   },
+              //   tileLabel: 'key_manage_address'.tr,
+              //   tileIconPath: "assets/icons/icon_location.png",
+              // ),
               _buildDrawerListTile(
                 onTileTap: () {
                   Get.toNamed(Routes.settingScreen);

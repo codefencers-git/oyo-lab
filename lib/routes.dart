@@ -3,6 +3,7 @@ import 'package:oyo_labs/screens/AboutUs/about_us.dart';
 import 'package:oyo_labs/screens/Drawer/Help&FAQ%20screen/help_and_support.dart';
 import 'package:oyo_labs/screens/Drawer/Member/update_member.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/my_prescription.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/change_password.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/my_profile.dart';
 import 'package:oyo_labs/screens/Drawer/Terms%20&%20Privacy%20Policy/terms_privacy_screen.dart';
 import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report.dart';
@@ -15,7 +16,7 @@ import 'package:oyo_labs/screens/laboratory/all%20lab%20test/rating_screen.dart'
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_drawer_detail.dart';
-import 'package:oyo_labs/screens/laboratory/my_appointment.dart';
+import 'package:oyo_labs/screens/laboratory/my_appointment/my_appointment.dart';
 import 'screens/ContactUs/contact_us.dart';
 import 'screens/Drawer/ManageAddress/add_address.dart';
 import 'screens/Drawer/ManageAddress/manage_address.dart';
@@ -75,7 +76,7 @@ class Routes {
     GetPage(name: forgotPasswordScreen, page: () => ForgotPassword()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
     GetPage(name: homeScreen, page: () => const HomePage()),
-    GetPage(name: aboutUsScreen, page: () => const AboutUs()),
+    GetPage(name: aboutUsScreen, page: () => AboutUs()),
     GetPage(name: contactUsScreen, page: () => const ContactUs()),
     GetPage(name: bookingSuccessScreen, page: () => const BookingSuccess()),
     GetPage(name: myUpCommingAppoinmentScreen, page: () => LabtestDetail()),
@@ -103,5 +104,7 @@ class Routes {
         name: helpAndSupportScreen, page: () => const HelpAndSupportScreen()),
     GetPage(
         name: termsAndPrivacyPolicy, page: () => const TermsAndPrivacyScreen()),
+    GetPage(
+        name: changePasswordScreen, page: () => const ChangePasswordScreen()),
   ];
 }

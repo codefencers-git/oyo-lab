@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/laboratory/my_appointment/upcoming_appointment_widget.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 
@@ -37,46 +38,7 @@ class _MyAppointmentState extends State<MyAppointment>
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Container(
-              height: 40,
-              decoration: BoxDecoration(
-                color: ThemeClass.whiteColor,
-                border: Border.all(color: ThemeClass.orangeColor),
-                borderRadius: BorderRadius.circular(
-                  25.0,
-                ),
-              ),
-              child: TabBar(
-                controller: _tabController,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    25.0,
-                  ),
-                  color: ThemeClass.orangeColor,
-                ),
-                labelColor: Colors.white,
-                unselectedLabelColor: ThemeClass.orangeColor,
-                tabs: [
-                  Tab(
-                    child: Text(
-                      'key_upcoming'.tr,
-                      style: const TextStyle(
-                          fontSize: 14.0, fontFamily: "Poppins-Regular"),
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'key_completed'.tr,
-                      style: const TextStyle(
-                          fontSize: 14.0, fontFamily: "Poppins-Regular"),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          _buildTwoButton(),
           Expanded(
             child: _tabBarView(),
           ),
@@ -89,12 +51,8 @@ class _MyAppointmentState extends State<MyAppointment>
     return TabBarView(
       controller: _tabController,
       children: [
-        _buildAppointmentListTIle(),
-        _buildAppointmentListTIle(),
-        // TextButton(
-        //   onPressed: () {},
-        //   //child: _tabBarView(),
-        // )
+        UpcomingAppointmentWidget(isUpcoming: true),
+        UpcomingAppointmentWidget(isUpcoming: false),
       ],
     );
   }
@@ -175,6 +133,49 @@ class _MyAppointmentState extends State<MyAppointment>
             },
           );
         },
+      ),
+    );
+  }
+
+  Padding _buildTwoButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Container(
+        height: 40,
+        decoration: BoxDecoration(
+          color: ThemeClass.whiteColor,
+          border: Border.all(color: ThemeClass.orangeColor),
+          borderRadius: BorderRadius.circular(
+            25.0,
+          ),
+        ),
+        child: TabBar(
+          controller: _tabController,
+          indicator: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              25.0,
+            ),
+            color: ThemeClass.orangeColor,
+          ),
+          labelColor: Colors.white,
+          unselectedLabelColor: ThemeClass.orangeColor,
+          tabs: [
+            Tab(
+              child: Text(
+                'key_upcoming'.tr,
+                style: const TextStyle(
+                    fontSize: 14.0, fontFamily: "Poppins-Regular"),
+              ),
+            ),
+            Tab(
+              child: Text(
+                'key_completed'.tr,
+                style: const TextStyle(
+                    fontSize: 14.0, fontFamily: "Poppins-Regular"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
