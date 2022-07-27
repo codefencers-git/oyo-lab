@@ -1,12 +1,34 @@
-import 'package:flutter/material.dart';
-import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dart';
-import 'package:oyo_labs/screens/laboratory/lab_test_drawer_detail.dart';
-import 'package:oyo_labs/widgets/buttons/round_button.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_model.dart';
+import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import '../../../themedata.dart';
 
 class MemberSelectionBottomSheet extends StatefulWidget {
-  const MemberSelectionBottomSheet({Key? key}) : super(key: key);
+  MemberSelectionBottomSheet({
+    Key? key,
+    this.testData,
+    this.laboratoryData,
+    this.date,
+    this.time,
+    this.prescription,
+    this.memberId,
+    this.remarks,
+    this.testPrice,
+  }) : super(key: key);
+
+  LAbTestDetailData? testData;
+  RecommendedProduct? laboratoryData;
+  String? date;
+  String? time;
+  List<XFile>? prescription;
+  String? memberId;
+  String? remarks;
+
+  String? testPrice;
 
   @override
   State<MemberSelectionBottomSheet> createState() =>
@@ -64,7 +86,14 @@ class _MemberSelectionBottomSheetState
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LabtestDetail()),
+                                builder: (context) => LabtestDetail(
+                                      date: widget.date,
+                                      time: widget.time,
+                                      prescription: widget.prescription,
+                                      bookingFor: short,
+                                      memberId: widget.memberId,
+                                      remarks: widget.remarks,
+                                    )),
                           );
                         })
                   ],
@@ -102,6 +131,7 @@ class _MemberSelectionBottomSheetState
                   setState(() {
                     short = value.toString();
                   });
+                  print(short);
                 }),
           ),
           const SizedBox(

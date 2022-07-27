@@ -25,7 +25,7 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   enumForMF _radioMF = enumForMF.Male;
-  final profileController = Get.find<ProfileServiceController>();
+  final _profileController = Get.find<ProfileServiceController>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -41,12 +41,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     // await profileController.getprofileData();
 
     _phoneNumberController.text =
-        profileController.profileData.value.phoneNumber.toString();
+        _profileController.profileData.value.phoneNumber.toString();
+
     _emailController.text =
-        profileController.profileData.value.email.toString();
-    _dobController.text = profileController.profileData.value.dob.toString();
-    _nameController.text = profileController.profileData.value.name.toString();
-    image = profileController.profileData.value.profileImage.toString();
+        _profileController.profileData.value.email.toString();
+
+    _dobController.text = _profileController.profileData.value.dob.toString();
+    _nameController.text = _profileController.profileData.value.name.toString();
+    image = _profileController.profileData.value.profileImage.toString();
   }
 
   Validation validation = Validation();
@@ -78,7 +80,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       EasyLoading.show();
       try {
         var value =
-            await profileController.uploadProfilePhotoImage(imageFileAvatar);
+            await _profileController.uploadProfilePhotoImage(imageFileAvatar);
         if (value == 1) {
           var controller = Get.put(ProfileServiceController(), permanent: true);
           await controller.getprofileData();
@@ -95,7 +97,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   final _formKey = GlobalKey<FormState>();
   var image;
-  //Validation? validation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,14 +108,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         ),
       ),
       body: Obx(() {
-        if (profileController.isloading.value != true) {
+        if (_profileController.isloading.value != true) {
           // if (profileController.profileData.value.gender.toString() == "Male") {
           //   _radioMF = enumForMF.Male;
           // } else {
           //   _radioMF = enumForMF.Female;
           // }
         }
-        return profileController.isloading.value
+        return _profileController.isloading.value
             ? const Center(
                 child: CircularProgressIndicator(),
               )
@@ -253,14 +254,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       "name": _nameController.text,
       "email": _emailController.text,
       "country_code":
-          profileController.profileData.value.countryCode.toString(),
+          _profileController.profileData.value.countryCode.toString(),
       "phone_number": _phoneNumberController.text,
       "gender": _radioMF.name.toString(),
       "dob": _dobController.text
     };
     try {
       EasyLoading.show();
-      var value = await profileController.updateProfileData(mapdata, context);
+      var value = await _profileController.updateProfileData(mapdata, context);
       if (value == 1) {
         var controller = Get.put(ProfileServiceController(), permanent: true);
         await controller.getprofileData();

@@ -150,12 +150,7 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                                         fontSize: 16,
                                         fontFamily: "poppins",
                                         onTap: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      BookAppointment(
-                                                        type: 'Reschedule',
-                                                      )));
+                                        
                                         })),
                               ],
                             ),

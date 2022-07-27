@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/Drawer%20screen/drawer_sceen.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
-import 'package:oyo_labs/screens/home/imagebottomsheet.dart';
+import 'package:oyo_labs/widgets/bottom_sheets/imagebottomsheet.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_model.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_service.dart';
 import 'package:oyo_labs/themedata.dart';

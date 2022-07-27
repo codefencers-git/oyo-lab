@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 
 class HttpServices {
@@ -25,7 +26,7 @@ class HttpServices {
 
   static Future<Response> httpGet(String url) async {
     var token = await UserPrefService().getToken();
-
+    print(token);
     print(API_BASE_URL + url);
 
     return http.get(
@@ -54,7 +55,7 @@ class HttpServices {
   static Future<Response> httpPost(String url, dynamic data,
       {BuildContext? context}) async {
     var token = await UserPrefService().getToken();
-
+    print(token);
     return http.post(
       Uri.parse(API_BASE_URL + url),
       body: jsonEncode(data),
@@ -88,6 +89,45 @@ class HttpServices {
         "${imageFile!.path}",
         // contentType: MediaType('image', 'jpg'),
       ));
+      queryParameters.forEach((key, value) {
+        request3.fields[key] = value;
+      });
+
+      StreamedResponse res3 = await request3.send();
+      var response = await http.Response.fromStream(
+        res3,
+      );
+
+      return response;
+    } catch (e) {
+      print(e.toString());
+
+      rethrow;
+    }
+  }
+
+  static Future<Response> httpPostWithMultipleImageUpload(
+      String url, List<XFile> imageFiles, Map<String, dynamic> queryParameters,
+      {required String peramterName}) async {
+    try {
+      var request3 = http.MultipartRequest(
+        'POST',
+        Uri.parse(API_BASE_URL + url),
+      );
+      var token = await UserPrefService().getToken();
+      request3.headers.addAll(requestHeaders);
+      request3.headers.addAll({
+        'Authorization': 'Bearer $token',
+      });
+
+      //
+
+      for (int i = 0; i < imageFiles.length; i++) {
+        request3.files.add(await http.MultipartFile.fromPath(
+          peramterName,
+          "${imageFiles[i].path}",
+        ));
+      }
       queryParameters.forEach((key, value) {
         request3.fields[key] = value;
       });

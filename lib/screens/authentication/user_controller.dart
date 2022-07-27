@@ -188,10 +188,10 @@ class UserController extends GetxController {
               res['status'].toString() == "200") {
             await UserPrefService().removeUserData();
             await UserPrefService().removeToken();
-
             showToast(GlobalMessages.logoutSuccess);
 
             setIsLogin(false);
+
             // Get.back();
             Navigator.pushAndRemoveUntil<void>(
               navigationService.navigationKey.currentContext!,
@@ -206,6 +206,7 @@ class UserController extends GetxController {
           }
         } else if (response.statusCode == 401) {
           showToast(GlobalMessages.unauthorizedUser);
+          setIsLogin(false);
           await UserPrefService().removeUserData();
           Get.offAllNamed(Routes.loginScreen);
         } else {

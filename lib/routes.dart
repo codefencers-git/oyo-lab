@@ -16,7 +16,7 @@ import 'package:oyo_labs/screens/laboratory/all%20lab%20test/rating_screen.dart'
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_drawer_detail.dart';
-import 'package:oyo_labs/screens/laboratory/my_appointment.dart';
+import 'package:oyo_labs/screens/laboratory/my_appointment/my_appointment.dart';
 import 'screens/ContactUs/contact_us.dart';
 import 'screens/Drawer/ManageAddress/add_address.dart';
 import 'screens/Drawer/ManageAddress/manage_address.dart';
@@ -78,23 +78,16 @@ class Routes {
     GetPage(name: homeScreen, page: () => const HomePage()),
     GetPage(name: aboutUsScreen, page: () => AboutUs()),
     GetPage(name: contactUsScreen, page: () => const ContactUs()),
-    GetPage(name: bookingSuccessScreen, page: () => const BookingSuccess()),
-    GetPage(
-        name: myUpCommingAppoinmentScreen, page: () => const LabtestDetail()),
+    GetPage(name: myUpCommingAppoinmentScreen, page: () => LabtestDetail()),
     GetPage(name: myAppointmentComplete, page: () => const LabTestComplete()),
     GetPage(name: checkAppointment, page: () => const MyAppointment()),
-    GetPage(
-        name: labDetailScreen,
-        page: () => const BookAppointment(
-              type: "",
-            )),
     GetPage(name: allLabTests, page: () => const AllLabTestsScreen()),
     GetPage(name: addMemberScreen, page: () => const AddNewMember()),
     GetPage(name: myPrescritionSreen, page: () => const MyPrescription()),
     GetPage(name: myTestReportScreen, page: () => const MyTestRepoer()),
     GetPage(name: prescriptionDetails, page: () => const PrescriptionDetail()),
     GetPage(name: manageAddressScreen, page: () => const ManageAddress()),
-    GetPage(name: addNewAddressScreen, page: () => const AddAddress()),
+    GetPage(name: addNewAddressScreen, page: () => AddAddress()),
     GetPage(name: addNewMembers, page: () => const AddnewMemberScreen()),
     GetPage(name: referandEarnScreen, page: () => const ReferEarnScreen()),
     GetPage(name: walletScreen, page: () => const WalletScreen()),

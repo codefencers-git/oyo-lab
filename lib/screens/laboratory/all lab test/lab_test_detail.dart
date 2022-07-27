@@ -1,25 +1,56 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:oyo_labs/global/flutter_toast.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
+import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
-
-import '../../../routes.dart';
+import '../booking model and services/book_appointment_services.dart';
+import '../booking model and services/web_view_payment_screen.dart';
 
 class LabtestDetail extends StatefulWidget {
-  const LabtestDetail({Key? key}) : super(key: key);
+  LabtestDetail({
+    Key? key,
+    this.date,
+    this.time,
+    this.prescription,
+    this.bookingFor,
+    this.memberId,
+    this.remarks,
+  }) : super(key: key);
+
+  String? date;
+  String? time;
+  List<XFile>? prescription;
+  String? bookingFor;
+  String? memberId;
+  String? remarks;
 
   @override
   State<LabtestDetail> createState() => _LabtestDetailState();
 }
 
 class _LabtestDetailState extends State<LabtestDetail> {
+  final _bookAppointmentController =
+      Get.find<BookAppointmentServicesController>();
+
+  final _profileController = Get.put(ProfileServiceController());
+
+  @override
+  void initState() {
+    _profileController.getprofileData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ThemeClass.whiteColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
         child: AppbarWithBackButton(appbarTitle: 'key_lab_test_details'.tr),
@@ -57,12 +88,59 @@ class _LabtestDetailState extends State<LabtestDetail> {
         height: 45,
         child: RoundButton(
           onTap: () {
-            Get.toNamed(Routes.bookingSuccessScreen);
+            var mapData = <String, dynamic>{};
+            mapData['test_id'] =
+                _bookAppointmentController.testDetails.value.id.toString();
+            mapData['laboratory'] =
+                _bookAppointmentController.labData.value.id.toString();
+            mapData['date'] = widget.date;
+            mapData['time'] = widget.time;
+            mapData['booking_for'] = widget.bookingFor;
+            mapData['member_id'] =
+                widget.memberId == null ? "" : widget.memberId.toString();
+            mapData['remarks'] =
+                widget.remarks == null ? "" : widget.remarks.toString();
+            mapData['contact_number'] =
+                _profileController.profileData.value.phoneNumber.toString();
+                
+            _checkOut(mapData);
           },
           buttonLabel: 'Confirm'.tr,
         ),
       ),
     );
+  }
+
+  _checkOut(mapData) async {
+    try {
+      EasyLoading.show();
+
+      await _bookAppointmentController.bookAppointmentService(
+          mapData, widget.prescription);
+
+      String paymentUrl =
+          _bookAppointmentController.paymentUrl.value.paymentUrl.toString();
+
+      print("-----------------------$paymentUrl");
+      EasyLoading.dismiss();
+      var res = await Navigator.of(context, rootNavigator: true).push(
+        MaterialPageRoute<bool>(
+          builder: (BuildContext context) => WebViewScreen(url: paymentUrl),
+        ),
+      );
+      if (res == true) {
+        showToast("Payment Successfully Done.");
+
+        Get.offAll(BookingSuccess(isPaymentDone: true));
+      } else {
+        showToast("Payment Not Done.");
+        Get.offAll(BookingSuccess(isPaymentDone: false));
+      }
+    } catch (e) {
+      showToast(e.toString());
+    } finally {
+      EasyLoading.dismiss();
+    }
   }
 
   Padding _buildPayableAmountWidget() {
@@ -79,7 +157,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 fontWeight: FontWeight.w400),
           ),
           Text(
-            "₹240.00",
+            "₹ ${_bookAppointmentController.testDetails.value.price}",
             style: TextStyle(
                 fontSize: 10,
                 color: ThemeClass.blackColor1,
@@ -104,7 +182,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 fontWeight: FontWeight.w400),
           ),
           Text(
-            "₹240.00",
+            "₹ ${_bookAppointmentController.testDetails.value.price}",
             style: TextStyle(
                 fontSize: 10,
                 color: ThemeClass.greyColor1,
@@ -149,9 +227,10 @@ class _LabtestDetailState extends State<LabtestDetail> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "ABO Group & RH Type",
-                          style: TextStyle(
+                        Text(
+                          _bookAppointmentController.testDetails.value.title
+                              .toString(),
+                          style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w500),
                         ),
                         Text(
@@ -166,7 +245,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                   ],
                 ),
                 Text(
-                  "₹120.00",
+                  "₹ ${_bookAppointmentController.testDetails.value.price}",
                   style: TextStyle(
                       fontSize: 16,
                       color: ThemeClass.orangeColor,
@@ -187,8 +266,15 @@ class _LabtestDetailState extends State<LabtestDetail> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset("assets/images/lab_detail_johndoe.png"),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: Image.network(
+                  _profileController.profileData.value.profileImage.toString(),
+                  height: 50,
+                ),
+              ),
               const SizedBox(
                 width: 8,
               ),
@@ -196,14 +282,14 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "John Doe",
+                    _profileController.profileData.value.name.toString(),
                     style: TextStyle(
                         fontSize: 14,
                         color: ThemeClass.darkgreyColor,
                         fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    "+91 98765 43210",
+                    "+91 ${_profileController.profileData.value.phoneNumber}",
                     style: TextStyle(
                         fontSize: 10,
                         color: ThemeClass.orangeColor,
@@ -245,48 +331,12 @@ class _LabtestDetailState extends State<LabtestDetail> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
-                // child: ElevatedButton(
-                //   style: ElevatedButton.styleFrom(
-                //     primary: ThemeClass.orangeColor,
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(25),
-                //     ),
-                //   ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
-                //   onPressed: () {},
-                //   child: Text(
-                //     'key_pending'.tr,
-                //     style: const TextStyle(
-                //         fontSize: 8,
-                //         color: ThemeClass.whiteColor,
-                //         fontWeight: FontWeight.w500),
-                //   ),
-                // ),
               ),
               Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                    // child: ElevatedButton(
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: ThemeClass.orangeColor,
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(25),
-                    //     ),
-                    //   ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
-                    //   onPressed: () {
-                    //     Get.toNamed(Routes.ratingScreen);
-                    //   },
-                    //   child: Text(
-                    //     'key_submit_review'.tr,
-                    //     style: const TextStyle(
-                    //         fontSize: 8,
-                    //         color: ThemeClass.whiteColor,
-                    //         fontWeight: FontWeight.w500),
-                    //   ),
-                    // ),
-                  ),
+                children: const [
+                  SizedBox(height: 20),
                 ],
               )
             ],
@@ -310,7 +360,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Green Cross Laboratory",
+                    _bookAppointmentController.labData.value.name.toString(),
                     style: TextStyle(
                         fontSize: 14,
                         color: ThemeClass.blackColor,
@@ -376,7 +426,8 @@ class _LabtestDetailState extends State<LabtestDetail> {
                                 padding:
                                     const EdgeInsets.only(right: 8.0, top: 4),
                                 child: Text(
-                                  '45, Park Avenue, Near Sal Hospital, Thaltej, Ahmedabad.',
+                                  _bookAppointmentController.labData.value.area
+                                      .toString(),
                                   style: TextStyle(
                                       fontSize: 12,
                                       color: ThemeClass.greyColor,

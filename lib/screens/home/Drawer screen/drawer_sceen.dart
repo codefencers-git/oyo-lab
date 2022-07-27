@@ -173,13 +173,13 @@ class DrawerWidget extends StatelessWidget {
                 tileLabel: 'key_help_n_faq'.tr,
                 tileIconPath: "assets/icons/help-faq-icon.png",
               ),
-              _buildDrawerListTile(
-                onTileTap: () {
-                  Get.toNamed(Routes.manageAddressScreen);
-                },
-                tileLabel: 'key_manage_address'.tr,
-                tileIconPath: "assets/icons/icon_location.png",
-              ),
+              // _buildDrawerListTile(
+              //   onTileTap: () {
+              //     Get.toNamed(Routes.manageAddressScreen);
+              //   },
+              //   tileLabel: 'key_manage_address'.tr,
+              //   tileIconPath: "assets/icons/icon_location.png",
+              // ),
               _buildDrawerListTile(
                 onTileTap: () {
                   Get.toNamed(Routes.settingScreen);
