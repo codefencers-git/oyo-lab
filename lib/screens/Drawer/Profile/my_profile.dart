@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:intl/intl.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
@@ -63,6 +67,32 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     }
   }
 
+  File? imageFileAvatar;
+  final ImagePicker _picker = ImagePicker();
+  Future _getImage() async {
+    final pickedFileList = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFileList != null) {
+      setState(() {
+        imageFileAvatar = File(pickedFileList.path);
+      });
+      EasyLoading.show();
+      try {
+        var value =
+            await profileController.uploadProfilePhotoImage(imageFileAvatar);
+        if (value == 1) {
+          var controller = Get.put(ProfileServiceController(), permanent: true);
+          await controller.getprofileData();
+          _onInit();
+        }
+      } catch (e) {
+        EasyLoading.dismiss();
+        showToast(e.toString());
+      } finally {
+        EasyLoading.dismiss();
+      }
+    }
+  }
+
   final _formKey = GlobalKey<FormState>();
   var image;
   //Validation? validation;
@@ -78,11 +108,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ),
       body: Obx(() {
         if (profileController.isloading.value != true) {
-          if (profileController.profileData.value.gender.toString() == "Male") {
-            _radioMF = enumForMF.Male;
-          } else {
-            _radioMF = enumForMF.Female;
-          }
+          // if (profileController.profileData.value.gender.toString() == "Male") {
+          //   _radioMF = enumForMF.Male;
+          // } else {
+          //   _radioMF = enumForMF.Female;
+          // }
         }
         return profileController.isloading.value
             ? const Center(
@@ -94,25 +124,30 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   child: Column(
                     children: [
                       Stack(
+                        clipBehavior: Clip.none,
                         children: [
-                          SizedBox(
-                            height: 200,
-                            width: 150,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(400.0),
-                                child: Image(image: NetworkImage(image))),
-                          ),
+                          CircleAvatar(
+                              radius: 55, backgroundImage: NetworkImage(image)),
+                          // SizedBox(
+                          //   height: 200,
+                          //   width: 150,
+                          //   child: ClipRRect(
+                          //       borderRadius: BorderRadius.circular(400.0),
+                          //       child: Image(image: NetworkImage(image))),
+                          // ),
                           Positioned(
-                            top: 135,
-                            right: 7,
-                            left: 98,
+                            bottom: -1,
+                            right: -10,
+                            // top: 135,
+                            // right: 7,
+                            // left: 98,
                             child: Container(
                               padding: const EdgeInsets.all(2),
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: _getImage,
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: ThemeClass.orangeColor,
@@ -127,6 +162,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             ),
                           )
                         ],
+                      ),
+                      const SizedBox(
+                        height: 16,
                       ),
                       SizedBox(
                         height: 25,
@@ -210,7 +248,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
-  _onEdit() {
+  _onEdit() async {
     Map<String, dynamic> mapdata = {
       "name": _nameController.text,
       "email": _emailController.text,
@@ -222,8 +260,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     };
     try {
       EasyLoading.show();
-      profileController.updateProfileData(mapdata, context);
-      profileController.getprofileData();
+      var value = await profileController.updateProfileData(mapdata, context);
+      if (value == 1) {
+        var controller = Get.put(ProfileServiceController(), permanent: true);
+        await controller.getprofileData();
+        _onInit();
+      }
       // setState(() {
 
       // });

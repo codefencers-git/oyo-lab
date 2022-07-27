@@ -7,7 +7,9 @@
    <application
         android:label="oyo_labs"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/launcher_icon"
+        android:usesCleartextTraffic="true"
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -40,6 +42,10 @@
   <intent>
     <action android:name="android.intent.action.VIEW" />
     <data android:scheme="https" />
+  </intent>
+   <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="http" />
   </intent>
   <!-- If your app makes calls -->
   <intent>

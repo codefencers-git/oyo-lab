@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
     _categoryController.getProductCategory();
-
+    profileController.getprofileData();
     _cmsDataController.getCmsData();
     Future.delayed(const Duration(seconds: 1), () async {
       _navigateTo();

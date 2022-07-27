@@ -23,6 +23,7 @@ class _AboutUsState extends State<AboutUs> {
     if (Platform.isAndroid) WebView.platform = AndroidWebView();
   }
 
+  WebViewController? _webController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +39,9 @@ class _AboutUsState extends State<AboutUs> {
         () => Scaffold(
           body: WebView(
             javascriptMode: JavascriptMode.unrestricted,
-            initialUrl: cmsDataController.globleCmsData.value.about.toString(),
+            initialUrl: Uri.encodeFull(
+              cmsDataController.globleCmsData.value.about.toString(),
+            ),
           ),
         ),
       ),

@@ -3,10 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/profile_model.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class DrawerWidget extends StatelessWidget {
+  ProfileModel? profileModel;
   DrawerWidget({
     Key? key,
     required this.width,
@@ -17,18 +20,26 @@ class DrawerWidget extends StatelessWidget {
   // LogoutController logoutController = Get.put(LogoutController());
 
   final UserController _userController = Get.find<UserController>();
+  final profileController = Get.find<ProfileServiceController>();
   // final UserPrefService _userPrefController = Get.find<UserPrefService>();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        backgroundColor: ThemeClass.whiteColor,
-        elevation: 0,
-        child: Obx(
-          () => _userController.setIsLogin.value == true
-              ? _buildMenuOfUser(context)
-              : _buildMenuForLogin(context),
-        ));
+      backgroundColor: ThemeClass.whiteColor,
+      elevation: 0,
+      child: Obx(
+        () => _userController.setIsLogin.value == true
+            ?
+            // profileController.isloading.value
+            //     ? Center(
+            //         child: CircularProgressIndicator(),
+            //       )
+            //     :
+            _buildMenuOfUser(context)
+            : _buildMenuForLogin(context),
+      ),
+    );
   }
 
   Column _buildMenuOfUser(BuildContext context) {
@@ -312,8 +323,8 @@ class DrawerWidget extends StatelessWidget {
             child: Row(
               children: [
                 CachedNetworkImage(
-                  imageUrl:
-                      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+                  imageUrl: profileController.profileData.value.profileImage
+                      .toString(),
                   imageBuilder: (context, imageProvider) => Container(
                     height: 60,
                     width: 60,
@@ -335,7 +346,7 @@ class DrawerWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hi John",
+                        profileController.profileData.value.name.toString(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -345,7 +356,8 @@ class DrawerWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "+91 98765 43210",
+                        profileController.profileData.value.phoneNumber
+                            .toString(),
                         style: TextStyle(
                           color: ThemeClass.orangeColor,
                           fontSize: 14,

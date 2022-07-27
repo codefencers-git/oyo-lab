@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,7 +7,10 @@ import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_model.dart';
 
 import '../../../global/global_messages.dart';
+import '../../../services/SharedPrefServices/shared_pref_services.dart';
 import '../../../services/http_services.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart' as http_parse;
 
 class ProfileServiceController extends GetxController {
   RxString errorMessage = "".obs;
@@ -69,6 +73,7 @@ class ProfileServiceController extends GetxController {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData["message"]);
+          return 1;
         } else {
           showToast(jasonData["message"]);
         }
@@ -78,5 +83,37 @@ class ProfileServiceController extends GetxController {
     } catch (e) {
       showToast(e.toString());
     }
+  }
+
+  Future uploadProfilePhotoImage(File? file) async {
+    String fileName = file!.path.split('/').last;
+    String url = HttpServices.API_BASE_URL + 'update_profilePicture';
+    var token = await UserPrefService().getToken();
+    Map<String, String> requestHeaders = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      "Request-From": Platform.isAndroid ? "Android" : "Ios",
+      HttpHeaders.acceptLanguageHeader: 'en',
+      'Authorization': 'Bearer $token'
+    };
+    var request = http.MultipartRequest("POST", Uri.parse(url));
+    request.headers.addAll(requestHeaders);
+
+    http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
+        'image', file.path,
+        filename: fileName, contentType: http_parse.MediaType('image', 'jpg'));
+    request.files.add(multipartFile);
+    var response = await request.send();
+
+    final res = await http.Response.fromStream(response);
+
+    var data = jsonDecode(res.body);
+    String message = data['message'];
+    showToast(message);
+    if (res.statusCode == 200) {
+      if (data["status"] == "200") {
+        return 1;
+      }
+    } else if (res.statusCode == 401) {}
+    return response;
   }
 }
