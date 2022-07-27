@@ -23,13 +23,16 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final DashboardController _dashboardController =
       Get.put(DashboardController(), permanent: true);
+
   final ProductCategoryController _categoryController =
       Get.put(ProductCategoryController(), permanent: true);
 
   final profileController =
       Get.put(ProfileServiceController(), permanent: true);
+
   final UserController _userController =
       Get.put(UserController(), permanent: true);
+      
   final CmsServices _cmsDataController =
       Get.put(CmsServices(), permanent: true);
 

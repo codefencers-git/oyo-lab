@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
+import 'package:oyo_labs/screens/authentication/Login/login.dart';
+import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import '../../widgets/buttons/round_button.dart';
@@ -142,7 +144,22 @@ class _BookAppointmentState extends State<BookAppointment> {
     );
   }
 
-  bool checkValidation() {
+  _checkUserLogin() async {
+    try {
+      var getToken = await UserPrefService().getToken();
+      print("--------$getToken");
+      if (getToken == "" || getToken == null) {
+        Get.to(LoginScreen(isFromBooking: true));
+        showToast("Login required");
+      } else if (getToken != "" && getToken != null) {
+        _checkValidation();
+      }
+    } catch (e) {
+      print("------------> $e");
+    }
+  }
+
+  _checkValidation() {
     if (_formKey.currentState!.validate()) {
       print(_dateController.text);
     } else {
@@ -157,9 +174,21 @@ class _BookAppointmentState extends State<BookAppointment> {
     if (_dateController.text != "" &&
         selectedTimeSlot != "" &&
         multiplePrescription.isNotEmpty) {
-      return true;
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (BuildContext context) {
+          return MemberSelectionBottomSheet(
+            date: _dateController.text.trim(),
+            time: selectedTimeSlot.substring(0, 5),
+            prescription: multiplePrescription,
+            memberId: "",
+            remarks: _remarkController.text,
+          );
+        },
+      );
     }
-    return false;
   }
 
   Container _buildBookAppointmentBtn(BuildContext context) {
@@ -167,27 +196,8 @@ class _BookAppointmentState extends State<BookAppointment> {
       margin: const EdgeInsets.all(16),
       height: 45,
       child: RoundButton(
-        onTap: () async {
-          bool isValidate = checkValidation();
-          isValidate
-              ? showModalBottomSheet<void>(
-                  context: context,
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  builder: (BuildContext context) {
-                    return MemberSelectionBottomSheet(
-                      date: _dateController.text.trim(),
-                      time: selectedTimeSlot.substring(0, 5),
-                      prescription: multiplePrescription,
-                      memberId: "",
-                      remarks: _remarkController.text,
-                    );
-                  },
-                )
-              : "";
-          print(
-            selectedTimeSlot.substring(0, 5),
-          );
+        onTap: () {
+          _checkUserLogin();
         },
         buttonLabel: 'key_book_appointment_btn'.tr,
       ),

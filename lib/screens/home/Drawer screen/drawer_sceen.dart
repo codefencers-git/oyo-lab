@@ -3,10 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/themedata.dart';
 
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends StatefulWidget {
   DrawerWidget({
     Key? key,
     required this.width,
@@ -14,10 +15,18 @@ class DrawerWidget extends StatelessWidget {
 
   final double width;
 
-  // LogoutController logoutController = Get.put(LogoutController());
+  @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
 
+class _DrawerWidgetState extends State<DrawerWidget> {
   final UserController _userController = Get.find<UserController>();
-  // final UserPrefService _userPrefController = Get.find<UserPrefService>();
+  final _profileController = Get.find<ProfileServiceController>();
+  @override
+  void initState() {
+    _profileController.getprofileData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +230,7 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 SizedBox(
-                  width: width * 0.45,
+                  width: widget.width * 0.45,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -300,73 +309,77 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
-  InkWell _buildProfileWidget({
+  Widget _buildProfileWidget({
     VoidCallback? onTap,
   }) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
-            child: Row(
-              children: [
-                CachedNetworkImage(
-                  imageUrl:
-                      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
-                  imageBuilder: (context, imageProvider) => Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
-                        borderRadius: BorderRadius.circular(50)),
-                  ),
-                  placeholder: (context, url) => CircularProgressIndicator(
-                    color: ThemeClass.orangeColor,
-                    strokeWidth: 3,
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+    return Obx(() => InkWell(
+          onTap: onTap,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
+                child: Row(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: _profileController
+                          .profileData.value.profileImage
+                          .toString(),
+                      imageBuilder: (context, imageProvider) => Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(50)),
+                      ),
+                      placeholder: (context, url) => CircularProgressIndicator(
+                        color: ThemeClass.orangeColor,
+                        strokeWidth: 3,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                    const SizedBox(width: 8),
+                    SizedBox(
+                      width: widget.width * 0.45,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _profileController.profileData.value.name
+                                .toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: ThemeClass.darkgreyColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            _profileController.profileData.value.phoneNumber
+                                .toString(),
+                            style: TextStyle(
+                              color: ThemeClass.orangeColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                const SizedBox(width: 8),
-                SizedBox(
-                  width: width * 0.45,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hi John",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: ThemeClass.darkgreyColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        "+91 98765 43210",
-                        style: TextStyle(
-                          color: ThemeClass.orangeColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Divider(
+                  thickness: 2,
+                  color: ThemeClass.orangeColor.withOpacity(0.1),
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: Divider(
-              thickness: 2,
-              color: ThemeClass.orangeColor.withOpacity(0.1),
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

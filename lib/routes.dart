@@ -72,7 +72,7 @@ class Routes {
   static List<GetPage> gobalRoutes = [
     GetPage(name: splashRoute, page: () => const SplashScreen()),
     GetPage(name: onboardingScreen, page: () => OnboardingScreen()),
-    GetPage(name: loginScreen, page: () => const LoginScreen()),
+    GetPage(name: loginScreen, page: () => LoginScreen()),
     GetPage(name: forgotPasswordScreen, page: () => ForgotPassword()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
     GetPage(name: homeScreen, page: () => const HomePage()),

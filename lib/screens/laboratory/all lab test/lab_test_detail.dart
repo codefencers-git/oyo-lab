@@ -39,7 +39,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
   final _bookAppointmentController =
       Get.find<BookAppointmentServicesController>();
 
-  final _profileController = Get.put(ProfileServiceController());
+  final _profileController = Get.find<ProfileServiceController>();
 
   @override
   void initState() {
@@ -102,7 +102,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 widget.remarks == null ? "" : widget.remarks.toString();
             mapData['contact_number'] =
                 _profileController.profileData.value.phoneNumber.toString();
-                
+
             _checkOut(mapData);
           },
           buttonLabel: 'Confirm'.tr,
