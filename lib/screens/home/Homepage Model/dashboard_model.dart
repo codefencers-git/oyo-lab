@@ -2,8 +2,6 @@
 //
 //     final dashboardModel = dashboardModelFromJson(jsonString);
 
-// ignore_for_file: prefer_if_null_operators
-
 import 'dart:convert';
 
 DashboardModel dashboardModelFromJson(String str) =>
@@ -122,6 +120,8 @@ class Test {
     this.quantity,
     this.price,
     this.priceTxt,
+    this.testType,
+    this.testCode,
     this.description,
     this.status,
   });
@@ -134,6 +134,8 @@ class Test {
   String? quantity;
   String? price;
   String? priceTxt;
+  String? testType;
+  String? testCode;
   String? description;
   String? status;
 
@@ -147,6 +149,8 @@ class Test {
         quantity: json["quantity"] == null ? null : json["quantity"],
         price: json["price"] == null ? null : json["price"],
         priceTxt: json["price_txt"] == null ? null : json["price_txt"],
+        testType: json["test_type"] == null ? null : json["test_type"],
+        testCode: json["test_code"] == null ? null : json["test_code"],
         description: json["description"] == null ? null : json["description"],
         status: json["status"] == null ? null : json["status"],
       );
@@ -160,6 +164,8 @@ class Test {
         "quantity": quantity == null ? null : quantity,
         "price": price == null ? null : price,
         "price_txt": priceTxt == null ? null : priceTxt,
+        "test_type": testType == null ? null : testType,
+        "test_code": testCode == null ? null : testCode,
         "description": description == null ? null : description,
         "status": status == null ? null : status,
       };

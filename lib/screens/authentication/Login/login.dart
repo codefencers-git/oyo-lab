@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
       buttonLabel: 'key_login_btn'.tr,
       onTap: () async {
         _onSubmit();
-        await dashboardController.getDashboardData();
+        // await dashboardController.getDashboardData();
       },
       fontSize: 16,
       fontWeight: FontWeight.w500,

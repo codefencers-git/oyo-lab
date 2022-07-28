@@ -2,12 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/screens/home/home_page.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class AppbarWithBackButton extends StatelessWidget {
   AppbarWithBackButton({
     Key? key,
     required this.appbarTitle,
+    this.onbackPress,
     this.onIconPress,
     this.isShowSearch = false,
     this.elevation = 0,
@@ -16,6 +18,8 @@ class AppbarWithBackButton extends StatelessWidget {
   bool isShowSearch;
   double elevation;
   Function? onIconPress;
+  Function? onbackPress;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -25,7 +29,11 @@ class AppbarWithBackButton extends StatelessWidget {
       backgroundColor: ThemeClass.orangeColor,
       leading: GestureDetector(
         onTap: () {
-          Get.back();
+          if (onbackPress == null) {
+            Get.back();
+          } else {
+            onbackPress!();
+          }
         },
         child: const Padding(
           padding: EdgeInsets.symmetric(vertical: 16),

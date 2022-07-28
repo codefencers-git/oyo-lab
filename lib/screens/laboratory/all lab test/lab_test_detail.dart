@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
+import 'package:oyo_labs/screens/Drawer/Member/services/member_services.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/themedata.dart';
@@ -40,6 +41,8 @@ class _LabtestDetailState extends State<LabtestDetail> {
       Get.find<BookAppointmentServicesController>();
 
   final _profileController = Get.put(ProfileServiceController());
+
+  final _membercontroller = Get.find<MembersController>();
 
   @override
   void initState() {
@@ -102,7 +105,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 widget.remarks == null ? "" : widget.remarks.toString();
             mapData['contact_number'] =
                 _profileController.profileData.value.phoneNumber.toString();
-                
+
             _checkOut(mapData);
           },
           buttonLabel: 'Confirm'.tr,
@@ -131,10 +134,10 @@ class _LabtestDetailState extends State<LabtestDetail> {
       if (res == true) {
         showToast("Payment Successfully Done.");
 
-        Get.offAll(BookingSuccess(isPaymentDone: true));
+        Get.off(BookingSuccess(isPaymentDone: true));
       } else {
         showToast("Payment Not Done.");
-        Get.offAll(BookingSuccess(isPaymentDone: false));
+        Get.off(BookingSuccess(isPaymentDone: false));
       }
     } catch (e) {
       showToast(e.toString());
@@ -259,49 +262,99 @@ class _LabtestDetailState extends State<LabtestDetail> {
     );
   }
 
-  Padding _buildPatientDetail() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: Image.network(
-                  _profileController.profileData.value.profileImage.toString(),
-                  height: 50,
+  _buildPatientDetail() {
+    if (widget.memberId == "") {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.network(
+                    _profileController.profileData.value.profileImage
+                        .toString(),
+                    height: 50,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _profileController.profileData.value.name.toString(),
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: ThemeClass.darkgreyColor,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  Text(
-                    "+91 ${_profileController.profileData.value.phoneNumber}",
-                    style: TextStyle(
-                        fontSize: 10,
-                        color: ThemeClass.orangeColor,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+                const SizedBox(
+                  width: 8,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _profileController.profileData.value.name.toString(),
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: ThemeClass.darkgreyColor,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      "+91 ${_profileController.profileData.value.phoneNumber}",
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: ThemeClass.orangeColor,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    } else {
+      var data = _membercontroller.memberData
+          .where((p0) => p0!.id.toString() == widget.memberId);
+      // return Text("member ${data.first!.name}");
+
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(40),
+                //   child: Image.network(
+                //     data.first!.profileImage.toString(),
+                //     height: 50,
+                //   ),
+                // ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      data.first!.name.toString(),
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: ThemeClass.darkgreyColor,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      "+91 ${data.first!.phoneNumber}",
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: ThemeClass.orangeColor,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Padding _buildPatientDetailTile() {

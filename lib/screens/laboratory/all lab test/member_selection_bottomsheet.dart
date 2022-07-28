@@ -6,6 +6,7 @@ import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dar
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_model.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import '../../../themedata.dart';
+import '../../Drawer/Member/services/select_member.dart';
 
 class MemberSelectionBottomSheet extends StatefulWidget {
   MemberSelectionBottomSheet({
@@ -82,19 +83,49 @@ class _MemberSelectionBottomSheetState
                     ),
                     RoundButton(
                         buttonLabel: "confirm",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
+                        onTap: () async {
+                          if (short == "Member") {
+                            Navigator.pop(context);
+                            var select = await Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const SelectMemberScreen(),
+                              ),
+                            );
+                            if (select == null) {
+                              Navigator.pop(context);
+                            } else {
+                              Navigator.pop(context);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LabtestDetail(
+                                    date: widget.date,
+                                    time: widget.time,
+                                    prescription: widget.prescription,
+                                    bookingFor: short,
+                                    memberId: select,
+                                    remarks: widget.remarks,
+                                  ),
+                                ),
+                              );
+                            }
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
                                 builder: (context) => LabtestDetail(
-                                      date: widget.date,
-                                      time: widget.time,
-                                      prescription: widget.prescription,
-                                      bookingFor: short,
-                                      memberId: widget.memberId,
-                                      remarks: widget.remarks,
-                                    )),
-                          );
+                                  date: widget.date,
+                                  time: widget.time,
+                                  prescription: widget.prescription,
+                                  bookingFor: short,
+                                  memberId: widget.memberId,
+                                  remarks: widget.remarks,
+                                ),
+                              ),
+                            );
+                          }
                         })
                   ],
                 ),

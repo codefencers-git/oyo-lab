@@ -1,4 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
@@ -36,19 +35,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
-    _categoryController.getProductCategory();
-    profileController.getprofileData();
-    _cmsDataController.getCmsData();
-    Future.delayed(const Duration(seconds: 1), () async {
-      _navigateTo();
-    });
+
+    _navigateTo();
 
     super.initState();
   }
 
   _navigateTo() async {
-    String? token = await FirebaseMessaging.instance.getToken();
-    debugPrint("---firebase token ---->" + token.toString());
+    _categoryController.getProductCategory();
+    _cmsDataController.getCmsData();
+    _dashboardController.getDashboardData();
+    // String? token = await FirebaseMessaging.instance.getToken();
+    // debugPrint("---firebase token ---->" + token.toString());
     try {
       bool? isOnboard = await OnBoadingPrefService.getOnBoaring();
       if (isOnboard == null) {
@@ -59,7 +57,6 @@ class _SplashScreenState extends State<SplashScreen> {
           ModalRoute.withName(Routes.onboardingScreen),
         );
       } else if (!isOnboard) {
-        await _dashboardController.getDashboardData();
         await _checkUserLogin();
         Navigator.pushAndRemoveUntil<void>(
           context,

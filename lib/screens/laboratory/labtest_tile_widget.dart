@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
 import 'package:oyo_labs/screens/laboratory/product_detail.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_book_slot.dart';
@@ -47,7 +48,7 @@ class AllLabsGridTileWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8.0, top: 5),
               child: Text(
-                "A002",
+                labTestData.testCode.toString(),
                 style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
               ),
             ),
@@ -62,14 +63,7 @@ class AllLabsGridTileWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8.0, top: 5),
               child: Text(
-                "(Blood Group)",
-                style: TextStyle(fontSize: 8, color: ThemeClass.greyColor),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, top: 5),
-              child: Text(
-                "(W B-ED TA (3ml))",
+                labTestData.testType.toString(),
                 style: TextStyle(fontSize: 8, color: ThemeClass.orangeColor),
               ),
             ),
