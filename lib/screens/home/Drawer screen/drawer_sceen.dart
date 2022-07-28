@@ -3,11 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/profile_model.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/themedata.dart';
 
-class DrawerWidget extends StatefulWidget {
+class DrawerWidget extends StatelessWidget {
+  ProfileModel? profileModel;
   DrawerWidget({
     Key? key,
     required this.width,
@@ -15,29 +17,28 @@ class DrawerWidget extends StatefulWidget {
 
   final double width;
 
-  @override
-  State<DrawerWidget> createState() => _DrawerWidgetState();
-}
 
-class _DrawerWidgetState extends State<DrawerWidget> {
   final UserController _userController = Get.find<UserController>();
   final _profileController = Get.find<ProfileServiceController>();
-  @override
-  void initState() {
-    _profileController.getprofileData();
-    super.initState();
-  }
+  // final UserPrefService _userPrefController = Get.find<UserPrefService>();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        backgroundColor: ThemeClass.whiteColor,
-        elevation: 0,
-        child: Obx(
-          () => _userController.setIsLogin.value == true
-              ? _buildMenuOfUser(context)
-              : _buildMenuForLogin(context),
-        ));
+      backgroundColor: ThemeClass.whiteColor,
+      elevation: 0,
+      child: Obx(
+        () => _userController.setIsLogin.value == true
+            ?
+            // profileController.isloading.value
+            //     ? Center(
+            //         child: CircularProgressIndicator(),
+            //       )
+            //     :
+            _buildMenuOfUser(context)
+            : _buildMenuForLogin(context),
+      ),
+    );
   }
 
   Column _buildMenuOfUser(BuildContext context) {
@@ -230,7 +231,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 const SizedBox(width: 8),
                 SizedBox(
-                  width: widget.width * 0.45,
+                  width: width * 0.45,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -341,7 +342,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                     const SizedBox(width: 8),
                     SizedBox(
-                      width: widget.width * 0.45,
+                      width: width * 0.45,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

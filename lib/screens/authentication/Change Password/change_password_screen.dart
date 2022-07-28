@@ -78,6 +78,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 40,
+                  ),
                   _buildButtonWidget(),
                 ],
               ),
@@ -92,7 +95,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 0, left: 30, right: 30),
       child: RoundButton(
-        buttonLabel: 'key_change_password'.tr,
+        buttonLabel: 'Forgot Password'.tr,
         onTap: () {
           if (_formKey.currentState!.validate()) {
             var mapData = <String, dynamic>{};
@@ -114,7 +117,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return Column(
       children: [
         Text(
-          'key_change_password'.tr,
+          'key_forgot_password'.tr,
           style: TextStyle(
               color: ThemeClass.orangeColor,
               fontSize: 20,

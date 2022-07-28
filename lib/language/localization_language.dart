@@ -18,6 +18,7 @@ class LanguageLocaleString extends Translations {
           'key_onboarding3_discription':
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
           'key_onboarding_next_btn': 'NEXT  ',
+          'key_forgot_password': 'Forgot Password',
           //-------------------Home screen
           'key_delivered_to_appbar': 'Delivered To',
           'key_login_appbar': 'Login',
