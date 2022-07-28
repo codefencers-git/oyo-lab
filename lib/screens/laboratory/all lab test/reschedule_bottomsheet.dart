@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/global/flutter_toast.dart';
 
 import '../../../themedata.dart';
 import '../../../widgets/buttons/round_button.dart';
@@ -18,7 +19,7 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 350,
+      height: 355,
       child: Stack(
         children: [
           Column(
@@ -142,7 +143,9 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                                         fontcolor: ThemeClass.orangeColor,
                                         fontSize: 16,
                                         fontFamily: "poppins",
-                                        onTap: () {})),
+                                        onTap: () {
+                                          Get.back();
+                                        })),
                                 const SizedBox(width: 10),
                                 Expanded(
                                     child: RoundButton(
@@ -150,7 +153,12 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                                         fontSize: 16,
                                         fontFamily: "poppins",
                                         onTap: () {
-                                        
+                                          if (!check) {
+                                            showToast(
+                                                "Please accept rescheduling policy!");
+                                          } else if (check) {
+                                            BookAppointment();
+                                          }
                                         })),
                               ],
                             ),

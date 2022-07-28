@@ -1,7 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/routes.dart';
+import 'package:oyo_labs/screens/laboratory/lab_test_drawer_detail.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment/appointment_model.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment/appointment_service.dart';
 import 'package:oyo_labs/themedata.dart';
@@ -19,7 +21,7 @@ class _UpcomingAppointmentWidgetState extends State<UpcomingAppointmentWidget> {
   var _futureCall;
   @override
   void initState() {
-    _futureCall = AppointmentService().getAppointment(widget.isUpcoming);
+    _futureCall = AppointmentServiceController().getAppointment(widget.isUpcoming);
     super.initState();
   }
 
@@ -32,7 +34,7 @@ class _UpcomingAppointmentWidgetState extends State<UpcomingAppointmentWidget> {
             if (snapshot.hasData) {
               if (snapshot.data != null && snapshot.data!.isNotEmpty) {
                 return _buildAppointmentListTIle(snapshot.data!);
-                // return Text("data");
+  
               } else {
                 return _buildDataNotFound1("Data Not Found!");
               }
@@ -95,17 +97,20 @@ class _UpcomingAppointmentWidgetState extends State<UpcomingAppointmentWidget> {
                             image: imageProvider, fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(10)),
                   ),
-                  placeholder: (context, url) => CircularProgressIndicator(
-                    color: ThemeClass.orangeColor,
-                    strokeWidth: 3,
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(
+                      color: ThemeClass.orangeColor,
+                      strokeWidth: 3,
+                    ),
                   ),
-                  errorWidget: (context, url, error) => Container(
-                      height: 60,
-                      width: 60,
-                      child: Center(child: Icon(Icons.error))),
+                  errorWidget: (context, url, error) => const SizedBox(
+                    height: 60,
+                    width: 60,
+                    child: Center(
+                      child: Icon(Icons.error),
+                    ),
+                  ),
                 ),
-
-                // Image.network(data.labImage.toString()),
                 const SizedBox(
                   width: 10,
                 ),
@@ -122,10 +127,10 @@ class _UpcomingAppointmentWidgetState extends State<UpcomingAppointmentWidget> {
                                 fontSize: 9, fontWeight: FontWeight.w500),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 8),
+                            padding: const EdgeInsets.only(right: 8),
                             child: Text(
                               "${data.bookingDate.toString()} ${data.bookingTime.toString()}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 9, fontWeight: FontWeight.w500),
                             ),
                           ),
@@ -136,7 +141,7 @@ class _UpcomingAppointmentWidgetState extends State<UpcomingAppointmentWidget> {
                       ),
                       Text(
                         data.labName.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                       Text(
@@ -155,7 +160,7 @@ class _UpcomingAppointmentWidgetState extends State<UpcomingAppointmentWidget> {
         ),
       ),
       onTap: () {
-        Get.toNamed(Routes.drawerLabTestScreen);
+        Get.to(DrawerLabTestScreen(appointmentId:data.id.toString()));
       },
     );
   }

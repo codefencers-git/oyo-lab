@@ -1,3 +1,5 @@
+// ignore_for_file: equal_keys_in_map
+
 import 'package:get/get.dart';
 
 class LanguageLocaleString extends Translations {
@@ -181,7 +183,6 @@ class LanguageLocaleString extends Translations {
           'key_resend_in': 'Resend in 00: ',
           'key_submit_btn': 'Submit',
           //-------------------Change Password
-          'key_change_password': 'Change Password',
           'key_change_password_description':
               'Please enter new password for your login account.',
           'key_confirm_password': 'Confirm Password',
@@ -220,6 +221,8 @@ class LanguageLocaleString extends Translations {
 
           'key_member_selection': 'Member Selection',
           'key_confirm':'Confirm',
+
+          'key_rate_your_experience': "Rate your experience",
         },
         // 'hi_IN': {
         //   'hello': 'नमस्ते दुनिया',

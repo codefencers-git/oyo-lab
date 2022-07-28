@@ -61,6 +61,7 @@ class ProductCategoryController extends GetxController {
         }
       } else if (response.statusCode == 401) {
         showToast(GlobalMessages.unauthorizedUser);
+        UserPrefService().setIsLogin(false);
         await UserPrefService().removeUserData();
       } else {
         isError(true);
