@@ -174,7 +174,7 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                                       padding:
                                           EdgeInsets.only(right: 8.0, top: 5),
                                       child: Image.asset(
-                                          "assets/images/icon_black_location.png"),
+                                          "assets/images/icon_black_location.png",height: 20,),
                                     ),
                                     Expanded(
                                       child: Padding(

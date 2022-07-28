@@ -10,6 +10,7 @@ import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/Login/user_model.dart';
 import 'package:oyo_labs/screens/authentication/Mobile%20Verification/mobile_verification_screen.dart';
 import 'package:oyo_labs/screens/home/home_page.dart';
+import 'package:oyo_labs/screens/laboratory/book_appointment.dart';
 import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/services/navigation_service.dart';
@@ -25,7 +26,7 @@ class UserController extends GetxController {
 
   RxBool setIsLogin = false.obs;
 
-  Future<void> loginServices(dynamic mapData) async {
+  Future<void> loginServices(dynamic mapData, bool? isFromBooking) async {
     isloading(true);
     try {
       String url = 'login';
@@ -44,13 +45,24 @@ class UserController extends GetxController {
           debugPrint(jasonData['message']);
           showToast(jasonData['message']);
           await profileController.getprofileData();
-          // Get.toNamed(Routes.homeScreen);
-          Navigator.pushAndRemoveUntil<void>(
-            navigationService.navigationKey.currentContext!,
-            MaterialPageRoute<void>(
-                builder: (BuildContext context) => const HomePage()),
-            ModalRoute.withName(Routes.loginScreen),
-          );
+
+          if (isFromBooking != null) {
+            if (isFromBooking) {
+              Navigator.pushAndRemoveUntil<void>(
+                navigationService.navigationKey.currentContext!,
+                MaterialPageRoute<void>(
+                    builder: (BuildContext context) => BookAppointment()),
+                ModalRoute.withName(Routes.loginScreen),
+              );
+            }
+          } else {
+            Navigator.pushAndRemoveUntil<void>(
+              navigationService.navigationKey.currentContext!,
+              MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const HomePage()),
+              ModalRoute.withName(Routes.loginScreen),
+            );
+          }
 
           isError(false);
           errorMessage("");
@@ -207,6 +219,7 @@ class UserController extends GetxController {
         } else if (response.statusCode == 401) {
           showToast(GlobalMessages.unauthorizedUser);
           setIsLogin(false);
+          UserPrefService().setIsLogin(false);
           await UserPrefService().removeUserData();
           Get.offAllNamed(Routes.loginScreen);
         } else {

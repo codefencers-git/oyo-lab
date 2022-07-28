@@ -22,6 +22,7 @@ class PrescriptionService {
           throw jasonData['message'].toString();
         }
       } else if (response.statusCode == 401) {
+        UserPrefService().setIsLogin(false);
         await UserPrefService().removeUserData();
         throw GlobalMessages.unauthorizedUser;
       } else {

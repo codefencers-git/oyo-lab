@@ -8,8 +8,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_model.dart';
 import 'package:oyo_labs/screens/laboratory/book_appointment.dart';
+import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import '../../widgets/appbar/appbar_with_back_button.dart';
@@ -60,6 +62,9 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
         }
       } else if (response.statusCode == 401) {
         showToast(GlobalMessages.unauthorizedUser);
+        UserPrefService().setIsLogin(false);
+        await UserPrefService().removeUserData();
+        Get.offAllNamed(Routes.loginScreen);
       } else if (response.statusCode == 500) {
         throw GlobalMessages.internalservererror;
       } else {

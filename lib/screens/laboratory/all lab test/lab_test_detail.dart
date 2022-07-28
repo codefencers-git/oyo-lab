@@ -40,7 +40,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
   final _bookAppointmentController =
       Get.find<BookAppointmentServicesController>();
 
-  final _profileController = Get.put(ProfileServiceController());
+  final _profileController = Get.find<ProfileServiceController>();
 
   final _membercontroller = Get.find<MembersController>();
 
@@ -472,7 +472,9 @@ class _LabtestDetailState extends State<LabtestDetail> {
                               padding:
                                   const EdgeInsets.only(right: 8.0, top: 5),
                               child: Image.asset(
-                                  "assets/icons/icon_black_location.png"),
+                                "assets/icons/icon_black_location.png",
+                                height: 20,
+                              ),
                             ),
                             Expanded(
                               child: Padding(

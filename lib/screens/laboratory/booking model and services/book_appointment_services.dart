@@ -49,6 +49,7 @@ class BookAppointmentServicesController extends GetxController {
       } else if (response.statusCode == 401) {
         showToast(GlobalMessages.unauthorizedUser);
         await UserPrefService().removeUserData();
+        UserPrefService().setIsLogin(false);
         Get.offAllNamed(Routes.loginScreen);
       } else {
         showToast(GlobalMessages.somethingwentwongMessage);

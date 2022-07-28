@@ -17,10 +17,9 @@ class DrawerWidget extends StatelessWidget {
 
   final double width;
 
-  // LogoutController logoutController = Get.put(LogoutController());
 
   final UserController _userController = Get.find<UserController>();
-  final profileController = Get.find<ProfileServiceController>();
+  final _profileController = Get.find<ProfileServiceController>();
   // final UserPrefService _userPrefController = Get.find<UserPrefService>();
 
   @override
@@ -37,7 +36,7 @@ class DrawerWidget extends StatelessWidget {
             //       )
             //     :
             _buildMenuOfUser(context)
-            : _buildMenuForLogin(context),
+            : _buildMenuForLogin(context), 
       ),
     );
   }
@@ -311,74 +310,77 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
-  InkWell _buildProfileWidget({
+  Widget _buildProfileWidget({
     VoidCallback? onTap,
   }) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
-            child: Row(
-              children: [
-                CachedNetworkImage(
-                  imageUrl: profileController.profileData.value.profileImage
-                      .toString(),
-                  imageBuilder: (context, imageProvider) => Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
-                        borderRadius: BorderRadius.circular(50)),
-                  ),
-                  placeholder: (context, url) => CircularProgressIndicator(
-                    color: ThemeClass.orangeColor,
-                    strokeWidth: 3,
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+    return Obx(() => InkWell(
+          onTap: onTap,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
+                child: Row(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: _profileController
+                          .profileData.value.profileImage
+                          .toString(),
+                      imageBuilder: (context, imageProvider) => Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(50)),
+                      ),
+                      placeholder: (context, url) => CircularProgressIndicator(
+                        color: ThemeClass.orangeColor,
+                        strokeWidth: 3,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                    const SizedBox(width: 8),
+                    SizedBox(
+                      width: width * 0.45,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _profileController.profileData.value.name
+                                .toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: ThemeClass.darkgreyColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            _profileController.profileData.value.phoneNumber
+                                .toString(),
+                            style: TextStyle(
+                              color: ThemeClass.orangeColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                const SizedBox(width: 8),
-                SizedBox(
-                  width: width * 0.45,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        profileController.profileData.value.name.toString(),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: ThemeClass.darkgreyColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        profileController.profileData.value.phoneNumber
-                            .toString(),
-                        style: TextStyle(
-                          color: ThemeClass.orangeColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Divider(
+                  thickness: 2,
+                  color: ThemeClass.orangeColor.withOpacity(0.1),
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: Divider(
-              thickness: 2,
-              color: ThemeClass.orangeColor.withOpacity(0.1),
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

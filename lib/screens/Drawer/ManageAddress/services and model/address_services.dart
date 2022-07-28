@@ -36,6 +36,7 @@ class AddressServicesController extends GetxController {
         }
       } else if (response.statusCode == 401) {
         showToast(GlobalMessages.unauthorizedUser);
+        UserPrefService().setIsLogin(false);
         await UserPrefService().removeUserData();
         Get.offAllNamed(Routes.loginScreen);
       } else {
@@ -68,6 +69,7 @@ class AddressServicesController extends GetxController {
         }
       } else if (response.statusCode == 401) {
         showToast(GlobalMessages.unauthorizedUser);
+        UserPrefService().setIsLogin(false);
         await UserPrefService().removeUserData();
         Get.offAllNamed(Routes.loginScreen);
       } else {
