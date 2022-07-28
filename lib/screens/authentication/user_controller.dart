@@ -219,6 +219,7 @@ class UserController extends GetxController {
         } else if (response.statusCode == 401) {
           showToast(GlobalMessages.unauthorizedUser);
           setIsLogin(false);
+          UserPrefService().setIsLogin(false);
           await UserPrefService().removeUserData();
           Get.offAllNamed(Routes.loginScreen);
         } else {

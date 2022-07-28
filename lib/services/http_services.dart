@@ -26,7 +26,7 @@ class HttpServices {
 
   static Future<Response> httpGet(String url) async {
     var token = await UserPrefService().getToken();
-    print(token);
+
     print(API_BASE_URL + url);
 
     return http.get(
@@ -55,7 +55,7 @@ class HttpServices {
   static Future<Response> httpPost(String url, dynamic data,
       {BuildContext? context}) async {
     var token = await UserPrefService().getToken();
-    print(token);
+
     return http.post(
       Uri.parse(API_BASE_URL + url),
       body: jsonEncode(data),

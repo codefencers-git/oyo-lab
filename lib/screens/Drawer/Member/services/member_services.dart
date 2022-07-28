@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
+import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/Drawer/Member/Model/members_model.dart';
+import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
 class MembersController extends GetxController {
@@ -36,7 +38,10 @@ class MembersController extends GetxController {
         }
       } else if (response.statusCode == 401) {
         isError(true);
-        errorMessage("unauthorized");
+        showToast(GlobalMessages.unauthorizedUser);
+        UserPrefService().setIsLogin(false);
+        await UserPrefService().removeUserData();
+        Get.offAllNamed(Routes.loginScreen);
       } else {
         isError(true);
         errorMessage(GlobalMessages.internalservererror);

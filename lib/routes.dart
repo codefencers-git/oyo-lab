@@ -12,7 +12,7 @@ import 'package:oyo_labs/screens/Drawer/Member/members.dart';
 import 'package:oyo_labs/screens/authentication/Signup/signup_screen.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_tests_screen.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dart';
-import 'package:oyo_labs/screens/laboratory/all%20lab%20test/rating_screen.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/rating/rating_screen.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
 import 'package:oyo_labs/screens/laboratory/lab_test_drawer_detail.dart';
@@ -93,12 +93,7 @@ class Routes {
     GetPage(name: walletScreen, page: () => const WalletScreen()),
     GetPage(name: settingScreen, page: () => const SettingScreen()),
     GetPage(name: myProfileScreen, page: () => const MyProfileScreen()),
-    GetPage(
-        name: ratingScreen,
-        page: () => RatingScreen(
-              id: '',
-            )),
-    GetPage(name: drawerLabTestScreen, page: () => const DrawerLabTestScreen()),
+   
     GetPage(
         name: helpAndSupportScreen, page: () => const HelpAndSupportScreen()),
     GetPage(
