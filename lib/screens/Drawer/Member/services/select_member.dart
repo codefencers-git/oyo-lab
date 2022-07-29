@@ -15,8 +15,7 @@ class SelectMemberScreen extends StatefulWidget {
 }
 
 class _SelectMemberScreenState extends State<SelectMemberScreen> {
-  final MembersController _membersController =
-      Get.put(MembersController(), permanent: true);
+  final MembersController _membersController = Get.find<MembersController>();
 
   @override
   void initState() {

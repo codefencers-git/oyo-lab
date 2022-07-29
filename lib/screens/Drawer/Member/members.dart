@@ -17,8 +17,10 @@ class AddNewMember extends StatefulWidget {
 }
 
 class _AddNewMemberState extends State<AddNewMember> {
-  final MembersController _membersController =
-      Get.put(MembersController(), permanent: true);
+  // final MembersController _membersController =
+  //     Get.put(MembersController(), permanent: true);
+
+  final MembersController _membersController = Get.find<MembersController>();
 
   @override
   void initState() {

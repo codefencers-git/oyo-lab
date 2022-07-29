@@ -18,64 +18,70 @@ class BookingSuccess extends StatefulWidget {
 class _BookingSuccessState extends State<BookingSuccess> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(65.0),
-        child: AppbarWithBackButton(
-            onbackPress: () {
-              Get.offAll(HomePage());
-            },
-            appbarTitle:
-                widget.isPaymentDone ? 'key_success'.tr : 'key_failed'.tr),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
-            child: Image.asset(widget.isPaymentDone
-                ? "assets/images/booking_successfull.png"
-                : "assets/images/booking_failed.png"),
-          ),
-          Text(
-            widget.isPaymentDone
-                ? 'key_booking_successfull'.tr
-                : 'key_booking_unsuccessfull'.tr,
-            style: TextStyle(
-                fontSize: 24,
-                color: ThemeClass.greenColor,
-                fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
+    return WillPopScope(
+      onWillPop: () {
+        Get.offAll(HomePage());
+        return Future.value(false);
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(65.0),
+          child: AppbarWithBackButton(
+              onbackPress: () {
+                Get.offAll(HomePage());
+              },
+              appbarTitle:
+                  widget.isPaymentDone ? 'key_success'.tr : 'key_failed'.tr),
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
+              child: Image.asset(widget.isPaymentDone
+                  ? "assets/images/booking_successfull.png"
+                  : "assets/images/booking_failed.png"),
+            ),
+            Text(
               widget.isPaymentDone
-                  ? 'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
-                      .tr
-                  : 'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
-                      .tr,
-              textAlign: TextAlign.center,
+                  ? 'key_booking_successfull'.tr
+                  : 'key_booking_unsuccessfull'.tr,
               style: TextStyle(
-                  fontSize: 14,
-                  color: ThemeClass.greyColor1,
+                  fontSize: 24,
+                  color: ThemeClass.greenColor,
                   fontWeight: FontWeight.w700),
             ),
-          )
-        ],
-      ),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(16),
-        height: 45,
-        child: RoundButton(
-          onTap: () {
-            Get.toNamed(Routes.checkAppointment);
-          },
-          buttonLabel: widget.isPaymentDone
-              ? 'key_check_appointment'.tr
-              : 'key_book_again'.tr,
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                widget.isPaymentDone
+                    ? 'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
+                        .tr
+                    : 'key_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry'
+                        .tr,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 14,
+                    color: ThemeClass.greyColor1,
+                    fontWeight: FontWeight.w700),
+              ),
+            )
+          ],
+        ),
+        bottomNavigationBar: Container(
+          margin: const EdgeInsets.all(16),
+          height: 45,
+          child: RoundButton(
+            onTap: () {
+              Get.toNamed(Routes.checkAppointment);
+            },
+            buttonLabel: widget.isPaymentDone
+                ? 'key_check_appointment'.tr
+                : 'key_book_again'.tr,
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_model.dart';
@@ -74,72 +75,74 @@ class _MyPrescriptionState extends State<MyPrescription> {
         ));
   }
 
-  Column _buildView() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            'key_prescriptions'.tr,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+  SingleChildScrollView _buildView() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 10,
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged five centuries, but also the leap into electronic.',
-            style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: ThemeClass.greyColor),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            'key_past_7_days'.tr,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'key_prescriptions'.tr,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
           ),
-        ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged five centuries, but also the leap into electronic.',
+              style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: ThemeClass.greyColor),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'key_past_7_days'.tr,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
 
-        const SizedBox(
-          height: 20,
-        ),
+          const SizedBox(
+            height: 20,
+          ),
 
-        ..._PresciptionList.map((e) => _buildTestCase(e)).toList(),
+          ..._PresciptionList.map((e) => _buildTestCase(e)).toList(),
 
-        // const SizedBox(
-        //   height: 15,
-        // ),
-        // _buildTestCase(),
-        // Padding(
-        //   padding: const EdgeInsets.all(16.0),
-        //   child: Text(
-        //     'key_past_22_days'.tr,
-        //     style: TextStyle(
-        //       fontSize: 12,
-        //       color: ThemeClass.blackColor,
-        //       fontWeight: FontWeight.w500,
-        //     ),
-        //   ),
-        // ),
-        // _buildTestCase(),
-      ],
+          // const SizedBox(
+          //   height: 15,
+          // ),
+          // _buildTestCase(),
+          // Padding(
+          //   padding: const EdgeInsets.all(16.0),
+          //   child: Text(
+          //     'key_past_22_days'.tr,
+          //     style: TextStyle(
+          //       fontSize: 12,
+          //       color: ThemeClass.blackColor,
+          //       fontWeight: FontWeight.w500,
+          //     ),
+          //   ),
+          // ),
+          // _buildTestCase(),
+        ],
+      ),
     );
   }
 
-  Container _buildTestCase(PrescriptionData e) {
+  Container _buildTestCase(PrescriptionData data) {
     return Container(
       margin: EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.all(16),
@@ -162,9 +165,9 @@ class _MyPrescriptionState extends State<MyPrescription> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
-                children: const [
+                children: [
                   Text(
-                    "Test Case",
+                    data.title.toString(),
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -173,8 +176,8 @@ class _MyPrescriptionState extends State<MyPrescription> {
                   SizedBox(
                     height: 8,
                   ),
-                  const Text(
-                    'Self Upload',
+                  Text(
+                    data.type.toString(),
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w500,
@@ -264,7 +267,7 @@ class _MyPrescriptionState extends State<MyPrescription> {
                 ),
               ),
               Text(
-                '13 june',
+                data.date.toString(),
                 style: TextStyle(
                   fontSize: 12,
                   color: ThemeClass.blackColor,

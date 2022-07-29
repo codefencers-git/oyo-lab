@@ -85,8 +85,8 @@ class _MemberSelectionBottomSheetState
                         buttonLabel: "confirm",
                         onTap: () async {
                           if (short == "Member") {
-                            Navigator.pop(context);
-                            var select = await Navigator.pushReplacement(
+                            // Navigator.pop(context);
+                            var select = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
@@ -96,8 +96,8 @@ class _MemberSelectionBottomSheetState
                             if (select == null) {
                               Navigator.pop(context);
                             } else {
-                              Navigator.pop(context);
-                              Navigator.pushReplacement(
+                              // Navigator.pop(context);
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => LabtestDetail(

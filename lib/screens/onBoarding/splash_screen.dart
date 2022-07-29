@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/Drawer/CMS%20data/cms_service.dart';
+import 'package:oyo_labs/screens/Drawer/Member/services/member_services.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
@@ -31,9 +32,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   final UserController _userController =
       Get.put(UserController(), permanent: true);
-      
+
   final CmsServices _cmsDataController =
       Get.put(CmsServices(), permanent: true);
+  final MembersController _membersController =
+      Get.put(MembersController(), permanent: true);
 
   @override
   void initState() {

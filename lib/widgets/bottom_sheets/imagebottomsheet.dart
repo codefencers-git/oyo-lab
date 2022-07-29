@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:oyo_labs/global/flutter_toast.dart';
+import 'package:oyo_labs/global/global_messages.dart';
+import 'package:oyo_labs/screens/laboratory/all%20lab%20test/text_box_normal.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:http/http.dart' as http;
@@ -17,12 +21,13 @@ class SelectImageBottomSheet extends StatefulWidget {
 }
 
 class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
+  final TextEditingController _titleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
     return SizedBox(
-      height: 220,
+      height: 290,
       child: Stack(
         children: [
           Column(
@@ -43,6 +48,15 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
                         'key_choose_option'.tr,
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w700),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: TextBoxSimpleWidget(
+                            hinttext: "Enter Title",
+                            controllers: _titleController),
                       ),
                       const SizedBox(
                         height: 20,
@@ -164,15 +178,51 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
   _uploadMumtiImage() async {
     final ImagePicker _picker = ImagePicker();
     final List<XFile>? images = await _picker.pickMultiImage();
+    print(_titleController.text);
+    if (_titleController.text != "") {
+      if (images != null && images.isNotEmpty) {
+        Map<String, String> requestPrm = {
+          "title": _titleController.text,
+          "type": "Self"
+        };
 
-    if (images != null && images.isNotEmpty) {
-      Map<String, String> requestPrm = {"title": "title12", "type": "Self"};
-      print(images);
+        callAPi(images, requestPrm);
+        print(images);
+      }
+    } else {
+      showToast("Please enter title");
+    }
+  }
+
+  callAPi(images, requestPrm) async {
+    try {
+      EasyLoading.show();
       var response = await HttpServices.httpPostWithMultipleImageUpload(
           "save_prescription", images, requestPrm,
           peramterName: "prescription");
 
       print("response  ${response}");
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final jasonData = jsonDecode(response.body);
+
+        if (jasonData['status'] == "200" && jasonData['success'] == "1") {
+          showToast(jasonData['message'].toString());
+        } else {
+          showToast(jasonData['message'].toString());
+        }
+      } else if (response.statusCode == 401) {
+        // UserPrefService().setIsLogin(false);
+        // await UserPrefService().removeUserData();
+        // throw GlobalMessages.unauthorizedUser;
+      } else {
+        // isError(true);
+
+        showToast(GlobalMessages.internalservererror);
+      }
+    } catch (e) {
+      showToast(e.toString());
+    } finally {
+      EasyLoading.dismiss();
     }
   }
 }
