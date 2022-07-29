@@ -222,7 +222,9 @@ class LanguageLocaleString extends Translations {
           'key_member_selection': 'Member Selection',
           'key_confirm':'Confirm',
 
-          'key_rate_your_experience': "Rate your experience",
+          'key_rate_your_experience': 'Rate your experience',
+
+          'key_write_your_remark':'Write your remark...',
         },
         // 'hi_IN': {
         //   'hello': 'नमस्ते दुनिया',

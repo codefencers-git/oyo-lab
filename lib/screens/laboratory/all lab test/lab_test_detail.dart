@@ -11,6 +11,7 @@ import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
+import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
 import '../booking model and services/book_appointment_services.dart';
 import '../booking model and services/web_view_payment_screen.dart';
 
@@ -50,6 +51,11 @@ class _LabtestDetailState extends State<LabtestDetail> {
     super.initState();
   }
 
+  final TextEditingController _remarkController = TextEditingController();
+  final TextEditingController _doctorNameController = TextEditingController();
+  final TextEditingController _contactNumberkController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,33 +64,95 @@ class _LabtestDetailState extends State<LabtestDetail> {
         preferredSize: const Size.fromHeight(65.0),
         child: AppbarWithBackButton(appbarTitle: 'key_lab_test_details'.tr),
       ),
-      body: Column(
-        children: [
-          _buildLabDetailWidget(),
-          const SizedBox(
-            height: 60,
-          ),
-          Column(
-            children: [
-              _buildPatientDetailTile(),
-              _buildPatientDetail(),
-              const SizedBox(
-                height: 10,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildLabDetailWidget(),
+            const SizedBox(height: 20),
+            Column(
+              children: [
+                _buildPatientDetail(),
+                _buildTestDetail(),
+                const SizedBox(
+                  height: 10,
+                ),
+                _buildItemTotalWidget(),
+                Divider(
+                  indent: 10,
+                  endIndent: 10,
+                  color: ThemeClass.greyColor1,
+                ),
+                _buildPayableAmountWidget(),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    minLines: 3,
+                    cursorColor: ThemeClass.orangeColor,
+                    decoration: InputDecoration(
+                      hintText: 'key_write_your_remark'.tr,
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                        color: ThemeClass.blackColor,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                    ),
+                    controller: _remarkController,
+                  ),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    cursorColor: ThemeClass.orangeColor,
+                    decoration: InputDecoration(
+                      hintText: 'Doctor Name',
+                      hintStyle: TextStyle(
+                          fontSize: 12,
+                          color: ThemeClass.blackColor,
+                          fontWeight: FontWeight.w400),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                    ),
+                    controller: _remarkController,
+                  ),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    maxLength: 10,
+                    cursorColor: ThemeClass.orangeColor,
+                    decoration: InputDecoration(
+                      counterText: "",
+                      hintText: 'Contact Number',
+                      hintStyle: TextStyle(
+                          fontSize: 12,
+                          color: ThemeClass.blackColor,
+                          fontWeight: FontWeight.w400),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                    ),
+                    controller: _remarkController,
+                  ),
+                ],
               ),
-              _buildTestDetail(),
-              const SizedBox(
-                height: 10,
-              ),
-              _buildItemTotalWidget(),
-              Divider(
-                indent: 10,
-                endIndent: 10,
-                color: ThemeClass.greyColor1,
-              ),
-              _buildPayableAmountWidget(),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.all(16),
@@ -104,7 +172,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
             mapData['remarks'] =
                 widget.remarks == null ? "" : widget.remarks.toString();
             mapData['contact_number'] =
-                _profileController.profileData.value.phoneNumber.toString();
+                _contactNumberkController.text.toString();
 
             _checkOut(mapData);
           },
@@ -124,7 +192,6 @@ class _LabtestDetailState extends State<LabtestDetail> {
       String paymentUrl =
           _bookAppointmentController.paymentUrl.value.paymentUrl.toString();
 
-      print("-----------------------$paymentUrl");
       EasyLoading.dismiss();
       var res = await Navigator.of(context, rootNavigator: true).push(
         MaterialPageRoute<bool>(
@@ -265,19 +332,36 @@ class _LabtestDetailState extends State<LabtestDetail> {
   _buildPatientDetail() {
     if (widget.memberId == "") {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              children: [
+                Text(
+                  'key_patient_details'.tr,
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: ThemeClass.blackColor,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+            SizedBox(height: 7),
+            Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: Image.network(
-                    _profileController.profileData.value.profileImage
-                        .toString(),
-                    height: 50,
+                Container(
+                  height: 50,
+                  width: 50,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image.network(
+                      _profileController.profileData.value.profileImage
+                          .toString(),
+                      fit: BoxFit.cover,
+                      height: 50,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -320,13 +404,6 @@ class _LabtestDetailState extends State<LabtestDetail> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // ClipRRect(
-                //   borderRadius: BorderRadius.circular(40),
-                //   child: Image.network(
-                //     data.first!.profileImage.toString(),
-                //     height: 50,
-                //   ),
-                // ),
                 const SizedBox(
                   width: 8,
                 ),
@@ -355,23 +432,6 @@ class _LabtestDetailState extends State<LabtestDetail> {
         ),
       );
     }
-  }
-
-  Padding _buildPatientDetailTile() {
-    return Padding(
-      padding: const EdgeInsets.all(9.0),
-      child: Row(
-        children: [
-          Text(
-            'key_patient_details'.tr,
-            style: TextStyle(
-                fontSize: 14,
-                color: ThemeClass.blackColor,
-                fontWeight: FontWeight.w500),
-          ),
-        ],
-      ),
-    );
   }
 
   Stack _buildLabDetailWidget() {

@@ -364,8 +364,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                             ),
                           ),
                           Text(
-                            _profileController.profileData.value.phoneNumber
-                                .toString(),
+                            " +91 ${_profileController.profileData.value.phoneNumber.toString()}",
                             style: TextStyle(
                               color: ThemeClass.orangeColor,
                               fontSize: 14,
