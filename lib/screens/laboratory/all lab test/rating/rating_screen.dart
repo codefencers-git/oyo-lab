@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -99,11 +101,25 @@ class _RatingScreenState extends State<RatingScreen> {
                   ),
                   Form(
                     key: _formKey,
-                    child: TextBoxSimpleWidget(
-                        minLine: 6,
-                        radius: 10,
-                        hinttext: "",
-                        controllers: _textController),
+                    child: TextFormField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      minLines: 6,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        filled: true,
+                      ),
+                      controller: _textController,
+                      // validator: (value) {
+                      //   if (value == "") {
+                      //     return "Please write your review.";
+                      //   }
+                      //   return null;
+                      // },
+                    ),
                   ),
                   const SizedBox(
                     height: 40,
@@ -118,15 +134,18 @@ class _RatingScreenState extends State<RatingScreen> {
           height: 45,
           child: RoundButton(
             onTap: () async {
-              if (_textController.text == "") {
-                showToast('Please write your review!');
-              } else if (_formKey.currentState!.validate()) {
+              print(_textController.text);
+              log(_formKey.currentState!.validate().toString());
+              if (_formKey.currentState!.validate()) {
+                print("formkey validation");
                 var mapData = <String, dynamic>{};
                 mapData['item_id'] = widget.itemId;
                 mapData['rating'] = rating;
                 mapData['review'] = _textController.text;
                 mapData['order_id'] = widget.orderId;
                 await _ratingServicesComtroller.ratingServices(mapData);
+              } else {
+                showToast('Please write your review!');
               }
             },
             buttonLabel: 'Submit',

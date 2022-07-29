@@ -85,7 +85,7 @@ class Routes {
     GetPage(name: addMemberScreen, page: () => const AddNewMember()),
     GetPage(name: myPrescritionSreen, page: () => const MyPrescription()),
     GetPage(name: myTestReportScreen, page: () => const MyTestRepoer()),
-    GetPage(name: prescriptionDetails, page: () => const PrescriptionDetail()),
+
     GetPage(name: manageAddressScreen, page: () => const ManageAddress()),
     GetPage(name: addNewAddressScreen, page: () => AddAddress()),
     GetPage(name: addNewMembers, page: () => const AddnewMemberScreen()),

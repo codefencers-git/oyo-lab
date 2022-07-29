@@ -8,7 +8,7 @@ import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
 import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 import '../../../widgets/textfield/textfield_with_suffix.dart';
-import 'change_password_controller.dart';
+import '../Change Password/change_password_controller.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   ChangePasswordScreen(
@@ -68,6 +68,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     key: _formKey,
                     child: _buildChangePwdTitleNdiscription(width),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Column(
@@ -79,7 +82,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: height / 7,
                   ),
                   _buildButtonWidget(),
                 ],

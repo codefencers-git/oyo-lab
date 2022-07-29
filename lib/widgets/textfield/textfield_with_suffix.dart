@@ -11,7 +11,7 @@ class TextFieldWithSuffixIcon extends StatelessWidget {
     required this.isObscureText,
     this.keyboardType = TextInputType.text,
     this.validator,
-     this.hintText,
+    this.hintText,
     required this.iconData,
     required this.onIconTap,
     this.color = ThemeClass.whiteColor,

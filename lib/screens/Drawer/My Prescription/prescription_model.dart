@@ -2,7 +2,11 @@
 //
 //     final prescriptionModel = prescriptionModelFromJson(jsonString);
 
+// ignore_for_file: prefer_if_null_operators
+
 import 'dart:convert';
+
+import 'package:flutter/src/widgets/container.dart';
 
 PrescriptionModel prescriptionModelFromJson(String str) =>
     PrescriptionModel.fromJson(json.decode(str));
@@ -79,4 +83,6 @@ class PrescriptionData {
         "type": type == null ? null : type,
         "date": date == null ? null : date!.toIso8601String(),
       };
+
+  map(Container Function(dynamic prescription) param0) {}
 }

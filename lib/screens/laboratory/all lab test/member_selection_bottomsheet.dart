@@ -17,7 +17,6 @@ class MemberSelectionBottomSheet extends StatefulWidget {
     this.time,
     this.prescription,
     this.memberId,
-    this.remarks,
     this.testPrice,
   }) : super(key: key);
 
@@ -27,7 +26,7 @@ class MemberSelectionBottomSheet extends StatefulWidget {
   String? time;
   List<XFile>? prescription;
   String? memberId;
-  String? remarks;
+
 
   String? testPrice;
 
@@ -85,8 +84,8 @@ class _MemberSelectionBottomSheetState
                         buttonLabel: "confirm",
                         onTap: () async {
                           if (short == "Member") {
-                            Navigator.pop(context);
-                            var select = await Navigator.pushReplacement(
+                            // Navigator.pop(context);
+                            var select = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
@@ -96,8 +95,8 @@ class _MemberSelectionBottomSheetState
                             if (select == null) {
                               Navigator.pop(context);
                             } else {
-                              Navigator.pop(context);
-                              Navigator.pushReplacement(
+                              // Navigator.pop(context);
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => LabtestDetail(
@@ -106,7 +105,7 @@ class _MemberSelectionBottomSheetState
                                     prescription: widget.prescription,
                                     bookingFor: short,
                                     memberId: select,
-                                    remarks: widget.remarks,
+                      
                                   ),
                                 ),
                               );
@@ -121,7 +120,7 @@ class _MemberSelectionBottomSheetState
                                   prescription: widget.prescription,
                                   bookingFor: short,
                                   memberId: widget.memberId,
-                                  remarks: widget.remarks,
+                    
                                 ),
                               ),
                             );

@@ -98,8 +98,6 @@ class _BookAppointmentState extends State<BookAppointment> {
                 _buildSelectSlot(),
                 _buildTimeSlotWidget(),
                 const SizedBox(height: 10),
-                _buildRemarkWidget(),
-                const SizedBox(height: 10),
                 Text(
                   'key_have_prescription'.tr,
                   style: TextStyle(
@@ -184,7 +182,6 @@ class _BookAppointmentState extends State<BookAppointment> {
             time: selectedTimeSlot.substring(0, 5),
             prescription: multiplePrescription,
             memberId: "",
-            remarks: _remarkController.text,
           );
         },
       );
@@ -253,28 +250,6 @@ class _BookAppointmentState extends State<BookAppointment> {
           ],
         )
       ],
-    );
-  }
-
-  TextFormField _buildRemarkWidget() {
-    return TextFormField(
-      controller: _remarkController,
-      keyboardType: TextInputType.multiline,
-      maxLines: null,
-      minLines: 3,
-      decoration: InputDecoration(
-        hintText: 'key_write_your_remark'.tr,
-        hintStyle: TextStyle(
-          fontSize: 12,
-          color: ThemeClass.greyColor,
-          fontWeight: FontWeight.w400,
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        filled: true,
-      ),
     );
   }
 

@@ -14,7 +14,7 @@ import 'package:oyo_labs/widgets/container_with_inner_shadow.dart';
 import '../../../widgets/textfield/textfield_with_suffix.dart';
 
 class LoginScreen extends StatefulWidget {
-   LoginScreen({Key? key,this.isFromBooking}) : super(key: key);
+  LoginScreen({Key? key, this.isFromBooking}) : super(key: key);
 
   bool? isFromBooking;
 
@@ -67,8 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       try {
         EasyLoading.show();
-        await userController.loginServices(mapData,widget.isFromBooking);
-      
+        await userController.loginServices(mapData, widget.isFromBooking);
       } catch (e) {
         debugPrint(e.toString());
       } finally {

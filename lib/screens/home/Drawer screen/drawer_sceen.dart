@@ -3,13 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
-import 'package:oyo_labs/screens/Drawer/Profile/profile_model.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/themedata.dart';
 
-class DrawerWidget extends StatelessWidget {
-  ProfileModel? profileModel;
+class DrawerWidget extends StatefulWidget {
   DrawerWidget({
     Key? key,
     required this.width,
@@ -17,10 +15,18 @@ class DrawerWidget extends StatelessWidget {
 
   final double width;
 
+  @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
 
+class _DrawerWidgetState extends State<DrawerWidget> {
   final UserController _userController = Get.find<UserController>();
   final _profileController = Get.find<ProfileServiceController>();
-  // final UserPrefService _userPrefController = Get.find<UserPrefService>();
+  @override
+  void initState() {
+    _profileController.getprofileData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class DrawerWidget extends StatelessWidget {
             //       )
             //     :
             _buildMenuOfUser(context)
-            : _buildMenuForLogin(context), 
+            : _buildMenuForLogin(context),
       ),
     );
   }
@@ -231,7 +237,7 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 SizedBox(
-                  width: width * 0.45,
+                  width: widget.width * 0.45,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -342,7 +348,7 @@ class DrawerWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     SizedBox(
-                      width: width * 0.45,
+                      width: widget.width * 0.45,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -358,8 +364,7 @@ class DrawerWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            _profileController.profileData.value.phoneNumber
-                                .toString(),
+                            " +91 ${_profileController.profileData.value.phoneNumber.toString()}",
                             style: TextStyle(
                               color: ThemeClass.orangeColor,
                               fontSize: 14,

@@ -1,11 +1,16 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_model.dart';
 import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
 
-class PrescriptionService {
-  Future<List<PrescriptionData>?> getProductCategory() async {
+class PrescriptionService extends GetxController {
+  RxBool isError = false.obs;
+  RxString errorMessage = "".obs;
+  RxBool isloading = false.obs;
+
+  Future<List<PrescriptionData>?> getPrescriptionList() async {
     try {
       String url = 'prescription';
 
@@ -26,16 +31,14 @@ class PrescriptionService {
         await UserPrefService().removeUserData();
         throw GlobalMessages.unauthorizedUser;
       } else {
-        // isError(true);
-
         throw GlobalMessages.internalservererror;
       }
     } catch (e) {
+      isError(true);
+      errorMessage(e.toString());
       throw e.toString();
-      // isError(true);
-      // errorMessage(e.toString());
     } finally {
-      // isloading(false);
+      isloading(false);
     }
   }
 }
