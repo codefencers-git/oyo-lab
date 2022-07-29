@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/home/Drawer%20screen/drawer_sceen.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Model/dashboard_model.dart';
+import 'package:oyo_labs/screens/laboratory/product_detail.dart';
 import 'package:oyo_labs/widgets/bottom_sheets/imagebottomsheet.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_model.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_test_service.dart';
@@ -314,7 +315,6 @@ class _HomePageState extends State<HomePage> {
             ),
             onTap: () {
               _moveToTop(MediaQuery.of(context).size.height * 0.3);
-              print("object");
             },
             onEditingComplete: () {
               FocusScopeNode _currentFocus = FocusScope.of(context);
@@ -353,8 +353,13 @@ class _HomePageState extends State<HomePage> {
               child: Text("no data found"),
             );
           },
-          onSuggestionSelected: (suggestion) {
-            print(suggestion);
+          onSuggestionSelected: (LabTestProductData suggestion) {
+            print("--------");
+            print(suggestion.id);
+            Get.to(LaboratoryDetail(
+              id: suggestion.id.toString(),
+              productTitle: suggestion.title.toString(),
+            ));
           },
           errorBuilder: (context, data) {
             return Center(
