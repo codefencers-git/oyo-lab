@@ -30,7 +30,6 @@ class DashboardController extends GetxController {
       String url = 'get_dashboard_data';
       var response = await HttpServices.httpGetWithoutToken(url);
 
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jasonData = json.decode(response.body);
 
@@ -50,6 +49,7 @@ class DashboardController extends GetxController {
       }
     } catch (e) {
       isError(true);
+      print("dashoard    --  ${e}   ");
       errorMessage(e.toString());
     } finally {
       isloading(false);

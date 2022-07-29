@@ -14,10 +14,11 @@ class HttpServices {
   static Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
     "Request-From": Platform.isAndroid ? "Android" : "Ios",
-    HttpHeaders.acceptLanguageHeader: 'en'
+    HttpHeaders.acceptLanguageHeader: 'en',
   };
 
   static Future<Response> httpGetWithoutToken(String url) async {
+    print("get call -   ${API_BASE_URL + url}");
     return http.get(
       Uri.parse(API_BASE_URL + url),
       headers: requestHeaders,

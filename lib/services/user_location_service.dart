@@ -35,12 +35,15 @@ class UserLocationController extends GetxController {
       position.longitude,
     );
 
-    var tempcurrentLocationCity = placemarks[0].subAdministrativeArea != null &&
-            placemarks[0].subAdministrativeArea != ""
-        ? placemarks[0].name
-        : "";
-    currentAddress(tempcurrentLocationCity);
-    print("-0-0-0-0-----" + currentAddress.value);
-    print("-1-1-1-1-1------" + tempcurrentLocationCity.toString());
+    if (placemarks.isNotEmpty) {
+      var tempcurrentLocationCity =
+          placemarks[0].subAdministrativeArea != null &&
+                  placemarks[0].subAdministrativeArea != ""
+              ? placemarks[0].name
+              : "";
+      currentAddress(tempcurrentLocationCity);
+      print("-0-0-0-0-----" + currentAddress.value);
+      print("-1-1-1-1-1------" + tempcurrentLocationCity.toString());
+    }
   }
 }

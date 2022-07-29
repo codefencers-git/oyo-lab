@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/Drawer/Member/services/member_services.dart';
-import 'package:oyo_labs/screens/Drawer/Member/update_member.dart';
-import 'package:oyo_labs/themedata.dart';
-import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
-import 'package:oyo_labs/widgets/buttons/round_button.dart';
 
-import 'Model/members_model.dart';
+import '../../../../themedata.dart';
+import '../../../../widgets/appbar/appbar_with_back_button.dart';
+import '../Model/members_model.dart';
+import '../update_member.dart';
 
-class AddNewMember extends StatefulWidget {
-  const AddNewMember({Key? key}) : super(key: key);
+class SelectMemberScreen extends StatefulWidget {
+  const SelectMemberScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddNewMember> createState() => _AddNewMemberState();
+  State<SelectMemberScreen> createState() => _SelectMemberScreenState();
 }
 
-class _AddNewMemberState extends State<AddNewMember> {
-  // final MembersController _membersController =
-  //     Get.put(MembersController(), permanent: true);
-
+class _SelectMemberScreenState extends State<SelectMemberScreen> {
   final MembersController _membersController = Get.find<MembersController>();
 
   @override
@@ -62,7 +57,6 @@ class _AddNewMemberState extends State<AddNewMember> {
                   )
             : _buildCircularProgressIndicator(height, width),
       ),
-      bottomNavigationBar: _buildAddMemberBtn(),
     );
   }
 
@@ -78,31 +72,12 @@ class _AddNewMemberState extends State<AddNewMember> {
     );
   }
 
-  Container _buildAddMemberBtn() {
-    return Container(
-      margin: const EdgeInsets.all(16),
-      height: 45,
-      child: RoundButton(
-        onTap: () {
-          Get.toNamed(Routes.addNewMembers);
-        },
-        buttonLabel: 'key_add_new_member'.tr,
-      ),
-    );
-  }
-
   Column _buildMemberListTile(MemberData? memberData) {
     return Column(
       children: [
         TextButton(
           onPressed: () {
-            Get.to(UpdateNewMemberScreen(
-              id: memberData!.id.toString(),
-              name: memberData.name.toString(),
-              dob: memberData.dob.toString(),
-              email: memberData.email.toString(),
-              phoneNumber: memberData.phoneNumber.toString(),
-            ));
+            Navigator.pop(context, memberData!.id.toString());
           },
           style: ElevatedButton.styleFrom(
             splashFactory: NoSplash.splashFactory,
@@ -119,10 +94,6 @@ class _AddNewMemberState extends State<AddNewMember> {
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: ThemeClass.blackColor),
-                ),
-                Image.asset(
-                  'assets/icons/icon_3_dots.png',
-                  height: 20,
                 ),
               ],
             ),

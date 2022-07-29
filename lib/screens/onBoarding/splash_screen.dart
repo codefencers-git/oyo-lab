@@ -1,8 +1,8 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/Drawer/CMS%20data/cms_service.dart';
+import 'package:oyo_labs/screens/Drawer/Member/services/member_services.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/screens/home/Homepage%20Services/dashboard_services.dart';
@@ -32,26 +32,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
   final UserController _userController =
       Get.put(UserController(), permanent: true);
-      
+
   final CmsServices _cmsDataController =
       Get.put(CmsServices(), permanent: true);
+  final MembersController _membersController =
+      Get.put(MembersController(), permanent: true);
 
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
-    _categoryController.getProductCategory();
-    profileController.getprofileData();
-    _cmsDataController.getCmsData();
-    Future.delayed(const Duration(seconds: 1), () async {
-      _navigateTo();
-    });
+
+    _navigateTo();
 
     super.initState();
   }
 
   _navigateTo() async {
-    String? token = await FirebaseMessaging.instance.getToken();
-    debugPrint("---firebase token ---->" + token.toString());
+    _categoryController.getProductCategory();
+    _cmsDataController.getCmsData();
+    _dashboardController.getDashboardData();
+    // String? token = await FirebaseMessaging.instance.getToken();
+    // debugPrint("---firebase token ---->" + token.toString());
     try {
       bool? isOnboard = await OnBoadingPrefService.getOnBoaring();
       if (isOnboard == null) {
@@ -62,7 +63,6 @@ class _SplashScreenState extends State<SplashScreen> {
           ModalRoute.withName(Routes.onboardingScreen),
         );
       } else if (!isOnboard) {
-        await _dashboardController.getDashboardData();
         await _checkUserLogin();
         Navigator.pushAndRemoveUntil<void>(
           context,
