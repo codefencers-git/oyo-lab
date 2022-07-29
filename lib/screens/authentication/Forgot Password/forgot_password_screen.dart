@@ -23,41 +23,37 @@ class ForgotPassword extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     validation = Validation();
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Scaffold(
-        backgroundColor: ThemeClass.whiteColor,
-        body: SingleChildScrollView(
-          child: Container(
-            height: height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: width * 0.62,
-                  height: height * 0.45,
-                  child: Image.asset(
-                    "assets/images/logo.png",
-                    fit: BoxFit.fitWidth,
-                  ),
+    return Scaffold(
+      backgroundColor: ThemeClass.whiteColor,
+      body: SingleChildScrollView(
+        child: Container(
+          height: height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
+                width: width * 0.62,
+                height: height * 0.45,
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  fit: BoxFit.fitWidth,
                 ),
-                ContainerWithInnerShadow(
-                  width: width,
-                  height: height * 0.45,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildTitleNdescription(width),
-                      _buildTextField(
-                          _formKey, _phoneNumberController, validation!),
-                      _buildButton(_formKey),
-                      SizedBox(height: 10),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              ),
+              ContainerWithInnerShadow(
+                width: width,
+                height: height * 0.45,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildTitleNdescription(width),
+                    _buildTextField(
+                        _formKey, _phoneNumberController, validation!),
+                    _buildButton(_formKey),
+                    SizedBox(height: 10),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

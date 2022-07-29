@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/services/http_services.dart';
-import '../Change Password/change_password_screen.dart';
+import '../Forgot Password/forgot_password.dart';
 
 class MobileVerificationController extends GetxController {
   var isError = false.obs;
