@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +9,8 @@ import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_model.dar
 import 'package:oyo_labs/services/prescription_service/prescription_service.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
+
+import 'prescription_detail.dart';
 
 class MyPrescription extends StatefulWidget {
   const MyPrescription({Key? key}) : super(key: key);
@@ -21,7 +25,6 @@ class _MyPrescriptionState extends State<MyPrescription> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     getPrescription();
@@ -33,7 +36,7 @@ class _MyPrescriptionState extends State<MyPrescription> {
     });
 
     try {
-      var data = await PrescriptionService().getProductCategory();
+      var data = await PrescriptionService().getPrescriptionList();
 
       if (data != null) {
         setState(() {
@@ -114,29 +117,10 @@ class _MyPrescriptionState extends State<MyPrescription> {
               ),
             ),
           ),
-
           const SizedBox(
             height: 20,
           ),
-
           ..._PresciptionList.map((e) => _buildTestCase(e)).toList(),
-
-          // const SizedBox(
-          //   height: 15,
-          // ),
-          // _buildTestCase(),
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: Text(
-          //     'key_past_22_days'.tr,
-          //     style: TextStyle(
-          //       fontSize: 12,
-          //       color: ThemeClass.blackColor,
-          //       fontWeight: FontWeight.w500,
-          //     ),
-          //   ),
-          // ),
-          // _buildTestCase(),
         ],
       ),
     );
@@ -144,8 +128,8 @@ class _MyPrescriptionState extends State<MyPrescription> {
 
   Container _buildTestCase(PrescriptionData data) {
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: ThemeClass.skyblueColor,
         border: Border.all(width: 0, color: Colors.white),
@@ -159,26 +143,26 @@ class _MyPrescriptionState extends State<MyPrescription> {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     data.title.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(
-                    height: 8,
+                  const SizedBox(
+                    height: 5,
                   ),
                   Text(
                     data.type.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w500,
                     ),
@@ -186,7 +170,7 @@ class _MyPrescriptionState extends State<MyPrescription> {
                 ],
               ),
               DropdownButton(
-                  underline: SizedBox(),
+                  underline: const SizedBox(),
                   icon: Image.asset(
                     'assets/icons/icon_3_dots.png',
                     height: 20,
@@ -215,8 +199,8 @@ class _MyPrescriptionState extends State<MyPrescription> {
                           borderRadius: BorderRadius.circular(5),
                         ),
 
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
                         // margin: const EdgeInsets.only(right: 10),
                         child: Text(
                           "Delete",
@@ -232,16 +216,15 @@ class _MyPrescriptionState extends State<MyPrescription> {
                   onChanged: (val) {}),
             ],
           ),
-          SizedBox(
-            height: 20,
+          const SizedBox(
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.prescriptionDetails);
-                  print("object");
+                  Get.to(PrescriptionDetail(prescriptionData: data));
                 },
                 child: SizedBox(
                   child: Row(
@@ -255,7 +238,7 @@ class _MyPrescriptionState extends State<MyPrescription> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                       Image.asset(
@@ -267,7 +250,7 @@ class _MyPrescriptionState extends State<MyPrescription> {
                 ),
               ),
               Text(
-                data.date.toString(),
+                DateFormat.MMMd().format(data.date!),
                 style: TextStyle(
                   fontSize: 12,
                   color: ThemeClass.blackColor,

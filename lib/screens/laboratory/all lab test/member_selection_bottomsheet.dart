@@ -17,7 +17,6 @@ class MemberSelectionBottomSheet extends StatefulWidget {
     this.time,
     this.prescription,
     this.memberId,
-    this.remarks,
     this.testPrice,
   }) : super(key: key);
 
@@ -27,7 +26,7 @@ class MemberSelectionBottomSheet extends StatefulWidget {
   String? time;
   List<XFile>? prescription;
   String? memberId;
-  String? remarks;
+
 
   String? testPrice;
 
@@ -106,7 +105,7 @@ class _MemberSelectionBottomSheetState
                                     prescription: widget.prescription,
                                     bookingFor: short,
                                     memberId: select,
-                                    remarks: widget.remarks,
+                      
                                   ),
                                 ),
                               );
@@ -121,7 +120,7 @@ class _MemberSelectionBottomSheetState
                                   prescription: widget.prescription,
                                   bookingFor: short,
                                   memberId: widget.memberId,
-                                  remarks: widget.remarks,
+                    
                                 ),
                               ),
                             );

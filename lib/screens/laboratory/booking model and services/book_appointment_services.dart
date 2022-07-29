@@ -24,7 +24,7 @@ class BookAppointmentServicesController extends GetxController {
         url,
         imageFiles,
         queryParameters,
-        peramterName: "prescription",
+        peramterName: "prescription[]",
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {

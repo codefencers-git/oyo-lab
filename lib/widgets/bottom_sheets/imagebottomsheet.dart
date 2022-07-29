@@ -194,14 +194,13 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
     }
   }
 
-  callAPi(images, requestPrm) async {
+  callAPi(List<XFile> images, Map<String, String> requestPrm) async {
     try {
       EasyLoading.show();
       var response = await HttpServices.httpPostWithMultipleImageUpload(
           "save_prescription", images, requestPrm,
-          peramterName: "prescription");
+          peramterName: "prescription[]");
 
-      print("response  ${response}");
       if (response.statusCode == 200 || response.statusCode == 201) {
         final jasonData = jsonDecode(response.body);
 

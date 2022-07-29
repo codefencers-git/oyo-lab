@@ -11,7 +11,6 @@ import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
-import 'package:oyo_labs/widgets/textfield/textfield_with_suffix.dart';
 import '../booking model and services/book_appointment_services.dart';
 import '../booking model and services/web_view_payment_screen.dart';
 
@@ -23,7 +22,6 @@ class LabtestDetail extends StatefulWidget {
     this.prescription,
     this.bookingFor,
     this.memberId,
-    this.remarks,
   }) : super(key: key);
 
   String? date;
@@ -31,7 +29,6 @@ class LabtestDetail extends StatefulWidget {
   List<XFile>? prescription;
   String? bookingFor;
   String? memberId;
-  String? remarks;
 
   @override
   State<LabtestDetail> createState() => _LabtestDetailState();
@@ -89,7 +86,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextFormField(
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
@@ -126,7 +123,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                       ),
                       filled: true,
                     ),
-                    controller: _remarkController,
+                    controller: _doctorNameController,
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
@@ -135,7 +132,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                     cursorColor: ThemeClass.orangeColor,
                     decoration: InputDecoration(
                       counterText: "",
-                      hintText: 'Contact Number',
+                      hintText: 'key_contact_number'.tr,
                       hintStyle: TextStyle(
                           fontSize: 12,
                           color: ThemeClass.blackColor,
@@ -169,10 +166,10 @@ class _LabtestDetailState extends State<LabtestDetail> {
             mapData['booking_for'] = widget.bookingFor;
             mapData['member_id'] =
                 widget.memberId == null ? "" : widget.memberId.toString();
-            mapData['remarks'] =
-                widget.remarks == null ? "" : widget.remarks.toString();
+            mapData['remarks'] = _remarkController.text.toString();
             mapData['contact_number'] =
                 _contactNumberkController.text.toString();
+            mapData['doctor_name'] = _doctorNameController.text.toString();
 
             _checkOut(mapData);
           },

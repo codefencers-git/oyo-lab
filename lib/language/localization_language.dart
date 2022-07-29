@@ -225,6 +225,7 @@ class LanguageLocaleString extends Translations {
           'key_rate_your_experience': 'Rate your experience',
 
           'key_write_your_remark':'Write your remark...',
+          'key_contact_number':'Contact Number',
         },
         // 'hi_IN': {
         //   'hello': 'नमस्ते दुनिया',
