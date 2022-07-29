@@ -73,6 +73,8 @@ class LabTestProductData {
     this.countInCart,
     this.quantity,
     this.price,
+    this.testType,
+    this.testCode,
     this.priceTxt,
     this.description,
     this.status,
@@ -84,6 +86,8 @@ class LabTestProductData {
   String? ownerId;
   String? countInCart;
   String? quantity;
+  String? testCode;
+  String? testType;
   String? price;
   String? priceTxt;
   String? description;
@@ -100,6 +104,8 @@ class LabTestProductData {
         quantity: json["quantity"] == null ? null : json["quantity"],
         price: json["price"] == null ? null : json["price"],
         priceTxt: json["price_txt"] == null ? null : json["price_txt"],
+        testType: json["test_type"] == null ? null : json["test_type"],
+        testCode: json["test_code"] == null ? null : json["test_code"],
         description: json["description"] == null ? null : json["description"],
         status: json["status"] == null ? null : json["status"],
       );
@@ -113,6 +119,8 @@ class LabTestProductData {
         "quantity": quantity == null ? null : quantity,
         "price": price == null ? null : price,
         "price_txt": priceTxt == null ? null : priceTxt,
+        "test_type": testType == null ? null : testType,
+        "test_code": testCode == null ? null : testCode,
         "description": description == null ? null : description,
         "status": status == null ? null : status,
       };
