@@ -96,7 +96,9 @@ class _DrawerLabTestScreenState extends State<DrawerLabTestScreen> {
                     fontcolor: ThemeClass.orangeColor,
                     fontSize: 16,
                     fontFamily: "poppins",
-                    onTap: () {})),
+                    onTap: () {
+                      Get.back();
+                    })),
             const SizedBox(width: 10),
             Expanded(
                 child: RoundButton(
@@ -492,15 +494,15 @@ class _DrawerLabTestScreenState extends State<DrawerLabTestScreen> {
         children: [
           Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: Image.network(
-                  _appointmentServiceController
-                      .appointmentDetailData.value.userImage
-                      .toString(),
-                  height: 50,
-                ),
-              ),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(40),
+              //   child: Image.network(
+              //     _appointmentServiceController
+              //         .appointmentDetailData.value.userImage
+              //         .toString(),
+              //     height: 50,
+              //   ),
+              // ),
               const SizedBox(
                 width: 8,
               ),

@@ -27,7 +27,6 @@ class MemberSelectionBottomSheet extends StatefulWidget {
   List<XFile>? prescription;
   String? memberId;
 
-
   String? testPrice;
 
   @override
@@ -95,7 +94,6 @@ class _MemberSelectionBottomSheetState
                             if (select == null) {
                               Navigator.pop(context);
                             } else {
-                              // Navigator.pop(context);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -105,7 +103,6 @@ class _MemberSelectionBottomSheetState
                                     prescription: widget.prescription,
                                     bookingFor: short,
                                     memberId: select,
-                      
                                   ),
                                 ),
                               );
@@ -120,7 +117,6 @@ class _MemberSelectionBottomSheetState
                                   prescription: widget.prescription,
                                   bookingFor: short,
                                   memberId: widget.memberId,
-                    
                                 ),
                               ),
                             );

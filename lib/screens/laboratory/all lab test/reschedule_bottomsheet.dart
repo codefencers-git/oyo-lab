@@ -157,7 +157,8 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                                             showToast(
                                                 "Please accept rescheduling policy!");
                                           } else if (check) {
-                                            BookAppointment();
+                                            Get.to(BookAppointment());
+                                            ;
                                           }
                                         })),
                               ],
