@@ -2,6 +2,8 @@
 //
 //     final lAbTestDetailModel = lAbTestDetailModelFromJson(jsonString);
 
+// ignore_for_file: prefer_if_null_operators
+
 import 'dart:convert';
 
 LAbTestDetailModel lAbTestDetailModelFromJson(String str) =>
@@ -21,7 +23,7 @@ class LAbTestDetailModel {
   String? success;
   String? status;
   String? message;
-  LAbTestDetailData? data;
+  LabTestDetailData? data;
 
   factory LAbTestDetailModel.fromJson(Map<String, dynamic> json) =>
       LAbTestDetailModel(
@@ -30,7 +32,7 @@ class LAbTestDetailModel {
         message: json["message"] == null ? null : json["message"],
         data: json["data"] == null
             ? null
-            : LAbTestDetailData.fromJson(json["data"]),
+            : LabTestDetailData.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,8 +43,8 @@ class LAbTestDetailModel {
       };
 }
 
-class LAbTestDetailData {
-  LAbTestDetailData({
+class LabTestDetailData {
+  LabTestDetailData({
     this.id,
     this.title,
     this.category,
@@ -76,8 +78,8 @@ class LAbTestDetailData {
   List<RecommendedProduct>? labList;
   List<Review>? reviews;
 
-  factory LAbTestDetailData.fromJson(Map<String, dynamic> json) =>
-      LAbTestDetailData(
+  factory LabTestDetailData.fromJson(Map<String, dynamic> json) =>
+      LabTestDetailData(
         id: json["id"] == null ? null : json["id"],
         title: json["title"] == null ? null : json["title"],
         category: json["category"] == null ? null : json["category"],

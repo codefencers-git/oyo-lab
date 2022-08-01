@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/screens/home/home_page.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class AppbarWithBackButton extends StatelessWidget {
@@ -22,6 +21,7 @@ class AppbarWithBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return AppBar(
       elevation: elevation,
       shadowColor: const Color(0x0000001a).withOpacity(0.3),
@@ -53,12 +53,16 @@ class AppbarWithBackButton extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            appbarTitle,
-            style: const TextStyle(
-                fontSize: 14,
-                color: ThemeClass.whiteColor,
-                fontWeight: FontWeight.w400),
+          Container(
+            width: width * 0.55,
+            child: Text(
+              appbarTitle,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                  fontSize: 14,
+                  color: ThemeClass.whiteColor,
+                  fontWeight: FontWeight.w400),
+            ),
           ),
           Image.asset(
             'assets/images/logo_oyo_lab.png',

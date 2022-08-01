@@ -1,15 +1,13 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/reschedule_bottomsheet.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment/appointment_service.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
-
 import 'all lab test/rating/rating_screen.dart';
 
 class DrawerLabTestScreen extends StatefulWidget {
@@ -78,14 +76,13 @@ class _DrawerLabTestScreenState extends State<DrawerLabTestScreen> {
                 height: height,
                 width: width,
                 child: Center(
-                  child: CircularProgressIndicator(
-                    color: ThemeClass.orangeColor,
-                  ),
+                  child:
+                      CircularProgressIndicator(color: ThemeClass.orangeColor),
                 ),
               ),
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.all(16),
+        margin: const EdgeInsets.all(16),
         height: 50,
         child: Row(
           children: [
@@ -110,7 +107,9 @@ class _DrawerLabTestScreenState extends State<DrawerLabTestScreen> {
                         context: context,
                         backgroundColor: Colors.transparent,
                         builder: (BuildContext context) {
-                          return const RescheduleBottomSheet();
+                          return RescheduleBottomSheet(
+                           appointmentId: widget.appointmentId,
+                          );
                         },
                       );
                     })),
@@ -455,13 +454,17 @@ class _DrawerLabTestScreenState extends State<DrawerLabTestScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "ABO Group & RH Type",
-                          style: TextStyle(
+                        Text(
+                          _appointmentServiceController
+                              .appointmentDetailData.value.testName
+                              .toString(),
+                          style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "W B-ED TA (3ml)",
+                          _appointmentServiceController
+                              .appointmentDetailData.value.testType
+                              .toString(),
                           style: TextStyle(
                               fontSize: 12,
                               color: ThemeClass.greyColor,

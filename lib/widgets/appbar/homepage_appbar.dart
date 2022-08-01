@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/screens/home/google_place_picker/google_place_picker_screen.dart';
 import 'package:oyo_labs/services/user_location_service.dart';
@@ -28,12 +29,14 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
   String _currentAddress = "";
 
   final UserController _userPrefController = Get.find<UserController>();
+  final _profileController = Get.find<ProfileServiceController>();
 
   final UserLocationController _userLocationController =
       Get.find<UserLocationController>();
 
   @override
   void initState() {
+    _profileController.getprofileData();
     super.initState();
     _currentAddress = widget.address;
   }
@@ -50,7 +53,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -101,11 +104,18 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
               ),
             ),
             Expanded(
-              flex: 1,
-              child: Padding(
+              flex: 2,
+              child: Container(
+                alignment: Alignment.centerRight,
                 padding: const EdgeInsets.only(left: 10),
                 child: _userPrefController.setIsLogin.value == true
-                    ? SizedBox()
+                    ? Text(
+                        "Hi ${_profileController.profileData.value.name}!",
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: ThemeClass.whiteColor),
+                      )
                     : TextButton(
                         onPressed: () {
                           Get.toNamed(Routes.loginScreen);

@@ -34,7 +34,7 @@ class FAQsController extends GetxController {
       }
     } catch (e) {
       isError(true);
-      print("dashoard    --  ${e}");
+      print("dashoard    --  $e");
       errorMessage(e.toString());
     } finally {
       isloading(false);

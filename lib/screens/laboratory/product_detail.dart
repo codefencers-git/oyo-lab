@@ -16,7 +16,6 @@ import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import '../../widgets/appbar/appbar_with_back_button.dart';
 import 'package:geolocator/geolocator.dart';
-
 import 'booking model and services/book_appointment_services.dart';
 
 /// Determine the current position of the device.
@@ -35,7 +34,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
   var _futureCall;
   var latlong;
 
-  final BookAppointmentServicesController _bookAppointmentController =
+  final _bookAppointmentController =
       Get.find<BookAppointmentServicesController>();
   @override
   void initState() {
@@ -44,7 +43,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
     _futureCall = _loadData();
   }
 
-  Future<LAbTestDetailData?> _loadData() async {
+  Future<LabTestDetailData?> _loadData() async {
     try {
       var response = await HttpServices.httpPostWithoutToken(
         "product/${widget.id}",
@@ -113,7 +112,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
       appBar: _buildAppbar(),
       body: FutureBuilder(
         future: _futureCall,
-        builder: (context, AsyncSnapshot<LAbTestDetailData?> snapshot) {
+        builder: (context, AsyncSnapshot<LabTestDetailData?> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               if (snapshot.data != null) {
@@ -151,7 +150,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
     );
   }
 
-  SingleChildScrollView _buildView(LAbTestDetailData? data) {
+  SingleChildScrollView _buildView(LabTestDetailData? data) {
     print(data!.labList!.length);
     return SingleChildScrollView(
       child: Column(
@@ -332,7 +331,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
   }
 
   Padding _buildNearLaboratory(
-    LAbTestDetailData labTestDetailData,
+    LabTestDetailData labTestDetailData,
   ) {
     return Padding(
       padding: const EdgeInsets.all(9.0),
@@ -395,6 +394,9 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
                         height: 30,
                       ),
                       onPressed: () {
+                        // _bookAppointmentController
+                        //     .testPrice(labTestDetailData.price);
+
                         _bookAppointmentController.tempBookingData(
                             labTestDetailData,
                             labTestDetailData.labList![index]);
@@ -460,7 +462,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
     );
   }
 
-  Positioned _buildDetailsCard(LAbTestDetailData? data) {
+  Positioned _buildDetailsCard(LabTestDetailData? data) {
     return Positioned(
       top: 133,
       left: 0,

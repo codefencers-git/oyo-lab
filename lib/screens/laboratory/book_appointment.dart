@@ -13,14 +13,13 @@ import '../../widgets/buttons/round_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'all lab test/member_selection_bottomsheet.dart';
 import 'booking model and services/book_appointment_services.dart';
+import 'my_appointment/appointment_service.dart';
 
 class BookAppointment extends StatefulWidget {
-  BookAppointment({
-    Key? key,
-    this.type,
-  }) : super(key: key);
+  BookAppointment({Key? key, this.type, this.appointmentId}) : super(key: key);
 
   String? type;
+  String? appointmentId;
 
   @override
   State<BookAppointment> createState() => _BookAppointmentState();
@@ -30,7 +29,6 @@ final _formKey = GlobalKey<FormState>();
 
 class _BookAppointmentState extends State<BookAppointment> {
   final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _remarkController = TextEditingController();
   late List<bool> isSelected;
 
   final BookAppointmentServicesController _bookAppointmentController =
@@ -41,10 +39,25 @@ class _BookAppointmentState extends State<BookAppointment> {
   List<XFile> multiplePrescription = [];
 
   int? select;
+
+  final _appointmentHistoryController =
+      Get.find<AppointmentServiceController>();
   @override
   void initState() {
+    _onInit();
     isSelected = [true, false];
     super.initState();
+  }
+
+  bool isReschedule = false;
+
+  _onInit() {
+    if (widget.type == 'Reschedule') {
+      isReschedule = true;
+
+      _appointmentHistoryController
+          .appointmentHistoryServices(widget.appointmentId.toString());
+    }
   }
 
   List<String> amTimeSlot = [
@@ -77,14 +90,19 @@ class _BookAppointmentState extends State<BookAppointment> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
+    print("------------------${widget.type}");
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65.0),
         child: AppbarWithBackButton(
-            appbarTitle: _bookAppointmentController.testDetails.value.title
-                .toString() //widget.testDetails!.title.toString(),
-            ),
+            appbarTitle: isReschedule
+                ? _appointmentHistoryController
+                    .appointmentDetailData.value.testName
+                    .toString()
+                : _bookAppointmentController.testDetails.value.title
+                    .toString()),
       ),
       body: Padding(
         padding: const EdgeInsets.all(9.0),
@@ -98,28 +116,32 @@ class _BookAppointmentState extends State<BookAppointment> {
                 _buildSelectSlot(),
                 _buildTimeSlotWidget(),
                 const SizedBox(height: 10),
-                Text(
-                  'key_have_prescription'.tr,
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: ThemeClass.blackColor2,
-                      fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: 15),
-                widget.type != "Reschedule"
-                    ? _priscripion(width)
-                    : const SizedBox(),
-                const SizedBox(height: 10),
-                Text(
-                  'Uploaded Prescription',
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: ThemeClass.blackColor2,
-                      fontWeight: FontWeight.w400),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
+                isReschedule
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          Text(
+                            'key_have_prescription'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: ThemeClass.blackColor2,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(height: 15),
+                          _priscripion(width),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Uploaded Prescription',
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: ThemeClass.blackColor2,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                      ),
                 Text(
                   'key_payment_summary'.tr,
                   style: TextStyle(
@@ -166,10 +188,28 @@ class _BookAppointmentState extends State<BookAppointment> {
     if (selectedTimeSlot == "") {
       showToast("Please select timeslot");
     }
-    if (multiplePrescription.isEmpty) {
-      showToast("Please upload prescription");
+    if (!isReschedule) {
+      if (multiplePrescription.isEmpty) {
+        showToast("Please upload prescription");
+      }
     }
-    if (_dateController.text != "" &&
+
+    if (_dateController.text != "" && selectedTimeSlot != "" && isReschedule) {
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (BuildContext context) {
+          return MemberSelectionBottomSheet(
+            date: _dateController.text.trim(),
+            time: selectedTimeSlot.substring(0, 5),
+            prescription: multiplePrescription,
+            memberId: "",
+            isRescheduled: isReschedule
+          );
+        },
+      );
+    } else if (_dateController.text != "" &&
         selectedTimeSlot != "" &&
         multiplePrescription.isNotEmpty) {
       showModalBottomSheet<void>(
@@ -215,7 +255,9 @@ class _BookAppointmentState extends State<BookAppointment> {
         Row(
           children: [
             Text(
-              "₹ ${_bookAppointmentController.testDetails.value.price.toString()}",
+              isReschedule
+                  ? "₹${_appointmentHistoryController.appointmentDetailData.value.grandTotal.toString()}"
+                  : "₹ ${_bookAppointmentController.testDetails.value.price.toString()}",
               style: TextStyle(
                   fontSize: 10,
                   color: ThemeClass.blackColor1,
@@ -241,7 +283,9 @@ class _BookAppointmentState extends State<BookAppointment> {
         Row(
           children: [
             Text(
-              "₹ ${_bookAppointmentController.testDetails.value.price.toString()}",
+              isReschedule
+                  ? "₹${_appointmentHistoryController.appointmentDetailData.value.itemTotal.toString()}"
+                  : "₹${_bookAppointmentController.testDetails.value.price.toString()}",
               style: TextStyle(
                   fontSize: 10,
                   color: ThemeClass.greyColor1,
@@ -473,7 +517,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   },
                 ),
               )
-            : SizedBox(),
+            : const SizedBox(),
       ],
     );
   }
@@ -562,10 +606,10 @@ class DatePicker extends StatefulWidget {
 
 // ignore: camel_case_types
 class _date_pickerState extends State<DatePicker> {
-  String currentDate() {
+  DateTime currentDate() {
     DateTime currentDate = DateTime.now();
     //String formattedDate = DateFormat('dd-MM-yyyy').format(currentDate);
-    return currentDate.toString();
+    return currentDate;
   }
 
   @override
@@ -586,7 +630,8 @@ class _date_pickerState extends State<DatePicker> {
             fillColor: ThemeClass.greyLightColor,
             filled: true,
             border: InputBorder.none,
-            hintText: currentDate().substring(0, 10),
+            hintText: DateFormat('dd-MM-yyyy').format(currentDate()),
+            //currentDate().substring(0, 10),
             hintStyle: TextStyle(
                 color: ThemeClass.greyColor1,
                 fontWeight: FontWeight.w400,

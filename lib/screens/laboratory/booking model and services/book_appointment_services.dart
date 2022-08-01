@@ -37,7 +37,7 @@ class BookAppointmentServicesController extends GetxController {
               BookAppointmentModel.fromJson(jasonData);
 
           paymentUrl(bookAppointmentModel.data);
-
+          clearTestDataAndLabData();
           isError(false);
           errorMessage("");
         } else if (jasonData['success'].toString() == "0" &&
@@ -66,21 +66,25 @@ class BookAppointmentServicesController extends GetxController {
     }
   }
 
-  Rx<LAbTestDetailData> testDetails = LAbTestDetailData().obs;
+  Rx<LabTestDetailData> testDetails = LabTestDetailData().obs;
   Rx<RecommendedProduct> labData = RecommendedProduct().obs;
 
   tempBookingData(testData, labDetail) {
     testDetails(testData);
     labData(labDetail);
+  }
 
-    print(testDetails);
-    print(labDetail);
+  clearTestDataAndLabData() {
+    testDetails.close();
+    labData.close();
   }
 
   // upper code is not use more.
 
-  RxString itemPrice = "".obs;
-  RxString itemtitle = "".obs;
-  RxString testID = "".obs;
-  RxString laboratoryID = "".obs;
+  // RxString testPrice = "".obs;
+  // RxString testTitle = "".obs;
+  // RxString testID = "".obs;
+  // RxString laboratoryID = "".obs;
+  // RxString laboratoryName = "".obs;
+  // RxString  laboratoryAddress = "".obs;
 }

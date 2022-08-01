@@ -8,7 +8,7 @@ import 'package:oyo_labs/screens/authentication/user_controller.dart';
 import 'package:oyo_labs/themedata.dart';
 
 class DrawerWidget extends StatefulWidget {
-  DrawerWidget({
+  const DrawerWidget({
     Key? key,
     required this.width,
   }) : super(key: key);
@@ -174,7 +174,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 tileIconPath: "assets/icons/lab-test-icon.png",
               ),
               _buildDrawerListTile(
-                onTileTap: () {},
+                onTileTap: () {
+                  Get.toNamed(Routes.helpAndSupportScreen);
+                },
                 tileLabel: 'key_help_n_faq'.tr,
                 tileIconPath: "assets/icons/help-faq-icon.png",
               ),
@@ -364,7 +366,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                             ),
                           ),
                           Text(
-                            " +91 ${_profileController.profileData.value.phoneNumber.toString()}",
+                            "+91 ${_profileController.profileData.value.phoneNumber.toString()}",
                             style: TextStyle(
                               color: ThemeClass.orangeColor,
                               fontSize: 14,
