@@ -76,4 +76,11 @@ class BookAppointmentServicesController extends GetxController {
     print(testDetails);
     print(labDetail);
   }
+
+  // upper code is not use more.
+
+  RxString itemPrice = "".obs;
+  RxString itemtitle = "".obs;
+  RxString testID = "".obs;
+  RxString laboratoryID = "".obs;
 }

@@ -36,7 +36,7 @@ class _LabTestScreenState extends State<LaboratoryDetail> {
   var latlong;
 
   final BookAppointmentServicesController _bookAppointmentController =
-      Get.put(BookAppointmentServicesController(), permanent: true);
+      Get.find<BookAppointmentServicesController>();
   @override
   void initState() {
     super.initState();

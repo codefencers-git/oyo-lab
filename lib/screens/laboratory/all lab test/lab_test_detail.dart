@@ -68,6 +68,9 @@ class _LabtestDetailState extends State<LabtestDetail> {
             const SizedBox(height: 20),
             Column(
               children: [
+                SizedBox(
+                  height: 20,
+                ),
                 _buildPatientDetail(),
                 _buildTestDetail(),
                 const SizedBox(
@@ -143,7 +146,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                       ),
                       filled: true,
                     ),
-                    controller: _remarkController,
+                    controller: _contactNumberkController,
                   ),
                 ],
               ),
@@ -348,19 +351,19 @@ class _LabtestDetailState extends State<LabtestDetail> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.network(
-                      _profileController.profileData.value.profileImage
-                          .toString(),
-                      fit: BoxFit.cover,
-                      height: 50,
-                    ),
-                  ),
-                ),
+                // Container(
+                //   height: 50,
+                //   width: 50,
+                //   child: ClipRRect(
+                //     borderRadius: BorderRadius.circular(40),
+                //     child: Image.network(
+                //       _profileController.profileData.value.profileImage
+                //           .toString(),
+                //       fit: BoxFit.cover,
+                //       height: 50,
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(
                   width: 8,
                 ),
@@ -407,6 +410,9 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       data.first!.name.toString(),
                       style: TextStyle(

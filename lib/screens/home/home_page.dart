@@ -436,6 +436,7 @@ class _HomePageState extends State<HomePage> {
       onPressed: () {
         showModalBottomSheet<void>(
           context: context,
+          isScrollControlled: true,
           backgroundColor: Colors.transparent,
           builder: (BuildContext context) {
             return const SelectImageBottomSheet();

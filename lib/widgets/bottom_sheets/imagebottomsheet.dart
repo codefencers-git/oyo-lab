@@ -58,9 +58,7 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
                             hinttext: "Enter Title",
                             controllers: _titleController),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      const SizedBox(height: 15),
                       Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Container(
@@ -143,13 +141,6 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
                           ),
                         ),
                       ),
-
-                      // ElevatedButton(
-                      //   child:
-                      //       const Text('Close BottomSheet'),
-                      //   onPressed: () =>
-                      //       Navigator.pop(context),
-                      // )
                     ],
                   ),
                 ),
@@ -206,16 +197,11 @@ class _SelectImageBottomSheetState extends State<SelectImageBottomSheet> {
 
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           showToast(jasonData['message'].toString());
+          Get.back();
         } else {
           showToast(jasonData['message'].toString());
         }
-      } else if (response.statusCode == 401) {
-        // UserPrefService().setIsLogin(false);
-        // await UserPrefService().removeUserData();
-        // throw GlobalMessages.unauthorizedUser;
       } else {
-        // isError(true);
-
         showToast(GlobalMessages.internalservererror);
       }
     } catch (e) {

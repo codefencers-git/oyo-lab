@@ -224,7 +224,7 @@ class _MyPrescriptionState extends State<MyPrescription> {
             children: [
               InkWell(
                 onTap: () {
-                  Get.to(PrescriptionDetail(prescriptionData: data));
+                  Get.to(() => PrescriptionDetail(prescriptionData: data));
                 },
                 child: SizedBox(
                   child: Row(

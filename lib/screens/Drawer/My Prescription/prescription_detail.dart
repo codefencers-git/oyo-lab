@@ -1,5 +1,4 @@
-// ignore_for_file: must_be_immutable
-
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +11,7 @@ class PrescriptionDetail extends StatefulWidget {
   PrescriptionDetail({Key? key, required this.prescriptionData})
       : super(key: key);
 
-  PrescriptionData? prescriptionData;
+  PrescriptionData prescriptionData;
 
   @override
   State<PrescriptionDetail> createState() => _PrescriptionDetailState();
@@ -44,7 +43,7 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.prescriptionData!.title.toString(),
+                        widget.prescriptionData.title.toString(),
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -52,7 +51,7 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        widget.prescriptionData!.type.toString(),
+                        widget.prescriptionData.type.toString(),
                         style: TextStyle(
                           fontSize: 10,
                           color: ThemeClass.blackColor,
@@ -62,7 +61,7 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
                     ],
                   ),
                   Text(
-                    DateFormat.MMMd().format(widget.prescriptionData!.date!),
+                    DateFormat.MMMd().format(widget.prescriptionData.date!),
                     style: TextStyle(
                       fontSize: 14,
                       color: ThemeClass.blackColor,
@@ -87,37 +86,31 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
               ),
             ),
             Expanded(
-                child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-              decoration: BoxDecoration(
-                color: ThemeClass.whiteColor2,
-                border: Border.all(width: 0, color: Colors.white),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4,
-                    offset: Offset(0, -3),
-                    color: Colors.black.withOpacity(0.1),
+              child: Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                  decoration: BoxDecoration(
+                    color: ThemeClass.whiteColor2,
+                    border: Border.all(width: 0, color: Colors.white),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 4,
+                        offset: Offset(0, -3),
+                        color: Colors.black.withOpacity(0.1),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  widget.prescriptionData!.prescription!.isEmpty
-                      ? const Text("No prescription added!")
-                      : widget.prescriptionData!
-                          .map((prescriptionList) => Container(
-                                padding: const EdgeInsets.only(bottom: 12),
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                child: Image.network(
-                                  prescriptionList.prescription.toString(),
-                                  fit: BoxFit.cover,
-                                ),
-                              ))
-                          .toList(),
-                ],
-              ),
-            )),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ...widget.prescriptionData.prescription!
+                            .map((e) => _buildPrescriptionList(e))
+                            .toList()
+                      ],
+                    ),
+                  )),
+            ),
           ],
         ),
         bottomNavigationBar: Container(
@@ -130,6 +123,22 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
             buttonLabel: 'key_download_prescription'.tr,
           ),
         ),
+      ),
+    );
+  }
+
+  Container _buildPrescriptionList(imagedata) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 12),
+      width: MediaQuery.of(context).size.width * 0.95,
+      child: Column(
+        children: [
+          Image.network(
+            imagedata,
+            fit: BoxFit.cover,
+          ),
+          const SizedBox(height: 15),
+        ],
       ),
     );
   }

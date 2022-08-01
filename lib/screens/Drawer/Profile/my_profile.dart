@@ -108,13 +108,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         ),
       ),
       body: Obx(() {
-        if (_profileController.isloading.value != true) {
-          // if (profileController.profileData.value.gender.toString() == "Male") {
-          //   _radioMF = enumForMF.Male;
-          // } else {
-          //   _radioMF = enumForMF.Female;
-          // }
-        }
         return _profileController.isloading.value
             ? const Center(
                 child: CircularProgressIndicator(),
@@ -124,24 +117,15 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      const SizedBox(height: 20),
                       Stack(
                         clipBehavior: Clip.none,
                         children: [
                           CircleAvatar(
                               radius: 55, backgroundImage: NetworkImage(image)),
-                          // SizedBox(
-                          //   height: 200,
-                          //   width: 150,
-                          //   child: ClipRRect(
-                          //       borderRadius: BorderRadius.circular(400.0),
-                          //       child: Image(image: NetworkImage(image))),
-                          // ),
                           Positioned(
                             bottom: -1,
                             right: -10,
-                            // top: 135,
-                            // right: 7,
-                            // left: 98,
                             child: Container(
                               padding: const EdgeInsets.all(2),
                               decoration: const BoxDecoration(
@@ -178,15 +162,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
                           onPressed: () {
                             Get.toNamed(Routes.changePasswordScreen);
-
-                            // showModalBottomSheet<void>(
-                            //   context: context,
-
-                            //   backgroundColor: Colors.transparent,
-                            //   builder: (BuildContext context) {
-                            //     return const SizedBox();
-                            //   },
-                            // );
                           },
                           child: Text(
                             'key_change_password'.tr,
@@ -370,6 +345,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       BuildContext context, TextEditingController textController) {
     return TextFieldWithSuffixIcon(
         textController: textController,
+        color: ThemeClass.greyLightColor,
         isReadOnly: true,
         isObscureText: false,
         validator: (val) {
