@@ -1,14 +1,16 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
-
 import '../../../themedata.dart';
 import '../../../widgets/buttons/round_button.dart';
 import '../book_appointment.dart';
 
 class RescheduleBottomSheet extends StatefulWidget {
-  const RescheduleBottomSheet({Key? key}) : super(key: key);
-
+   RescheduleBottomSheet({Key? key,required this.appointmentId})
+      : super(key: key);
+String appointmentId;
   @override
   State<RescheduleBottomSheet> createState() => _RescheduleBottomSheetState();
 }
@@ -17,7 +19,6 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
   @override
   bool check = false;
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return SizedBox(
       height: 355,
       child: Stack(
@@ -108,23 +109,30 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                               const SizedBox(
                                 width: 5,
                               ),
-                              RichText(
-                                text: TextSpan(
-                                  style: DefaultTextStyle.of(context).style,
-                                  children: <TextSpan>[
-                                    const TextSpan(
-                                        text: ' I Accept',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                        )),
-                                    TextSpan(
-                                        text: ' Rescheduling Policy',
-                                        style: TextStyle(
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    check = !check;
+                                  });
+                                },
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: DefaultTextStyle.of(context).style,
+                                    children: <TextSpan>[
+                                      const TextSpan(
+                                          text: ' I Accept',
+                                          style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
-                                            color: ThemeClass.orangeColor)),
-                                  ],
+                                          )),
+                                      TextSpan(
+                                          text: ' Rescheduling Policy',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color: ThemeClass.orangeColor)),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -137,15 +145,16 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                             child: Row(
                               children: [
                                 Expanded(
-                                    child: RoundButton(
-                                        buttonLabel: 'No',
-                                        color: ThemeClass.whiteColor,
-                                        fontcolor: ThemeClass.orangeColor,
-                                        fontSize: 16,
-                                        fontFamily: "poppins",
-                                        onTap: () {
-                                          Get.back();
-                                        })),
+                                  child: RoundButton(
+                                      buttonLabel: 'No',
+                                      color: ThemeClass.whiteColor,
+                                      fontcolor: ThemeClass.orangeColor,
+                                      fontSize: 16,
+                                      fontFamily: "poppins",
+                                      onTap: () {
+                                        Get.back();
+                                      }),
+                                ),
                                 const SizedBox(width: 10),
                                 Expanded(
                                     child: RoundButton(
@@ -157,8 +166,7 @@ class _RescheduleBottomSheetState extends State<RescheduleBottomSheet> {
                                             showToast(
                                                 "Please accept rescheduling policy!");
                                           } else if (check) {
-                                            Get.to(BookAppointment());
-                                            ;
+                                            Get.to(BookAppointment(type:'Reschedule',appointmentId: widget.appointmentId,));
                                           }
                                         })),
                               ],

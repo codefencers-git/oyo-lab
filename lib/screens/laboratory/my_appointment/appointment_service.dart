@@ -1,14 +1,11 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment/appointment_model.dart';
 import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
-
 import 'package:oyo_labs/services/http_services.dart';
-
 import 'model and services/appointment_history_model.dart';
 
 class AppointmentServiceController extends GetxController {

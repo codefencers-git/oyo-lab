@@ -8,6 +8,7 @@ import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/screens/Drawer/Member/services/member_services.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/profile_services.dart';
 import 'package:oyo_labs/screens/laboratory/book_success.dart';
+import 'package:oyo_labs/screens/laboratory/my_appointment/appointment_service.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
 import 'package:oyo_labs/widgets/buttons/round_button.dart';
@@ -22,6 +23,7 @@ class LabtestDetail extends StatefulWidget {
     this.prescription,
     this.bookingFor,
     this.memberId,
+    this.isRescheduled
   }) : super(key: key);
 
   String? date;
@@ -29,6 +31,7 @@ class LabtestDetail extends StatefulWidget {
   List<XFile>? prescription;
   String? bookingFor;
   String? memberId;
+  bool? isRescheduled;
 
   @override
   State<LabtestDetail> createState() => _LabtestDetailState();
@@ -41,12 +44,15 @@ class _LabtestDetailState extends State<LabtestDetail> {
   final _profileController = Get.find<ProfileServiceController>();
 
   final _membercontroller = Get.find<MembersController>();
+  final _appointmentHistoryController =
+      Get.find<AppointmentServiceController>();
 
   @override
   void initState() {
     _profileController.getprofileData();
     super.initState();
   }
+
 
   final TextEditingController _remarkController = TextEditingController();
   final TextEditingController _doctorNameController = TextEditingController();

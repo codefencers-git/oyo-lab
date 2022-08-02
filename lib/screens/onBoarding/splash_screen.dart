@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
   final ProductCategoryController _categoryController =
       Get.put(ProductCategoryController(), permanent: true);
 
-  final profileController =
+  final _profileController =
       Get.put(ProfileServiceController(), permanent: true);
 
   final UserController _userController =
@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     FocusManager.instance.primaryFocus?.unfocus();
-
+    _profileController.getprofileData();
     _navigateTo();
 
     super.initState();
@@ -99,8 +99,7 @@ class _SplashScreenState extends State<SplashScreen> {
       print("--------$getToken");
       if (getToken != "" && getToken != null) {
         _userController.setIsLogin(true);
-        await profileController.getprofileData();
-        print("afer----");
+        await _profileController.getprofileData();
       } else {
         _userController.setIsLogin(false);
       }

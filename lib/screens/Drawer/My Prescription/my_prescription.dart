@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:oyo_labs/global/flutter_toast.dart';
-import 'package:oyo_labs/routes.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_model.dart';
 import 'package:oyo_labs/services/prescription_service/prescription_service.dart';
 import 'package:oyo_labs/themedata.dart';

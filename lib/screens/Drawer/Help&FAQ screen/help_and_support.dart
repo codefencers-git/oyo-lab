@@ -89,7 +89,6 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                                     dividerColor: Colors.transparent,
                                   ),
                                   child: ExpansionTile(
-                                    //key: PageStorageKey<NeedHelpData>(data),
                                     iconColor: ThemeClass.orangeColor,
                                     collapsedIconColor: ThemeClass.orangeColor,
                                     title: Text(
@@ -125,17 +124,22 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                                               padding:
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 25),
-                                              child: Text(
-                                                _faqsController
-                                                    .faqsData
-                                                    .value[index]!
-                                                    .list![indx]
-                                                    .description
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                  color: Color(0xff0E0E0E),
-                                                  fontSize: 12,
-                                                ),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    _faqsController
+                                                        .faqsData
+                                                        .value[index]!
+                                                        .list![indx]
+                                                        .description
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      color: Color(0xff0E0E0E),
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                  
+                                                ],
                                               ),
                                             ),
                                           ],

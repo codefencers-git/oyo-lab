@@ -1,6 +1,7 @@
-import 'dart:io';
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail_model.dart';
@@ -18,14 +19,16 @@ class MemberSelectionBottomSheet extends StatefulWidget {
     this.prescription,
     this.memberId,
     this.testPrice,
+    this.isRescheduled
   }) : super(key: key);
 
-  LAbTestDetailData? testData;
+  LabTestDetailData? testData;
   RecommendedProduct? laboratoryData;
   String? date;
   String? time;
   List<XFile>? prescription;
   String? memberId;
+  bool? isRescheduled;
 
   String? testPrice;
 
@@ -52,7 +55,7 @@ class _MemberSelectionBottomSheetState
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Member Selection',
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
@@ -76,11 +79,11 @@ class _MemberSelectionBottomSheetState
                     _buildListTile("Self"),
                     _buildListTile("Member"),
                     _buildListTile("Other"),
-                    SizedBox(
-                      height: 10,
+                   const SizedBox(
+                      height: 10
                     ),
                     RoundButton(
-                        buttonLabel: "confirm",
+                        buttonLabel: 'key_confirm'.tr,
                         onTap: () async {
                           if (short == "Member") {
                             // Navigator.pop(context);
@@ -103,6 +106,7 @@ class _MemberSelectionBottomSheetState
                                     prescription: widget.prescription,
                                     bookingFor: short,
                                     memberId: select,
+                                    isRescheduled: widget.isRescheduled
                                   ),
                                 ),
                               );

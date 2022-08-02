@@ -43,9 +43,9 @@ class ProfileServiceController extends GetxController {
         if (jasonData['status'] == "200" && jasonData['success'] == "1") {
           isError(false);
           errorMessage("");
-          var dashboardData1 = ProfileModel.fromJson(jasonData);
+          var profileDetail = ProfileModel.fromJson(jasonData);
 
-          profileData(dashboardData1.data);
+          profileData(profileDetail.data);
         } else {
           isError(true);
           errorMessage(jasonData['message'].toString());

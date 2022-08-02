@@ -30,7 +30,9 @@ class AppointmentHistoryModel {
         success: json["success"] == null ? null : json["success"],
         status: json["status"] == null ? null : json["status"],
         message: json["message"] == null ? null : json["message"],
-        data: json["data"] == null ? null : AppointmentDetails.fromJson(json["data"]),
+        data: json["data"] == null
+            ? null
+            : AppointmentDetails.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -51,6 +53,7 @@ class AppointmentDetails {
     this.bookingFor,
     this.memberId,
     this.laboratory,
+    this.labId,
     this.labAddress,
     this.rating,
     this.totalRate,
@@ -70,6 +73,7 @@ class AppointmentDetails {
   String? bookingFor;
   String? memberId;
   String? laboratory;
+  String? labId;
   String? labAddress;
   String? rating;
   String? totalRate;
@@ -80,7 +84,8 @@ class AppointmentDetails {
   String? userImage;
   String? status;
 
-  factory AppointmentDetails.fromJson(Map<String, dynamic> json) => AppointmentDetails(
+  factory AppointmentDetails.fromJson(Map<String, dynamic> json) =>
+      AppointmentDetails(
         id: json["id"] == null ? null : json["id"],
         itemId: json["item_id"] == null ? null : json["item_id"],
         price: json["price"] == null ? null : json["price"],
@@ -89,6 +94,7 @@ class AppointmentDetails {
         bookingFor: json["booking_for"] == null ? null : json["booking_for"],
         memberId: json["member_id"] == null ? null : json["member_id"],
         laboratory: json["laboratory"] == null ? null : json["laboratory"],
+        labId: json["lab_id"] == null ? null : json["lab_id"],
         labAddress: json["lab_address"] == null ? null : json["lab_address"],
         rating: json["rating"] == null ? null : json["rating"],
         totalRate: json["total_rate"] == null ? null : json["total_rate"],
@@ -109,6 +115,7 @@ class AppointmentDetails {
         "booking_for": bookingFor == null ? null : bookingFor,
         "member_id": memberId == null ? null : memberId,
         "laboratory": laboratory == null ? null : laboratory,
+        "lab_id": labId == null ? null : labId,
         "lab_address": labAddress == null ? null : labAddress,
         "rating": rating == null ? null : rating,
         "total_rate": totalRate == null ? null : totalRate,
