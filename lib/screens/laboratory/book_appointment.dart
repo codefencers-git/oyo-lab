@@ -34,14 +34,15 @@ class _BookAppointmentState extends State<BookAppointment> {
   final BookAppointmentServicesController _bookAppointmentController =
       Get.find<BookAppointmentServicesController>();
 
+  final _appointmentHistoryController =
+      Get.find<AppointmentHistoryController>();
+
   final ImagePicker _picker = ImagePicker();
   // File? image;
   List<XFile> multiplePrescription = [];
 
   int? select;
 
-  final _appointmentHistoryController =
-      Get.find<AppointmentServiceController>();
   @override
   void initState() {
     _onInit();
@@ -91,7 +92,6 @@ class _BookAppointmentState extends State<BookAppointment> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-    print("------------------${widget.type}");
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -119,6 +119,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                 isReschedule
                     ? const SizedBox()
                     : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'key_have_prescription'.tr,
@@ -129,17 +130,6 @@ class _BookAppointmentState extends State<BookAppointment> {
                           ),
                           const SizedBox(height: 15),
                           _priscripion(width),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Uploaded Prescription',
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: ThemeClass.blackColor2,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
                         ],
                       ),
                 Text(
@@ -205,7 +195,8 @@ class _BookAppointmentState extends State<BookAppointment> {
             time: selectedTimeSlot.substring(0, 5),
             prescription: multiplePrescription,
             memberId: "",
-            isRescheduled: isReschedule
+            isRescheduled: isReschedule,
+            appoiuntmentHistoryId: widget.appointmentId,
           );
         },
       );
@@ -222,6 +213,7 @@ class _BookAppointmentState extends State<BookAppointment> {
             time: selectedTimeSlot.substring(0, 5),
             prescription: multiplePrescription,
             memberId: "",
+            isRescheduled: isReschedule,
           );
         },
       );
@@ -464,6 +456,16 @@ class _BookAppointmentState extends State<BookAppointment> {
               ),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        Text(
+          'Uploaded Prescription',
+          style: TextStyle(
+              fontSize: 14,
+              color: ThemeClass.blackColor2,
+              fontWeight: FontWeight.w400),
         ),
         multiplePrescription.isNotEmpty
             ? Container(

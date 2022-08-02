@@ -23,7 +23,8 @@ class LabtestDetail extends StatefulWidget {
     this.prescription,
     this.bookingFor,
     this.memberId,
-    this.isRescheduled
+    required this.isRescheduled,
+    this.appointmentId,
   }) : super(key: key);
 
   String? date;
@@ -31,7 +32,9 @@ class LabtestDetail extends StatefulWidget {
   List<XFile>? prescription;
   String? bookingFor;
   String? memberId;
-  bool? isRescheduled;
+  bool isRescheduled;
+
+  String? appointmentId;
 
   @override
   State<LabtestDetail> createState() => _LabtestDetailState();
@@ -45,14 +48,21 @@ class _LabtestDetailState extends State<LabtestDetail> {
 
   final _membercontroller = Get.find<MembersController>();
   final _appointmentHistoryController =
-      Get.find<AppointmentServiceController>();
+      Get.find<AppointmentHistoryController>();
 
   @override
   void initState() {
+    _onInit();
     _profileController.getprofileData();
     super.initState();
   }
 
+  _onInit() {
+    if (widget.isRescheduled) {
+      _appointmentHistoryController
+          .appointmentHistoryServices(widget.appointmentId.toString());
+    }
+  }
 
   final TextEditingController _remarkController = TextEditingController();
   final TextEditingController _doctorNameController = TextEditingController();
@@ -74,9 +84,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
             const SizedBox(height: 20),
             Column(
               children: [
-                SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 _buildPatientDetail(),
                 _buildTestDetail(),
                 const SizedBox(
@@ -165,20 +173,38 @@ class _LabtestDetailState extends State<LabtestDetail> {
         height: 45,
         child: RoundButton(
           onTap: () {
-            var mapData = <String, dynamic>{};
-            mapData['test_id'] =
-                _bookAppointmentController.testDetails.value.id.toString();
-            mapData['laboratory'] =
-                _bookAppointmentController.labData.value.id.toString();
-            mapData['date'] = widget.date;
-            mapData['time'] = widget.time;
-            mapData['booking_for'] = widget.bookingFor;
-            mapData['member_id'] =
-                widget.memberId == null ? "" : widget.memberId.toString();
-            mapData['remarks'] = _remarkController.text.toString();
-            mapData['contact_number'] =
-                _contactNumberkController.text.toString();
-            mapData['doctor_name'] = _doctorNameController.text.toString();
+            Map<String, dynamic> mapData = <String, dynamic>{};
+            if (widget.isRescheduled) {
+              mapData['test_id'] = _appointmentHistoryController
+                  .appointmentDetailData.value.itemId
+                  .toString();
+              mapData['laboratory'] = _appointmentHistoryController
+                  .appointmentDetailData.value.labId
+                  .toString();
+              mapData['date'] = widget.date;
+              mapData['time'] = widget.time;
+              mapData['booking_for'] = widget.bookingFor;
+              mapData['member_id'] =
+                  widget.memberId == null ? "" : widget.memberId.toString();
+              mapData['remarks'] = _remarkController.text.toString();
+              mapData['contact_number'] =
+                  _contactNumberkController.text.toString();
+              mapData['doctor_name'] = _doctorNameController.text.toString();
+            } else {
+              mapData['test_id'] =
+                  _bookAppointmentController.testDetails.value.id.toString();
+              mapData['laboratory'] =
+                  _bookAppointmentController.labData.value.id.toString();
+              mapData['date'] = widget.date;
+              mapData['time'] = widget.time;
+              mapData['booking_for'] = widget.bookingFor;
+              mapData['member_id'] =
+                  widget.memberId == null ? "" : widget.memberId.toString();
+              mapData['remarks'] = _remarkController.text.toString();
+              mapData['contact_number'] =
+                  _contactNumberkController.text.toString();
+              mapData['doctor_name'] = _doctorNameController.text.toString();
+            }
 
             _checkOut(mapData);
           },
@@ -205,11 +231,11 @@ class _LabtestDetailState extends State<LabtestDetail> {
         ),
       );
       if (res == true) {
-        showToast("Payment Successfully Done.");
+        showToast("Payment Successfully Done");
 
         Get.off(BookingSuccess(isPaymentDone: true));
       } else {
-        showToast("Payment Not Done.");
+        showToast("Payment Not Done");
         Get.off(BookingSuccess(isPaymentDone: false));
       }
     } catch (e) {
@@ -233,7 +259,9 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 fontWeight: FontWeight.w400),
           ),
           Text(
-            "₹ ${_bookAppointmentController.testDetails.value.price}",
+            widget.isRescheduled
+                ? "₹${_appointmentHistoryController.appointmentDetailData.value.grandTotal.toString()}"
+                : "₹${_bookAppointmentController.testDetails.value.price}",
             style: TextStyle(
                 fontSize: 10,
                 color: ThemeClass.blackColor1,
@@ -258,7 +286,9 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 fontWeight: FontWeight.w400),
           ),
           Text(
-            "₹ ${_bookAppointmentController.testDetails.value.price}",
+            widget.isRescheduled
+                ? "₹${_appointmentHistoryController.appointmentDetailData.value.itemTotal.toString()}"
+                : "₹${_bookAppointmentController.testDetails.value.price}",
             style: TextStyle(
                 fontSize: 10,
                 color: ThemeClass.greyColor1,
@@ -271,10 +301,9 @@ class _LabtestDetailState extends State<LabtestDetail> {
 
   Container _buildTestDetail() {
     return Container(
-      height: 100,
       color: ThemeClass.skyblueColor,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -289,43 +318,62 @@ class _LabtestDetailState extends State<LabtestDetail> {
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      "assets/icons/icon_lab.png",
-                      height: 30,
-                    ),
-                    const SizedBox(
-                      width: 9,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          _bookAppointmentController.testDetails.value.title
-                              .toString(),
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "W B-ED TA (3ml)",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: ThemeClass.greyColor,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                  ],
+                Expanded(
+                  flex: 1,
+                  child: Image.asset(
+                    "assets/icons/icon_lab.png",
+                    height: 35,
+                  ),
                 ),
-                Text(
-                  "₹ ${_bookAppointmentController.testDetails.value.price}",
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: ThemeClass.orangeColor,
-                      fontWeight: FontWeight.w600),
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.isRescheduled
+                            ? _appointmentHistoryController
+                                .appointmentDetailData.value.testName
+                                .toString()
+                            : _bookAppointmentController.testDetails.value.title
+                                .toString(),
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        widget.isRescheduled
+                            ? _appointmentHistoryController
+                                .appointmentDetailData.value.testType
+                                .toString()
+                            : _bookAppointmentController
+                                .testDetails.value.testType
+                                .toString(),
+                        maxLines: 2,
+                        style: TextStyle(
+                            fontSize: 12,
+                            overflow: TextOverflow.ellipsis,
+                            color: ThemeClass.greyColor,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    widget.isRescheduled
+                        ? "₹${_appointmentHistoryController.appointmentDetailData.value.price.toString()}"
+                        : "₹${_bookAppointmentController.testDetails.value.price}",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: ThemeClass.orangeColor,
+                        fontWeight: FontWeight.w600),
+                  ),
                 )
               ],
             ),
@@ -353,23 +401,10 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 ),
               ],
             ),
-            SizedBox(height: 7),
+            const SizedBox(height: 7),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Container(
-                //   height: 50,
-                //   width: 50,
-                //   child: ClipRRect(
-                //     borderRadius: BorderRadius.circular(40),
-                //     child: Image.network(
-                //       _profileController.profileData.value.profileImage
-                //           .toString(),
-                //       fit: BoxFit.cover,
-                //       height: 50,
-                //     ),
-                //   ),
-                // ),
                 const SizedBox(
                   width: 8,
                 ),
@@ -416,7 +451,7 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
@@ -482,7 +517,12 @@ class _LabtestDetailState extends State<LabtestDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _bookAppointmentController.labData.value.name.toString(),
+                    widget.isRescheduled
+                        ? _appointmentHistoryController
+                            .appointmentDetailData.value.laboratory
+                            .toString()
+                        : _bookAppointmentController.labData.value.name
+                            .toString(),
                     style: TextStyle(
                         fontSize: 14,
                         color: ThemeClass.blackColor,
@@ -550,8 +590,15 @@ class _LabtestDetailState extends State<LabtestDetail> {
                                 padding:
                                     const EdgeInsets.only(right: 8.0, top: 4),
                                 child: Text(
-                                  _bookAppointmentController.labData.value.area
-                                      .toString(),
+                                  widget.isRescheduled
+                                      ? _appointmentHistoryController
+                                          .appointmentDetailData
+                                          .value
+                                          .labAddress
+                                          .toString()
+                                      : _bookAppointmentController
+                                          .labData.value.area
+                                          .toString(),
                                   style: TextStyle(
                                       fontSize: 12,
                                       color: ThemeClass.greyColor,

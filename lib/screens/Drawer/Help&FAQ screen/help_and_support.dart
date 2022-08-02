@@ -36,7 +36,7 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
       backgroundColor: Colors.white,
       bottomNavigationBar: Container(
         height: 50.0,
-        margin: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(16.0),
       ),
       body: Obx(
         () => (_faqsController.isloading.value == false)
@@ -51,15 +51,15 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           ),
-                          Text(
+                          const Text(
                             "Select any topics",
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           ),
                           Expanded(

@@ -8,7 +8,7 @@ import 'package:oyo_labs/services/SharedPrefServices/shared_pref_services.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import 'model and services/appointment_history_model.dart';
 
-class AppointmentServiceController extends GetxController {
+class AppointmentHistoryController extends GetxController {
   Rx<AppointmentDetails> appointmentDetailData = AppointmentDetails().obs;
   RxBool isError = false.obs;
   RxString errorMessage = "".obs;

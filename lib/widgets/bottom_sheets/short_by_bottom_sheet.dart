@@ -62,7 +62,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
             children: <Widget>[
               ListTile(
                 dense: true,
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
                 contentPadding: EdgeInsets.zero,
                 minVerticalPadding: 0,
                 title: Row(
@@ -92,7 +92,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
               ),
               ListTile(
                 dense: true,
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
                 contentPadding: EdgeInsets.zero,
                 minVerticalPadding: 0,
                 title: Row(
@@ -122,7 +122,7 @@ class _ShortByBottomSheetState extends State<ShortByBottomSheet> {
               ),
               ListTile(
                 dense: true,
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
                 contentPadding: EdgeInsets.zero,
                 minVerticalPadding: 0,
                 title: Row(

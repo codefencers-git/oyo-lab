@@ -14,6 +14,7 @@ import 'package:oyo_labs/services/product_category/product_category_service.dart
 import 'package:oyo_labs/themedata.dart';
 
 import '../laboratory/booking model and services/book_appointment_services.dart';
+import '../laboratory/my_appointment/appointment_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -28,6 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   final BookAppointmentServicesController _bookAppointmentController =
       Get.put(BookAppointmentServicesController(), permanent: true);
+
+  final _appointmentServiceController =
+      Get.put(AppointmentHistoryController(), permanent: true);
 
   final ProductCategoryController _categoryController =
       Get.put(ProductCategoryController(), permanent: true);

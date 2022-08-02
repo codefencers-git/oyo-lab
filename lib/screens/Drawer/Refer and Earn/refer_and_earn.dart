@@ -29,7 +29,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Image.asset('assets/images/refer_image.png'),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Text(
@@ -39,7 +39,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                 fontSize: 18,
                 fontWeight: FontWeight.w600),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Padding(
@@ -52,13 +52,13 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                   fontWeight: FontWeight.w600),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: DottedBorder(
-              radius: Radius.circular(5),
+              radius: const Radius.circular(5),
               borderType: BorderType.RRect,
               color: ThemeClass.orangeColor,
               strokeWidth: 1,
@@ -138,11 +138,11 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          Divider(),
-          SizedBox(
+          const Divider(),
+          const SizedBox(
             height: 15,
           ),
           Text(
@@ -152,18 +152,18 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                 fontSize: 14,
                 fontWeight: FontWeight.w900),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _socialButton("assets/icons/icon-whatsapp.png"),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               _socialButton("assets/icons/icon-email.png"),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               _socialButton("assets/icons/icon-share.png"),

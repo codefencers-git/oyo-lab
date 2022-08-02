@@ -37,7 +37,6 @@ class BookAppointmentServicesController extends GetxController {
               BookAppointmentModel.fromJson(jasonData);
 
           paymentUrl(bookAppointmentModel.data);
-          clearTestDataAndLabData();
           isError(false);
           errorMessage("");
         } else if (jasonData['success'].toString() == "0" &&

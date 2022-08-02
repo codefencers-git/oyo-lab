@@ -2,6 +2,8 @@
 //
 //     final cmsData = cmsDataFromJson(jsonString);
 
+// ignore_for_file: prefer_if_null_operators
+
 import 'dart:convert';
 
 CmsModel cmsDataFromJson(String str) => CmsModel.fromJson(json.decode(str));

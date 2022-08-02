@@ -80,7 +80,7 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                                     MaterialStateProperty.all<Color>(
                                         ThemeClass.orangeColor),
                                 shape:
-                                    MaterialStateProperty.all(CircleBorder()),
+                                    MaterialStateProperty.all(const CircleBorder()),
                               ),
                               onPressed: () {},
                               child: Image.asset(
@@ -172,14 +172,14 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                                   children: [
                                     Padding(
                                       padding:
-                                          EdgeInsets.only(right: 8.0, top: 5),
+                                          const EdgeInsets.only(right: 8.0, top: 5),
                                       child: Image.asset(
                                           "assets/images/icon_black_location.png",height: 20,),
                                     ),
                                     Expanded(
                                       child: Padding(
                                         padding:
-                                            EdgeInsets.only(right: 8.0, top: 4),
+                                            const EdgeInsets.only(right: 8.0, top: 4),
                                         child: Text(
                                           '45, Park Avenue, Near Sal Hospital, Thaltej, Ahmedabad.',
                                           style: TextStyle(
@@ -368,7 +368,7 @@ class _LabTestCompleteState extends State<LabTestComplete> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Padding(

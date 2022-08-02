@@ -1,21 +1,15 @@
 import 'package:get/get.dart';
 import 'package:oyo_labs/screens/AboutUs/about_us.dart';
 import 'package:oyo_labs/screens/Drawer/Help&FAQ%20screen/help_and_support.dart';
-import 'package:oyo_labs/screens/Drawer/Member/update_member.dart';
 import 'package:oyo_labs/screens/Drawer/My%20Prescription/my_prescription.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/change_password.dart';
 import 'package:oyo_labs/screens/Drawer/Profile/my_profile.dart';
 import 'package:oyo_labs/screens/Drawer/Terms%20&%20Privacy%20Policy/terms_privacy_screen.dart';
 import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report.dart';
-import 'package:oyo_labs/screens/Drawer/My%20Prescription/prescription_detail.dart';
 import 'package:oyo_labs/screens/Drawer/Member/members.dart';
 import 'package:oyo_labs/screens/authentication/Signup/signup_screen.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/all_lab_tests_screen.dart';
-import 'package:oyo_labs/screens/laboratory/all%20lab%20test/lab_test_detail.dart';
-import 'package:oyo_labs/screens/laboratory/all%20lab%20test/rating/rating_screen.dart';
-import 'package:oyo_labs/screens/laboratory/book_success.dart';
 import 'package:oyo_labs/screens/laboratory/complete_booking.dart';
-import 'package:oyo_labs/screens/laboratory/lab_test_drawer_detail.dart';
 import 'package:oyo_labs/screens/laboratory/my_appointment/my_appointment.dart';
 import 'screens/ContactUs/contact_us.dart';
 import 'screens/Drawer/ManageAddress/add_address.dart';
@@ -27,8 +21,6 @@ import 'screens/Drawer/Wallet/wallet_screen.dart';
 import 'screens/authentication/Forgot Password/forgot_password_screen.dart';
 import 'screens/authentication/Login/login.dart';
 import 'screens/home/home_page.dart';
-import 'screens/laboratory/book_appointment.dart';
-
 import 'screens/onBoarding/onboarding_screen.dart';
 import 'screens/onBoarding/splash_screen.dart';
 
@@ -78,14 +70,12 @@ class Routes {
     GetPage(name: homeScreen, page: () => const HomePage()),
     GetPage(name: aboutUsScreen, page: () => AboutUs()),
     GetPage(name: contactUsScreen, page: () => const ContactUs()),
-    GetPage(name: myUpCommingAppoinmentScreen, page: () => LabtestDetail()),
     GetPage(name: myAppointmentComplete, page: () => const LabTestComplete()),
     GetPage(name: checkAppointment, page: () => const MyAppointment()),
     GetPage(name: allLabTests, page: () => const AllLabTestsScreen()),
     GetPage(name: addMemberScreen, page: () => const AddNewMember()),
     GetPage(name: myPrescritionSreen, page: () => const MyPrescription()),
     GetPage(name: myTestReportScreen, page: () => const MyTestRepoer()),
-
     GetPage(name: manageAddressScreen, page: () => const ManageAddress()),
     GetPage(name: addNewAddressScreen, page: () => AddAddress()),
     GetPage(name: addNewMembers, page: () => const AddnewMemberScreen()),
@@ -93,7 +83,6 @@ class Routes {
     GetPage(name: walletScreen, page: () => const WalletScreen()),
     GetPage(name: settingScreen, page: () => const SettingScreen()),
     GetPage(name: myProfileScreen, page: () => const MyProfileScreen()),
-   
     GetPage(
         name: helpAndSupportScreen, page: () => const HelpAndSupportScreen()),
     GetPage(

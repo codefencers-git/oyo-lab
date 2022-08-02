@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-
 import '../../../global/global_messages.dart';
-import '../../../routes.dart';
 import '../../../services/validation_services.dart';
 import '../../../themedata.dart';
 import '../../../widgets/appbar/appbar_with_back_button.dart';

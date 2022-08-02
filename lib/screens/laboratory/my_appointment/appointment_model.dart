@@ -2,6 +2,8 @@
 //
 //     final appointmentModel = appointmentModelFromJson(jsonString);
 
+// ignore_for_file: prefer_if_null_operators
+
 import 'dart:convert';
 
 AppointmentModel appointmentModelFromJson(String str) =>

@@ -87,7 +87,7 @@ class HttpServices {
 
       request3.files.add(await http.MultipartFile.fromPath(
         peramterName,
-        "${imageFile!.path}",
+        imageFile!.path,
         // contentType: MediaType('image', 'jpg'),
       ));
       queryParameters.forEach((key, value) {
@@ -126,7 +126,7 @@ class HttpServices {
       for (int i = 0; i < imageFiles.length; i++) {
         request3.files.add(await http.MultipartFile.fromPath(
           peramterName,
-          "${imageFiles[i].path}",
+          imageFiles[i].path,
         ));
       }
       queryParameters.forEach((key, value) {

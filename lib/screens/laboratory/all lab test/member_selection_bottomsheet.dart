@@ -10,17 +10,18 @@ import '../../../themedata.dart';
 import '../../Drawer/Member/services/select_member.dart';
 
 class MemberSelectionBottomSheet extends StatefulWidget {
-  MemberSelectionBottomSheet({
-    Key? key,
-    this.testData,
-    this.laboratoryData,
-    this.date,
-    this.time,
-    this.prescription,
-    this.memberId,
-    this.testPrice,
-    this.isRescheduled
-  }) : super(key: key);
+  MemberSelectionBottomSheet(
+      {Key? key,
+      this.testData,
+      this.laboratoryData,
+      this.date,
+      this.time,
+      this.prescription,
+      this.memberId,
+      this.testPrice,
+      required this.isRescheduled,
+      this.appoiuntmentHistoryId})
+      : super(key: key);
 
   LabTestDetailData? testData;
   RecommendedProduct? laboratoryData;
@@ -28,9 +29,10 @@ class MemberSelectionBottomSheet extends StatefulWidget {
   String? time;
   List<XFile>? prescription;
   String? memberId;
-  bool? isRescheduled;
-
+  bool isRescheduled;
   String? testPrice;
+
+  String? appoiuntmentHistoryId;
 
   @override
   State<MemberSelectionBottomSheet> createState() =>
@@ -79,9 +81,7 @@ class _MemberSelectionBottomSheetState
                     _buildListTile("Self"),
                     _buildListTile("Member"),
                     _buildListTile("Other"),
-                   const SizedBox(
-                      height: 10
-                    ),
+                    const SizedBox(height: 10),
                     RoundButton(
                         buttonLabel: 'key_confirm'.tr,
                         onTap: () async {
@@ -106,7 +106,8 @@ class _MemberSelectionBottomSheetState
                                     prescription: widget.prescription,
                                     bookingFor: short,
                                     memberId: select,
-                                    isRescheduled: widget.isRescheduled
+                                    isRescheduled: widget.isRescheduled,
+                                    appointmentId: widget.appoiuntmentHistoryId,
                                   ),
                                 ),
                               );
@@ -121,6 +122,8 @@ class _MemberSelectionBottomSheetState
                                   prescription: widget.prescription,
                                   bookingFor: short,
                                   memberId: widget.memberId,
+                                  isRescheduled: widget.isRescheduled,
+                                  appointmentId: widget.appoiuntmentHistoryId,
                                 ),
                               ),
                             );

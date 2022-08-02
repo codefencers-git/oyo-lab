@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -9,9 +7,7 @@ import 'package:oyo_labs/global/global_messages.dart';
 import 'package:oyo_labs/screens/laboratory/all%20lab%20test/text_box_normal.dart';
 import 'package:oyo_labs/services/http_services.dart';
 import 'package:oyo_labs/themedata.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:path/path.dart';
 
 class SelectImageBottomSheet extends StatefulWidget {
   const SelectImageBottomSheet({Key? key}) : super(key: key);

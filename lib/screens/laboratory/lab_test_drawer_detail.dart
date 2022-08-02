@@ -19,7 +19,7 @@ class DrawerLabTestScreen extends StatefulWidget {
 }
 
 class _DrawerLabTestScreenState extends State<DrawerLabTestScreen> {
-  final _appointmentServiceController = Get.put(AppointmentServiceController());
+  final _appointmentServiceController = Get.find<AppointmentHistoryController>();
   @override
   void initState() {
     _appointmentServiceController

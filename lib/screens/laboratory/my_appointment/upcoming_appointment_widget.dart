@@ -21,7 +21,7 @@ class _UpcomingAppointmentWidgetState extends State<UpcomingAppointmentWidget> {
   var _futureCall;
   @override
   void initState() {
-    _futureCall = AppointmentServiceController().getAppointment(widget.isUpcoming);
+    _futureCall = AppointmentHistoryController().getAppointment(widget.isUpcoming);
     super.initState();
   }
 

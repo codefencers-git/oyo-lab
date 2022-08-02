@@ -49,7 +49,7 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
                         widget.prescriptionData.type.toString(),
                         style: TextStyle(
@@ -71,7 +71,7 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
@@ -96,7 +96,7 @@ class _PrescriptionDetailState extends State<PrescriptionDetail> {
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 4,
-                        offset: Offset(0, -3),
+                        offset: const Offset(0, -3),
                         color: Colors.black.withOpacity(0.1),
                       ),
                     ],

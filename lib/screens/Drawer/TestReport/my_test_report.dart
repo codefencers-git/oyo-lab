@@ -1,12 +1,19 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:open_file/open_file.dart';
+import 'package:oyo_labs/global/flutter_toast.dart';
 import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report_model.dart';
 import 'package:oyo_labs/screens/Drawer/TestReport/my_test_report_services.dart';
 import 'package:oyo_labs/themedata.dart';
 import 'package:oyo_labs/widgets/appbar/appbar_with_back_button.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MyTestRepoer extends StatefulWidget {
   const MyTestRepoer({Key? key}) : super(key: key);
@@ -20,6 +27,7 @@ class _MyTestRepoerState extends State<MyTestRepoer> {
   @override
   void initState() {
     _testReportController.getMyTestReports();
+
     super.initState();
   }
 
@@ -127,7 +135,15 @@ class _MyTestRepoerState extends State<MyTestRepoer> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                       ).copyWith(elevation: ButtonStyleButton.allOrNull(0)),
-                      onPressed: () {},
+                      onPressed: () async {
+                        final taskId = await FlutterDownloader.enqueue(
+                          url: 'your download link',
+                          savedDir:
+                              'the path of directory where you want to save downloaded files',
+                          showNotification: true,
+                          openFileFromNotification: true,
+                        );
+                      },
                       child: Text(
                         'key_download_btn'.tr,
                         style: const TextStyle(
